@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yefoi.github.io/entrenador-oposicion-auxiliar/sitemap.xml
