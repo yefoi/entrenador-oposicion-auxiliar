@@ -29,12 +29,12 @@ export const block3Questions: Question[] = [
     statement:
       'El código de un expediente puede reutilizarse cuando termina un procedimiento, pero los expedientes archivados deben conservar su trazabilidad. ¿Qué elección es más adecuada?',
     options: [
-      'Usar un identificador sustituto estable como clave primaria y conservar el código reutilizable como un atributo que no identifica las filas',
       'Usar únicamente el código reutilizable como clave primaria y eliminar los expedientes anteriores',
+      'Usar un identificador sustituto estable como clave primaria y conservar el código reutilizable como un atributo que no identifica las filas',
       'No declarar ninguna clave primaria hasta que finalicen todos los procedimientos',
       'Usar el código como clave primaria y permitir duplicados históricos entre procedimientos',
     ],
-    correctIndex: 0,
+    correctIndex: 1,
     explanation:
       'Una clave primaria estable y no reutilizada mantiene la identidad de cada fila. El código del expediente es un dato del negocio y puede cambiar o repetirse en filas históricas sin alterar esa identidad.',
     difficulty: 'medium',
@@ -50,12 +50,12 @@ export const block3Questions: Question[] = [
     statement:
       'Un departamento guarda sus datos y sus empleados. Cada empleado pertenece a un solo departamento, pero un departamento puede tener muchos empleados. ¿Qué relación y clave foránea representan el caso?',
     options: [
-      'DEPARTAMENTO uno a muchos EMPLEADO, con DEPARTAMENTO_ID en EMPLEADO como clave foránea',
       'EMPLEADO uno a muchos DEPARTAMENTO, con DEPARTAMENTO_ID en DEPARTAMENTO como clave foránea',
       'Relación muchos a muchos, sin claves foráneas en ninguna tabla',
+      'DEPARTAMENTO uno a muchos EMPLEADO, con DEPARTAMENTO_ID en EMPLEADO como clave foránea',
       'Relación uno a uno, con la clave primaria de DEPARTAMENTO en cada fila de EMPLEADO',
     ],
-    correctIndex: 0,
+    correctIndex: 2,
     explanation:
       'La cardinalidad es uno a muchos desde DEPARTAMENTO hacia EMPLEADO. La clave primaria del departamento aparece en EMPLEADO como clave foránea, por lo que la misma clave foránea se repite para varios empleados de un mismo departamento.',
     difficulty: 'easy',
@@ -71,12 +71,12 @@ export const block3Questions: Question[] = [
     statement:
       'En una tabla de empleados se almacena el código postal junto con provincia y comunidad autónoma. En otra tabla ya existe el código postal con esos mismos datos. ¿Qué mejora cumple la tercera forma normal?',
     options: [
-      'Eliminar provincia y comunidad de EMPLEADO y obtenerlas mediante una relación con CODIGO_POSTAL',
       'Añadir más filas a la tabla de empleados sin cambiar sus columnas',
       'Convertir el nombre del empleado en la clave primaria de la tabla',
       'Duplicar provincia y comunidad en una segunda tabla sin relación con el empleado',
+      'Eliminar provincia y comunidad de EMPLEADO y obtenerlas mediante una relación con CODIGO_POSTAL',
     ],
-    correctIndex: 0,
+    correctIndex: 3,
     explanation:
       'Código postal, provincia y comunidad forman una dependencia transitiva: provincia y comunidad dependen del código postal y no deben depender directamente de la clave primaria del empleado.',
     difficulty: 'medium',
@@ -107,18 +107,81 @@ export const block3Questions: Question[] = [
     active: true,
   },
   {
+    id: 'B3-T01-Q06',
+    topicId: 'B3-T01',
+    blockId: 'III',
+    statement:
+      'Una persona puede apuntarse a varios cursos y cada curso puede tener varias personas. La relación incluye fecha de inscripción y nota, y la regla es que una persona solo puede tener una matrícula por curso. ¿Qué diseño relacional representa mejor ese caso?',
+    options: [
+      'Duplicar las personas dentro de una tabla independiente para cada curso',
+      'Crear MATRICULA con PERSONA_ID y CURSO_ID como clave primaria compuesta, además de fecha y nota, y declarar ambas claves foráneas',
+      'Añadir a PERSONA una columna de texto que contenga todos los cursos y sus notas',
+      'Crear una tabla por persona sin claves foráneas ni tabla de cursos',
+    ],
+    correctIndex: 1,
+    explanation:
+      'La matrícula es una entidad asociativa con atributos propios. La clave primaria compuesta formada por PERSONA_ID y CURSO_ID identifica una única inscripción por persona y curso, y las claves foráneas conectan ambas entidades.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T01-Q07',
+    topicId: 'B3-T01',
+    blockId: 'III',
+    statement:
+      'Cada empleado tiene como máximo una credencial y cada credencial pertenece como máximo a un empleado. Una credencial puede quedar disponible sin asignarse. ¿Dónde debe colocarse la clave foránea y qué restricción adicional hace falta?',
+    options: [
+      'En EMPLEADO, con CREDENCIAL_ID obligatorio y sin restricción de unicidad',
+      'En CREDENCIAL, con EMPLEADO_ID obligatorio y sin restricción adicional',
+      'En CREDENCIAL, con EMPLEADO_ID opcional y una restricción UNIQUE',
+      'En CREDENCIAL, con EMPLEADO_ID opcional y sin restricción de unicidad',
+    ],
+    correctIndex: 2,
+    explanation:
+      'La clave foránea opcional en CREDENCIAL permite que una credencial no esté asignada. La restricción UNIQUE impide que un mismo empleado aparezca en más de una credencial, por lo que se materializa la relación uno a uno.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T01-Q08',
+    topicId: 'B3-T01',
+    blockId: 'III',
+    statement:
+      'En un modelo conceptual, el total de cada pedido se obtiene sumando los importes de sus líneas y no se introduce manualmente. ¿Cómo debe representarse ese dato?',
+    options: [
+      'Como una clave foránea al primer artículo incluido en el pedido',
+      'Como una entidad separada sin ninguna relación con PEDIDO',
+      'Como un atributo almacenado obligatorio que pueda cambiarse sin recalcular las líneas',
+      'Como un atributo derivado de la relación entre PEDIDO y LINEA_PEDIDO',
+    ],
+    correctIndex: 3,
+    explanation:
+      'Un atributo derivado se calcula a partir de otros datos y no necesita almacenarse de forma independiente. En este caso, el total de PEDIDO se obtiene de los importes de sus LINEA_PEDIDO.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
     id: 'B3-T02-Q01',
     topicId: 'B3-T02',
     blockId: 'III',
     statement:
       'Un sistema de reservas debe impedir que la cantidad sea negativa. El lenguaje seleccionado dispone de tipos numéricos con y sin signo. ¿Qué construcción es la adecuada?',
     options: [
-      'Declarar la cantidad con un tipo numérico que no admita valores negativos',
       'Convertir siempre la cantidad a texto para evitar comparaciones',
+      'Declarar la cantidad con un tipo numérico que no admita valores negativos',
       'Usar una variable booleana para almacenar cualquier cantidad válida',
       'Asignar un valor negativo a todas las cantidades para alterar su signo al presentarlas',
     ],
-    correctIndex: 0,
+    correctIndex: 1,
     explanation:
       'Un tipo numérico sin signo restringe el dominio en tiempo de ejecución. Esta técnica evita valores no válidos en sus variables, siempre que las operaciones posteriores respeten ese dominio.',
     difficulty: 'easy',
@@ -134,12 +197,12 @@ export const block3Questions: Question[] = [
     statement:
       'Un proceso explora las rutas descartables en orden inverso de inserción y atiende las tareas pendientes en orden de llegada. ¿Qué estructuras debe utilizar?',
     options: [
-      'Una pila para las rutas y una cola para las tareas',
       'Una cola para las rutas y una pila para las tareas',
       'Dos pilas, porque toda estructura de inserción se comporta como una pila',
+      'Una pila para las rutas y una cola para las tareas',
       'Dos colas, porque el orden de salida no depende del orden de inserción',
     ],
-    correctIndex: 0,
+    correctIndex: 2,
     explanation:
       'Una pila devuelve el último elemento insertado, por lo que recorre las rutas en orden inverso. Una cola devuelve el primero, por lo que atiende las tareas en orden de llegada.',
     difficulty: 'easy',
@@ -154,8 +217,8 @@ export const block3Questions: Question[] = [
     blockId: 'III',
     statement:
       'Un árbol de búsqueda contiene los enteros 40, 20, 60, 10, 30, 50 y 70. Tras insertar 35, ¿qué entero se visita primero en un recorrido en preorden?',
-    options: ['40', '20', '35', '50'],
-    correctIndex: 0,
+    options: ['20', '35', '50', '40'],
+    correctIndex: 3,
     explanation:
       'El 35 es hijo izquierdo de 40 y se inserta como hijo derecho de 30. El preorden visita raíz, subárbol izquierdo y subárbol derecho, por lo que tras 40 aparecen 20, 10, 30, 35 y después 60.',
     difficulty: 'medium',
@@ -192,14 +255,77 @@ export const block3Questions: Question[] = [
     statement:
       'Un código inspecciona un vector de cinco elementos con índices del 0 al 4. ¿Cuál es el valor de la expresión vector[vector.length - 1]?',
     options: [
-      'El quinto elemento',
       'El primer elemento',
+      'El quinto elemento',
       'El valor 4 del vector',
       'Una posición que no existe',
     ],
-    correctIndex: 0,
+    correctIndex: 1,
     explanation:
       'vector.length vale 5, por lo que length - 1 vale 4. El índice 4 corresponde al quinto elemento del vector.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T02-Q06',
+    topicId: 'B3-T02',
+    blockId: 'III',
+    statement:
+      'En Java, el método static void aumentar(int n) { n++; } se invoca como aumentar(x) con int x = 5. ¿Qué valor conserva x después de la llamada?',
+    options: [
+      '6, porque Java pasa todos los argumentos por referencia',
+      'No compila, porque un parámetro int no puede modificarse',
+      '5, porque un int se pasa por valor',
+      'Depende de una opción de compatibilidad del compilador',
+    ],
+    correctIndex: 2,
+    explanation:
+      'En Java, un argumento de tipo primitivo int se pasa por valor. El incremento afecta a la copia local n y no cambia el valor de x en el método que llama.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T02-Q07',
+    topicId: 'B3-T02',
+    blockId: 'III',
+    statement:
+      'Un sensor debe evaluarse al menos una vez y después repetir la lectura mientras la temperatura siga dentro del rango. ¿Qué estructura de control encaja?',
+    options: [
+      'Un for tradicional, porque siempre ejecuta el cuerpo tres veces',
+      'Un while, porque puede omitir la primera lectura',
+      'Un if, porque repite internamente la lectura',
+      'Un do...while, porque evalúa la condición después de ejecutar el cuerpo',
+    ],
+    correctIndex: 3,
+    explanation:
+      'do...while ejecuta el cuerpo al menos una vez y después comprueba la condición para decidir si repite la lectura. while comprobaría primero la condición y podría no entrar en el bucle.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T02-Q08',
+    topicId: 'B3-T02',
+    blockId: 'III',
+    statement:
+      'Una función recursiva factorial(n) debe devolver 1 para n=0. ¿Por qué es necesario ese caso base?',
+    options: [
+      'Para terminar la recursión en n=0 y devolver el valor definido para ese caso',
+      'Para convertir automáticamente n en un número real',
+      'Para ordenar los enteros antes de multiplicarlos',
+      'Para declarar dos funciones con el mismo nombre',
+    ],
+    correctIndex: 0,
+    explanation:
+      'El caso base proporciona una salida directa de la recursión. Sin la condición que detiene las llamadas para n=0, factorial intentaría invocar indefinidamente factorial(-1).',
     difficulty: 'easy',
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',
@@ -213,12 +339,12 @@ export const block3Questions: Question[] = [
     statement:
       'En SQL:2023 (ISO/IEC 9075), una organización tiene DEPARTAMENTO y EMPLEADO. ¿Qué consulta usa un outer join y conserva todos los departamentos, incluidos los que no tienen empleados?',
     options: [
-      'SELECT d.id, e.id FROM DEPARTAMENTO AS d LEFT JOIN EMPLEADO AS e ON e.departamento_id = d.id',
       'SELECT d.id, e.id FROM DEPARTAMENTO AS d INNER JOIN EMPLEADO AS e ON e.departamento_id = d.id',
       'SELECT d.id, e.id FROM DEPARTAMENTO AS d CROSS JOIN EMPLEADO AS e',
+      'SELECT d.id, e.id FROM DEPARTAMENTO AS d LEFT JOIN EMPLEADO AS e ON e.departamento_id = d.id',
       'SELECT d.id, e.id FROM DEPARTAMENTO AS d RIGHT JOIN EMPLEADO AS e ON e.departamento_id = d.id',
     ],
-    correctIndex: 0,
+    correctIndex: 2,
     explanation:
       'LEFT JOIN conserva todas las filas del lado izquierdo y completa con valores nulos las columnas sin coincidencia. RIGHT JOIN conserva los empleados, aunque perdería los departamentos sin empleados.',
     difficulty: 'easy',
@@ -234,12 +360,12 @@ export const block3Questions: Question[] = [
     statement:
       'En SQL:2023 (ISO/IEC 9075), se pide el nombre de cada cliente y el número de facturas emitidas por fecha. ¿Qué cláusula forma un grupo por cada combinación de nombre y fecha?',
     options: [
-      'GROUP BY cliente.nombre, FACTURA.fecha',
       'ORDER BY cliente.nombre, FACTURA.fecha',
       'WHERE cliente.nombre, FACTURA.fecha',
       'DISTINCT cliente.nombre, FACTURA.fecha',
+      'GROUP BY cliente.nombre, FACTURA.fecha',
     ],
-    correctIndex: 0,
+    correctIndex: 3,
     explanation:
       'Después de unir las tablas, cada fila pertenece a una combinación de nombre de cliente y fecha. GROUP BY forma un grupo por cada una de esas combinaciones, lo que permite contar las facturas del grupo.',
     difficulty: 'medium',
@@ -276,12 +402,12 @@ export const block3Questions: Question[] = [
     statement:
       'En una base de datos, una secuencia de consultas con parámetros debe reutilizarse con controles de acceso y una transacción gestionada internamente. ¿Qué objeto SQL resulta adecuado?',
     options: [
-      'Un procedimiento almacenado',
       'Una restricción CHECK',
+      'Un procedimiento almacenado',
       'Una vista materializada sin tabla base',
       'Una sentencia GRANT sin cuerpo ejecutable',
     ],
-    correctIndex: 0,
+    correctIndex: 1,
     explanation:
       'Un procedimiento almacenado guarda en el servidor una secuencia de instrucciones SQL reutilizable. Puede recibir parámetros, incluir controles y gestionar una transacción conforme a las capacidades del motor.',
     difficulty: 'medium',
@@ -297,14 +423,77 @@ export const block3Questions: Question[] = [
     statement:
       'En una base de datos, toda actualización de SALDO debe validarse y, si deja un valor negativo, corregirse o rechazarse. ¿Qué objeto SQL permite ejecutar esa lógica automáticamente ante el evento?',
     options: [
-      'Un disparador o trigger',
       'Una vista materializada sin tabla base',
       'Un índice no único',
+      'Un disparador o trigger',
       'Un permiso SELECT',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Un trigger es un programa que se ejecuta automáticamente ante determinados eventos, como INSERT, UPDATE o DELETE. Permite validar o modificar la operación según las reglas del motor.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T03-Q06',
+    topicId: 'B3-T03',
+    blockId: 'III',
+    statement:
+      'En una tabla FACTURA, la columna NIF puede contener NULL. Se pide el número total de facturas y también el número de facturas con NIF informado. ¿Qué expresiones SQL:2023 corresponden?',
+    options: [
+      'COUNT(nif) y COUNT(*)',
+      'SUM(nif) y COUNT(nif)',
+      'COUNT(DISTINCT nif) y COUNT(*)',
+      'COUNT(*) y COUNT(nif)',
+    ],
+    correctIndex: 3,
+    explanation:
+      'COUNT(*) cuenta todas las filas, incluidas las que tienen NIF nulo. COUNT(nif) omite los valores NULL, por lo que cuenta únicamente las facturas con NIF informado.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T03-Q07',
+    topicId: 'B3-T03',
+    blockId: 'III',
+    statement:
+      'Se combinan dos consultas que devuelven la misma columna codigo: una puede contener duplicados y la otra no. ¿Qué operador conserva todos los registros de ambas consultas, incluidos duplicados, siempre que tengan el mismo número y tipo de columnas?',
+    options: [
+      'UNION ALL',
+      'UNION',
+      'INTERSECT',
+      'EXCEPT',
     ],
     correctIndex: 0,
     explanation:
-      'Un trigger es un programa que se ejecuta automáticamente ante determinados eventos, como INSERT, UPDATE o DELETE. Permite validar o modificar la operación según las reglas del motor.',
+      'UNION ALL concatena los resultados de ambas consultas y conserva las filas duplicadas. UNION elimina duplicados; INTERSECT devuelve coincidencias y EXCEPT filas que solo aparecen en la primera consulta.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T03-Q08',
+    topicId: 'B3-T03',
+    blockId: 'III',
+    statement:
+      'Para obtener el préstamo más reciente de cada socio, se necesitan todas las fechas de préstamo y el número 1 dentro de cada socio para la fecha máxima. Si hay empate, se elige el préstamo con el identificador mayor. ¿Qué construcción SQL:2023 es adecuada?',
+    options: [
+      'GROUP BY socio_id, fecha_prestamo sin conservar el préstamo',
+      'ROW_NUMBER() OVER (PARTITION BY socio_id ORDER BY fecha_prestamo DESC, prestamo_id DESC)',
+      'ORDER BY socio_id, fecha_prestamo sin separar cada socio',
+      'SELECT DISTINCT socio_id, MAX(fecha_prestamo) sobre todas las filas',
+    ],
+    correctIndex: 1,
+    explanation:
+      'ROW_NUMBER particiona las filas por socio y las ordena por fecha de préstamo y, en caso de empate, por identificador, ambos en orden descendente. Así, el número 1 identifica de forma determinista el préstamo más reciente de cada socio y puede filtrarse con la condición correspondiente.',
     difficulty: 'hard',
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',
@@ -318,12 +507,12 @@ export const block3Questions: Question[] = [
     statement:
       'Un dominio define operaciones de alta y baja, mientras cada implementación debe añadir una fecha de auditoría. ¿Qué principio SOLID exige que las subclases puedan reemplazar la implementación sin modificar esos contratos?',
     options: [
-      'Principio de sustitución de Liskov',
       'Principio de responsabilidad única',
       'Principio de inversión de dependencias',
       'Principio abierto-cerrado',
+      'Principio de sustitución de Liskov',
     ],
-    correctIndex: 0,
+    correctIndex: 3,
     explanation:
       'El principio de sustitución de Liskov exige que una implementación pueda sustituir a otra sin incumplir el contrato. Así, el código que consume la interfaz no depende de detalles de la implementación concreta.',
     difficulty: 'medium',
@@ -359,8 +548,8 @@ export const block3Questions: Question[] = [
     blockId: 'III',
     statement:
       'Un flujo crea objetos Repositorio, pero el código de negocio necesita una interfaz de persistencia y no la clase concreta de base de datos. ¿Qué patrón facilita esta decisión?',
-    options: ['Repositorio', 'Decorador', 'Observador', 'Constructor privado'],
-    correctIndex: 0,
+    options: ['Decorador', 'Repositorio', 'Observador', 'Constructor privado'],
+    correctIndex: 1,
     explanation:
       'El patrón Repositorio encapsula el acceso a datos detrás de una abstracción. El código de negocio depende de esa abstracción, no de la implementación concreta del almacenamiento.',
     difficulty: 'easy',
@@ -376,12 +565,12 @@ export const block3Questions: Question[] = [
     statement:
       'Al documentar un flujo de reservas, el diagrama debe mostrar pasos del proceso, decisiones y bifurcaciones. ¿Qué tipo de diagrama UML resulta más apropiado?',
     options: [
-      'Diagrama de actividad',
       'Diagrama de clases',
       'Diagrama de componentes',
+      'Diagrama de actividad',
       'Diagrama de despliegue',
     ],
-    correctIndex: 0,
+    correctIndex: 2,
     explanation:
       'El diagrama de actividad representa el flujo de trabajo mediante actividades, decisiones, condiciones y caminos de control. Los diagramas de clases, componentes y despliegue muestran otros aspectos del sistema.',
     difficulty: 'easy',
@@ -397,15 +586,78 @@ export const block3Questions: Question[] = [
     statement:
       'La lógica de negocio necesita guardar datos, pero el equipo quiere separar esa regla de la base de datos concreta. ¿Qué principio SOLID orienta el diseño?',
     options: [
-      'Inversión de dependencias',
       'Abierto-cerrado',
       'Segregación de interfaces',
       'Responsabilidad única',
+      'Inversión de dependencias',
     ],
-    correctIndex: 0,
+    correctIndex: 3,
     explanation:
       'La inversión de dependencias hace que los módulos de alto nivel dependan de abstracciones y no de detalles de bajo nivel. Así, la persistencia queda detrás de una abstracción que puede cambiar sin acoplarse al dominio.',
     difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T04-Q06',
+    topicId: 'B3-T04',
+    blockId: 'III',
+    statement:
+      'Un sistema de notificaciones puede cambiar su algoritmo de envío sin modificar el código que inicia el envío. ¿Qué patrón permite que el cliente seleccione una implementación concreta de forma intercambiable?',
+    options: [
+      'Strategy',
+      'Singleton',
+      'Un adaptador de datos específico',
+      'Constructor privado sin interfaz',
+    ],
+    correctIndex: 0,
+    explanation:
+      'El patrón Strategy encapsula algoritmos intercambiables detrás de una abstracción común. El cliente puede seleccionar otra estrategia sin conocer los detalles de su implementación.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T04-Q07',
+    topicId: 'B3-T04',
+    blockId: 'III',
+    statement:
+      'Una clase Figura declara el método calcularArea como abstracto y todas sus subclases deben implementarlo. ¿Qué propiedad tiene la clase Figura?',
+    options: [
+      'Es una interfaz que solo puede contener constantes',
+      'No se puede instanciar directamente y puede definir una operación abstracta para sus subclases',
+      'Es una clase concreta que se instancia aunque no tenga implementación',
+      'Es un enum que obliga a usar siempre el mismo cálculo',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Una clase abstracta puede declarar métodos sin implementación y no se puede instanciar directamente. Las subclases concretas deben implementar o heredar una implementación válida de esos métodos.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T04-Q08',
+    topicId: 'B3-T04',
+    blockId: 'III',
+    statement:
+      'En un diagrama UML, una parte pertenece al ciclo de vida de un todo y no puede existir de forma independiente. ¿Qué relación representa mejor esa condición?',
+    options: [
+      'Una asociación simple sin multiplicidad',
+      'Una generalización entre dos clases',
+      'Una composición, representada con un rombo relleno en el extremo del todo',
+      'Una dependencia de uso temporal',
+    ],
+    correctIndex: 2,
+    explanation:
+      'La composición es una relación de agregación fuerte: la parte forma parte del todo y su ciclo de vida está ligado a él. En UML se representa con un rombo relleno en el extremo del todo.',
+    difficulty: 'medium',
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',
     reviewedOn: '2026-09-24',
@@ -438,8 +690,8 @@ export const block3Questions: Question[] = [
     blockId: 'III',
     statement:
       'Una empresa selecciona la plataforma .NET y necesita un lenguaje principal para su aplicación multiplataforma. ¿Qué lenguaje corresponde a esa elección?',
-    options: ['C# en el contexto de .NET', 'JavaScript', 'HTML', 'SQL'],
-    correctIndex: 0,
+    options: ['JavaScript', 'C# en el contexto de .NET', 'HTML', 'SQL'],
+    correctIndex: 1,
     explanation:
       'C# es el lenguaje principal de la plataforma .NET y admite aplicaciones multiplataforma para los sistemas operativos admitidos por el entorno.',
     difficulty: 'easy',
@@ -455,12 +707,12 @@ export const block3Questions: Question[] = [
     statement:
       'En una aplicación Java y Jakarta EE, una operación de negocio y sus accesos a datos deben quedar dentro de una transacción gestionada por el contenedor. ¿Qué mecanismo declarativo es adecuado?',
     options: [
-      'Una demarcación transaccional declarativa sobre el método de negocio',
       'Una sentencia PRINT de SQL',
       'Un atributo alt de HTML',
+      'Una demarcación transaccional declarativa sobre el método de negocio',
       'Una función de la interfaz de usuario',
     ],
-    correctIndex: 0,
+    correctIndex: 2,
     explanation:
       'Una anotación transaccional declara al contenedor dónde comenzar y finalizar la transacción. El código de negocio no necesita implementar manualmente toda la coordinación del acceso a datos.',
     difficulty: 'hard',
@@ -476,12 +728,12 @@ export const block3Questions: Question[] = [
     statement:
       'Un cliente de una API empresarial necesita autenticación basada en tokens y permisos para sus operaciones. ¿Qué especificación de Jakarta EE define los servicios de seguridad que debe integrar la aplicación?',
     options: [
-      'La especificación Jakarta Security, integrada con mecanismos de identidad del contenedor',
       'La especificación Jakarta Batch',
       'La especificación Jakarta Messaging',
       'La especificación Jakarta Bean Validation',
+      'La especificación Jakarta Security, integrada con mecanismos de identidad del contenedor',
     ],
-    correctIndex: 0,
+    correctIndex: 3,
     explanation:
       'Jakarta Security define servicios de autenticación y autorización para aplicaciones Jakarta EE. La aplicación los integra con los mecanismos y almacenes de identidad del contenedor; las demás especificaciones cubren otros aspectos.',
     difficulty: 'medium',
@@ -512,18 +764,81 @@ export const block3Questions: Question[] = [
     active: true,
   },
   {
+    id: 'B3-T05-Q06',
+    topicId: 'B3-T05',
+    blockId: 'III',
+    statement:
+      'Una clase de recursos de Jakarta RESTful Web Services declara un método con @GET y usa @Path para atender una petición HTTP. ¿Qué papel tiene esa clase dentro de la aplicación?',
+    options: [
+      'Es un procedimiento almacenado que solo se ejecuta desde SQL',
+      'Es un recurso Jakarta RESTful Web Services que expone una operación HTTP',
+      'Es un componente de presentación que solo genera HTML sin recibir peticiones',
+      'Es una entidad de persistencia que reemplaza al servidor web',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Jakarta RESTful Web Services, originariamente JAX-RS, permite definir recursos con rutas y métodos HTTP como GET, POST o DELETE. La clase atiende una petición y devuelve una respuesta conforme al contrato del recurso.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T05-Q07',
+    topicId: 'B3-T05',
+    blockId: 'III',
+    statement:
+      'Una clase de persistencia de Jakarta EE representa una fila de EMPLEADO y se consulta mediante un EntityManager. ¿Qué combinación identifica correctamente su configuración?',
+    options: [
+      'Anotarla con @Path y declarar un método anotado con @GET',
+      'Registrarla como un servlet y usar @PostConstruct para identificarla',
+      'Anotarla con @Entity y declarar una propiedad identificadora con @Id',
+      'Declararla únicamente como una clase final sin relación con el modelo',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Una entidad de persistencia se declara con una anotación @Entity y necesita una propiedad identificadora, normalmente señalada con @Id. Las demás alternativas describen un recurso web o una clase sin configuración de persistencia.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T05-Q08',
+    topicId: 'B3-T05',
+    blockId: 'III',
+    statement:
+      'En una aplicación web .NET, un controlador necesita un repositorio, pero el código no debe depender de su implementación concreta. ¿Qué técnica permite registrar una implementación y recibirla por inyección de dependencias?',
+    options: [
+      'Guardar el repositorio en una variable global sin registrar ningún servicio',
+      'Crear una nueva instancia del repositorio en cada vista sin abstracción',
+      'Usar el constructor para leer una clave de registro y eludir la inyección',
+      'Registrar el servicio en el contenedor de inyección y recibir una abstracción en el constructor',
+    ],
+    correctIndex: 3,
+    explanation:
+      'El contenedor de inyección resuelve las dependencias declaradas por la aplicación. Si el controlador recibe una interfaz del repositorio, queda acoplado a la abstracción y no a una implementación concreta.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
     id: 'B3-T06-Q01',
     topicId: 'B3-T06',
     blockId: 'III',
     statement:
       'Una aplicación de gestión tiene interfaz de usuario, lógica de negocio y acceso a datos en procesos separados. ¿Qué arquitectura describe ese diseño?',
     options: [
-      'Arquitectura de tres capas',
       'Arquitectura de dos nodos sin separación lógica',
+      'Arquitectura de tres capas',
       'Modelo de memoria compartida',
       'Arquitectura de un único archivo ejecutable',
     ],
-    correctIndex: 0,
+    correctIndex: 1,
     explanation:
       'La arquitectura de tres capas separa presentación, lógica de negocio y acceso a datos. La separación permite mantener cada responsabilidad en un componente distinto.',
     difficulty: 'easy',
@@ -539,12 +854,12 @@ export const block3Questions: Question[] = [
     statement:
       'Un servicio web procesa cada petición con los datos incluidos en ella y no mantiene información de sesión entre peticiones. ¿Qué característica tiene?',
     options: [
-      'Es sin estado',
       'Mantiene una sesión de usuario permanente',
       'Requiere un servidor de aplicaciones por usuario',
+      'Es sin estado',
       'Solo funciona con conexiones UDP',
     ],
-    correctIndex: 0,
+    correctIndex: 2,
     explanation:
       'Un servicio sin estado no conserva contexto de una petición a otra. Cualquier estado necesario debe viajar dentro de la petición o recuperarse desde un almacén externo.',
     difficulty: 'easy',
@@ -560,12 +875,12 @@ export const block3Questions: Question[] = [
     statement:
       'Un cliente móvil obtiene datos de un servidor mediante recursos identificables por URL y verbos HTTP. ¿Qué estilo de arquitectura de servicios describe este escenario?',
     options: [
-      'REST',
       'Un modelo de herencia de clases local',
       'Un sistema de archivos distribuidos',
       'Una cola de mensajes local',
+      'REST',
     ],
-    correctIndex: 0,
+    correctIndex: 3,
     explanation:
       'REST representa recursos con identificadores y utiliza métodos HTTP para operar sobre ellos. La arquitectura puede ser sin estado y organizarse como una API independiente.',
     difficulty: 'medium',
@@ -602,14 +917,77 @@ export const block3Questions: Question[] = [
     statement:
       'Un cliente reintenta una transferencia porque la respuesta se perdió. El servidor usa un identificador único para la transferencia y devuelve el mismo resultado si recibe la misma clave. ¿Qué propiedad presenta la operación?',
     options: [
-      'Idempotencia',
       'Mutabilidad de datos',
+      'Idempotencia',
       'Herencia múltiple',
       'Transparencia de ubicación',
     ],
-    correctIndex: 0,
+    correctIndex: 1,
     explanation:
       'Una operación idempotente puede ejecutarse varias veces con la misma intención y producir el mismo efecto lógico. El identificador permite reconocer el reintento y evitar una segunda transferencia.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T06-Q06',
+    topicId: 'B3-T06',
+    blockId: 'III',
+    statement:
+      'En una aplicación web MVC, el controlador recibe una petición, el modelo actualiza los datos y la vista compone la respuesta. ¿Qué separación describe MVC?',
+    options: [
+      'Una única función que mezcla entrada, datos y presentación',
+      'Un protocolo que sustituye al servidor de aplicaciones',
+      'Modelo, vista y controlador con responsabilidades separadas',
+      'Un formato de almacenamiento de archivos estáticos',
+    ],
+    correctIndex: 2,
+    explanation:
+      'MVC separa el modelo, que contiene los datos y sus reglas, de la vista, que representa la respuesta, y del controlador, que atiende la petición y coordina ambos. La separación facilita mantener responsabilidades diferentes.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T06-Q07',
+    topicId: 'B3-T06',
+    blockId: 'III',
+    statement:
+      'Una pasarela de API (API Gateway) recibe las peticiones antes que varios servicios y aplica autenticación, limitación de tasa y enrutado. ¿Qué función describe esa pieza?',
+    options: [
+      'Normalizar los datos de una tabla relacional',
+      'Compilar el código de cada microservicio en tiempo de ejecución',
+      'Servir archivos estáticos sin pasar por la red',
+      'Centralizar políticas de acceso y dirigir cada petición al servicio correspondiente',
+    ],
+    correctIndex: 3,
+    explanation:
+      'Una pasarela de API (API Gateway) es un punto de entrada que aplica políticas transversales y enruta las peticiones hacia los servicios internos. No sustituye la compilación, la persistencia ni el modelo de datos.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T06-Q08',
+    topicId: 'B3-T06',
+    blockId: 'III',
+    statement:
+      'Una API usa recursos identificados por una URL conocida. El cliente envía varias veces PUT con la misma representación y cada ejecución deja el recurso en el mismo estado. ¿Qué método HTTP tiene esa propiedad?',
+    options: [
+      'PUT, porque reemplaza la representación del recurso en la URI identificada',
+      'HEAD, porque solo descarga las cabeceras',
+      'POST, porque crea siempre un recurso distinto',
+      'PATCH, porque siempre duplica la representación',
+    ],
+    correctIndex: 0,
+    explanation:
+      'PUT representa la creación o sustitución de la representación identificada por la URI y es idempotente: repetir la misma solicitud produce el mismo estado lógico. POST no ofrece esa garantía y PATCH modifica parcialmente la representación.',
     difficulty: 'hard',
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',
@@ -622,8 +1000,8 @@ export const block3Questions: Question[] = [
     blockId: 'III',
     statement:
       'Una página de cita necesita una estructura semántica con un encabezado principal, un formulario de búsqueda y una lista de resultados. ¿Qué elemento HTML representa correctamente el encabezado principal?',
-    options: ['h1', 'meta', 'br', 'canvas'],
-    correctIndex: 0,
+    options: ['meta', 'br', 'h1', 'canvas'],
+    correctIndex: 2,
     explanation:
       'h1 representa el encabezado principal del documento. meta describe metadatos, br produce un salto de línea y canvas es un área de dibujo.',
     difficulty: 'easy',
@@ -639,12 +1017,12 @@ export const block3Questions: Question[] = [
     statement:
       'Un menú lateral permanece visible en pantallas anchas, se convierte en una barra inferior en pantallas estrechas y mantiene nombres visibles junto a los iconos. ¿Qué principio de diseño responsivo se está aplicando?',
     options: [
-      'Diseño adaptable con puntos de ruptura y contenido esencial preservado',
       'Diseño de escritorio con anchura fija',
       'Una tabla HTML usada para controlar la pantalla',
       'Una captura de pantalla usada como menú',
+      'Diseño adaptable con puntos de ruptura y contenido esencial preservado',
     ],
-    correctIndex: 0,
+    correctIndex: 3,
     explanation:
       'El diseño responsivo adapta la disposición a las características de la pantalla mediante puntos de ruptura, pero conserva la función y el contenido principales en cada modo.',
     difficulty: 'easy',
@@ -681,12 +1059,12 @@ export const block3Questions: Question[] = [
     statement:
       'Un documento XML intercambia datos entre dos aplicaciones independientes. ¿Qué característica permite que cada lado defina nombres de elementos propios sin depender de un orden fijo de columnas?',
     options: [
-      'Es autodescriptivo y admite espacios de nombres',
       'Solo admite valores numéricos',
+      'Es autodescriptivo y admite espacios de nombres',
       'Requiere que todos los elementos tengan el mismo nombre',
       'No puede contener atributos',
     ],
-    correctIndex: 0,
+    correctIndex: 1,
     explanation:
       'XML etiqueta la información con nombres de elementos y atributos. Sus espacios de nombres evitan colisiones entre vocabularios, por lo que no depende de una estructura de columnas fija.',
     difficulty: 'medium',
@@ -701,11 +1079,74 @@ export const block3Questions: Question[] = [
     blockId: 'III',
     statement:
       'Un documento HTML contiene textos en español y en alfabeto cirílico. ¿Qué atributo de la cabecera indica al navegador qué codificación debe interpretar?',
-    options: ['charset', 'rel', 'target', 'download'],
-    correctIndex: 0,
+    options: ['rel', 'target', 'charset', 'download'],
+    correctIndex: 2,
     explanation:
       'El atributo charset de meta declara la codificación de caracteres del documento. Los otros atributos tienen funciones distintas, como relación de recursos o comportamiento de enlaces.',
     difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T07-Q06',
+    topicId: 'B3-T07',
+    blockId: 'III',
+    statement:
+      'Una hoja de estilos contiene la regla .tarjeta[data-estado="pendiente"]. ¿Qué elementos selecciona?',
+    options: [
+      'Todos los descendientes de un elemento con clase tarjeta',
+      'Solo elementos con id igual a tarjeta, sin importar sus atributos',
+      'Elementos con clase tarjeta que tengan cualquier valor en el atributo estado',
+      'Elementos con clase tarjeta cuyo atributo data-estado valga exactamente pendiente',
+    ],
+    correctIndex: 3,
+    explanation:
+      'La parte .tarjeta exige que el elemento tenga esa clase y [data-estado="pendiente"] exige que el valor del atributo data-estado sea exactamente pendiente. La regla no selecciona descendientes ni atributos con cualquier valor.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T07-Q07',
+    topicId: 'B3-T07',
+    blockId: 'III',
+    statement:
+      'En JavaScript, la promesa de fetch(\'/api/expedientes\') se resuelve con una respuesta HTTP 404. ¿Qué comprobación evita tratar ese 404 como si fuera contenido válido?',
+    options: [
+      'Comprobar response.ok y gestionar la respuesta no correcta',
+      'Esperar a que fetch lance siempre una excepción por cualquier código HTTP',
+      'Convertir siempre response.status en 200 antes de leer el cuerpo',
+      'No esperar la promesa para que la interfaz continúe de inmediato',
+    ],
+    correctIndex: 0,
+    explanation:
+      'fetch resuelve su promesa para respuestas HTTP, incluidas las no satisfactorias; normalmente rechaza por fallos de red. Por eso hay que comprobar response.ok y tratar explícitamente el código de error antes de usar los datos.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T07-Q08',
+    topicId: 'B3-T07',
+    blockId: 'III',
+    statement:
+      'Una aplicación intercambia un XML que debe ajustarse a la estructura, los tipos y las restricciones de un vocabulario. ¿Qué tecnología define ese esquema y permite validarlo?',
+    options: [
+      'Una hoja de estilos CSS, porque puede comparar valores',
+      'Un esquema XSD, que define la estructura y los tipos permitidos',
+      'Una consulta SQL, que valida el documento al ejecutarse',
+      'Un script de JavaScript sin intérprete declarado',
+    ],
+    correctIndex: 1,
+    explanation:
+      'XSD es un lenguaje de definición de esquemas XML que describe elementos, atributos, tipos y restricciones. Un documento conforme a ese esquema puede validarse contra el XSD.',
+    difficulty: 'medium',
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',
     reviewedOn: '2026-09-24',
@@ -718,12 +1159,12 @@ export const block3Questions: Question[] = [
     statement:
       'Una aplicación muestra el estado de una solicitud mediante un icono y una etiqueta. La interfaz debe funcionar también con un lector de pantalla. ¿Qué opción mejora la percepción del estado?',
     options: [
-      'Conservar el icono como elemento decorativo y ofrecer la etiqueta y el estado como texto accesible',
       'Añadir solo un asterisco de color al icono',
       'Transmitir el estado únicamente mediante el ancho del icono',
       'Eliminar la etiqueta y dejar solo un color de fondo',
+      'Conservar el icono como elemento decorativo y ofrecer la etiqueta y el estado como texto accesible',
     ],
-    correctIndex: 0,
+    correctIndex: 3,
     explanation:
       'Una etiqueta textual comprensible comunica el estado sin depender del color ni del significado de un símbolo. El icono decorativo no debe sustituir esa información.',
     difficulty: 'easy',
@@ -760,12 +1201,12 @@ export const block3Questions: Question[] = [
     statement:
       'Una persona navega únicamente con teclado y un menú desplegable depende de JavaScript para mostrar sus opciones. ¿Qué diseño es más usable y accesible?',
     options: [
-      'Un patrón de menú accesible que permita enfocar, abrir, recorrer y activar sus opciones con teclado',
       'Un menú que solo responda al ratón y no pueda recibir foco',
+      'Un patrón de menú accesible que permita enfocar, abrir, recorrer y activar sus opciones con teclado',
       'Una lista sin enlaces ni controles de teclado',
       'Una imagen del menú sin nombre accesible ni orden de tabulación',
     ],
-    correctIndex: 0,
+    correctIndex: 1,
     explanation:
       'Un control operable por teclado ofrece un orden de foco comprensible y estados de foco visibles. El patrón accesible permite comprender y utilizar el menú sin depender exclusivamente del puntero.',
     difficulty: 'medium',
@@ -781,12 +1222,12 @@ export const block3Questions: Question[] = [
     statement:
       'Un servicio interno acepta una operación de solo lectura desde una aplicación de atención al ciudadano. ¿Qué medida respeta mejor el principio de mínimo privilegio?',
     options: [
-      'Conceder a esa aplicación únicamente el permiso de lectura necesario',
       'Conceder permisos de administrador para evitar reconfiguraciones futuras',
       'Compartir una cuenta de administrador con todas las aplicaciones',
+      'Conceder a esa aplicación únicamente el permiso de lectura necesario',
       'Permitir escritura y lectura solo porque la operación actual es de lectura',
     ],
-    correctIndex: 0,
+    correctIndex: 2,
     explanation:
       'El mínimo privilegio concede únicamente los permisos imprescindibles para la tarea. Limitar la interfaz a lectura reduce el impacto de un uso indebido o de un compromiso de la aplicación.',
     difficulty: 'medium',
@@ -802,15 +1243,73 @@ export const block3Questions: Question[] = [
     statement:
       'Un servicio crítico debe seguir accesible tras un fallo de un componente y contar con procedimientos probados para restablecerlo. ¿Qué propiedad de seguridad se está trabajando?',
     options: [
-      'Disponibilidad',
       'Confidencialidad de la clave de cifrado',
       'Integridad de los metadatos',
       'Usabilidad de la interfaz',
+      'Disponibilidad',
     ],
-    correctIndex: 0,
+    correctIndex: 3,
     explanation:
       'La disponibilidad trata de que los usuarios autorizados puedan acceder al servicio cuando lo necesitan. La redundancia, la recuperación y los procedimientos probados son medidas para mantenerla.',
     difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T08-Q06',
+    topicId: 'B3-T08',
+    blockId: 'III',
+    statement:
+      'Según WCAG 2.2 nivel AA, ¿cuál es el mínimo de contraste para un texto normal?',
+    options: ['4,5:1', '3:1', '7:1 solo para texto normal', 'No hay requisito si el texto es grande'],
+    correctIndex: 0,
+    explanation:
+      'El mínimo AA para texto normal es 4,5:1. El valor 3:1 se aplica a texto grande bajo ciertas condiciones y 7:1 es el umbral AAA para texto normal; ambos valores pueden superar el mínimo, pero no son el mínimo AA pedido.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T08-Q07',
+    topicId: 'B3-T08',
+    blockId: 'III',
+    statement:
+      'Una aplicación registra trazas de autenticación. Para reducir la exposición de datos personales, ¿qué diseño conviene?',
+    options: [
+      'Guardar el número de documento completo en cada traza para facilitar la auditoría',
+      'Registrar un identificador pseudonimizado y restringir el acceso y la retención de las trazas',
+      'Copiar las contraseñas en la traza para poder recuperar sesiones',
+      'Enviar las trazas a cualquier cliente sin cifrar porque contienen datos internos',
+    ],
+    correctIndex: 1,
+    explanation:
+      'La minimización evita recoger datos que no son necesarios para la finalidad. Un identificador pseudonimizado reduce la exposición, y los controles de acceso y retención protegen el registro restante.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T08-Q08',
+    topicId: 'B3-T08',
+    blockId: 'III',
+    statement:
+      'Un comentario de usuario se inserta en una página mediante innerHTML. ¿Qué medida evita que su contenido se interprete como HTML o JavaScript?',
+    options: [
+      'Validar únicamente que el comentario no esté vacío',
+      'Añadir el comentario a un atributo title sin codificar',
+      'Codificar el texto para el contexto HTML antes de insertarlo, o usar textContent',
+      'Sustituir innerHTML por una etiqueta que muestre una imagen',
+    ],
+    correctIndex: 2,
+    explanation:
+      'El contenido debe tratarse como texto, no como marcado ejecutable. La codificación adaptada al contexto o textContent evita que el navegador interprete sus etiquetas y scripts; las demás opciones no corrigen la inserción ni evitan la interpretación del contenido.',
+    difficulty: 'hard',
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',
     reviewedOn: '2026-09-24',
@@ -844,12 +1343,12 @@ export const block3Questions: Question[] = [
     statement:
       'Un equipo necesita registrar la evolución de un contrato de API, volver a una versión concreta para depurar y comparar ramas. ¿Qué función ofrece el historial de un repositorio Git?',
     options: [
-      'Registrar instantáneas de cambios identificadas por commits',
       'Mantener una única versión sin historial',
+      'Registrar instantáneas de cambios identificadas por commits',
       'Compartir bases de datos sin control de versiones',
       'Ejecutar automáticamente todas las pruebas del sistema',
     ],
-    correctIndex: 0,
+    correctIndex: 1,
     explanation:
       'Git registra commits que permiten recorrer la evolución, comparar ramas y recuperar el contenido de una revisión concreta cuando está disponible en el historial.',
     difficulty: 'easy',
@@ -865,12 +1364,12 @@ export const block3Questions: Question[] = [
     statement:
       'Una función suma el precio de varios artículos. ¿Qué prueba permite comprobar que dos pedidos con los mismos precios y cantidades producen el mismo importe?',
     options: [
-      'Una prueba de determinismo con entradas iguales',
       'Una prueba que solo compruebe que el programa no se cierra',
       'Una prueba de rendimiento con millones de usuarios',
+      'Una prueba de determinismo con entradas iguales',
       'Una prueba de despliegue en el servidor final',
     ],
-    correctIndex: 0,
+    correctIndex: 2,
     explanation:
       'El determinismo significa que la misma entrada produce la misma salida en el mismo contexto de ejecución. Repetir el cálculo con precios y cantidades idénticos permite verificar esa propiedad.',
     difficulty: 'easy',
@@ -886,12 +1385,12 @@ export const block3Questions: Question[] = [
     statement:
       'Una persona trabaja en una rama de corrección mientras otra necesita una corrección urgente en producción. ¿Qué estrategia permite llevar solo ese cambio urgente a otra rama?',
     options: [
-      'Crear un commit focalizado, publicarlo y aplicar cherry-pick en la rama de destino',
       'Reescribir todas las ramas para que apunten al commit más reciente',
       'Borrar la rama de trabajo después de modificarla',
       'Usar git status para mover el commit automáticamente',
+      'Crear un commit focalizado, publicarlo y aplicar cherry-pick en la rama de destino',
     ],
-    correctIndex: 0,
+    correctIndex: 3,
     explanation:
       'Un commit focalizado contiene el cambio urgente y puede identificarse para aplicarlo mediante cherry-pick. Así se evita incorporar cambios ajenos al trabajo de la otra persona.',
     difficulty: 'medium',
@@ -916,6 +1415,69 @@ export const block3Questions: Question[] = [
     explanation:
       'La integración continua automatiza comprobaciones tras cada cambio y evita avanzar con un fallo conocido. Las puertas de calidad reducen el riesgo del despliegue sin eliminar la revisión ni la responsabilidad del equipo.',
     difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T09-Q06',
+    topicId: 'B3-T09',
+    blockId: 'III',
+    statement:
+      'Antes de crear un commit, un equipo ha modificado dos archivos y ejecuta git diff --staged. ¿Qué información muestra?',
+    options: [
+      'El historial completo de todos los commits de la rama',
+      'Los cambios entre el índice y el último commit, es decir, los cambios preparados',
+      'Los archivos no rastreados que todavía no se han añadido',
+      'La lista de ramas que divergen del remoto',
+    ],
+    correctIndex: 1,
+    explanation:
+      'git diff --staged, también disponible como git diff --cached, compara el contenido del índice con HEAD. Muestra los cambios preparados para el próximo commit, no el historial ni los archivos no rastreados.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T09-Q07',
+    topicId: 'B3-T09',
+    blockId: 'III',
+    statement:
+      'Una función de cálculo de impuesto no necesita base de datos ni red y se puede ejecutar aislada. ¿Qué tipo de prueba la verifica directamente?',
+    options: [
+      'Una prueba de extremo a extremo que recorre toda la interfaz',
+      'Una prueba de integración que conecta todos los servicios',
+      'Una prueba unitaria que ejercita la función con entradas y resultados esperados',
+      'Una prueba de carga que mide peticiones por segundo',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Una prueba unitaria aísla una unidad de código y verifica su comportamiento con casos controlados. La ausencia de base de datos y red hace innecesaria una integración o una prueba de extremo a extremo para esa función.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B3-T09-Q08',
+    topicId: 'B3-T09',
+    blockId: 'III',
+    statement:
+      'Una rama principal protegida exige que los cambios lleguen mediante una pull request y que las comprobaciones automáticas estén en verde. ¿Qué control describe esa protección?',
+    options: [
+      'Permitir que cualquier usuario sobrescriba la rama principal sin revisión',
+      'Desviar automáticamente todos los cambios a una rama personal',
+      'Ejecutar las pruebas solo después de publicar en producción',
+      'Rechazar la integración directa y validar las comprobaciones antes de proteger la rama',
+    ],
+    correctIndex: 3,
+    explanation:
+      'La protección de la rama principal bloquea integraciones directas y exige el flujo de revisión y las comprobaciones automatizadas. Así se evita publicar un cambio sin los controles de calidad definidos.',
+    difficulty: 'medium',
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',
     reviewedOn: '2026-09-24',

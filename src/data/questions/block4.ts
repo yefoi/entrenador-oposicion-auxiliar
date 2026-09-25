@@ -102,6 +102,69 @@ export const block4Questions: Question[] = [
     active: true,
   },
   {
+    id: 'B4-T01-Q06',
+    topicId: 'B4-T01',
+    blockId: 'IV',
+    statement:
+      'Un servicio Linux debe arrancar automáticamente después de cada reinicio y comenzar ahora sin duplicar comandos. ¿Qué combinación de systemctl cumple ambos objetivos?',
+    options: [
+      'systemctl enable --now app',
+      'systemctl start app y esperar al siguiente reinicio',
+      'systemctl disable --now app',
+      'journalctl -u app',
+    ],
+    correctIndex: 0,
+    explanation:
+      'systemctl enable crea la habilitación persistente y --now también inicia la unidad en ese momento. Un start aislado no garantiza que el servicio vuelva a arrancar tras reiniciar.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T01-Q07',
+    topicId: 'B4-T01',
+    blockId: 'IV',
+    statement:
+      'Un servicio de Windows no inicia tras un cambio de configuración. ¿Qué consulta de PowerShell permite revisar los eventos recientes del registro de Sistema?',
+    options: [
+      'Get-Process',
+      'Get-ChildItem C:\\Windows\\System32',
+      'Get-WinEvent -LogName System -MaxEvents 50',
+      'Remove-Item C:\\Windows\\System32\\drivers\\*',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Get-WinEvent lee los registros de eventos de Windows y permite filtrar por registro, proveedor, nivel o fecha. Get-Process solo muestra procesos y las otras órdenes no consultan el registro Sistema.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T01-Q08',
+    topicId: 'B4-T01',
+    blockId: 'IV',
+    statement:
+      'Un servicio Linux quedó enmascarado después de una tarea de mantenimiento. ¿Qué secuencia permite quitar esa restricción y dejarlo disponible para el arranque?',
+    options: [
+      'systemctl mask app y después systemctl reboot',
+      'systemctl disable app y borrar el directorio /etc',
+      'systemctl unmask app y después systemctl enable --now app',
+      'journalctl -u app para retirar el enlace de máscara',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Una unidad enmascarada tiene un enlace que impide su inicio. systemctl unmask elimina esa restricción y enable --now la habilita de forma persistente y la inicia inmediatamente.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
     id: 'B4-T02-Q01',
     topicId: 'B4-T02',
     blockId: 'IV',
@@ -191,6 +254,64 @@ export const block4Questions: Question[] = [
     explanation:
       'Una copia completa establece la base de recuperación y el WAL o registro de transacciones permite reconstruir cambios posteriores hasta un punto temporal determinado, siempre que las copias necesarias estén disponibles.',
     difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T02-Q06',
+    topicId: 'B4-T02',
+    blockId: 'IV',
+    statement:
+      'Un hipervisor crea una instantánea de una máquina virtual y la mantiene en el mismo almacén para revertir una actualización. ¿Qué afirmación explica correctamente su alcance?',
+    options: [
+      'La instantánea es una copia independiente que siempre sobrevive a la pérdida simultánea del hipervisor y del almacén.',
+      'La instantánea representa un estado puntual y puede depender del hipervisor y del almacén, por lo que no sustituye una copia externa.',
+      'La instantánea solo contiene direcciones IP y no necesita conservar el estado de la máquina.',
+      'La instantánea cifra automáticamente todos los archivos y solo puede descifrarse con la contraseña del usuario.',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Una instantánea permite volver a un estado anterior, pero no necesariamente crea una copia independiente. Si comparte almacenamiento o depende del mismo hipervisor, una avería o un ransomware puede afectarla; una copia de seguridad debe probarse y conservarse con esa separación.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T02-Q07',
+    topicId: 'B4-T02',
+    blockId: 'IV',
+    statement:
+      'Un servidor de almacenamiento presenta un volumen de bloque a varios hosts mediante iSCSI. ¿Qué puerto TCP se asocia habitualmente a la conexión con el destino iSCSI?',
+    options: ['2049', '3260', '161', '445'],
+    correctIndex: 1,
+    explanation:
+      'iSCSI utiliza habitualmente TCP 3260 para acceder al destino. El 2049 corresponde a NFS, el 161 al agente SNMP y el 445 a SMB sobre TCP.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T02-Q08',
+    topicId: 'B4-T02',
+    blockId: 'IV',
+    statement:
+      'Una base de datos fija como objetivo tolerate 15 minutos de datos perdidos y restablecer el servicio en 2 horas. ¿Qué valores representan exactamente esos objetivos como RPO y RTO?',
+    options: [
+      'RPO de 2 horas y RTO de 15 minutos',
+      'RPO y RTO de 15 minutos',
+      'RPO y RTO de 2 horas',
+      'RPO de 15 minutos y RTO de 2 horas',
+    ],
+    correctIndex: 3,
+    explanation:
+      'El RPO mide hacia atrás cuánto tiempo de cambios se acepta perder y el RTO mide hacia delante cuánto tiempo se admite tardar en recuperar el servicio. Aquí corresponden 15 minutos y 2 horas, respectivamente; la opción correcta es la que los asigna en ese orden.',
+    difficulty: 'medium',
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',
     reviewedOn: '2026-09-24',
@@ -292,6 +413,64 @@ export const block4Questions: Question[] = [
     active: true,
   },
   {
+    id: 'B4-T03-Q06',
+    topicId: 'B4-T03',
+    blockId: 'IV',
+    statement:
+      'Un cliente móvil se conecta a un buzón con IMAP sobre TLS implícito, sin usar STARTTLS. ¿Qué puerto TCP suele utilizar?',
+    options: ['TCP 993', 'TCP 143', 'TCP 110', 'TCP 587'],
+    correctIndex: 0,
+    explanation:
+      'IMAP sobre TLS implícito utiliza habitualmente TCP 993. El 143 se asocia a IMAP en claro y normalmente se protege con STARTTLS; el 995 corresponde a POP3 sobre TLS y el 587 a la entrega autenticada de correo.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T03-Q07',
+    topicId: 'B4-T03',
+    blockId: 'IV',
+    statement:
+      'Durante un despliegue, una imagen inmutable se utiliza para iniciar varios contenedores independientes. ¿Qué relación existe entre la imagen y cada contenedor?',
+    options: [
+      'La imagen es el proceso que ya se está ejecutando y el contenedor es solo una copia de configuración.',
+      'Cada contenedor es necesariamente una máquina virtual con su propio núcleo.',
+      'La imagen es una plantilla de capas normalmente de solo lectura y el contenedor es una instancia ejecutable con proceso y capa de escritura aislada.',
+      'La imagen y el contenedor son dos nombres para el mismo volumen de datos del anfitrión.',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Una imagen de contenedor describe capas versionadas que se reutilizan para crear instancias. Al ejecutar una se obtiene un contenedor con proceso, recursos y capa de escritura, aislado del resto mediante los mecanismos del sistema anfitrión.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T03-Q08',
+    topicId: 'B4-T03',
+    blockId: 'IV',
+    statement:
+      'Una API contenedorizada necesita una clave de proveedor. ¿Qué diseño evita dejarla expuesta en la imagen y reduce el impacto de un compromiso?',
+    options: [
+      'Incluir la clave en una capa del Dockerfile y ejecutar el contenedor en modo privilegiado.',
+      'Montar todo el sistema de archivos del anfitrión y ejecutar el proceso como root.',
+      'Publicar la clave en un registro privado, porque el registro ya cifra el archivo completo.',
+      'Gestionar la clave fuera de la imagen, inyectarla en tiempo de ejecución y ejecutar con el menor privilegio necesario.',
+    ],
+    correctIndex: 3,
+    explanation:
+      'Las imágenes y sus capas pueden distribuirse o quedar en caché, por lo que no deben contener secretos. Un gestor de secretos o montaje en tiempo de ejecución, junto con usuario sin privilegios y capacidades reducidas, limita la exposición.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
     id: 'B4-T04-Q01',
     topicId: 'B4-T04',
     blockId: 'IV',
@@ -385,6 +564,64 @@ export const block4Questions: Question[] = [
     correctIndex: 0,
     explanation:
       'El puerto espejo copia las tramas seleccionadas hacia un puerto de análisis sin cambiar el camino normal de conmutación. NAT modifica direcciones y NAT no es un mecanismo de captura de tráfico.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T04-Q06',
+    topicId: 'B4-T04',
+    blockId: 'IV',
+    statement:
+      'Dos conmutadores están unidos por varios enlaces troncales que podrían crear un bucle de capa 2. ¿Qué mecanismo evita que ese bucle disruptivo permanezca activo?',
+    options: [
+      'Activar RSTP o STP para elegir un puente raíz y bloquear de forma lógica los puertos redundantes.',
+      'Asignar todas las VLAN a un concentrador para aumentar las difusiones.',
+      'Aplicar NAT para ocultar las direcciones MAC que participan en el bucle.',
+      'Activar DHCP snooping sin configurar ningún protocolo de puente.',
+    ],
+    correctIndex: 0,
+    explanation:
+      'STP y su variante RSTP intercambian tramas BPDU para elegir un puente raíz y poner en bloqueo los puertos redundantes. Así se evita la circulación indefinida de tramas por el bucle; RSTP ofrece una convergencia más rápida que STP clásico.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T04-Q07',
+    topicId: 'B4-T04',
+    blockId: 'IV',
+    statement:
+      'La administración quiere agrupar dos enlaces Ethernet de 1 Gbps en un puerto lógico y negociar esa agregación con los dispositivos vecinos. ¿Qué protocolo debe utilizar?',
+    options: ['LACP', 'RSTP', 'DHCP', 'RADIUS'],
+    correctIndex: 0,
+    explanation:
+      'LACP, definido en el estándar IEEE 802.1AX, negocia la agregación de enlaces físicos y mantiene un puerto lógico. RSTP evita bucles, DHCP distribuye configuración y RADIUS controla el acceso; no son protocolos de agregación.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T04-Q08',
+    topicId: 'B4-T04',
+    blockId: 'IV',
+    statement:
+      'En un conmutador aumentan los contadores CRC o FCS de error de una interfaz y algunos paquetes llegan corruptos. ¿Qué revisión es la más adecuada como primer paso?',
+    options: [
+      'Sustituir el conmutador por un concentrador para eliminar las tramas incorrectas.',
+      'Desactivar todas las VLAN y cambiar la máscara de la interfaz.',
+      'Borrar repetidamente la tabla ARP de todos los equipos.',
+      'Revisar el latiguillo, los conectores, el transceptor o la fibra, la potencia óptica y la velocidad y dúplex negociados.',
+    ],
+    correctIndex: 3,
+    explanation:
+      'Los errores CRC o FCS indican tramas alteradas después de la capa de enlace. La causa más directa suele estar en el medio físico, los conectores, la óptica o la configuración de velocidad y dúplex, antes de descartar un problema de capa superior.',
     difficulty: 'hard',
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',
@@ -497,6 +734,69 @@ export const block4Questions: Question[] = [
     active: true,
   },
   {
+    id: 'B4-T05-Q06',
+    topicId: 'B4-T05',
+    blockId: 'IV',
+    statement:
+      'Un CPD debe sostener sus cargas críticas durante un corte breve y disponer de una continuidad prolongada tras un apagón prolongado. ¿Qué diseño físico es más completo?',
+    options: [
+      'Un UPS con transferencia automática y mantenimiento probado para las cargas críticas, apoyado en un generador y controles ambientales para periodos largos.',
+      'Una batería de portátil conectada a un solo servidor y sin procedimiento de prueba.',
+      'Una política de contraseñas robustas, porque sustituye la protección eléctrica del edificio.',
+      'Un cable de red compartido entre la sala de servidores y el grupo electrógeno.',
+    ],
+    correctIndex: 0,
+    explanation:
+      'El UPS proporciona autonomía y una transición ordenada para cortes cortos; un generador y una estrategia de continuidad cubren interrupciones prolongadas. Los controles ambientales, el mantenimiento y las pruebas periódicas son parte de la seguridad física del CPD.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T05-Q07',
+    topicId: 'B4-T05',
+    blockId: 'IV',
+    statement:
+      'Un volumen de 1 TB debe cifrarse y la clave se intercambia con un sistema remoto que no debe conocer el contenido. ¿Qué combinación criptográfica encaja mejor?',
+    options: [
+      'Enviar la clave simétrica en claro por el mismo canal y usarla para descifrar el volumen.',
+      'Cifrar el volumen con un algoritmo simétrico y proteger o intercambiar la clave mediante un esquema asimétrico.',
+      'Usar SHA-256 como cifrado simétrico del volumen y enviar su huella como clave.',
+      'Aplicar RSA directamente a cada bloque del volumen porque su clave pública es la más rápida para el cifrado masivo.',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Los algoritmos simétricos son eficientes para cifrar grandes volúmenes. Un esquema asimétrico puede autenticar al receptor y proteger el intercambio o el envoltorio de la clave, sin necesidad de hacer el cifrado masivo con RSA.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T05-Q08',
+    topicId: 'B4-T05',
+    blockId: 'IV',
+    statement:
+      'Tras detectar un incidente, se recogen una imagen de disco y volcado de memoria de un equipo. ¿Qué registro ayuda a demostrar su integridad y trazabilidad durante la investigación?',
+    options: [
+      'Guardar únicamente el veredicto final del antivirus, sin indicar quién intervino.',
+      'Permitir que cualquier persona de un grupo compartido transfiera la evidencia sin anotaciones.',
+      'Documentar quién recogió cada elemento, cuándo y desde qué sistema, el método usado, su hash y cada transferencia de custodia.',
+      'Eliminar la imagen original después de copiarla en una unidad personal del analista.',
+    ],
+    correctIndex: 2,
+    explanation:
+      'La cadena de custodia documenta responsables, fechas, procedimiento y transferencias de la evidencia. Calcular un hash y verificarlo después ayuda a demostrar que la copia no cambió; conservar el original sigue siendo necesario.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
     id: 'B4-T06-Q01',
     topicId: 'B4-T06',
     blockId: 'IV',
@@ -602,6 +902,64 @@ export const block4Questions: Question[] = [
     active: true,
   },
   {
+    id: 'B4-T06-Q06',
+    topicId: 'B4-T06',
+    blockId: 'IV',
+    statement:
+      'Dos equipos conectados a un conmutador negociando dúplex completo necesitan intercambiar datos y voz a la vez. ¿Qué propiedad tiene ese modo de enlace?',
+    options: [
+      'Solo uno de los extremos puede transmitir y el otro debe esperar a que termine.',
+      'Ambos extremos pueden transmitir y recibir simultáneamente, sin colisiones porque no existe un dominio de colisión compartido.',
+      'La comunicación solo puede avanzar en una dirección, como una cámara hacia un grabador.',
+      'Cada trama debe esperar a que un nodo intermedio la reenvíe después de almacenarla.',
+    ],
+    correctIndex: 1,
+    explanation:
+      'En dúplex completo los dos extremos pueden enviar y recibir al mismo tiempo. Los enlaces conmutados no comparten el dominio de colisión del Ethernet tradicional y no necesitan detectar colisiones para funcionar.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T06-Q07',
+    topicId: 'B4-T06',
+    blockId: 'IV',
+    statement:
+      'Un instalador va a desplegar 1000BASE-T sobre cable de par trenzado y necesita respetar la longitud máxima del canal. ¿Qué longitud máxima admite el diseño de cobre?',
+    options: ['55 metros', '90 metros', '100 metros', '200 metros'],
+    correctIndex: 2,
+    explanation:
+      'El canal 1000BASE-T admite 100 metros: hasta 90 metros de cable horizontal permanente más los latiguillos y equipos, hasta un total de 10 metros. Superar el límite requiere fibra, conmutación activa u otra solución de canal.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T06-Q08',
+    topicId: 'B4-T06',
+    blockId: 'IV',
+    statement:
+      'Una organización quiere proteger una WLAN personal frente a ataques de diccionario fuera de línea y actualizar su estándar de acceso. ¿Qué característica ofrece WPA3-Personal?',
+    options: [
+      'Mantiene WPA2-PSK y solo cambia el nombre de la red.',
+      'Utiliza WEP con una clave de 40 bits para facilitar la recuperación.',
+      'Ocultar el SSID impide que un atacante pueda asociarse a la red.',
+      'Sustituye el intercambio PSK de WPA2 por SAE, lo que dificulta en gran medida el adivinado de contraseñas sin conexión.',
+    ],
+    correctIndex: 3,
+    explanation:
+      'WPA3-Personal utiliza SAE, un método de autenticación diseñado para resistir ataques de diccionario fuera de línea. La protección depende también de una contraseña fuerte y única; WPA2 y WEP no ofrecen esa misma garantía.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
     id: 'B4-T07-Q01',
     topicId: 'B4-T07',
     blockId: 'IV',
@@ -686,6 +1044,69 @@ export const block4Questions: Question[] = [
     explanation:
       'Una máscara /26 reserva 64 direcciones: .0 es la red y .63 es la difusión. Las direcciones de equipo van de .1 a .62, por lo que la puerta de enlace .1 es válida.',
     difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T07-Q06',
+    topicId: 'B4-T07',
+    blockId: 'IV',
+    statement:
+      'Cuando una respuesta HTTP sobre TCP atraviesa una red Ethernet, ¿en qué orden se encapsula su información desde la aplicación hasta el medio físico?',
+    options: [
+      'Mensaje HTTP, segmento TCP, paquete IP y trama Ethernet',
+      'Trama Ethernet, paquete IP, segmento TCP y mensaje HTTP',
+      'Segmento TCP, mensaje HTTP, trama Ethernet y paquete IP',
+      'Paquete IP, mensaje HTTP, segmento TCP y trama Ethernet',
+    ],
+    correctIndex: 0,
+    explanation:
+      'Los datos de la aplicación se encapsulan primero en una unidad de transporte, después en un paquete de red y finalmente en una trama de enlace. Al descender por el medio, cada capa retira su cabecera en el destino.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T07-Q07',
+    topicId: 'B4-T07',
+    blockId: 'IV',
+    statement:
+      'Una conexión TCP necesita establecerse antes de transportar una sesión fiable. ¿Cuál es la secuencia habitual de apertura?',
+    options: [
+      'El cliente envía ACK, el servidor responde SYN y el cliente termina con FIN.',
+      'El servidor envía SYN-ACK, el cliente responde SYN y el servidor envía ACK.',
+      'El cliente envía SYN, el servidor responde SYN-ACK y el cliente confirma con ACK.',
+      'Ambos extremos envían FIN, ACK y RST simultáneamente sin intercambiar números de secuencia.',
+    ],
+    correctIndex: 2,
+    explanation:
+      'El establecimiento de tres pasos es SYN, SYN-ACK y ACK. SYN sincroniza los números de secuencia iniciales y ACK confirma la recepción; no es una entrega de datos de aplicación por sí sola.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T07-Q08',
+    topicId: 'B4-T07',
+    blockId: 'IV',
+    statement:
+      'Un técnico documenta el direccionamiento de una red moderna y compara sus tamaños con IPv4. ¿Qué longitud tienen las direcciones IPv6 y qué prefijo suele utilizarse para un enlace?',
+    options: [
+      '32 bits de dirección y prefijo /24',
+      '64 bits de dirección y prefijo /32',
+      '128 bits de dirección y prefijo /32',
+      '128 bits de dirección y prefijo /64',
+    ],
+    correctIndex: 3,
+    explanation:
+      'Una dirección IPv6 tiene 128 bits. El prefijo /64 es una convención habitual para un enlace y define el tamaño de la red, aunque IPv6 admite otros tamaños de subred.',
+    difficulty: 'medium',
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',
     reviewedOn: '2026-09-24',
@@ -780,6 +1201,59 @@ export const block4Questions: Question[] = [
     correctIndex: 0,
     explanation:
       'Secure impide que el navegador envíe la cookie por una conexión HTTP y HttpOnly impide que el JavaScript de la página la lea. Domain, Path y SameSite tienen otras funciones de alcance y compatibilidad.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T08-Q06',
+    topicId: 'B4-T08',
+    blockId: 'IV',
+    statement:
+      'Un cliente abre una conexión HTTPS tradicional sobre TCP y no especifica un puerto distinto. ¿Qué puerto debe utilizar por defecto?',
+    options: ['TCP 443', 'TCP 80', 'TCP 25', 'UDP 53'],
+    correctIndex: 0,
+    explanation:
+      'El servicio HTTPS convencional sobre TCP utiliza el puerto 443. TCP 80 es HTTP sin cifrar, 25 es SMTP y 53 es DNS; HTTP/3 es un caso separado porque usa UDP, normalmente también con el número 443.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T08-Q07',
+    topicId: 'B4-T08',
+    blockId: 'IV',
+    statement:
+      'Tras una primera visita segura, la organización quiere que los navegadores no vuelvan automáticamente a una URL HTTP con ese dominio. ¿Qué cabecera de respuesta resulta adecuada?',
+    options: [
+      'Cache-Control: no-store',
+      'Strict-Transport-Security: max-age=31536000; includeSubDomains',
+      'X-Forwarded-Proto: http',
+      'Set-Cookie: Secure',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Strict-Transport-Security (HSTS) indica al navegador que use HTTPS durante max-age y, con includeSubDomains, que aplique la política a sus subdominios. La cabecera solo se entrega de forma fiable mediante HTTPS y no protege la primera visita.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T08-Q08',
+    topicId: 'B4-T08',
+    blockId: 'IV',
+    statement:
+      'El certificado de un servidor está dentro de su período de validez y su nombre coincide, pero la clave privada se ha comprometido y el certificado ha sido revocado. ¿Qué mecanismo permite consultar el estado de revocación?',
+    options: ['ARP', 'Un CNAME de DNS', 'RAID', 'OCSP'],
+    correctIndex: 3,
+    explanation:
+      'OCSP permite consultar a la autoridad o a un respondedor el estado actual de revocación de un certificado X.509. Una CRL es una lista firmada que también puede distribuir ese estado, pero no es la consulta individual descrita.',
     difficulty: 'hard',
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',
@@ -892,6 +1366,69 @@ export const block4Questions: Question[] = [
     active: true,
   },
   {
+    id: 'B4-T09-Q06',
+    topicId: 'B4-T09',
+    blockId: 'IV',
+    statement:
+      'La seguridad de la red quiere detectar escaneos y bloquear en el momento una sesión que explota una vulnerabilidad. ¿Qué sistema es el más adecuado?',
+    options: [
+      'Un IPS situado en línea que analiza el tráfico y puede bloquear la sesión maliciosa.',
+      'Un IDS pasivo que solo muestra una alerta y no participa en el camino del tráfico.',
+      'Una VLAN que oculta las direcciones IP de todos los dispositivos.',
+      'Un registro DNS que convierte cualquier conexión no autorizada en HTTPS.',
+    ],
+    correctIndex: 0,
+    explanation:
+      'Un IDS detecta y comunica actividad sospechosa, mientras que un IPS se sitúa en línea y puede aplicar acciones de bloqueo. La capacidad concreta depende de la política y del diseño para no interrumpir tráfico legítimo.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T09-Q07',
+    topicId: 'B4-T09',
+    blockId: 'IV',
+    statement:
+      'La política permite que solo el tráfico de la aplicación interna viaje por la VPN, mientras el resto puede salir directamente desde el equipo remoto. ¿Qué describe esa configuración y qué riesgo debe considerarse?',
+    options: [
+      'Túnel completo: todo el tráfico, incluido el correo, se cifra y bloquea por la VPN.',
+      'Túnel dividido (split tunneling): el tráfico seleccionado atraviesa la VPN y el resto sigue una ruta directa, que debe estar protegida por controles del extremo.',
+      'Una VPN sin cifrado que solo cambia la dirección IP de todas las aplicaciones.',
+      'Un segundo adaptador que duplica la dirección del servidor y elimina la necesidad de autenticar al usuario.',
+    ],
+    correctIndex: 1,
+    explanation:
+      'El túnel dividido separa el tráfico que entra en la VPN del que sale directamente. Puede reducir carga y latencia, pero el camino directo queda fuera del control de la VPN y requiere protección, filtrado y supervisión del equipo.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T09-Q08',
+    topicId: 'B4-T09',
+    blockId: 'IV',
+    statement:
+      'Un servidor web debe ser público, pero su base de datos solo debe aceptar conexiones desde ese servidor mediante reglas limitadas. ¿Dónde debe situarse cada componente?',
+    options: [
+      'El servidor web y la base de datos en la misma VLAN, sin reglas de filtrado.',
+      'Ambos componentes en la red de invitados, confiando porque están en el mismo segmento.',
+      'El servidor web en una DMZ separada de la red interna y la base de datos detrás, con reglas de cortafuegos explícitas.',
+      'La base de datos directamente en Internet, protegida únicamente por una contraseña.',
+    ],
+    correctIndex: 2,
+    explanation:
+      'La DMZ separa el servicio público de los sistemas internos. Un cortafuegos debe permitir lo necesario entre las zonas, por ejemplo solo el puerto del servicio web hacia la base de datos, y bloquear el resto del acceso directo.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
     id: 'B4-T10-Q01',
     topicId: 'B4-T10',
     blockId: 'IV',
@@ -980,6 +1517,64 @@ export const block4Questions: Question[] = [
     correctIndex: 0,
     explanation:
       'En DHCPv4, el cliente utiliza habitualmente UDP 68 y el servidor UDP 67 para solicitar y recibir la configuración. En IPv6 se emplea DHCPv6 con otros puertos y mecanismos.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T10-Q06',
+    topicId: 'B4-T10',
+    blockId: 'IV',
+    statement:
+      'Una red heredada utiliza un único backbone al que se conectan todos los equipos. ¿Qué efecto puede tener la avería de ese backbone?',
+    options: [
+      'Afecta únicamente al último equipo conectado, porque cada equipo tiene un enlace independiente.',
+      'Puede impedir la comunicación de varios o de todos los equipos, pues comparten el medio y el punto común.',
+      'No tiene efecto porque el backbone cambia automáticamente a una topología en estrella.',
+      'Solo afecta al tráfico de difusión y mantiene intactas las comunicaciones unicast.',
+    ],
+    correctIndex: 1,
+    explanation:
+      'En una topología de bus o backbone, las estaciones comparten el mismo medio y dependen del segmento común. Una avería en ese elemento puede interrumpir el servicio de varias o todas las estaciones.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T10-Q07',
+    topicId: 'B4-T10',
+    blockId: 'IV',
+    statement:
+      'Un conmutador mantiene en su tabla una dirección MAC aprendida, pero durante el intervalo de antigüedad configurado no recibe tramas de ese origen. ¿Qué hace normalmente con esa entrada?',
+    options: [
+      'La conserva para siempre aunque el equipo ya no esté conectado.',
+      'La convierte en una dirección IP y la envía al enrutador.',
+      'La elimina o marca como caducada para que una trama posterior vuelva a aprenderse.',
+      'La copia automáticamente a todas las VLAN del conmutador.',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Las entradas dinámicas de MAC se mantienen durante el intervalo de antigüedad configurado y se descartan cuando no se actualizan. Si después llega una trama con ese destino y la entrada ya no existe, el conmutador la tratará como un destino desconocido dentro de la VLAN.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B4-T10-Q08',
+    topicId: 'B4-T10',
+    blockId: 'IV',
+    statement:
+      'Una red crítica necesita rutas alternativas para que la caída de un enlace no interrumpa todos los caminos. ¿Qué topología conecta cada nodo con todos los demás?',
+    options: ['Estrella', 'Bus', 'Anillo', 'Malla completa'],
+    correctIndex: 3,
+    explanation:
+      'Una malla completa ofrece varios caminos entre los nodos y puede tolerar la caída de un enlace o nodo, pero requiere más conexiones y cableado. La topología en estrella tiene un elemento central y la de bus comparte un único medio.',
     difficulty: 'medium',
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',

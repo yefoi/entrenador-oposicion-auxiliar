@@ -1,0 +1,26 @@
+{
+  "name": "Plaza TAI · Entrenador TAI AGE",
+  "short_name": "Plaza TAI",
+  "description": "Entrenador local de oposiciones para Técnico Auxiliar de Informática de la AGE.",
+  "lang": "es-ES",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f7f6fb",
+  "theme_color": "#6d59e8",
+  "icons": [
+    {
+      "src": "./icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

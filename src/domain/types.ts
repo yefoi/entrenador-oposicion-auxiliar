@@ -72,6 +72,7 @@ export interface TrainerSession {
   completedAt?: string
   scenarioBlock?: 'III' | 'IV'
   minigameType?: MinigameType
+  selectionStrategy?: 'random' | 'adaptive'
   questions: SessionQuestion[]
   reserveQuestionIds?: string[]
   scenarioReserveQuestionIds?: string[]
@@ -102,6 +103,7 @@ export interface Attempt {
   durationSeconds: number
   scenarioBlock?: 'III' | 'IV'
   minigameType?: MinigameType
+  selectionStrategy?: 'random' | 'adaptive'
   bestStreak?: number
   questions: SessionQuestion[]
   answers: Record<string, number>

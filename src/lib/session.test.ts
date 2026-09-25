@@ -11,6 +11,27 @@ describe('session builders', () => {
     expect(session.mode).toBe('practice')
   })
 
+  it('respeta el orden de selección del modo adaptativo', () => {
+    const ids = activeQuestions.slice(0, 3).map((question) => question.id)
+    const session = createPracticeSession(activeQuestions, {
+      count: 2,
+      questionIds: ids,
+      selectionStrategy: 'adaptive',
+      title: 'Práctica adaptativa',
+    })
+    expect(session.questions.map((entry) => entry.questionId)).toEqual(ids.slice(0, 2))
+    expect(session.selectionStrategy).toBe('adaptive')
+  })
+
+  it('no convierte un filtro vacío en una práctica mixta', () => {
+    const session = createPracticeSession(activeQuestions, {
+      count: 5,
+      topicIds: [],
+      title: 'Sin temas',
+    })
+    expect(session.questions).toHaveLength(0)
+  })
+
   it('crea un simulacro con 80 de teoría y 20 de un bloque', () => {
     const session = createExamSession(activeQuestions, 'III', new Date('2026-01-01'))
     expect(session.questions.filter((entry) => entry.part === 1)).toHaveLength(80)

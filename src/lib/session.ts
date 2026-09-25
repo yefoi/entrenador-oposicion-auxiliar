@@ -14,6 +14,8 @@ export interface PracticeOptions {
   mode?: Extract<SessionMode, 'practice' | 'review'>
   immediateFeedback?: boolean
   wrongQuestionIds?: string[]
+  questionIds?: string[]
+  selectionStrategy?: 'random' | 'adaptive'
   title?: string
   now?: Date
 }
@@ -57,18 +59,29 @@ export function createPracticeSession(
   const blockSet = new Set(options.blockIds ?? [])
   const topicSet = new Set(options.topicIds ?? [])
   const wrongSet = new Set(options.wrongQuestionIds ?? [])
+  const questionSet = new Set(options.questionIds ?? [])
   const filtered = allQuestions.filter((question) => {
     if (!question.active) return false
-    if (blockSet.size > 0 && !blockSet.has(question.blockId)) return false
-    if (topicSet.size > 0 && !topicSet.has(question.topicId)) return false
-    if (wrongSet.size > 0 && !wrongSet.has(question.id)) return false
+    if (options.blockIds && !blockSet.has(question.blockId)) return false
+    if (options.topicIds && !topicSet.has(question.topicId)) return false
+    if (options.wrongQuestionIds && !wrongSet.has(question.id)) return false
+    if (options.questionIds && !questionSet.has(question.id)) return false
     return true
   })
-  const selected = takeRandom(filtered, options.count)
+  const selected =
+    options.selectionStrategy === 'adaptive' && options.questionIds
+      ? options.questionIds
+          .map((questionId) =>
+            filtered.find((question) => question.id === questionId),
+          )
+          .filter((question): question is Question => Boolean(question))
+          .slice(0, options.count)
+      : takeRandom(filtered, options.count)
   return {
     id: makeId('practice'),
     mode: options.mode ?? 'practice',
     title: options.title ?? 'Sesión de práctica',
+    selectionStrategy: options.selectionStrategy ?? 'random',
     createdAt: now.toISOString(),
     startedAt: now.toISOString(),
     questions: toSessionQuestions(selected, 1),
@@ -121,7 +134,7 @@ export function createExamSession(
   return {
     id: makeId('exam'),
     mode: 'exam',
-    title: `Simulacro oficial · ${scenarioBlock === 'III' ? 'Desarrollo' : 'Sistemas y comunicaciones'}`,
+    title: `Simulacro orientativo · ${scenarioBlock === 'III' ? 'Desarrollo' : 'Sistemas y comunicaciones'}`,
     createdAt: now.toISOString(),
     startedAt: now.toISOString(),
     expiresAt,

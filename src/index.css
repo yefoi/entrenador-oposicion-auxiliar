@@ -465,6 +465,17 @@ a {
   font-size: 11px;
   line-height: 1.6;
 }
+.adaptive-note {
+  width: 100%;
+  margin: 9px 0 0;
+  padding: 9px 11px;
+  color: #5c4eb1;
+  background: #f4f1ff;
+  border: 1px solid #e2dcff;
+  border-radius: 10px;
+  font-size: 11px;
+  line-height: 1.5;
+}
 
 .panel {
   padding: 23px;

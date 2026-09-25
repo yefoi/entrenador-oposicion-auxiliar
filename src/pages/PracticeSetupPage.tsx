@@ -12,6 +12,7 @@ import { Button, PageHeader } from '../components/UI'
 
 interface PracticeSetupPageProps {
   stats: TopicStat[]
+  adaptiveQuestionIds: string[]
   showExplanations: boolean
   onStart: (options: PracticeOptions) => void
   initialTopicId?: string
@@ -19,10 +20,11 @@ interface PracticeSetupPageProps {
   onNavigate: (view: AppView) => void
 }
 
-type Focus = 'all' | 'weak' | 'due'
+type Focus = 'all' | 'weak' | 'due' | 'adaptive'
 
 export function PracticeSetupPage({
   stats,
+  adaptiveQuestionIds,
   showExplanations,
   onStart,
   initialTopicId,
@@ -44,6 +46,26 @@ export function PracticeSetupPage({
     if (scope === 'block') return questionsByBlock[blockId]
     return activeQuestions
   }, [scope, blockId, topicId])
+  const effectiveAvailable = useMemo(() => {
+    if (focus === 'adaptive') {
+      return available.filter((question) =>
+        adaptiveQuestionIds.includes(question.id),
+      )
+    }
+    if (focus === 'weak' || focus === 'due') {
+      const matchingTopics = new Set(
+        stats
+          .filter((item) =>
+            focus === 'weak'
+              ? item.status === 'weak'
+              : item.status === 'review',
+          )
+          .map((item) => item.topicId),
+      )
+      return available.filter((question) => matchingTopics.has(question.topicId))
+    }
+    return available
+  }, [adaptiveQuestionIds, available, focus, stats])
   const availableTopics = useMemo(
     () =>
       topics.filter((topic) =>
@@ -61,24 +83,33 @@ export function PracticeSetupPage({
       count,
       immediateFeedback: immediate,
       blockIds: scope === 'block' ? [blockId] : undefined,
+      questionIds:
+        focus === 'adaptive'
+          ? effectiveAvailable.map((question) => question.id)
+          : undefined,
+      selectionStrategy: focus === 'adaptive' ? 'adaptive' : 'random',
       topicIds:
-        scope === 'topic'
-          ? [topicId]
-          : focus === 'weak'
-            ? stats
-                .filter((item) => item.status === 'weak')
-                .map((item) => item.topicId)
-            : focus === 'due'
+        focus === 'adaptive'
+          ? undefined
+          : scope === 'topic'
+            ? [topicId]
+            : focus === 'weak'
               ? stats
-                  .filter((item) => item.status === 'review')
+                  .filter((item) => item.status === 'weak')
                   .map((item) => item.topicId)
-              : undefined,
+              : focus === 'due'
+                ? stats
+                    .filter((item) => item.status === 'review')
+                    .map((item) => item.topicId)
+                : undefined,
       title:
-        scope === 'topic'
-          ? `Práctica · ${topics.find((topic) => topic.id === topicId)?.focus ?? 'Tema'}`
-          : scope === 'block'
-            ? `Práctica · Bloque ${blockId}`
-            : 'Práctica mixta',
+        focus === 'adaptive'
+          ? 'Práctica adaptativa'
+          : scope === 'topic'
+            ? `Práctica · ${topics.find((topic) => topic.id === topicId)?.focus ?? 'Tema'}`
+            : scope === 'block'
+              ? `Práctica · Bloque ${blockId}`
+              : 'Práctica mixta',
     })
   }
 
@@ -234,7 +265,20 @@ export function PracticeSetupPage({
               >
                 Repaso
               </button>
+              <button
+                className={focus === 'adaptive' ? 'is-active' : ''}
+                onClick={() => setFocus('adaptive')}
+                type="button"
+              >
+                Adaptativo
+              </button>
             </div>
+            {focus === 'adaptive' ? (
+              <p className="adaptive-note">
+                Prioriza preguntas nuevas, errores recientes, temas débiles y
+                repasos vencidos, manteniendo equilibrio entre bloques.
+              </p>
+            ) : null}
           </div>
           <label className="toggle-row">
             <span>
@@ -251,9 +295,12 @@ export function PracticeSetupPage({
           <div className="setup-footer">
             <div className="availability">
               <span
-                className={available.length >= count ? 'ok-dot' : 'warn-dot'}
+                className={
+                  effectiveAvailable.length >= count ? 'ok-dot' : 'warn-dot'
+                }
               />
-              <strong>{Math.min(available.length, count)}</strong> preguntas
+              <strong>{Math.min(effectiveAvailable.length, count)}</strong>{' '}
+              preguntas
               disponibles
               {selectedStat ? (
                 <small>
@@ -263,7 +310,7 @@ export function PracticeSetupPage({
               ) : null}
             </div>
             <Button
-              disabled={available.length === 0}
+              disabled={effectiveAvailable.length === 0}
               onClick={start}
               icon="play"
             >

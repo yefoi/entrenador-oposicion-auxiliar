@@ -14,7 +14,7 @@ describe('scoreQuestions', () => {
     if (!first || !second) return
     const score = scoreQuestions(
       [entry(first.id), entry(second.id)],
-      { [first.id]: first.correctIndex, [second.id]: (first.correctIndex + 1) % 4 },
+      { [first.id]: first.correctIndex, [second.id]: (second.correctIndex + 1) % 4 },
       questionById,
       1,
     )

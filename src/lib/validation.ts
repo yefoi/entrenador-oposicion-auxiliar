@@ -1,5 +1,5 @@
 import type { BlockId, Question } from '../domain/types'
-import { blocks, topics } from '../data/syllabus'
+import { blocks, QUESTIONS_PER_TOPIC, topics } from '../data/syllabus'
 
 export interface ContentValidation {
   valid: boolean
@@ -16,6 +16,7 @@ export function validateContent(allQuestions: Question[]): ContentValidation {
   const topicCounts = new Map<string, number>()
   const ids = new Set<string>()
   const statements = new Set<string>()
+  const answerCounts = [0, 0, 0, 0]
 
   for (const question of allQuestions) {
     if (question.blockId in blockCounts) blockCounts[question.blockId] += 1
@@ -53,19 +54,39 @@ export function validateContent(allQuestions: Question[]): ContentValidation {
       question.correctIndex > 3
     ) {
       errors.push(`Índice inválido: ${question.id}`)
+    } else {
+      answerCounts[question.correctIndex] += 1
     }
     if (!question.explanation.trim())
       errors.push(`Explicación vacía: ${question.id}`)
+    if (!question.sourceLabel.trim()) errors.push(`Fuente vacía: ${question.id}`)
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(question.reviewedOn))
+      errors.push(`Revisión inválida: ${question.id}`)
+    if (
+      question.source === 'generated' &&
+      !question.sourceLabel.toLocaleLowerCase('es').includes('no oficial')
+    ) {
+      errors.push(`Fuente no oficial sin etiquetar: ${question.id}`)
+    }
   }
 
   for (const topic of topics) {
-    if ((topicCounts.get(topic.id) ?? 0) !== 5)
-      errors.push(`${topic.id}: se esperaban 5 preguntas`)
+    if ((topicCounts.get(topic.id) ?? 0) !== QUESTIONS_PER_TOPIC)
+      errors.push(
+        `${topic.id}: se esperaban ${QUESTIONS_PER_TOPIC} preguntas`,
+      )
   }
   if (blocks.length !== 4) errors.push('El temario debe tener 4 bloques')
   if (topics.length !== 33) errors.push('El temario debe tener 33 temas')
-  if (allQuestions.length !== 165)
-    errors.push('El banco debe tener 165 preguntas')
+  const expectedQuestionCount = topics.length * QUESTIONS_PER_TOPIC
+  if (allQuestions.length !== expectedQuestionCount)
+    errors.push(`El banco debe tener ${expectedQuestionCount} preguntas`)
+  if (allQuestions.length > 0) {
+    const largestAnswerGroup = Math.max(...answerCounts)
+    if (largestAnswerGroup / allQuestions.length > 0.4) {
+      errors.push('Las respuestas están demasiado concentradas en una posición')
+    }
+  }
 
   return {
     valid: errors.length === 0,

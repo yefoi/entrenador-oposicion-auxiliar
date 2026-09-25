@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title>Plaza TAI</title>
+  <rect width="512" height="512" rx="112" fill="#6d59e8"/>
+  <circle cx="256" cy="256" r="130" fill="none" stroke="#fff" stroke-width="26"/>
+  <path d="M256 91v58M256 363v58M91 256h58M363 256h58" stroke="#fff" stroke-width="26" stroke-linecap="round"/>
+  <circle cx="256" cy="256" r="35" fill="#fff"/>
+</svg>

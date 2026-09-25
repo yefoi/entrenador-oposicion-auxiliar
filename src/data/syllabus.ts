@@ -1,6 +1,7 @@
 import type { Block, Scenario, Topic } from '../domain/types'
 
-export const CONTENT_VERSION = 'convocatoria-2025-banco-2026-09'
+export const CONTENT_VERSION = 'convocatoria-2025-banco-2026-09-v2'
+export const QUESTIONS_PER_TOPIC = 8
 export const STATE_VERSION = 1
 export const OFFICIAL_BOE_URL =
   'https://www.boe.es/diario_boe/txt.php?id=BOE-A-2025-26262'

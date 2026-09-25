@@ -17,6 +17,6 @@ describe('content catalog', () => {
     const result = validateContent(activeQuestions)
     expect(result.errors).toEqual([])
     expect(result.valid).toBe(true)
-    expect(result.questionCount).toBe(165)
+    expect(result.questionCount).toBe(264)
   })
 })

@@ -198,7 +198,7 @@ export function DashboardPage({
             </div>
           ) : (
             <EmptyState
-              description="Cuando Study registra respuestas, aquí aparecerá el siguiente foco de estudio."
+              description="Cuando registres respuestas, aquí aparecerá el siguiente foco de estudio."
               icon="target"
               title="Tu mapa está limpio"
               action={

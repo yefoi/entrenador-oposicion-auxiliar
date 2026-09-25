@@ -22,6 +22,7 @@ import {
   getWeakTopics,
   updateTopicReviews,
 } from '../lib/statistics'
+import { selectAdaptiveQuestionIds } from '../lib/adaptive'
 
 const MAX_ATTEMPTS = 200
 const MAX_SESSIONS = 20
@@ -45,6 +46,10 @@ export function useTrainer() {
     [state.attempts, state.reviews],
   )
   const weakTopics = useMemo(() => getWeakTopics(stats), [stats])
+  const adaptiveQuestionIds = useMemo(
+    () => selectAdaptiveQuestionIds(activeQuestions, state.attempts, stats, 30),
+    [state.attempts, stats],
+  )
   const reviewQueue = useMemo(
     () => getReviewQueue(state.reviews),
     [state.reviews],
@@ -117,6 +122,7 @@ export function useTrainer() {
         durationSeconds,
         scenarioBlock: session.scenarioBlock,
         minigameType: session.minigameType,
+        selectionStrategy: session.selectionStrategy,
         ...(session.mode === 'minigame'
           ? {
               bestStreak: calculateBestStreak(
@@ -174,6 +180,7 @@ export function useTrainer() {
     activeSession,
     stats,
     weakTopics,
+    adaptiveQuestionIds,
     reviewQueue,
     reviews: Object.values(state.reviews),
     activity,

@@ -235,6 +235,7 @@ function App() {
             onStart={startPractice}
             showExplanations={trainer.state.settings.showExplanations}
             stats={trainer.stats}
+            adaptiveQuestionIds={trainer.adaptiveQuestionIds}
           />
         ) : null}
         {view === 'practice' &&

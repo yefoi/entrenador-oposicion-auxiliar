@@ -84,7 +84,7 @@ export function SessionPage({
           <Icon name="arrow" size={16} /> Salir
         </button>
         <div className="session-top-title">
-          <span>{isExam ? 'Simulacro oficial' : 'Práctica'}</span>
+          <span>{isExam ? 'Simulacro orientativo' : 'Práctica'}</span>
           <strong>{session.title}</strong>
         </div>
         <div

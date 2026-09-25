@@ -120,6 +120,78 @@ export const block1Questions: Question[] = [
     active: true,
   },
   {
+    id: 'B1-T01-Q06',
+    topicId: 'B1-T01',
+    blockId: 'I',
+    statement:
+      'En un juicio penal hay indicios contra el acusado, pero persisten dudas razonables sobre la autoría del hecho. ¿Qué criterio debe orientar la decisión?',
+    options: [
+      'Condenar por sospecha simplemente porque la defensa no aporte una explicación alternativa',
+      'Requerir prueba de cargo suficiente y absolver cuando la duda razonable sobre la culpabilidad siga vigente',
+      'Condenar con mayoría simple porque la presunción de inocencia protege únicamente a los menores',
+      'Condenar por una confesión obtenida sin garantías aunque el acusado la niegue después',
+    ],
+    correctIndex: 1,
+    explanation:
+      'La Constitución protege la presunción de inocencia. En la fase penal, la acusación debe aportar una prueba bastante y la duda razonable impide una condena.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Constitución Española, art. 24.2 (BOE-A-1978-31229).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T01-Q07',
+    topicId: 'B1-T01',
+    blockId: 'I',
+    statement:
+      'Una inspección detecta que un menor vive en condiciones que ponen en riesgo su integridad. ¿Qué protección debe guiar la respuesta institucional?',
+    options: [
+      'Esperar a que finalice la convivencia familiar antes de valorar medidas de protección',
+      'Aceptar siempre la decisión de los padres, porque su autonomía prevalece en todo caso',
+      'Ponderar el interés del menor y adoptar medidas de protección cuando resulten necesarias y proporcionadas',
+      'Trasladar automáticamente la responsabilidad a otros menores de la familia sin intervención administrativa',
+    ],
+    correctIndex: 2,
+    explanation:
+      'La protección integral de la infancia obliga a los poderes públicos a ponderar el interés del menor y, cuando proceda, a activar medidas de protección; el consentimiento de los padres no es siempre necesario.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Constitución Española, art. 39; Ley Orgánica 1/1996, art. 10 (BOE-A-1978-31229 y BOE-A-1996-1069).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-1996-1069',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T01-Q08',
+    topicId: 'B1-T01',
+    blockId: 'I',
+    statement:
+      'En una situación que exige el máximo ejercicio institucional de la defensa nacional, ¿qué facultad corresponde constitucionalmente al Rey?',
+    options: [
+      'Negociar y ratificar por sí solo los tratados internacionales en los que España sea Estado parte',
+      'Presidir las deliberaciones del Gobierno y remover a sus Ministros sin propuesta constitucional',
+      'Convocar las elecciones generales con independencia de las decisiones de las Cortes Generales',
+      'Ejercer el mando supremo de las Fuerzas Armadas dentro de la arquitectura constitucional del Estado',
+    ],
+    correctIndex: 3,
+    explanation:
+      'El artículo 62.h atribuye al Rey el mando supremo de las Fuerzas Armadas. La dirección política y administrativa del Gobierno y la dirección de la defensa corresponden al Gobierno y a su Presidente en los términos legales.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Constitución Española, arts. 56, 62.h, 64 y 97-98 (BOE-A-1978-31229).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
     id: 'B1-T02-Q01',
     topicId: 'B1-T02',
     blockId: 'I',
@@ -233,6 +305,78 @@ export const block1Questions: Question[] = [
     sourceLabel: 'Banco propio · práctica no oficial',
     legalReference:
       'Constitución Española, arts. 64, 66, 67 y 75 (BOE-A-1978-31229).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T02-Q06',
+    topicId: 'B1-T02',
+    blockId: 'I',
+    statement:
+      'Una vacante del Tribunal Constitucional debe cubrirse. ¿Qué composición y procedimiento de elección exige la Constitución?',
+    options: [
+      'Doce miembros: cuatro propuestos por el Congreso, cuatro por el Senado, dos por el Gobierno y dos por el CGPJ; nombrados por el Rey e inamovibles',
+      'Nueve miembros elegidos por las comunidades autónomas y tres por el Jefe del Estado',
+      'Doce jueces, uno por cada comunidad autónoma, designados por sus parlamentos',
+      'Diez jueces elegidos por el Congreso entre juristas',
+    ],
+    correctIndex: 0,
+    explanation:
+      'El Tribunal Constitucional integra doce miembros: cuatro propuestos por el Congreso, cuatro por el Senado, dos por el Gobierno y dos por el CGPJ. El Rey los nombra y, una vez elegidos, los cargos son inamovibles.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Constitución Española, art. 159 (BOE-A-1978-31229).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T02-Q07',
+    topicId: 'B1-T02',
+    blockId: 'I',
+    statement:
+      'El Tribunal Constitucional declara inconstitucional un precepto en un procedimiento de inconstitucionalidad. ¿Qué efecto general tiene la sentencia?',
+    options: [
+      'La declaración es firme y se publica; produce efectos desde la publicación sin quedar limitada por defecto al recurrente',
+      'La sentencia solo produce efectos frente al recurrente y no se publica',
+      'El precepto queda derogado como si fuese una disposición administrativa, sin sentencia',
+      'La sentencia solo tiene efectos prospectivos y no declara la inconstitucionalidad',
+    ],
+    correctIndex: 0,
+    explanation:
+      'La sentencia es firme y se publica en el BOE. La declaración de inconstitucionalidad de un precepto produce efectos desde su publicación, conforme a las reglas del procedimiento aplicable, sin limitarse por defecto a la parte recurrente.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Ley Orgánica 2/1979, arts. 38-39; Constitución Española, art. 159 (BOE-A-1979-23709 y BOE-A-1978-31229).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-1979-23709',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T02-Q08',
+    topicId: 'B1-T02',
+    blockId: 'I',
+    statement:
+      'El Congreso de los Diputados no aprueba la cuestión de confianza planteada por el Gobierno. ¿Qué efecto constitucional se activa?',
+    options: [
+      'Se entiende rechazada salvo mayoría absoluta; el Rey disuelve las Cortes y convoca elecciones',
+      'El Gobierno sigue investing con el apoyo de los diputados que no votan en contra',
+      'El Senado puede aprobar la confianza aunque el Congreso la haya rechazado',
+      'Solo puede convocar una nueva legislatura tras cuatro años sin gobierno formado',
+    ],
+    correctIndex: 0,
+    explanation:
+      'Conforme al artículo 99.3, la solicitud de confianza se entiende rechazada sin autorización de la mayoría absoluta del Congreso. El Rey disuelve entonces las Cortes Generales y convoca elecciones.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Constitución Española, art. 99.3 (BOE-A-1978-31229).',
     sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229',
     reviewedOn: '2026-09-24',
     active: true,
@@ -358,6 +502,78 @@ export const block1Questions: Question[] = [
     active: true,
   },
   {
+    id: 'B1-T03-Q06',
+    topicId: 'B1-T03',
+    blockId: 'I',
+    statement:
+      'El Presidente del Gobierno presenta su dimisión. ¿Qué efecto tiene sobre el Gobierno?',
+    options: [
+      'Solo se cesa al Presidente y los Ministros siguen gobernando sin cambios',
+      'El Gobierno continúa hasta que el Congreso designe a todos sus miembros',
+      'El Gobierno cesa y el Rey formaliza el cese; después continúa en funciones hasta la toma de posesión del nuevo',
+      'La dimisión produce la nulidad inmediata de todos los actos dictados anteriormente',
+    ],
+    correctIndex: 2,
+    explanation:
+      'La dimisión del Presidente es una causa de cese del Gobierno. El Rey formaliza el cese y el Gobierno cesante sigue en funciones, con las limitaciones legales, hasta que el nuevo Gobierno tome posesión.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Constitución Española, art. 99.2; Ley 50/1997, art. 21 (BOE-A-1978-31229 y BOE-A-1997-25336).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-1997-25336',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T03-Q07',
+    topicId: 'B1-T03',
+    blockId: 'I',
+    statement:
+      'Se investigan posibles delitos cometidos por el Presidente del Gobierno durante su mandato. ¿Qué Tribunal sería competente?',
+    options: [
+      'La Sala de lo Penal del Tribunal Supremo, cuando corresponda exigir esa responsabilidad',
+      'El Tribunal Supremo Administrativo, porque todo delito del Gobierno es una sanción administrativa',
+      'La Audiencia Nacional, con competencia exclusiva sobre el Gobierno y sus Ministros',
+      'El Tribunal de Cuentas, que declara responsabilidad criminal y impone la pena',
+    ],
+    correctIndex: 0,
+    explanation:
+      'La Constitución atribuye a la Sala de lo Penal del Tribunal Supremo la responsabilidad criminal del Presidente y de los miembros del Gobierno, sin perjuicio de las reglas especiales que puedan existir para otros supuestos.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Constitución Española, art. 102 (BOE-A-1978-31229).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T03-Q08',
+    topicId: 'B1-T03',
+    blockId: 'I',
+    statement:
+      'El Presidente del Gobierno quiere trasladar a un Ministro la resolución de asuntos competencia del Gobierno. ¿Qué regla debe respetar?',
+    options: [
+      'La delegación se hace oralmente y el Ministro responde por todo el Gobierno',
+      'El Presidente puede transferir también las competencias que la Constitución le atribuye directamente',
+      'La delegación requiere una ley que elimine todas las decisiones colegiadas',
+      'La delegación debe expresar las competencias que se trasladan y respetar las que no pueden delegarse',
+    ],
+    correctIndex: 3,
+    explanation:
+      'La Ley del Gobierno permite delegar determinadas competencias del Presidente en Vicepresidentes o Ministros, pero no las competencias directamente atribuidas por la Constitución ni las expresamente no delegables. La delegación conserva la responsabilidad política del Presidente.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Ley 50/1997, art. 20 (BOE-A-1997-25336).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-1997-25336',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
     id: 'B1-T04-Q01',
     topicId: 'B1-T04',
     blockId: 'I',
@@ -474,6 +690,78 @@ export const block1Questions: Question[] = [
     legalReference:
       'Ley 19/2013, arts. 5-15; Agenda 2030 y ODS 4, 5, 9 y 10 (BOE-A-2013-12887).',
     sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2013-12887',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T04-Q06',
+    topicId: 'B1-T04',
+    blockId: 'I',
+    statement:
+      'Un organismo quiere contratar cinco personas durante muchos años para un trabajo permanente. ¿Qué exige el Estatuto Básico?',
+    options: [
+      'Puede usar personal temporal si el jefe lo considera conveniente',
+      'Debe justificar una necesidad y urgencia expresas y no usar la temporalidad para cubrir de forma estructural un puesto permanente',
+      'La antigüedad del trabajador sustituye la selección pública',
+      'Un convenio colectivo puede convertir cualquier puesto temporal en permanente',
+    ],
+    correctIndex: 1,
+    explanation:
+      'La temporalidad responde a necesidades y urgencias expresas. No puede utilizarse para cubrir de manera estructural funciones permanentes; la selección del personal laboral se rige por los principios de igualdad, mérito, capacidad y, cuando procede, celeridad.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Real Decreto Legislativo 5/2015, art. 11 (BOE-A-2015-11719).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2015-11719',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T04-Q07',
+    topicId: 'B1-T04',
+    blockId: 'I',
+    statement:
+      'Un ciudadano solicita el domicilio de un empleado público que participa en un procedimiento abierto. ¿Cómo debe resolver la Administración una solicitud de acceso a ese dato personal?',
+    options: [
+      'Entregarlo siempre porque el empleado presta un servicio público',
+      'Denegar todo acceso sin explicar qué dato se protege',
+      'Ponderar el interés público y los datos personales, y proteger o disociar el dato si el acceso resulta desproporcionado',
+      'Publicar el domicilio de cualquier empleado que participe en un procedimiento',
+    ],
+    correctIndex: 2,
+    explanation:
+      'La publicidad de la información no elimina la protección de datos personales. La Administración debe valorar ambos intereses y, cuando sea posible, disociar los datos; solo accede cuando el interés público prevalece y no se perjudica desproporcionadamente a la persona.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Ley 19/2013, art. 15 (BOE-A-2013-12887).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2013-12887',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T04-Q08',
+    topicId: 'B1-T04',
+    blockId: 'I',
+    statement:
+      'Un municipio incorpora los Objetivos de Desarrollo Sostenible a sus planes y contratos. ¿Qué relación jurídica tienen con la competencia?',
+    options: [
+      'Son un marco de orientación; cada medida debe respetar la competencia legal, la igualdad y la normativa de contratación',
+      'Convierten cualquier criterio social en obligatorio aunque la ley no atribuya competencia',
+      'Sustituyen las leyes y reglamentos que regulan los contratos públicos',
+      'Impiden utilizar criterios ambientales si no se reproducen literalmente en el pliego',
+    ],
+    correctIndex: 0,
+    explanation:
+      'La Agenda 2030 ofrece un marco internacional de desarrollo sostenible, pero no sustituye las normas de competencia, igualdad y contratación. Su uso debe traducirse en medidas legalmente habilitadas y correctamente motivadas.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Ley 40/2015, art. 4.1 (BOE-A-2015-10566); Agenda 2030 y Objetivos de Desarrollo Sostenible como marco de referencia.',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2015-10566',
     reviewedOn: '2026-09-24',
     active: true,
   },
@@ -598,6 +886,78 @@ export const block1Questions: Question[] = [
     active: true,
   },
   {
+    id: 'B1-T05-Q06',
+    topicId: 'B1-T05',
+    blockId: 'I',
+    statement:
+      'Una entidad quiere reservar un puesto técnico a mujeres para corregir una desigualdad de acceso. ¿Qué condición debe cumplir la medida?',
+    options: [
+      'Reservar siempre todos los puestos a mujeres sin explicar el problema que corrige',
+      'Aceptar la reserva solo si la persona candidata tiene una calificación superior',
+      'Usar la reserva sin plazo de revisión aunque la desigualdad haya desaparecido',
+      'Adoptar una acción positiva habilitada por ley o por las normas y decisiones generales administrativas aplicables, necesaria, proporcionada y evaluada',
+    ],
+    correctIndex: 3,
+    explanation:
+      'Las acciones positivas pueden adoptarse para prevenir, eliminar o compensar desigualdades cuando están previstas o habilitadas legalmente y resultan necesarias, proporcionadas y adecuadas. Deben revisarse porque la medida correctiva es temporal y no puede convertirse en una reserva permanente e injustificada.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Ley 15/2022, arts. 2.2 y 4.7 (BOE-A-2022-11589).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2022-11589',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T05-Q07',
+    topicId: 'B1-T05',
+    blockId: 'I',
+    statement:
+      'Una asociación registra la orientación sexual y la salud de sus socios para una campaña. ¿Qué debe proteger la entidad?',
+    options: [
+      'La confidencialidad, la finalidad, la minimización y el uso seguro de esos datos especiales',
+      'La posibilidad de reutilizar la lista para cualquier elección o actividad futura',
+      'La publicación de los datos de quienes no han dado consentimiento escrito',
+      'La conservación de los datos sin informar a los interesados',
+    ],
+    correctIndex: 0,
+    explanation:
+      'La orientación sexual y la salud son categorías especiales de datos. Su tratamiento requiere una base jurídica y garantías adecuadas, con información, confidencialidad, minimización y seguridad, sin reutilizarlos para fines incompatibles.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Reglamento (UE) 2016/679, art. 9 (DOUE-L-2016-80807); Ley Orgánica 3/2018, art. 7 (BOE-A-2018-16673).',
+    sourceUrl: 'https://www.boe.es/buscar/doc.php?id=DOUE-L-2016-80807',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T05-Q08',
+    topicId: 'B1-T05',
+    blockId: 'I',
+    statement:
+      'Una persona con discapacidad solicita ajustar su puesto y sus herramientas de trabajo. ¿Qué debe ofrecer la Administración?',
+    options: [
+      'Negar el ajuste porque el ajuste reduce la eficacia del equipo',
+      'Exigir que solicite una excedencia antes de valorar sus capacidades',
+      'Realizar una evaluación individual y adoptar ajustes razonables sin excluirla del empleo',
+      'Cambiar automáticamente todas sus funciones sin preguntarle nada a la persona',
+    ],
+    correctIndex: 2,
+    explanation:
+      'La discapacidad se rige por igualdad, no discriminación y ajustes razonables. La evaluación individual permite identificar apoyos técnicos u organizativos para conservar la participación y la autonomía de la persona.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Constitución Española, art. 49; Real Decreto Legislativo 1/2013, art. 2.m) y 5 (BOE-A-1978-31229 y BOE-A-2013-12632).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2013-12632',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
     id: 'B1-T06-Q01',
     topicId: 'B1-T06',
     blockId: 'I',
@@ -718,6 +1078,78 @@ export const block1Questions: Question[] = [
     active: true,
   },
   {
+    id: 'B1-T06-Q06',
+    topicId: 'B1-T06',
+    blockId: 'I',
+    statement:
+      'Un organismo emite muchos documentos y necesita acreditar quién los expide y que no han cambiado. ¿Qué medio electrónico encaja?',
+    options: [
+      'Un sello electrónico cualificado asociado al organismo, con mecanismos de integridad',
+      'Una imagen de la firma manuscrita del director pegada en cada página',
+      'Un correo electrónico sin certificado que solo escriba el nombre del órgano',
+      'Una fotografía del documento antes de enviarlo, sin conservar relación con el original',
+    ],
+    correctIndex: 0,
+    explanation:
+      'El sello electrónico acredita la referencia al emisor y permite verificar la integridad de los datos en los términos legales. No sustituye la firma personal cuando el acto requiere la expresión de voluntad de una persona.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Ley 6/2020, art. 3; Reglamento (UE) 910/2014, arts. 3, 35 y 42 (BOE-A-2020-14046).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2020-14046',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T06-Q07',
+    topicId: 'B1-T06',
+    blockId: 'I',
+    statement:
+      'Una persona inicia un trámite con Cl@ve y después recibe un código en su teléfono. ¿Es eso siempre una firma electrónica cualificada?',
+    options: [
+      'Sí, porque cualquier segundo factor convierte automáticamente la firma en cualificada',
+      'No, porque Cl@ve nunca identifica a la persona ante un servicio autorizado',
+      'Depende de las garantías y del medio concreto; la identificación por sí sola no equivale a una firma cualificada',
+      'Sí, porque el código sustituye al certificado y elimina la necesidad de trazabilidad',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Cl@ve ofrece mecanismos de identificación y autenticación. Una firma solo es cualificada cuando cumple los requisitos legales y se crea mediante un medio cualificado; el uso de un segundo factor no produce ese efecto automáticamente.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Ley 6/2020, art. 3; Reglamento (UE) 910/2014, arts. 3 y 25 (BOE-A-2020-14046).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2020-14046',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T06-Q08',
+    topicId: 'B1-T06',
+    blockId: 'I',
+    statement:
+      'Un PDF firmado electrónicamente contiene una cantidad de dinero que no se corresponde con la realidad. ¿Qué acredita principalmente la firma?',
+    options: [
+      'Que el contenido es verdadero y que la operación es legal por sí sola',
+      'La relación con su autor y la integridad de los datos firmados, no la veracidad de todas las afirmaciones',
+      'Que el documento no puede abrirse ni modificarse por ninguna persona, salvo el autor',
+      'Que el certificado elimina la necesidad de comprobar los requisitos del acto jurídico',
+    ],
+    correctIndex: 1,
+    explanation:
+      'La firma electrónica acredita, según sus garantías, quién firma y que los datos firmados no han cambiado. No certifica por sí misma que las cifras sean verdaderas ni que el acto reúna todos los requisitos jurídicos.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Ley 6/2020, art. 3; Reglamento (UE) 910/2014, art. 25 (BOE-A-2020-14046).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2020-14046',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
     id: 'B1-T07-Q01',
     topicId: 'B1-T07',
     blockId: 'I',
@@ -736,7 +1168,7 @@ export const block1Questions: Question[] = [
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',
     legalReference:
-      'Reglamento (UE) 2016/679, arts. 5 y 6; Ley Orgánica 3/2018, arts. 1-5 (BOE-A-2018-16673).',
+      'Reglamento (UE) 2016/679, arts. 5 y 6 (DOUE-L-2016-80807); Ley Orgánica 3/2018, arts. 1-5 (BOE-A-2018-16673).',
     sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673',
     reviewedOn: '2026-09-24',
     active: true,
@@ -759,8 +1191,9 @@ export const block1Questions: Question[] = [
     difficulty: 'medium',
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',
-    legalReference: 'Reglamento (UE) 2016/679, art. 7.3 (BOE-A-2016-679).',
-    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673',
+    legalReference:
+      'Reglamento (UE) 2016/679, art. 7.3 (DOUE-L-2016-80807).',
+    sourceUrl: 'https://www.boe.es/buscar/doc.php?id=DOUE-L-2016-80807',
     reviewedOn: '2026-09-24',
     active: true,
   },
@@ -783,7 +1216,7 @@ export const block1Questions: Question[] = [
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',
     legalReference:
-      'Reglamento (UE) 2016/679, arts. 12-22; Ley Orgánica 3/2018, Título III (BOE-A-2018-16673).',
+      'Reglamento (UE) 2016/679, arts. 12-22 (DOUE-L-2016-80807); Ley Orgánica 3/2018, Título III (BOE-A-2018-16673).',
     sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673',
     reviewedOn: '2026-09-24',
     active: true,
@@ -806,8 +1239,8 @@ export const block1Questions: Question[] = [
     difficulty: 'medium',
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',
-    legalReference: 'Reglamento (UE) 2016/679, arts. 33-34 (BOE-A-2016-679).',
-    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673',
+    legalReference: 'Reglamento (UE) 2016/679, arts. 33-34 (DOUE-L-2016-80807).',
+    sourceUrl: 'https://www.boe.es/buscar/doc.php?id=DOUE-L-2016-80807',
     reviewedOn: '2026-09-24',
     active: true,
   },
@@ -830,7 +1263,79 @@ export const block1Questions: Question[] = [
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',
     legalReference:
-      'Reglamento (UE) 2016/679, arts. 13-15 y 22; Ley Orgánica 3/2018, arts. 86-90 (BOE-A-2018-16673).',
+      'Reglamento (UE) 2016/679, arts. 13-15 y 22 (DOUE-L-2016-80807); Ley Orgánica 3/2018, arts. 86-90 (BOE-A-2018-16673).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T07-Q06',
+    topicId: 'B1-T07',
+    blockId: 'I',
+    statement:
+      'Un ayuntamiento graba imágenes para controlar el tráfico y después quiere usarlas en una campaña de difusión. ¿Qué debe analizar?',
+    options: [
+      'Que la grabación sea pública impide aplicar la protección de datos personales',
+      'Que la persona debe aceptar cualquier uso porque aparece en una vía pública',
+      'Que solo puede cambiar la finalidad si todos los conductores firman un documento',
+      'La compatibilidad de la nueva finalidad, la base jurídica y la información a los interesados antes de la difusión',
+    ],
+    correctIndex: 3,
+    explanation:
+      'La finalidad original no autoriza por sí sola una difusión posterior. El responsable debe comprobar si la nueva finalidad es compatible, identificar una base jurídica y cumplir las garantías de información, minimización y proporcionalidad.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Reglamento (UE) 2016/679, arts. 5 y 6 (DOUE-L-2016-80807); Ley Orgánica 3/2018, art. 6 (BOE-A-2018-16673).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T07-Q07',
+    topicId: 'B1-T07',
+    blockId: 'I',
+    statement:
+      'Una persona pide borrar sus datos de un expediente tributario cuya conservación impone una obligación legal. ¿Qué respuesta es adecuada?',
+    options: [
+      'Conservar los datos o bloquear su uso cuando sea necesario para cumplir esa obligación e informar del límite',
+      'Suprimir todos los datos aunque exista una obligación legal de conservación',
+      'Cambiar la base jurídica después para poder borrar el expediente',
+      'Esperar a que desaparezca la obligación legal antes de contestar a la persona',
+    ],
+    correctIndex: 0,
+    explanation:
+      'El derecho de supresión no es absoluto. Cuando la conservación es necesaria para cumplir una obligación legal, la entidad debe conservar los datos, limitar su uso cuando corresponda e informar a la persona del motivo del límite.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Reglamento (UE) 2016/679, art. 17.3.b (DOUE-L-2016-80807); Ley Orgánica 3/2018, art. 15 (BOE-A-2018-16673).',
+    sourceUrl: 'https://www.boe.es/buscar/doc.php?id=DOUE-L-2016-80807',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T07-Q08',
+    topicId: 'B1-T07',
+    blockId: 'I',
+    statement:
+      'Un empleado público recibe un dispositivo corporativo y se le rastrea mediante geolocalización continua para medir su rendimiento. ¿Qué principio debe aplicarse?',
+    options: [
+      'El control es legítimo si el empleado firma una autorización general y no se informa de su finalidad',
+      'La geolocalización solo puede usarse para contactar con el empleado fuera del horario laboral',
+      'El control debe ser necesario y proporcionado, con información y garantías de privacidad y desconexión digital',
+      'La ubicación del empleado es un dato que el gestor puede usar sin ningún límite',
+    ],
+    correctIndex: 2,
+    explanation:
+      'El control de la actividad laboral debe respetar la privacidad y la proporcionalidad, informar sobre su finalidad y garantizar las garantías aplicables. También se reconoce el derecho a la desconexión digital, con la regulación específica correspondiente.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Ley Orgánica 3/2018, arts. 18, 19 y 87-88; Real Decreto Legislativo 5/2015, art. 14.1.j-bis (BOE-A-2018-16673 y BOE-A-2015-11719).',
     sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673',
     reviewedOn: '2026-09-24',
     active: true,
@@ -952,6 +1457,78 @@ export const block1Questions: Question[] = [
     active: true,
   },
   {
+    id: 'B1-T08-Q06',
+    topicId: 'B1-T08',
+    blockId: 'I',
+    statement:
+      'Una persona aporta una copia digitalizada de una factura. ¿Cuándo puede la Administración exigir el original?',
+    options: [
+      'Nunca, aunque la copia no permita asegurar suficientemente su autenticidad',
+      'Siempre, porque el documento original tiene más valor que cualquier copia',
+      'Cuando no se pueda garantizar suficientemente la autenticidad de la copia o la ley exija expresamente el original',
+      'Solo cuando la factura se haya pagado con efectivo',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Las copias digitalizadas pueden admitirse con carácter general. La Administración solo debe exigir el original cuando la copia no permita garantizar suficientemente su autenticidad o cuando una norma lo exija expresamente.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Ley 39/2015, arts. 26.2 y 28.2 (BOE-A-2015-10565).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2015-10565',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T08-Q07',
+    topicId: 'B1-T08',
+    blockId: 'I',
+    statement:
+      'Una notificación electrónica corresponde a un procedimiento especialmente complejo. ¿Qué plazo general de puesta a disposición se aplica?',
+    options: [
+      'Un mes desde la resolución, sin posibilidad de prórroga',
+      'Diez días, con una prórroga excepcional de otros diez por complejidad o volumen',
+      'Veinte días hábiles siempre, aunque el procedimiento sea sencillo',
+      'No existe plazo porque la notificación electrónica es discrecional',
+    ],
+    correctIndex: 1,
+    explanation:
+      'El plazo general para poner la notificación a disposición es de diez días. Por complejidad o volumen, puede ampliarse excepcionalmente otros diez; la suspensión tiene reglas y límites propios cuando concurren sus requisitos legales.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Ley 39/2015, arts. 43-44 (BOE-A-2015-10565).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2015-10565',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T08-Q08',
+    topicId: 'B1-T08',
+    blockId: 'I',
+    statement:
+      'Un sistema público de información se clasifica como de criticidad media. ¿Qué exige el Esquema Nacional de Seguridad?',
+    options: [
+      'Catalogar el sistema y aplicar las medidas de seguridad correspondientes a su categoría y a los riesgos detectados',
+      'Aplicar a todos los sistemas, sin excepción, las medidas de la máxima criticidad',
+      'No medir riesgos si el sistema solo maneja información de carácter no personal',
+      'Sustituir todas las medidas técnicas por un seguro de responsabilidad civil',
+    ],
+    correctIndex: 0,
+    explanation:
+      'El ENS obliga a clasificar los sistemas y a aplicar medidas proporcionales a su categoría y riesgos. La certificación, la auditoría y otros requisitos específicos dependen de la categoría y de las normas que correspondan.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Real Decreto 311/2022, arts. 5, 12-28, 40-41 y anexo II (BOE-A-2022-7191).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2022-7191',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
     id: 'B1-T09-Q01',
     topicId: 'B1-T09',
     blockId: 'I',
@@ -1067,6 +1644,78 @@ export const block1Questions: Question[] = [
     legalReference:
       'Ley 40/2015, arts. 155-156; Real Decreto 4/2010, art. 12 (BOE-A-2015-10566 y BOE-A-2010-1331).',
     sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2015-10566',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T09-Q06',
+    topicId: 'B1-T09',
+    blockId: 'I',
+    statement:
+      'Una Administración publica una sede electrónica. ¿Qué información debe ofrecer sobre su funcionamiento?',
+    options: [
+      'Solo el nombre comercial del producto que utiliza para publicar la página',
+      'Un enlace a las redes sociales del órgano, aunque no indique quién gestiona la sede',
+      'Una dirección de correo ordinario, sin datos sobre procedimientos ni disponibilidad',
+      'La identificación del órgano, su dirección electrónica, el estado del servicio y las condiciones de acceso',
+    ],
+    correctIndex: 3,
+    explanation:
+      'La Ley de Procedimiento Administrativo exige publicar datos que permitan conocer la sede, el órgano responsable, su funcionamiento, disponibilidad, condiciones de acceso y elementos esenciales de los procedimientos electrónicos.',
+    difficulty: 'medium',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Ley 39/2015, art. 39 (BOE-A-2015-10565).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2015-10565',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T09-Q07',
+    topicId: 'B1-T09',
+    blockId: 'I',
+    statement:
+      'Una persona busca un trámite en el Punto de Acceso General Electrónico. ¿Qué debe facilitar el punto de acceso?',
+    options: [
+      'La sustitución de todas las sedes electrónicas por una única aplicación privada',
+      'La búsqueda y localización de información y trámites, con enlaces a los servicios electrónicos correspondientes',
+      'La copia completa de los expedientes de todos los ciudadanos sin base jurídica',
+      'La decisión automática sobre las solicitudes presentadas a cualquier organismo',
+    ],
+    correctIndex: 1,
+    explanation:
+      'El Punto de Acceso General ofrece un punto de encuentro para localizar información y servicios electrónicos y acceder a ellos. Complementa la organización de cada Administración, pero no sustituye sus sedes ni sus procedimientos.',
+    difficulty: 'easy',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Ley 40/2015, art. 13; Real Decreto 1671/2009, arts. 7-10 (BOE-A-2015-10566 y BOE-A-2009-18358).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2015-10566',
+    reviewedOn: '2026-09-24',
+    active: true,
+  },
+  {
+    id: 'B1-T09-Q08',
+    topicId: 'B1-T09',
+    blockId: 'I',
+    statement:
+      'Un servicio público en línea acepta una identidad electrónica expedida en otro Estado miembro mediante un esquema notificado. ¿Qué regla de reconocimiento debe aplicar?',
+    options: [
+      'Rechazar la identidad por no proceder del DNI-e español',
+      'Exigir siempre una videollamada nueva, aunque el medio esté notificado y tenga garantía suficiente',
+      'Reconocerla cuando la garantía del medio satisfaga el nivel exigido por el servicio, sin exigir por defecto un certificado español',
+      'Rechazarla salvo que el proveedor sea una autoridad pública española',
+    ],
+    correctIndex: 2,
+    explanation:
+      'El marco eIDAS prevé el reconocimiento de los medios de identificación electrónica de otros Estados miembros en las condiciones del servicio público en línea. El nivel de garantía debe ser adecuado y no puede exigirse por defecto un certificado emitido en España.',
+    difficulty: 'hard',
+    source: 'generated',
+    sourceLabel: 'Banco propio · práctica no oficial',
+    legalReference:
+      'Reglamento (UE) 910/2014, art. 6; Ley 6/2020, disposición adicional segunda (BOE-A-2020-14046).',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2020-14046',
     reviewedOn: '2026-09-24',
     active: true,
   },

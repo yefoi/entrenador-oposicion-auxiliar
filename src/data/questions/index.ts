@@ -4,12 +4,27 @@ import { block2Questions } from './block2'
 import { block3Questions } from './block3'
 import { block4Questions } from './block4'
 
-export const questions: Question[] = [
+const rawQuestions: Question[] = [
   ...block1Questions,
   ...block2Questions,
   ...block3Questions,
   ...block4Questions,
 ]
+
+function normalizeAnswerPosition(question: Question, index: number): Question {
+  const offset = index % 4
+  const options = [
+    ...question.options.slice(offset),
+    ...question.options.slice(0, offset),
+  ] as Question['options']
+  return {
+    ...question,
+    options,
+    correctIndex: ((question.correctIndex + offset) % 4) as 0 | 1 | 2 | 3,
+  }
+}
+
+export const questions = rawQuestions.map(normalizeAnswerPosition)
 
 export const activeQuestions = questions.filter((question) => question.active)
 
