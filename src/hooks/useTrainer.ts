@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useReducer } from 'react'
 import type {
   Attempt,
   StudySettings,
@@ -23,23 +23,84 @@ import {
   updateTopicReviews,
 } from '../lib/statistics'
 import { selectAdaptiveQuestionIds } from '../lib/adaptive'
+import { trackEvent } from '../lib/analytics'
 
 const MAX_ATTEMPTS = 200
 const MAX_SESSIONS = 20
+
+type TrainerStore = {
+  ownerId?: string | null
+  state: TrainerState
+  recovered: boolean
+}
+
+type TrainerAction =
+  | {
+      type: 'load'
+      ownerId?: string | null
+      state: TrainerState
+      recovered: boolean
+    }
+  | {
+      type: 'update'
+      updater: (state: TrainerState) => TrainerState
+      stamp?: boolean
+    }
+
+function trainerReducer(store: TrainerStore, action: TrainerAction): TrainerStore {
+  if (action.type === 'load') {
+    return {
+      ownerId: action.ownerId,
+      state: action.state,
+      recovered: action.recovered,
+    }
+  }
+  const next = action.updater(store.state)
+  return {
+    ...store,
+    recovered: false,
+    state: action.stamp === false
+      ? next
+      : { ...next, lastSavedAt: new Date().toISOString() },
+  }
+}
 
 function uniqueIds(values: string[]): string[] {
   return [...new Set(values)]
 }
 
-export function useTrainer() {
-  const initial = useMemo(() => loadTrainerState(), [])
-  const [state, setState] = useState<TrainerState>(initial.state)
-  const [recovered, setRecovered] = useState(initial.recovered)
+export function useTrainer(ownerId?: string | null) {
+  const initial = useMemo(() => loadTrainerState(ownerId), [ownerId])
+  const [store, dispatch] = useReducer(trainerReducer, {
+    ownerId,
+    state: initial.state,
+    recovered: initial.recovered,
+  })
+  const { state, recovered } = store
   const storageAvailable = useMemo(() => storageIsAvailable(), [])
 
   useEffect(() => {
-    saveTrainerState(state)
-  }, [state])
+    if (store.ownerId === ownerId) return
+    const next = loadTrainerState(ownerId)
+    dispatch({
+      type: 'load',
+      ownerId,
+      state: next.state,
+      recovered: next.recovered,
+    })
+  }, [ownerId, store.ownerId])
+
+  useEffect(() => {
+    if (store.ownerId !== ownerId) return
+    saveTrainerState(state, ownerId)
+  }, [ownerId, state, store.ownerId])
+
+  const updateState = useCallback(
+    (updater: (state: TrainerState) => TrainerState, stamp = true) => {
+      dispatch({ type: 'update', updater, stamp })
+    },
+    [],
+  )
 
   const stats = useMemo(
     () => buildTopicStats(state.attempts, questionById, state.reviews),
@@ -64,18 +125,18 @@ export function useTrainer() {
   )
 
   const addSession = useCallback((session: TrainerSession) => {
-    setState((current) => ({
+    updateState((current) => ({
       ...current,
       sessions: [
         ...current.sessions.filter((item) => item.id !== session.id),
         session,
       ].slice(-MAX_SESSIONS),
     }))
-  }, [])
+  }, [updateState])
 
   const answerQuestion = useCallback(
     (sessionId: string, questionId: string, answer?: number) => {
-      setState((current) => ({
+      updateState((current) => ({
         ...current,
         sessions: current.sessions.map((session) => {
           if (session.id !== sessionId || session.submitted) return session
@@ -86,11 +147,11 @@ export function useTrainer() {
         }),
       }))
     },
-    [],
+    [updateState],
   )
 
   const toggleFlag = useCallback((sessionId: string, questionId: string) => {
-    setState((current) => ({
+    updateState((current) => ({
       ...current,
       sessions: current.sessions.map((session) => {
         if (session.id !== sessionId || session.submitted) return session
@@ -100,7 +161,7 @@ export function useTrainer() {
         return { ...session, flagged }
       }),
     }))
-  }, [])
+  }, [updateState])
 
   const submitSession = useCallback(
     (sessionId: string, durationSeconds: number) => {
@@ -138,7 +199,11 @@ export function useTrainer() {
         scores,
         reviewTopicIds,
       }
-      setState((current) => {
+      trackEvent('session_completed', {
+        mode: session.mode,
+        selection: session.selectionStrategy ?? 'random',
+      })
+      updateState((current) => {
         const attempts = [...current.attempts, attempt].slice(-MAX_ATTEMPTS)
         return {
           ...current,
@@ -152,31 +217,35 @@ export function useTrainer() {
           reviews: updateTopicReviews(current.reviews, attempt, questionById),
         }
       })
+
       return attempt
     },
-    [state.sessions],
+    [state.sessions, updateState],
   )
 
   const updateSettings = useCallback((settings: Partial<StudySettings>) => {
-    setState((current) => ({
+    updateState((current) => ({
       ...current,
       settings: { ...current.settings, ...settings },
     }))
-  }, [])
+  }, [updateState])
 
   const clearData = useCallback(() => {
-    setState(createDefaultState())
-    setRecovered(false)
-  }, [])
+    updateState(() => createDefaultState())
+  }, [updateState])
 
   const importData = useCallback((text: string) => {
     const imported = parseImportedState(text)
-    setState(imported)
-    setRecovered(false)
-  }, [])
+    updateState(() => imported)
+  }, [updateState])
+
+  const replaceState = useCallback((next: TrainerState) => {
+    updateState(() => next, false)
+  }, [updateState])
 
   return {
     state,
+    lastSavedAt: state.lastSavedAt,
     activeSession,
     stats,
     weakTopics,
@@ -193,6 +262,7 @@ export function useTrainer() {
     updateSettings,
     clearData,
     importData,
+    replaceState,
     questionCount: activeQuestions.length,
   }
 }

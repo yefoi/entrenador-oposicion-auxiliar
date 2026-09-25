@@ -2,6 +2,8 @@ import { useCallback, useMemo, useState } from 'react'
 import type { AppView } from './domain/types'
 import { activeQuestions, questionById } from './data/questions'
 import { useTrainer } from './hooks/useTrainer'
+import { useSupabaseAuth } from './hooks/useSupabaseAuth'
+import { useCloudSync } from './hooks/useCloudSync'
 import {
   createExamSession,
   createPracticeSession,
@@ -26,7 +28,14 @@ import { StatisticsPage } from './pages/StatisticsPage'
 import { SyllabusPage } from './pages/SyllabusPage'
 
 function App() {
-  const trainer = useTrainer()
+  const auth = useSupabaseAuth()
+  const trainer = useTrainer(auth.user?.id ?? null)
+  const cloud = useCloudSync({
+    user: auth.user,
+    state: trainer.state,
+    lastSavedAt: trainer.lastSavedAt,
+    onReplace: trainer.replaceState,
+  })
   const [view, setView] = useState<AppView>('dashboard')
   const [selectedAttemptId, setSelectedAttemptId] = useState<string | null>(
     null,
@@ -165,6 +174,7 @@ function App() {
     >
       <AppShell
         activeSession={trainer.activeSession}
+        cloudEnabled={Boolean(auth.user)}
         onNavigate={navigate}
         view={view}
       >
@@ -312,6 +322,8 @@ function App() {
         ) : null}
         {view === 'settings' ? (
           <SettingsPage
+            auth={auth}
+            cloud={cloud}
             onClear={trainer.clearData}
             onImport={trainer.importData}
             onNavigate={navigate}

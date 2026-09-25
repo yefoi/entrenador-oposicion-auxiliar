@@ -31,6 +31,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_ANALYTICS_SRC: ${{ secrets.VITE_ANALYTICS_SRC }}
+          VITE_ANALYTICS_DOMAIN: ${{ secrets.VITE_ANALYTICS_DOMAIN }}
         run: npm run build
       - name: Configure Pages
         uses: actions/configure-pages@v5

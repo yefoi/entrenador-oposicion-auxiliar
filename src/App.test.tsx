@@ -7,6 +7,13 @@ describe('App smoke flow', () => {
     localStorage.clear()
   })
 
+  it('mantiene el modo local cuando Supabase no está configurado', () => {
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: 'Ajustes' }))
+    expect(screen.getByText('Sincronización desactivada')).toBeInTheDocument()
+    expect(screen.getByText(/VITE_SUPABASE_URL/)).toBeInTheDocument()
+  })
+
   it('muestra el panel y permite navegar al temario y minijuegos', () => {
     render(<App />)
     expect(
