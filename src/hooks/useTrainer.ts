@@ -119,6 +119,13 @@ export function useTrainer() {
     }))
   }, [updateState])
 
+  const discardSession = useCallback((sessionId: string) => {
+    updateState((current) => ({
+      ...current,
+      sessions: current.sessions.filter((session) => session.id !== sessionId),
+    }))
+  }, [updateState])
+
   const answerQuestion = useCallback(
     (sessionId: string, questionId: string, answer?: number) => {
       updateState((current) => ({
@@ -233,6 +240,7 @@ export function useTrainer() {
     storageAvailable,
     storageStatus,
     addSession,
+    discardSession,
     answerQuestion,
     toggleFlag,
     submitSession,

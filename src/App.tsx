@@ -10,6 +10,7 @@ import {
   type PracticeOptions,
 } from './lib/session'
 import { createMinigameSession, type MinigameOptions } from './lib/minigames'
+import { Button, Modal } from './components/UI'
 import { AppShell } from './components/AppShell'
 import { Onboarding } from './components/Onboarding'
 import { RouteLoading } from './components/RouteLoading'
@@ -54,6 +55,11 @@ const SyllabusPage = lazy(() =>
   import('./pages/SyllabusPage').then((m) => ({ default: m.SyllabusPage })),
 )
 
+type PendingStart =
+  | { kind: 'practice'; options: PracticeOptions }
+  | { kind: 'exam'; scenario: 'III' | 'IV' }
+  | { kind: 'minigame'; options: MinigameOptions }
+
 function App() {
   const trainer = useTrainer()
   const [showOnboarding, setShowOnboarding] = useState(
@@ -70,6 +76,7 @@ function App() {
   const [practiceBlockId, setPracticeBlockId] = useState<
     'I' | 'II' | 'III' | 'IV' | undefined
   >(deepLink.blockId)
+  const [pendingStart, setPendingStart] = useState<PendingStart | null>(null)
 
   const navigate = useCallback((next: AppView) => {
     setView(next)
@@ -83,13 +90,7 @@ function App() {
   const startPractice = useCallback(
     (options: PracticeOptions) => {
       if (trainer.activeSession) {
-        setView(
-          trainer.activeSession.mode === 'minigame'
-            ? 'minigames'
-            : trainer.activeSession.mode === 'exam'
-              ? 'exam'
-              : 'practice',
-        )
+        setPendingStart({ kind: 'practice', options })
         return
       }
       const session = createPracticeSession(activeQuestions, options)
@@ -102,13 +103,7 @@ function App() {
   const startExam = useCallback(
     (scenario: 'III' | 'IV') => {
       if (trainer.activeSession) {
-        setView(
-          trainer.activeSession.mode === 'minigame'
-            ? 'minigames'
-            : trainer.activeSession.mode === 'exam'
-              ? 'exam'
-              : 'practice',
-        )
+        setPendingStart({ kind: 'exam', scenario })
         return
       }
       const session = createExamSession(activeQuestions, scenario)
@@ -121,13 +116,7 @@ function App() {
   const startMinigame = useCallback(
     (options: MinigameOptions) => {
       if (trainer.activeSession) {
-        setView(
-          trainer.activeSession.mode === 'minigame'
-            ? 'minigames'
-            : trainer.activeSession.mode === 'exam'
-              ? 'exam'
-              : 'practice',
-        )
+        setPendingStart({ kind: 'minigame', options })
         return
       }
       const session = createMinigameSession(activeQuestions, options)
@@ -136,6 +125,41 @@ function App() {
     },
     [trainer],
   )
+
+  const abandonActive = useCallback(() => {
+    if (trainer.activeSession) trainer.discardSession(trainer.activeSession.id)
+    setPendingStart(null)
+  }, [trainer])
+
+  const confirmPending = useCallback(() => {
+    const pending = pendingStart
+    setPendingStart(null)
+    if (!pending) return
+    abandonActive()
+    if (pending.kind === 'practice') {
+      const session = createPracticeSession(activeQuestions, pending.options)
+      trainer.addSession(session)
+      setView('practice')
+      return
+    }
+    if (pending.kind === 'exam') {
+      const session = createExamSession(activeQuestions, pending.scenario)
+      trainer.addSession(session)
+      setView('exam')
+      return
+    }
+    const session = createMinigameSession(activeQuestions, pending.options)
+    trainer.addSession(session)
+    setView('minigames')
+  }, [pendingStart, trainer, abandonActive])
+
+  const resumeActive = useCallback(() => {
+    setPendingStart(null)
+    const mode = trainer.activeSession?.mode
+    setView(
+      mode === 'minigame' ? 'minigames' : mode === 'exam' ? 'exam' : 'practice',
+    )
+  }, [trainer.activeSession])
 
   const submitActive = useCallback(
     (durationSeconds: number) => {
@@ -385,6 +409,25 @@ function App() {
       </AppShell>
       {showOnboarding ? (
         <Onboarding onComplete={() => setShowOnboarding(false)} />
+      ) : null}
+      {pendingStart && trainer.activeSession ? (
+        <Modal
+          onClose={() => setPendingStart(null)}
+          title="Ya tienes una sesión en marcha"
+        >
+          <p className="modal-lead">
+            <strong>{trainer.activeSession.title}</strong> sigue abierta. Puedes
+            retomarla, descartarla para empezar la nueva, o seguir donde estabas.
+          </p>
+          <div className="modal-actions">
+            <Button onClick={confirmPending} icon="play">
+              Descartar y empezar la nueva
+            </Button>
+            <Button onClick={resumeActive} variant="secondary">
+              Continuar la actual
+            </Button>
+          </div>
+        </Modal>
       ) : null}
     </div>
   )

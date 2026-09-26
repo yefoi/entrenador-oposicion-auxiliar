@@ -4780,7 +4780,17 @@ a {
   .modal-actions {
     flex-direction: column-reverse;
   }
-  .modal-actions .button {
+  .modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.modal-lead {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.modal-actions .button {
     width: 100%;
   }
   .plan-legend {
