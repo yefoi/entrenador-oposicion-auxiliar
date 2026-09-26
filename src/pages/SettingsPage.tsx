@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import type { AppView, StudySettings, TrainerState } from '../domain/types'
 import {
   BAQUEDANO_URL,
@@ -38,6 +38,15 @@ export function SettingsPage({
   const [message, setMessage] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
   const validation = validateContent(activeQuestions)
+  const latestReview = useMemo(() => {
+    const dates = activeQuestions
+      .map((question) => question.reviewedOn)
+      .filter(Boolean)
+      .sort()
+    return dates.length
+      ? new Date(dates[dates.length - 1]).toLocaleDateString('es-ES')
+      : 'sin fecha'
+  }, [])
   const handleFile = async (file: File | undefined) => {
     if (!file) return
     try {
@@ -212,9 +221,15 @@ export function SettingsPage({
             <h2>Estado del temario y del banco</h2>
           </div>
           <Tag tone={validation.valid ? 'success' : 'danger'}>
-            {validation.valid ? 'Validado' : 'Revisión necesaria'}
+            {validation.valid ? 'Formato correcto' : 'Revisión necesaria'}
           </Tag>
         </div>
+        <p className="health-note">
+          Este check solo verifica la forma: que cada pregunta tenga cuatro
+          opciones, una respuesta correcta, explicación, fuente y fecha de
+          revisión.           No confirma que el contenido sea juridicamente correcto ni que
+          proceda de la convocatoria.
+        </p>
         <div className="health-grid">
           <div>
             <span>Banco activo</span>
@@ -229,7 +244,7 @@ export function SettingsPage({
           <div>
             <span>Fuente</span>
             <strong>Práctica no oficial</strong>
-            <small>Generadas y revisadas en la app</small>
+            <small>Banco propio, revisado el {latestReview}</small>
           </div>
           <div>
             <span>Persistencia</span>
