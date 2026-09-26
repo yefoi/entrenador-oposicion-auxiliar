@@ -1290,6 +1290,12 @@ export const block3Questions: Question[] = [
       'Una página de cita necesita una estructura semántica con un encabezado principal, un formulario de búsqueda y una lista de resultados. ¿Qué elemento HTML representa correctamente el encabezado principal?',
     options: ['meta', 'br', 'h1', 'canvas'],
     correctIndex: 2,
+    optionNotes: [
+      'meta declara metadatos en la cabecera, no un encabezado visible.',
+      'br inserta un salto de línea, no estructura el documento.',
+      '',
+      'canvas dibuja gráficos mediante scripts: no representa un título.',
+    ],
     explanation:
       'h1 representa el encabezado principal del documento. meta describe metadatos, br produce un salto de línea y canvas es un área de dibujo.',
     difficulty: 'easy',
@@ -1311,6 +1317,12 @@ export const block3Questions: Question[] = [
       'Diseño adaptable con puntos de ruptura',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Una anchura fija no cambia de disposición según la pantalla.',
+      'Una tabla HTML organiza datos, no controla la maquetación.',
+      'Una captura de pantalla no es interactiva ni se adapta sola.',
+      '',
+    ],
     explanation:
       'El diseño responsivo adapta la disposición a las características de la pantalla mediante puntos de ruptura, pero conserva la función y el contenido principales en cada modo.',
     difficulty: 'easy',
@@ -1332,6 +1344,12 @@ export const block3Questions: Question[] = [
       'Etiqueta de documento XML',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'La herencia múltiple es un mecanismo de clases, no de asincronía.',
+      'Los bytes son datos en memoria, no una unidad de código asíncrono.',
+      'Una etiqueta XML describe un documento, no la ejecución asíncrona.',
+    ],
     explanation:
       'Una Promise representa un resultado pendiente, cumplido o rechazado y permite encadenar funciones asíncronas sin bloquear el hilo de ejecución.',
     difficulty: 'medium',
@@ -1353,6 +1371,12 @@ export const block3Questions: Question[] = [
       'No puede contener atributos',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'XML admite texto, no solo valores numéricos.',
+      '',
+      'Los elementos tienen nombres distintos, no el mismo nombre.',
+      'XML admite atributos con bastante libertad.',
+    ],
     explanation:
       'XML etiqueta la información con nombres de elementos y atributos. Sus espacios de nombres evitan colisiones entre vocabularios, por lo que no depende de una estructura de columnas fija.',
     difficulty: 'medium',
@@ -1369,6 +1393,12 @@ export const block3Questions: Question[] = [
       'Un documento HTML contiene textos en español y en alfabeto cirílico. ¿Qué atributo de la cabecera indica al navegador qué codificación debe interpretar?',
     options: ['rel', 'target', 'charset', 'download'],
     correctIndex: 2,
+    optionNotes: [
+      'rel relaciona el documento con recursos externos.',
+      'target decide dónde se abre un enlace o un formulario.',
+      '',
+      'download propone guardar el recurso y no declara la codificación.',
+    ],
     explanation:
       'El atributo charset de meta declara la codificación de caracteres del documento. Los otros atributos tienen funciones distintas, como relación de recursos o comportamiento de enlaces.',
     difficulty: 'easy',
@@ -1390,6 +1420,12 @@ export const block3Questions: Question[] = [
       'Elementos con clase tarjeta cuyo atributo data-estado valga exactamente pendiente',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Sin combinador, la regla no alcanza a los descendientes.',
+      'El selector no usa id, solo la clase tarjeta.',
+      'El signo igual exige que el valor coincida exactamente con pendiente.',
+      '',
+    ],
     explanation:
       'La parte .tarjeta exige que el elemento tenga esa clase y [data-estado="pendiente"] exige que el valor del atributo data-estado sea exactamente pendiente. La regla no selecciona descendientes ni atributos con cualquier valor.',
     difficulty: 'medium',
@@ -1411,6 +1447,12 @@ export const block3Questions: Question[] = [
       'No esperar la promesa para que la interfaz continúe de inmediato',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'fetch no lanza excepción por un 404: solo rechaza ante fallos de red.',
+      'Cambiar el código a 200 falsearía el estado real de la respuesta.',
+      'Sin esperar la promesa no hay respuesta que comprobar.',
+    ],
     explanation:
       'fetch resuelve su promesa para respuestas HTTP, incluidas las no satisfactorias; normalmente rechaza por fallos de red. Por eso hay que comprobar response.ok y tratar explícitamente el código de error antes de usar los datos.',
     difficulty: 'medium',
@@ -1432,6 +1474,12 @@ export const block3Questions: Question[] = [
       'Un script de JavaScript sin intérprete declarado',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Una hoja de estilos aplica presentación, no valida la estructura.',
+      '',
+      'Una consulta SQL opera sobre la base de datos, no sobre el XML.',
+      'Un script sin intérprete declarado no valida ningún esquema.',
+    ],
     explanation:
       'XSD es un lenguaje de definición de esquemas XML que describe elementos, atributos, tipos y restricciones. Un documento conforme a ese esquema puede validarse contra el XSD.',
     difficulty: 'medium',
@@ -1453,6 +1501,12 @@ export const block3Questions: Question[] = [
       'Icono decorativo y etiqueta y estado como texto accesible',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Un asterisco de color no es interpretable por un lector de pantalla.',
+      'El ancho de un icono no comunica un estado.',
+      'Eliminar la etiqueta deja el estado solo en el color.',
+      '',
+    ],
     explanation:
       'Una etiqueta textual comprensible comunica el estado sin depender del color ni del significado de un símbolo. El icono decorativo no debe sustituir esa información.',
     difficulty: 'easy',
@@ -1474,6 +1528,12 @@ export const block3Questions: Question[] = [
       'Eliminar el nombre del campo para reducir la longitud del formulario',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Un título al final del documento no se asocia al campo.',
+      'El color rojo por sí solo no comunica obligatoriedad a quien tiene daltonismo.',
+      'Sin nombre, el campo pierde su etiqueta programática.',
+    ],
     explanation:
       'Una etiqueta asociada identifica el control y expone su propósito a las tecnologías de asistencia. La ayuda sobre formato y obligatoriedad hace explícita la información necesaria para introducir el valor.',
     difficulty: 'easy',
@@ -1495,6 +1555,12 @@ export const block3Questions: Question[] = [
       'Una imagen del menú sin nombre accesible ni orden de tabulación',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Un control que no recibe foco queda fuera del alcance del teclado.',
+      '',
+      'Una lista sin enlaces ni controles de teclado no es interactiva.',
+      'Una imagen sin nombre accesible no transmite información.',
+    ],
     explanation:
       'Un control operable por teclado ofrece un orden de foco comprensible y estados de foco visibles. El patrón accesible permite comprender y utilizar el menú sin depender exclusivamente del puntero.',
     difficulty: 'medium',
@@ -1516,6 +1582,12 @@ export const block3Questions: Question[] = [
       'Permitir escritura y lectura solo porque la operación actual es de lectura',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Conceder administrador va en contra del mínimo privilegio.',
+      'Una cuenta compartida impide atribuir el uso y amplía el alcance del permiso.',
+      '',
+      'Permitir escritura aumenta el daño posible sin que la tarea lo necesite.',
+    ],
     explanation:
       'El mínimo privilegio concede únicamente los permisos imprescindibles para la tarea. Limitar la interfaz a lectura reduce el impacto de un uso indebido o de un compromiso de la aplicación.',
     difficulty: 'medium',
@@ -1537,6 +1609,12 @@ export const block3Questions: Question[] = [
       'Disponibilidad',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'La clave de cifrado no determina si el servicio sigue accesible.',
+      'Los metadatos no se ven afectados por la caída de un componente.',
+      'La usabilidad no mide la continuidad del servicio.',
+      '',
+    ],
     explanation:
       'La disponibilidad trata de que los usuarios autorizados puedan acceder al servicio cuando lo necesitan. La redundancia, la recuperación y los procedimientos probados son medidas para mantenerla.',
     difficulty: 'easy',
@@ -1553,6 +1631,12 @@ export const block3Questions: Question[] = [
       'Según WCAG 2.2 nivel AA, ¿cuál es el mínimo de contraste para un texto normal?',
     options: ['4,5:1', '3:1', '7:1 solo para texto normal', 'No hay requisito si el texto es grande'],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El 3:1 corresponde a texto grande, no a texto normal.',
+      'El 7:1 es el nivel AAA: es más exigente que el mínimo pedido.',
+      'Sí hay requisito de contraste; solo el texto grande tiene un umbral menor.',
+    ],
     explanation:
       'El mínimo AA para texto normal es 4,5:1. El valor 3:1 se aplica a texto grande bajo ciertas condiciones y 7:1 es el umbral AAA para texto normal; ambos valores pueden superar el mínimo, pero no son el mínimo AA pedido.',
     difficulty: 'medium',
@@ -1574,6 +1658,12 @@ export const block3Questions: Question[] = [
       'Enviar las trazas a cualquier cliente sin cifrar porque contienen datos internos',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'El número completo es un dato personal que la traza no necesita.',
+      '',
+      'Copiar contraseñas en una traza expone un secreto de acceso.',
+      'Enviar trazas sin cifrar a cualquier cliente filtra información.',
+    ],
     explanation:
       'La minimización evita recoger datos que no son necesarios para la finalidad. Un identificador pseudonimizado reduce la exposición, y los controles de acceso y retención protegen el registro restante.',
     difficulty: 'medium',
@@ -1595,6 +1685,12 @@ export const block3Questions: Question[] = [
       'Sustituir innerHTML por una etiqueta que muestre una imagen',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Comprobar que no está vacío no evita la interpretación del contenido.',
+      'Un atributo title sigue siendo un atributo: necesita su propia codificación.',
+      '',
+      'Una etiqueta de imagen no corrige cómo se inserta el texto.',
+    ],
     explanation:
       'El contenido debe tratarse como texto, no como marcado ejecutable. La codificación adaptada al contexto o textContent evita que el navegador interprete sus etiquetas y scripts; las demás opciones no corrigen la inserción ni evitan la interpretación del contenido.',
     difficulty: 'hard',
@@ -1616,6 +1712,12 @@ export const block3Questions: Question[] = [
       'git log --archivo rama-principal',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'git status muestra el estado del repositorio, no integra ramas.',
+      'git add prepara archivos en el índice, no fusiona nada.',
+      'git log muestra el historial, no aplica cambios de otra rama.',
+    ],
     explanation:
       'git merge integra los cambios de otra rama en la rama actual. status, add y log realizan tareas de consulta, preparación o registro, pero no fusionan ramas.',
     difficulty: 'easy',
@@ -1637,6 +1739,12 @@ export const block3Questions: Question[] = [
       'Ejecutar automáticamente todas las pruebas del sistema',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Sin historial no se puede volver a una versión ni comparar ramas.',
+      '',
+      'Git no comparte bases de datos: controla el código fuente.',
+      'Git no ejecuta por sí mismo las pruebas del sistema.',
+    ],
     explanation:
       'Git registra commits que permiten recorrer la evolución, comparar ramas y recuperar el contenido de una revisión concreta cuando está disponible en el historial.',
     difficulty: 'easy',
@@ -1658,6 +1766,12 @@ export const block3Questions: Question[] = [
       'Una prueba de despliegue en el servidor final',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Comprobar que el programa no se cierra no verifica el importe calculado.',
+      'Una prueba de rendimiento mide tiempos, no la igualdad de resultados.',
+      '',
+      'El despliegue en el servidor no verifica el cálculo de una función.',
+    ],
     explanation:
       'El determinismo significa que la misma entrada produce la misma salida en el mismo contexto de ejecución. Repetir el cálculo con precios y cantidades idénticos permite verificar esa propiedad.',
     difficulty: 'easy',
@@ -1679,6 +1793,12 @@ export const block3Questions: Question[] = [
       'Crear un commit focalizado, publicarlo y aplicar cherry-pick en la rama de destino',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Reescribir las ramas de todos descarta el trabajo en curso.',
+      'Borrar la rama elimina el commit urgente que se quería llevar.',
+      'git status no mueve commits entre ramas.',
+      '',
+    ],
     explanation:
       'Un commit focalizado contiene el cambio urgente y puede identificarse para aplicarlo mediante cherry-pick. Así se evita incorporar cambios ajenos al trabajo de la otra persona.',
     difficulty: 'medium',
@@ -1700,6 +1820,12 @@ export const block3Questions: Question[] = [
       'Hacer opcional la ejecución de las pruebas',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'La integración continua no elimina la revisión del código.',
+      'Ignorar los errores destruiría el valor de la puerta de calidad.',
+      'Hacer opcionales las pruebas elimina justamente la garantía.',
+    ],
     explanation:
       'La integración continua automatiza comprobaciones tras cada cambio y evita avanzar con un fallo conocido. Las puertas de calidad reducen el riesgo del despliegue sin eliminar la revisión ni la responsabilidad del equipo.',
     difficulty: 'easy',
@@ -1721,6 +1847,12 @@ export const block3Questions: Question[] = [
       'La lista de ramas que divergen del remoto',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'El historial lo muestra git log, no git diff.',
+      '',
+      'Los archivos no rastreados aparecen en git status, no en git diff.',
+      'Las ramas divergentes se consultan con git branch, no con git diff.',
+    ],
     explanation:
       'git diff --staged, también disponible como git diff --cached, compara el contenido del índice con HEAD. Muestra los cambios preparados para el próximo commit, no el historial ni los archivos no rastreados.',
     difficulty: 'easy',
@@ -1742,6 +1874,12 @@ export const block3Questions: Question[] = [
       'Una prueba de carga que mide peticiones por segundo',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Una prueba de extremo a extremo recorre la interfaz y todos los servicios.',
+      'La integración conecta servicios, y aquí no hay nada que conectar.',
+      '',
+      'Una prueba de carga mide peticiones por segundo, no el resultado.',
+    ],
     explanation:
       'Una prueba unitaria aísla una unidad de código y verifica su comportamiento con casos controlados. La ausencia de base de datos y red hace innecesaria una integración o una prueba de extremo a extremo para esa función.',
     difficulty: 'easy',
@@ -1763,6 +1901,12 @@ export const block3Questions: Question[] = [
       'Rechazar la integración directa y validar las comprobaciones antes de proteger la rama',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Permitir sobrescribir la rama principal elimina la revisión previa.',
+      'Desviar los cambios a una rama personal no es protección de la rama principal.',
+      'Ejecutar las pruebas tras publicar deja producción sin comprobar.',
+      '',
+    ],
     explanation:
       'La protección de la rama principal bloquea integraciones directas y exige el flujo de revisión y las comprobaciones automatizadas. Así se evita publicar un cambio sin los controles de calidad definidos.',
     difficulty: 'medium',

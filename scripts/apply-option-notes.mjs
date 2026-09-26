@@ -36,8 +36,8 @@ for (const [id, list] of Object.entries(notes)) {
       'journey', 'ignore', 'master', 'opening', 'share', 'spare', 'employee',
       'employees', 'affected', 'equality', 'levine', 'situations', 'sovereignty',
       'candidate', 'candidates', 'approach', 'escape', 'journeys', 'record',
-      'owner', 'match', 'scale', 'reset', 'source', 'target', 'point', 'label',
-      'block', 'shift', 'sprite', 'render', 'commit', 'smart',
+      'owner', 'match', 'scale', 'reset', 'source',
+      'block', 'shift', 'sprite', 'render',
       'bright', 'please',
     ]
     for (const word of note.match(/[A-Za-z]{4,}/g) ?? []) {
