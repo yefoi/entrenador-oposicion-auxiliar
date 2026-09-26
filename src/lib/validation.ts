@@ -1,5 +1,5 @@
 import type { BlockId, Question } from '../domain/types'
-import { blocks, QUESTIONS_PER_TOPIC, topics } from '../data/syllabus'
+import { blocks, MIN_QUESTIONS_PER_TOPIC, topics } from '../data/syllabus'
 
 export interface ContentValidation {
   valid: boolean
@@ -71,16 +71,19 @@ export function validateContent(allQuestions: Question[]): ContentValidation {
   }
 
   for (const topic of topics) {
-    if ((topicCounts.get(topic.id) ?? 0) !== QUESTIONS_PER_TOPIC)
+    const count = topicCounts.get(topic.id) ?? 0
+    if (count < MIN_QUESTIONS_PER_TOPIC)
       errors.push(
-        `${topic.id}: se esperaban ${QUESTIONS_PER_TOPIC} preguntas`,
+        `${topic.id}: se esperaban al menos ${MIN_QUESTIONS_PER_TOPIC} preguntas, hay ${count}`,
       )
   }
   if (blocks.length !== 4) errors.push('El temario debe tener 4 bloques')
   if (topics.length !== 33) errors.push('El temario debe tener 33 temas')
-  const expectedQuestionCount = topics.length * QUESTIONS_PER_TOPIC
-  if (allQuestions.length !== expectedQuestionCount)
-    errors.push(`El banco debe tener ${expectedQuestionCount} preguntas`)
+  const minimumQuestionCount = topics.length * MIN_QUESTIONS_PER_TOPIC
+  if (allQuestions.length < minimumQuestionCount)
+    errors.push(
+      `El banco debe tener al menos ${minimumQuestionCount} preguntas, tiene ${allQuestions.length}`,
+    )
   if (allQuestions.length > 0) {
     const largestAnswerGroup = Math.max(...answerCounts)
     if (largestAnswerGroup / allQuestions.length > 0.4) {
