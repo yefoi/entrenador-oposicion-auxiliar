@@ -1,0 +1,242 @@
+{
+  "B1-T01-Q01": [
+    "La igualdad formal solo pide tratar igual a lo igual; por sí sola no corrige la desigualdad previa.",
+    "",
+    "El interés particular no está por encima del interés general ni justifica un trato desigual.",
+    "La discreción está acotada por la ley y por los principios de igualdad, sin ventajas sin límite."
+  ],
+  "B1-T01-Q02": [
+    "La censura previa está prohibida por el artículo 20 de la Constitución.",
+    "",
+    "Que se trate de una opinión no exime del cumplimiento de la normativa de datos.",
+    "El consentimiento escrito no es el único supuesto que legitima el tratamiento."
+  ],
+  "B1-T01-Q03": [
+    "Una cantidad idéntica para todos es igualdad formal y no tiene en cuenta la capacidad económica.",
+    "",
+    "Los gastos públicos se financian con los ingresos del Estado, no con dinero privado.",
+    "La discrepancia con la política presupuestaria no elimina ese deber constitucional."
+  ],
+  "B1-T01-Q04": [
+    "La suspensión no puede ser permanente ni quedar fuera de control institucional.",
+    "",
+    "No la declara cualquier autoridad administrativa, y siempre existe control posterior.",
+    "Hay derechos que la Constitución no permite suspender, como la dignidad."
+  ],
+  "B1-T01-Q05": [
+    "El Rey no dirige los debates de las Cámaras.",
+    "La promulgación es un acto formal y exige el refrendo constitucional.",
+    "",
+    "El control de constitucionalidad corresponde al Tribunal Constitucional, no al Rey."
+  ],
+  "B1-T01-Q06": [
+    "La simple sospecha no basta para condenar.",
+    "",
+    "La presunción de inocencia protege a todas las personas, no solo a los menores.",
+    "Una confesión obtenida sin garantías no puede sostenerse si después se niega."
+  ],
+  "B1-T01-Q07": [
+    "No hay que esperar a que termine la convivencia familiar para proteger al menor.",
+    "La autonomía parental no es absoluta cuando hay riesgo para el menor.",
+    "",
+    "No se puede trasladar la responsabilidad a otros menores de la familia."
+  ],
+  "B1-T01-Q08": [
+    "La ratificación de tratados es una facultad distinta de la de mando supremo.",
+    "El Rey no preside el Gobierno ni revoca a los Ministros.",
+    "La convocatoria a elecciones generales se decide en las Cortes Generales.",
+    ""
+  ],
+  "B1-T02-Q01": [
+    "La confianza al Gobierno la otorga el Congreso, no el Senado.",
+    "",
+    "El Senado no sustituye al Congreso ni tiene competencias ilimitadas en estados excepcionales.",
+    "Las Cámaras tienen competencias distintas y el Senado representa al territorio."
+  ],
+  "B1-T02-Q02": [
+    "El Tribunal Supremo no tiene competencia constitucional.",
+    "",
+    "El Defensor del Pueblo no dicta sentencias con efecto vinculante.",
+    "El Gobierno no puede dejar sin efecto una ley por mayoría simple."
+  ],
+  "B1-T02-Q03": [
+    "Una denuncia no anula automáticamente un acto administrativo.",
+    "",
+    "El Senado no ordena indemnizaciones sin demanda judicial.",
+    "El Consejo de Ministros no concede la nulidad radical a instancia de parte."
+  ],
+  "B1-T02-Q04": [
+    "No sustituye a los tribunales ni ejecuta sentencias en nombre de nadie.",
+    "",
+    "No aprueba normas interiores con rango de ley.",
+    "No administra los recursos de la Administración ni concede ayudas."
+  ],
+  "B1-T02-Q05": [
+    "El Senado no puede vetar de forma definitiva sin más trámite.",
+    "No solo el Senado aprueba normas: ambas Cámaras tienen el mismo poder legislativo.",
+    "",
+    "El Gobierno no decide el texto y las Cámaras no se limitan a ratificar."
+  ],
+  "B1-T02-Q06": [
+    "",
+    "La composición no la fijan las comunidades autónomas.",
+    "No hay un juez por comunidad autónoma ni los designan sus parlamentos.",
+    "El número de miembros no es diez y no los elige solo el Congreso."
+  ],
+  "B1-T02-Q07": [
+    "",
+    "La sentencia se publica y en este caso no se limita al recurrente.",
+    "Un precepto no queda derogado sin sentencia que lo declare inconstitucional.",
+    "La sentencia declara la inconstitucionalidad, no solo efectos prospectivos."
+  ],
+  "B1-T02-Q08": [
+    "",
+    "El silencio no equivale a la confianza: se entiende rechazada.",
+    "El Senado no convalida una confianza que el Congreso ha rechazado.",
+    "No hace falta esperar cuatro años para convocar nuevas elecciones."
+  ],
+  "B1-T03-Q01": [
+    "Los presidentes de las Cortes y el CGPJ no forman el Gobierno.",
+    "",
+    "El Jefe del Estado y el Defensor del Pueblo no son miembros del Gobierno.",
+    "El Presidente forma parte del Gobierno aunque no ocupe un ministerio."
+  ],
+  "B1-T03-Q02": [
+    "El Senado no elige al Presidente del Gobierno.",
+    "",
+    "El Rey no elige libremente: sigue el procedimiento constitucional.",
+    "El Tribunal Constitucional no nombra al Presidente del Gobierno."
+  ],
+  "B1-T03-Q03": [
+    "Los Coordinadores generales defienden la unidad de la gestión, no la independencia ministerial.",
+    "",
+    "Las Cortes no elaboran las decisiones ministeriales de cada día.",
+    "El Consejo de Estado asesora, no sustituye al Gobierno."
+  ],
+  "B1-T03-Q04": [
+    "El Gobierno no puede imponer por decreto una norma con rango de ley.",
+    "",
+    "La aprobación interna del Gobierno no da validez legal al proyecto.",
+    "Las Cámaras intervienen también en las materias urgentes."
+  ],
+  "B1-T03-Q05": [
+    "La publicación oficial no convalida un reglamento que invade la ley.",
+    "",
+    "El reglamento no puede contradecir el sentido de la ley.",
+    "La actualización tecnológica no justifica vulnerar el texto legal vigente."
+  ],
+  "B1-T03-Q06": [
+    "La dimisión del Presidente cesa todo el Gobierno, no solo al Presidente.",
+    "El Gobierno no permanece hasta que el Congreso designe a todos sus miembros.",
+    "",
+    "La dimisión no anula los actos que ya se habían dictado."
+  ],
+  "B1-T03-Q07": [
+    "",
+    "El Tribunal Supremo Administrativo no impone penas.",
+    "La Audiencia Nacional no tiene competencia exclusiva sobre el Gobierno.",
+    "El Tribunal de Cuentas no declara responsabilidad criminal ni impone pena."
+  ],
+  "B1-T03-Q08": [
+    "La delegación no es oral ni traslada la responsabilidad política del Presidente.",
+    "El Presidente no puede delegar lo que la Constitución le atribuye directamente.",
+    "La delegación no necesita eliminar la collegiateidad en la toma de decisiones.",
+    ""
+  ],
+  "B1-T04-Q01": [
+    "La antigüedad no sustituye a la valoración de los requisitos del puesto.",
+    "",
+    "El parentesco está prohibido en el acceso al empleo público.",
+    "La lealtad política no es un criterio legal de selección."
+  ],
+  "B1-T04-Q02": [
+    "La antigüedad no sustituye siempre a la evaluación del desempeño.",
+    "La antigüedad es un factor, no el único criterio de promoción.",
+    "",
+    "La firma del jefe inmediato no sustituye el procedimiento de evaluación."
+  ],
+  "B1-T04-Q03": [
+    "Entregar información a cambio de una compensación es un regalo indebido.",
+    "",
+    "La firma de un tercero no legitima el acceso a la información interna.",
+    "La transparencia no se logra difundiendo datos internos en redes sociales."
+  ],
+  "B1-T04-Q04": [
+    "La inmediatez no puede sustituir al procedimiento con audiencia y defensa.",
+    "",
+    "No hay sanción automática por un informe favorable al crecimiento profesional.",
+    "La reserva absoluta del expediente impide el contradictorio."
+  ],
+  "B1-T04-Q05": [
+    "La publicidad activa existe precisamente sin solicitud previa de la persona.",
+    "",
+    "La Agenda 2030 no convierte los datos presupuestarios en secretos.",
+    "Transparencia y medición de resultados no son incompatibles."
+  ],
+  "B1-T04-Q06": [
+    "La temporalidad no depende de la conveniencia del jefe directo.",
+    "",
+    "La antigüedad del trabajador no sustituye a la selección pública.",
+    "Un convenio colectivo no puede convertir un puesto en estructural."
+  ],
+  "B1-T04-Q07": [
+    "La condición de empleado público no hace público su domicilio.",
+    "Denegar todo acceso sin explicar el dato protegido incumple el deber de motivación.",
+    "",
+    "Publicar el domicilio de cualquier empleado sería una vulneración de la normativa de datos."
+  ],
+  "B1-T04-Q08": [
+    "",
+    "Los Objetivos obligan solo cuando la ley atribuye la competencia.",
+    "Los Objetivos no sustituyen las leyes que regulan los contratos públicos.",
+    "Sí pueden usarse criterios ambientales sin copiarlos literalmente del pliego."
+  ],
+  "B1-T05-Q01": [
+    "No hace falta condena penal para prevenir, proteger y atender.",
+    "",
+    "Exigir a la víctima que abandone su vivienda no es la respuesta adecuada.",
+    "No es un asunto privado: hay datos que comunicar a la red de atención."
+  ],
+  "B1-T05-Q02": [
+    "",
+    "Denegar por orientación o identidad sexual produce un trato desigual injustificado.",
+    "No se puede reservar un servicio público por la orientación declarada.",
+    "La remisión automática a otro país es discriminatoria."
+  ],
+  "B1-T05-Q03": [
+    "La accesibilidad exige ajustes razonables, no usar la herramienta igual sin ayuda.",
+    "La accesibilidad no es solo física: incluye también lo digital.",
+    "",
+    "No se suprime el servicio digital hasta que la persona alcance el mismo nivel de manejo."
+  ],
+  "B1-T05-Q04": [
+    "",
+    "El plan se individualiza según capacidad, preferencias y entorno.",
+    "La ayuda económica no sustituye a los servicios ni a la participación.",
+    "La decisión se toma con la persona, no solo sobre su familia."
+  ],
+  "B1-T05-Q05": [
+    "Repartir el mismo título a todos no corrige la desigualdad de acceso.",
+    "",
+    "Exigir que se acredite recursos para informarse crea una barrera inversa.",
+    "Las medidas correctoras necesitan revisión y están sujetas a temporalidad."
+  ],
+  "B1-T05-Q06": [
+    "La medida debe estar justificada, limitada y evaluada.",
+    "La reserva no puede condicionarse a que la candidata supere en calificación.",
+    "Hay que revisar la medida cuando la desigualdad haya desaparecido.",
+    ""
+  ],
+  "B1-T05-Q07": [
+    "",
+    "La finalidad limitada impide reutilizar la lista para otra campaña.",
+    "Sin consentimiento no se publican esos datos.",
+    "Hay que informar a los interesados aunque no lo soliciten."
+  ],
+  "B1-T05-Q08": [
+    "El ajuste razonable no se rechaza porque beneficie a la persona.",
+    "No hay que pedir una excedencia antes de valorar sus capacidades.",
+    "",
+    "No se cambian sus funciones sin preguntarle nada."
+  ]
+}

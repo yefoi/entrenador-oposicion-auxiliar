@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Question, TrainerSession } from '../domain/types'
 import { formatTimer, getRemainingSeconds } from '../lib/session'
 import { Icon } from '../components/Icons'
+import { OptionNotes } from '../components/OptionNotes'
 import { Button, Modal, ProgressBar } from '../components/UI'
 
 interface SessionPageProps {
@@ -205,6 +206,7 @@ export function SessionPage({
                 />
               </div>
               <p>{question.explanation}</p>
+              <OptionNotes question={question} />
               {question.legalReference ? (
                 <small>{question.legalReference}</small>
               ) : null}

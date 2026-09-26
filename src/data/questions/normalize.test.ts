@@ -42,6 +42,22 @@ describe('normalizacion de la posicion correcta', () => {
     }
   })
 
+  it('mantiene cada nota pegada a su opcion', () => {
+    const withNotes = questions.filter((q) => q.optionNotes)
+    expect(withNotes.length).toBeGreaterThan(0)
+    for (const question of withNotes) {
+      const source = rawById.get(question.id)!
+      expect(question.optionNotes).toHaveLength(4)
+      expect(source.optionNotes).toHaveLength(4)
+      for (let i = 0; i < 4; i += 1) {
+        // La nota normalizada en la posicion i debe ser la que en el fuente
+        // corresponde a la MISMA opcion que ocupa la posicion i.
+        const sourceIndex = source.options.indexOf(question.options[i])
+        expect(question.optionNotes![i]).toBe(source.optionNotes![sourceIndex])
+      }
+    }
+  })
+
   it('reparte las respuestas correctas y aplica el desplazamiento real', () => {
     const counts = [0, 0, 0, 0]
     questions.forEach((question, index) => {

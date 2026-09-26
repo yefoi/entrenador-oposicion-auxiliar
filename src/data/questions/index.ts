@@ -13,13 +13,14 @@ const rawQuestions: Question[] = [
 
 function normalizeAnswerPosition(question: Question, index: number): Question {
   const offset = index % 4
-  const options = [
-    ...question.options.slice(offset),
-    ...question.options.slice(0, offset),
-  ] as Question['options']
+  const rotate = <T,>(items: readonly T[]) =>
+    [...items.slice(offset), ...items.slice(0, offset)] as T[]
   return {
     ...question,
-    options,
+    options: rotate(question.options) as Question['options'],
+    ...(question.optionNotes
+      ? { optionNotes: rotate(question.optionNotes) as Question['optionNotes'] }
+      : {}),
     correctIndex: ((question.correctIndex - offset + 4) % 4) as 0 | 1 | 2 | 3,
   }
 }

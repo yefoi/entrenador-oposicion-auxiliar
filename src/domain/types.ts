@@ -39,6 +39,11 @@ export interface Question {
   statement: string
   options: [string, string, string, string]
   correctIndex: 0 | 1 | 2 | 3
+  /**
+   * One line per option saying why it is not the answer. Stored in the same
+   * order as options and rotated with them, so never key this by index.
+   */
+  optionNotes?: [string, string, string, string]
   explanation: string
   difficulty: Difficulty
   source: QuestionSource

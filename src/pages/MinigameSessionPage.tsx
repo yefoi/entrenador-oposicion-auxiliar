@@ -3,6 +3,7 @@ import type { Question, TrainerSession } from '../domain/types'
 import { formatTimer, getRemainingSeconds } from '../lib/session'
 import { getMinigameStreak } from '../lib/minigames'
 import { Icon } from '../components/Icons'
+import { OptionNotes } from '../components/OptionNotes'
 import { Button, ProgressBar } from '../components/UI'
 import { Question as QuestionCard } from '../lib/pages/components/Question'
 
@@ -160,6 +161,7 @@ export function MinigameSessionPage({
                 <Icon name={isCorrect ? 'check' : 'x'} size={17} />
               </div>
               <p>{question.explanation}</p>
+              <OptionNotes question={question} />
               {question.legalReference ? (
                 <small>{question.legalReference}</small>
               ) : null}

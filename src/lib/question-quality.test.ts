@@ -51,6 +51,27 @@ describe('calidad de los distractores', () => {
     }
   })
 
+  it('mantiene las notas de opcion pegadas a su texto', () => {
+    for (const question of activeQuestions) {
+      if (!question.optionNotes) continue
+      expect(question.optionNotes).toHaveLength(4)
+      expect(question.correctIndex).toBeGreaterThanOrEqual(0)
+      // La nota de la opcion correcta se deja vacia a proposito: la
+      // explicacion ya cubre por que esa es la buena.
+      expect(question.optionNotes[question.correctIndex]).toBe('')
+      for (let i = 0; i < 4; i += 1) {
+        if (i === question.correctIndex) continue
+        expect(question.optionNotes[i].trim().length).toBeGreaterThan(15)
+      }
+    }
+  })
+
+  it('cubrio al menos la mitad del bloque I con notas', () => {
+    const blockOne = activeQuestions.filter((q) => q.blockId === 'I')
+    const covered = blockOne.filter((q) => q.optionNotes).length
+    expect(covered / blockOne.length).toBeGreaterThanOrEqual(0.5)
+  })
+
   it('reparte las respuestas correctas entre las cuatro posiciones', () => {
     const counts = [0, 0, 0, 0]
     for (const question of activeQuestions) counts[question.correctIndex] += 1

@@ -14,6 +14,12 @@ export const block1Questions: Question[] = [
       'La discreción absoluta de la Administración para establecer ventajas sin límites',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'La igualdad formal solo pide tratar igual a lo igual; por sí sola no corrige la desigualdad previa.',
+      '',
+      'El interés particular no está por encima del interés general ni justifica un trato desigual.',
+      'La discreción está acotada por la ley y por los principios de igualdad, sin ventajas sin límite.',
+    ],
     explanation:
       'La igualdad material permite retirar obstáculos para que la igualdad sea efectiva; las medidas correctivas deben justificarse y ser proporcionadas.',
     difficulty: 'medium',
@@ -38,6 +44,12 @@ export const block1Questions: Question[] = [
       'Rechazar la publicación siempre que la persona citada no haya firmado un consentimiento escrito',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'La censura previa está prohibida por el artículo 20 de la Constitución.',
+      '',
+      'Que se trate de una opinión no exime del cumplimiento de la normativa de datos.',
+      'El consentimiento escrito no es el único supuesto que legitima el tratamiento.',
+    ],
     explanation:
       'La expresión tiene una protección amplia, pero sus límites se relacionan con otros derechos, como la intimidad, el honor y la protección de datos.',
     difficulty: 'medium',
@@ -62,6 +74,12 @@ export const block1Questions: Question[] = [
       'Quedar liberada de todo deber siempre que exprese su desacuerdo con la política presupuestaria',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Una cantidad idéntica para todos es igualdad formal y no tiene en cuenta la capacidad económica.',
+      '',
+      'Los gastos públicos se financian con los ingresos del Estado, no con dinero privado.',
+      'La discrepancia con la política presupuestaria no elimina ese deber constitucional.',
+    ],
     explanation:
       'El artículo 31 obliga a contribuir a los gastos públicos con un sistema tributario justo, igualitario y progresivo, atendida la capacidad económica.',
     difficulty: 'easy',
@@ -85,6 +103,12 @@ export const block1Questions: Question[] = [
       'Que afecte a todos los derechos fundamentales para evitar que aparezcan excepciones',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'La suspensión no puede ser permanente ni quedar fuera de control institucional.',
+      '',
+      'No la declara cualquier autoridad administrativa, y siempre existe control posterior.',
+      'Hay derechos que la Constitución no permite suspender, como la dignidad.',
+    ],
     explanation:
       'La suspensión de derechos enumerados en el artículo 55 exige habilitación legal, temporalidad, carácter excepcional, necesidad y proporcionalidad, además del control institucional y la revisión judicial previstos.',
     difficulty: 'hard',
@@ -108,6 +132,12 @@ export const block1Questions: Question[] = [
       'Controlar la constitucionalidad de la ley antes de que sea publicada',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'El Rey no dirige los debates de las Cámaras.',
+      'La promulgación es un acto formal y exige el refrendo constitucional.',
+      '',
+      'El control de constitucionalidad corresponde al Tribunal Constitucional, no al Rey.',
+    ],
     explanation:
       'El Rey sanciona y promulga las leyes; sus actos requieren normalmente el refrendo de los órganos constitucionalmente responsables.',
     difficulty: 'medium',
@@ -132,6 +162,12 @@ export const block1Questions: Question[] = [
       'Condenar por una confesión obtenida sin garantías aunque el acusado la niegue después',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'La simple sospecha no basta para condenar.',
+      '',
+      'La presunción de inocencia protege a todas las personas, no solo a los menores.',
+      'Una confesión obtenida sin garantías no puede sostenerse si después se niega.',
+    ],
     explanation:
       'La Constitución protege la presunción de inocencia. En la fase penal, la acusación debe aportar una prueba bastante y la duda razonable impide una condena.',
     difficulty: 'medium',
@@ -156,6 +192,12 @@ export const block1Questions: Question[] = [
       'Trasladar automáticamente la responsabilidad a otros menores de la familia sin intervención administrativa',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'No hay que esperar a que termine la convivencia familiar para proteger al menor.',
+      'La autonomía parental no es absoluta cuando hay riesgo para el menor.',
+      '',
+      'No se puede trasladar la responsabilidad a otros menores de la familia.',
+    ],
     explanation:
       'La protección integral de la infancia obliga a los poderes públicos a ponderar el interés del menor y, cuando proceda, a activar medidas de protección; el consentimiento de los padres no es siempre necesario.',
     difficulty: 'medium',
@@ -180,6 +222,12 @@ export const block1Questions: Question[] = [
       'Ejercer el mando supremo de las Fuerzas Armadas dentro de la arquitectura constitucional del Estado',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'La ratificación de tratados es una facultad distinta de la de mando supremo.',
+      'El Rey no preside el Gobierno ni revoca a los Ministros.',
+      'La convocatoria a elecciones generales se decide en las Cortes Generales.',
+      '',
+    ],
     explanation:
       'El artículo 62.h atribuye al Rey el mando supremo de las Fuerzas Armadas. La dirección política y administrativa del Gobierno y la dirección de la defensa corresponden al Gobierno y a su Presidente en los términos legales.',
     difficulty: 'medium',
@@ -204,6 +252,12 @@ export const block1Questions: Question[] = [
       'Ambas Cámaras tienen exactamente las mismas competencias y ninguna representa al territorio',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'La confianza al Gobierno la otorga el Congreso, no el Senado.',
+      '',
+      'El Senado no sustituye al Congreso ni tiene competencias ilimitadas en estados excepcionales.',
+      'Las Cámaras tienen competencias distintas y el Senado representa al territorio.',
+    ],
     explanation:
       'El Congreso es la cámara de representación popular y de control del Gobierno; el Senado es la cámara de representación territorial y participa en el poder legislativo.',
     difficulty: 'medium',
@@ -228,6 +282,12 @@ export const block1Questions: Question[] = [
       'El Consejo de Ministros, que puede dejar sin efecto la norma por mayoría simple',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'El Tribunal Supremo no tiene competencia constitucional.',
+      '',
+      'El Defensor del Pueblo no dicta sentencias con efecto vinculante.',
+      'El Gobierno no puede dejar sin efecto una ley por mayoría simple.',
+    ],
     explanation:
       'El Tribunal Constitucional es el intérprete supremo de la Constitución y tiene competencias específicas de control de la constitucionalidad.',
     difficulty: 'easy',
@@ -252,6 +312,12 @@ export const block1Questions: Question[] = [
       'Una solicitud al Consejo de Ministros para obtener la nulidad radical del acto',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Una denuncia no anula automáticamente un acto administrativo.',
+      '',
+      'El Senado no ordena indemnizaciones sin demanda judicial.',
+      'El Consejo de Ministros no concede la nulidad radical a instancia de parte.',
+    ],
     explanation:
       'El recurso de amparo ante el Tribunal Constitucional protege frente a vulneraciones de derechos fundamentales, siempre que no exista otra vía procesal adecuada.',
     difficulty: 'medium',
@@ -275,6 +341,12 @@ export const block1Questions: Question[] = [
       'Administrar los recursos de la Administración y conceder ayudas a las entidades con menor nivel',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'No sustituye a los tribunales ni ejecuta sentencias en nombre de nadie.',
+      '',
+      'No aprueba normas interiores con rango de ley.',
+      'No administra los recursos de la Administración ni concede ayudas.',
+    ],
     explanation:
       'El Defensor del Pueblo supervisa la Administración por razones de legalidad y justicia, informa a las Cortes y no sustituye a los tribunales.',
     difficulty: 'easy',
@@ -298,6 +370,12 @@ export const block1Questions: Question[] = [
       'El Gobierno decide el texto definitivo y ambas Cámaras solo lo ratifican sin deliberación',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'El Senado no puede vetar de forma definitiva sin más trámite.',
+      'No solo el Senado aprueba normas: ambas Cámaras tienen el mismo poder legislativo.',
+      '',
+      'El Gobierno no decide el texto y las Cámaras no se limitan a ratificar.',
+    ],
     explanation:
       'El desacuerdo no equivale a un veto absoluto: según el tipo de ley puede abrirse una segunda lectura o una mediación con un texto igual.',
     difficulty: 'hard',
@@ -322,6 +400,12 @@ export const block1Questions: Question[] = [
       'Diez jueces elegidos por el Congreso entre juristas',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'La composición no la fijan las comunidades autónomas.',
+      'No hay un juez por comunidad autónoma ni los designan sus parlamentos.',
+      'El número de miembros no es diez y no los elige solo el Congreso.',
+    ],
     explanation:
       'El Tribunal Constitucional integra doce miembros: cuatro propuestos por el Congreso, cuatro por el Senado, dos por el Gobierno y dos por el CGPJ. El Rey los nombra y, una vez elegidos, los cargos son inamovibles.',
     difficulty: 'hard',
@@ -346,6 +430,12 @@ export const block1Questions: Question[] = [
       'La sentencia solo tiene efectos prospectivos y no declara la inconstitucionalidad',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'La sentencia se publica y en este caso no se limita al recurrente.',
+      'Un precepto no queda derogado sin sentencia que lo declare inconstitucional.',
+      'La sentencia declara la inconstitucionalidad, no solo efectos prospectivos.',
+    ],
     explanation:
       'La sentencia es firme y se publica en el BOE. La declaración de inconstitucionalidad de un precepto produce efectos desde su publicación, conforme a las reglas del procedimiento aplicable, sin limitarse por defecto a la parte recurrente.',
     difficulty: 'hard',
@@ -370,6 +460,12 @@ export const block1Questions: Question[] = [
       'Solo puede convocar una nueva legislatura tras cuatro años sin gobierno formado',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El silencio no equivale a la confianza: se entiende rechazada.',
+      'El Senado no convalida una confianza que el Congreso ha rechazado.',
+      'No hace falta esperar cuatro años para convocar nuevas elecciones.',
+    ],
     explanation:
       'Conforme al artículo 99.3, la solicitud de confianza se entiende rechazada sin autorización de la mayoría absoluta del Congreso. El Rey disuelve entonces las Cortes Generales y convoca elecciones.',
     difficulty: 'medium',
@@ -394,6 +490,12 @@ export const block1Questions: Question[] = [
       'Únicamente los Ministros, siempre que el Presidente del Gobierno actúe como uno más',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Los presidentes de las Cortes y el CGPJ no forman el Gobierno.',
+      '',
+      'El Jefe del Estado y el Defensor del Pueblo no son miembros del Gobierno.',
+      'El Presidente forma parte del Gobierno aunque no ocupe un ministerio.',
+    ],
     explanation:
       'El artículo 98 de la Constitución y la Ley del Gobierno prevén el Presidente, los Vicepresidentes cuando existan y los Ministros.',
     difficulty: 'easy',
@@ -418,6 +520,12 @@ export const block1Questions: Question[] = [
       'El Tribunal Constitucional nombra al Presidente cuando ninguna formación tiene mayoría absoluta',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'El Senado no elige al Presidente del Gobierno.',
+      '',
+      'El Rey no elige libremente: sigue el procedimiento constitucional.',
+      'El Tribunal Constitucional no nombra al Presidente del Gobierno.',
+    ],
     explanation:
       'La formación se concreta con la confianza del Congreso; la propuesta del candidato corresponde al Presidente y el nombramiento al Rey.',
     difficulty: 'medium',
@@ -442,6 +550,12 @@ export const block1Questions: Question[] = [
       'El Consejo de Estado sustituye al Gobierno cuando existe una discrepancia interministerial',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Los Coordinadores generales defienden la unidad de la gestión, no la independencia ministerial.',
+      '',
+      'Las Cortes no elaboran las decisiones ministeriales de cada día.',
+      'El Consejo de Estado asesora, no sustituye al Gobierno.',
+    ],
     explanation:
       'El Gobierno dirige la política y la Administración; el Presidente coordina la acción y el Consejo de Ministros delibera colegiadamente.',
     difficulty: 'easy',
@@ -466,6 +580,12 @@ export const block1Questions: Question[] = [
       'Las Cortes no intervienen en materias urgentes cuando el proyecto afecta a un solo sector',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'El Gobierno no puede imponer por decreto una norma con rango de ley.',
+      '',
+      'La aprobación interna del Gobierno no da validez legal al proyecto.',
+      'Las Cámaras intervienen también en las materias urgentes.',
+    ],
     explanation:
       'La iniciativa del Gobierno debe respetar el procedimiento de aprobación de las Cámaras, la jerarquía normativa y las reglas de buena regulación.',
     difficulty: 'medium',
@@ -490,6 +610,12 @@ export const block1Questions: Question[] = [
       'La modernización tecnológica del sector, aunque contradiga claramente el texto legal vigente',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'La publicación oficial no convalida un reglamento que invade la ley.',
+      '',
+      'El reglamento no puede contradecir el sentido de la ley.',
+      'La actualización tecnológica no justifica vulnerar el texto legal vigente.',
+    ],
     explanation:
       'La potestad reglamentaria desarrolla y ejecuta leyes dentro de su habilitación; no puede contradecir la ley ni el procedimiento de buena regulación.',
     difficulty: 'hard',
@@ -514,6 +640,12 @@ export const block1Questions: Question[] = [
       'La dimisión produce la nulidad inmediata de todos los actos dictados anteriormente',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'La dimisión del Presidente cesa todo el Gobierno, no solo al Presidente.',
+      'El Gobierno no permanece hasta que el Congreso designe a todos sus miembros.',
+      '',
+      'La dimisión no anula los actos que ya se habían dictado.',
+    ],
     explanation:
       'La dimisión del Presidente es una causa de cese del Gobierno. El Rey formaliza el cese y el Gobierno cesante sigue en funciones, con las limitaciones legales, hasta que el nuevo Gobierno tome posesión.',
     difficulty: 'medium',
@@ -538,6 +670,12 @@ export const block1Questions: Question[] = [
       'El Tribunal de Cuentas, que declara responsabilidad criminal y impone la pena',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El Tribunal Supremo Administrativo no impone penas.',
+      'La Audiencia Nacional no tiene competencia exclusiva sobre el Gobierno.',
+      'El Tribunal de Cuentas no declara responsabilidad criminal ni impone pena.',
+    ],
     explanation:
       'La Constitución atribuye a la Sala de lo Penal del Tribunal Supremo la responsabilidad criminal del Presidente y de los miembros del Gobierno, sin perjuicio de las reglas especiales que puedan existir para otros supuestos.',
     difficulty: 'hard',
@@ -562,6 +700,12 @@ export const block1Questions: Question[] = [
       'La delegación debe expresar las competencias que se trasladan y respetar las que no pueden delegarse',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'La delegación no es oral ni traslada la responsabilidad política del Presidente.',
+      'El Presidente no puede delegar lo que la Constitución le atribuye directamente.',
+      'La delegación no necesita eliminar la collegiateidad en la toma de decisiones.',
+      '',
+    ],
     explanation:
       'La Ley del Gobierno permite delegar determinadas competencias del Presidente en Vicepresidentes o Ministros, pero no las competencias directamente atribuidas por la Constitución ni las expresamente no delegables. La delegación conserva la responsabilidad política del Presidente.',
     difficulty: 'hard',
@@ -586,6 +730,12 @@ export const block1Questions: Question[] = [
       'Utilizar una prueba que mida la lealtad política antes de evaluar la competencia técnica',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'La antigüedad no sustituye a la valoración de los requisitos del puesto.',
+      '',
+      'El parentesco está prohibido en el acceso al empleo público.',
+      'La lealtad política no es un criterio legal de selección.',
+    ],
     explanation:
       'El acceso y la promoción se basarán en el mérito, la capacidad y la igualdad, con requisitos relacionados con el puesto y sin favoritismos.',
     difficulty: 'easy',
@@ -610,6 +760,12 @@ export const block1Questions: Question[] = [
       'Sí, si el jefe inmediato firma la solicitud, sin necesidad de procedimiento ni valoración',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'La antigüedad no sustituye siempre a la evaluación del desempeño.',
+      'La antigüedad es un factor, no el único criterio de promoción.',
+      '',
+      'La firma del jefe inmediato no sustituye el procedimiento de evaluación.',
+    ],
     explanation:
       'La antigüedad puede sumar experiencia, pero no sustituye los principios de mérito, capacidad y evaluación que articulan la carrera profesional.',
     difficulty: 'medium',
@@ -634,6 +790,12 @@ export const block1Questions: Question[] = [
       'Difundir la información en redes sociales para demostrar que la Administración es transparente',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Entregar información a cambio de una compensación es un regalo indebido.',
+      '',
+      'La firma de un tercero no legitima el acceso a la información interna.',
+      'La transparencia no se logra difundiendo datos internos en redes sociales.',
+    ],
     explanation:
       'Los empleados públicos deben respetar la confidencialidad, actuar con imparcialidad y evitar que el puesto se convierta en una fuente de enriquecimiento privado.',
     difficulty: 'medium',
@@ -658,6 +820,12 @@ export const block1Questions: Question[] = [
       'La reserva absoluta del expediente hasta que se publiquen todas las decisiones judiciales',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'La inmediatez no puede sustituir al procedimiento con audiencia y defensa.',
+      '',
+      'No hay sanción automática por un informe favorable al crecimiento profesional.',
+      'La reserva absoluta del expediente impide el contradictorio.',
+    ],
     explanation:
       'La responsabilidad disciplinaria exige procedimiento, audiencia, contradicción y proporcionalidad entre la infracción y la sanción.',
     difficulty: 'hard',
@@ -682,6 +850,12 @@ export const block1Questions: Question[] = [
       'La transparencia impide medir resultados, porque solo permite publicar un informe final sin explicación',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'La publicidad activa existe precisamente sin solicitud previa de la persona.',
+      '',
+      'La Agenda 2030 no convierte los datos presupuestarios en secretos.',
+      'Transparencia y medición de resultados no son incompatibles.',
+    ],
     explanation:
       'La publicidad activa difunde información relevante sin esperar una solicitud, y los ODS ofrecen un marco para evaluar el progreso.',
     difficulty: 'medium',
@@ -706,6 +880,12 @@ export const block1Questions: Question[] = [
       'Un convenio colectivo puede convertir cualquier puesto temporal en permanente',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'La temporalidad no depende de la conveniencia del jefe directo.',
+      '',
+      'La antigüedad del trabajador no sustituye a la selección pública.',
+      'Un convenio colectivo no puede convertir un puesto en estructural.',
+    ],
     explanation:
       'La temporalidad responde a necesidades y urgencias expresas. No puede utilizarse para cubrir de manera estructural funciones permanentes; la selección del personal laboral se rige por los principios de igualdad, mérito, capacidad y, cuando procede, celeridad.',
     difficulty: 'medium',
@@ -730,6 +910,12 @@ export const block1Questions: Question[] = [
       'Publicar el domicilio de cualquier empleado que participe en un procedimiento',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'La condición de empleado público no hace público su domicilio.',
+      'Denegar todo acceso sin explicar el dato protegido incumple el deber de motivación.',
+      '',
+      'Publicar el domicilio de cualquier empleado sería una vulneración de la normativa de datos.',
+    ],
     explanation:
       'La publicidad de la información no elimina la protección de datos personales. La Administración debe valorar ambos intereses y, cuando sea posible, disociar los datos; solo accede cuando el interés público prevalece y no se perjudica desproporcionadamente a la persona.',
     difficulty: 'medium',
@@ -754,6 +940,12 @@ export const block1Questions: Question[] = [
       'Impiden utilizar criterios ambientales si no se reproducen literalmente en el pliego',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Los Objetivos obligan solo cuando la ley atribuye la competencia.',
+      'Los Objetivos no sustituyen las leyes que regulan los contratos públicos.',
+      'Sí pueden usarse criterios ambientales sin copiarlos literalmente del pliego.',
+    ],
     explanation:
       'La Agenda 2030 ofrece un marco internacional de desarrollo sostenible, pero no sustituye las normas de competencia, igualdad y contratación. Su uso debe traducirse en medidas legalmente habilitadas y correctamente motivadas.',
     difficulty: 'medium',
@@ -778,6 +970,12 @@ export const block1Questions: Question[] = [
       'Tratar el asunto como un conflicto privado y no comunicar las necesidades a la red de atención',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'No hace falta condena penal para prevenir, proteger y atender.',
+      '',
+      'Exigir a la víctima que abandone su vivienda no es la respuesta adecuada.',
+      'No es un asunto privado: hay datos que comunicar a la red de atención.',
+    ],
     explanation:
       'La respuesta a la violencia de género es integral: combina prevención, protección, atención y recuperación, sin tratar la violencia como un asunto privado.',
     difficulty: 'medium',
@@ -802,6 +1000,12 @@ export const block1Questions: Question[] = [
       'La remisión automática a otro país cuando la persona no acredite su residencia en el trámite',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Denegar por orientación o identidad sexual produce un trato desigual injustificado.',
+      'No se puede reservar un servicio público por la orientación declarada.',
+      'La remisión automática a otro país es discriminatoria.',
+    ],
     explanation:
       'La orientación, identidad sexual y expresión de género son motivos protegidos por la igualdad de trato; la denegación requiere una justificación legítima.',
     difficulty: 'easy',
@@ -826,6 +1030,12 @@ export const block1Questions: Question[] = [
       'Eliminar el servicio digital hasta que la persona alcance el mismo nivel de manejo que una persona sin discapacidad',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'La accesibilidad exige ajustes razonables, no usar la herramienta igual sin ayuda.',
+      'La accesibilidad no es solo física: incluye también lo digital.',
+      '',
+      'No se suprime el servicio digital hasta que la persona alcance el mismo nivel de manejo.',
+    ],
     explanation:
       'La accesibilidad universal comprende entornos, productos, servicios y tecnologías, con ajustes que permitan la participación autónoma.',
     difficulty: 'medium',
@@ -850,6 +1060,12 @@ export const block1Questions: Question[] = [
       'Trasladar toda la carga a una persona de la familia y asumir que no hacen falta servicios ni valoración',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El plan se individualiza según capacidad, preferencias y entorno.',
+      'La ayuda económica no sustituye a los servicios ni a la participación.',
+      'La decisión se toma con la persona, no solo sobre su familia.',
+    ],
     explanation:
       'El sistema de dependencia combina servicios y prestaciones, con evaluación, participación y un programa individual orientado a promover la autonomía.',
     difficulty: 'medium',
@@ -874,6 +1090,12 @@ export const block1Questions: Question[] = [
       'Convertir cualquier medida correctora en una reserva permanente sin necesidad de planificación temporal',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Repartir el mismo título a todos no corrige la desigualdad de acceso.',
+      '',
+      'Exigir que se acredite recursos para informarse crea una barrera inversa.',
+      'Las medidas correctoras necesitan revisión y están sujetas a temporalidad.',
+    ],
     explanation:
       'La igualdad material exige identificar situaciones de desventaja y justificar medidas adecuadas sin introducir nuevas discriminaciones.',
     difficulty: 'hard',
@@ -898,6 +1120,12 @@ export const block1Questions: Question[] = [
       'Adoptar una acción positiva habilitada por ley, necesaria, proporcionada y evaluada',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'La medida debe estar justificada, limitada y evaluada.',
+      'La reserva no puede condicionarse a que la candidata supere en calificación.',
+      'Hay que revisar la medida cuando la desigualdad haya desaparecido.',
+      '',
+    ],
     explanation:
       'Las acciones positivas pueden adoptarse para prevenir, eliminar o compensar desigualdades cuando están previstas o habilitadas legalmente y resultan necesarias, proporcionadas y adecuadas. Deben revisarse porque la medida correctiva es temporal y no puede convertirse en una reserva permanente e injustificada.',
     difficulty: 'hard',
@@ -922,6 +1150,12 @@ export const block1Questions: Question[] = [
       'La conservación de los datos sin informar a los interesados',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'La finalidad limitada impide reutilizar la lista para otra campaña.',
+      'Sin consentimiento no se publican esos datos.',
+      'Hay que informar a los interesados aunque no lo soliciten.',
+    ],
     explanation:
       'La orientación sexual y la salud son categorías especiales de datos. Su tratamiento requiere una base jurídica y garantías adecuadas, con información, confidencialidad, minimización y seguridad, sin reutilizarlos para fines incompatibles.',
     difficulty: 'medium',
@@ -946,6 +1180,12 @@ export const block1Questions: Question[] = [
       'Cambiar automáticamente todas sus funciones sin preguntarle nada a la persona',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'El ajuste razonable no se rechaza porque beneficie a la persona.',
+      'No hay que pedir una excedencia antes de valorar sus capacidades.',
+      '',
+      'No se cambian sus funciones sin preguntarle nada.',
+    ],
     explanation:
       'La discapacidad se rige por igualdad, no discriminación y ajustes razonables. La evaluación individual permite identificar apoyos técnicos u organizativos para conservar la participación y la autonomía de la persona.',
     difficulty: 'medium',
