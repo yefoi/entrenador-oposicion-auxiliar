@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 
 const defaultSiteUrl =
   'https://yefoi.github.io/entrenador-oposicion-auxiliar/'
-const siteUrl = (process.env.VITE_SITE_URL ?? defaultSiteUrl).replace(/\/$/, '') + '/'
+const siteUrl = (process.env.SITE_URL ?? defaultSiteUrl).replace(/\/$/, '') + '/'
 const date = new Date().toISOString().slice(0, 10)
 const pages = [
   { path: '', priority: '1.0' },

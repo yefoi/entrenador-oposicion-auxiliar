@@ -5,7 +5,7 @@ const defaultSiteUrl = 'https://yefoi.github.io/entrenador-oposicion-auxiliar/'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  const siteUrl = (env.VITE_SITE_URL ?? defaultSiteUrl).replace(/\/$/, '') + '/'
+  const siteUrl = (env.SITE_URL ?? defaultSiteUrl).replace(/\/$/, '') + '/'
   return {
     base: './',
     plugins: [
