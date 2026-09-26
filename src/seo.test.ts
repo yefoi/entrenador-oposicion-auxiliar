@@ -80,6 +80,55 @@ describe('SEO metadata', () => {
     expect([...blocks].sort()).toEqual(['B1', 'B2', 'B3', 'B4'])
   })
 
+  it('serves ads.txt at the root for AdSense', () => {
+    const ads = read('public/ads.txt')
+    expect(ads).toContain('google.com, pub-9757010029304189, DIRECT')
+    expect(ads.trim().split('\n')).toHaveLength(1)
+  })
+
+  it('injects the AdSense script in the head only when configured', () => {
+    const outDir = mkdtempSync(resolve(tmpdir(), 'tai-seo-ads-'))
+    const siteUrl = 'https://www.example.test/'
+    const client = 'ca-pub-9757010029304189'
+    execFileSync('node', ['scripts/generate-seo.mjs'], {
+      env: { ...process.env, SITE_URL: siteUrl, SEO_OUT_DIR: outDir },
+      stdio: 'pipe',
+    })
+    const withoutClient = readFileSync(
+      resolve(outDir, 'temario-tai.html'),
+      'utf8',
+    )
+    expect(withoutClient).not.toContain('adsbygoogle.js')
+
+    writeFileSync(
+      resolve(outDir, 'guia-tai.html'),
+      '<html lang="es"><head></head><body><main>x</main></body></html>',
+    )
+    execFileSync('node', ['scripts/generate-seo.mjs'], {
+      env: {
+        ...process.env,
+        SITE_URL: siteUrl,
+        SEO_OUT_DIR: outDir,
+        VITE_ADSENSE_CLIENT: client,
+      },
+      stdio: 'pipe',
+    })
+    const generated = readFileSync(
+      resolve(outDir, 'temario-tai.html'),
+      'utf8',
+    )
+    const staticPage = readFileSync(resolve(outDir, 'guia-tai.html'), 'utf8')
+    for (const html of [generated, staticPage]) {
+      expect(html).toContain(
+        `src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${client}"`,
+      )
+      expect(html).toContain('crossorigin="anonymous"')
+      expect(html.indexOf('adsbygoogle.js')).toBeLessThan(
+        html.indexOf('</head>'),
+      )
+    }
+  })
+
   it('generates a sitemap, robots and indexable pages aligned with SITE_URL', () => {
     const outDir = mkdtempSync(resolve(tmpdir(), 'tai-seo-'))
     const siteUrl = 'https://www.example.test/'

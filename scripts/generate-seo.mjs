@@ -6,6 +6,10 @@ import { topicSeo } from './seo-topics.mjs'
 const defaultSiteUrl = 'https://yefoi.github.io/entrenador-oposicion-auxiliar/'
 const siteUrl = (process.env.SITE_URL ?? defaultSiteUrl).replace(/\/$/, '') + '/'
 const date = new Date().toISOString().slice(0, 10)
+const adsenseClient = process.env.VITE_ADSENSE_CLIENT?.trim()
+const adsenseSnippet = adsenseClient
+  ? `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}" crossorigin="anonymous"></script>`
+  : ''
 const staticPages = [
   { path: '', priority: '1.0' },
   { path: 'guia-tai.html', priority: '0.8' },
@@ -72,6 +76,7 @@ const renderPage = ({
     <meta name="twitter:card" content="summary" />
     <meta name="keywords" content="${escapeHtml(keywords.join(', '))}" />
     <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
+    ${adsenseSnippet}
     <link rel="stylesheet" href="${root}site.css" />
   </head>
   <body>
@@ -260,8 +265,12 @@ await writeFile(
 await writeFile(resolve(dist, 'sitemap.xml'), sitemap)
 for (const page of staticPages.slice(1)) {
   const path = resolve(dist, page.path)
-  const html = await readIfExists(path)
-  if (!html) continue
-  await writeFile(path, html.replaceAll(defaultSiteUrl, siteUrl))
+  const original = await readIfExists(path)
+  if (!original) continue
+  let html = original.replaceAll(defaultSiteUrl, siteUrl)
+  if (adsenseSnippet && !html.includes('adsbygoogle.js')) {
+    html = html.replace('</head>', `  ${adsenseSnippet}\n  </head>`)
+  }
+  await writeFile(path, html)
 }
 console.log(`SEO: ${pages.length} URLs en el sitemap (${generated.length} generadas)`)

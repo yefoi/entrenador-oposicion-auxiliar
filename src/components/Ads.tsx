@@ -1,40 +1,32 @@
-import { useEffect, useSyncExternalStore } from 'react'
-import {
-  getConsentSnapshot,
-  subscribeConsent,
-  writeConsent,
-} from '../lib/consent'
+import { useEffect } from 'react'
 
-const ADSENSE_SCRIPT = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
-
-function useAdsConsent() {
-  return useSyncExternalStore(
-    subscribeConsent,
-    getConsentSnapshot,
-    () => null,
-  )
-}
+const ADSENSE_SRC = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
 
 export interface AdSlotProps {
   slot: string
   label?: string
 }
 
+/**
+ * Auto Ads, enabled by loading the adsbygoogle script in the document head
+ * (see vite.config.ts and scripts/generate-seo.mjs), places ads on its own.
+ * This component is only needed for manual ad units: pass the slot id from
+ * the AdSense dashboard. Without a slot id it renders nothing.
+ */
 export function AdSlot({ slot, label = 'Publicidad' }: AdSlotProps) {
   const client = import.meta.env.VITE_ADSENSE_CLIENT
-  const consent = useAdsConsent()
 
   useEffect(() => {
-    if (!client || consent !== 'granted') return
-    if (document.querySelector(`script[src="${ADSENSE_SCRIPT}"]`)) return
+    if (!client || !slot) return
+    if (document.querySelector(`script[src^="${ADSENSE_SRC}"]`)) return
     const script = document.createElement('script')
     script.async = true
-    script.src = ADSENSE_SCRIPT
+    script.src = `${ADSENSE_SRC}?client=${client}`
     script.crossOrigin = 'anonymous'
     document.head.appendChild(script)
-  }, [client, consent])
+  }, [client, slot])
 
-  if (!client || !slot || consent !== 'granted') return null
+  if (!client || !slot) return null
 
   return (
     <aside className="ad-slot" aria-label={label}>
@@ -47,35 +39,5 @@ export function AdSlot({ slot, label = 'Publicidad' }: AdSlotProps) {
         data-ad-slot={slot}
       />
     </aside>
-  )
-}
-
-export function ConsentBanner() {
-  const client = import.meta.env.VITE_ADSENSE_CLIENT
-  const consent = useAdsConsent()
-  const pending = Boolean(client) && consent === null
-
-  if (!client || !pending) return null
-
-  const decide = (value: boolean) => {
-    writeConsent(value ? 'granted' : 'denied')
-  }
-
-  return (
-    <div className="consent-banner" role="region" aria-label="Aviso de cookies">
-      <p>
-        Podemos mostrar publicidad para mantener el sitio gratuito. No usamos
-        analítica que cree perfiles. Puedes decidir ahora o seguir sin publicidad.
-      </p>
-      <div className="consent-banner__actions">
-        <button onClick={() => decide(true)} type="button">
-          Aceptar publicidad
-        </button>
-        <button onClick={() => decide(false)} type="button">
-          Seguir sin publicidad
-        </button>
-      </div>
-      <a href="./cookies.html">Política de cookies</a>
-    </div>
   )
 }

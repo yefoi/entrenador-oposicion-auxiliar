@@ -13,7 +13,6 @@ import { createMinigameSession, type MinigameOptions } from './lib/minigames'
 import { AppShell } from './components/AppShell'
 import { Onboarding } from './components/Onboarding'
 import { RouteLoading } from './components/RouteLoading'
-import { ConsentBanner } from './components/Ads'
 import { DashboardPage } from './pages/DashboardPage'
 
 const ExamSetupPage = lazy(() =>
@@ -383,7 +382,6 @@ function App() {
       {showOnboarding ? (
         <Onboarding onComplete={() => setShowOnboarding(false)} />
       ) : null}
-      <ConsentBanner />
     </div>
   )
 }
