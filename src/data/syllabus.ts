@@ -362,10 +362,89 @@ export const scenarios: Scenario[] = [
       'Diseña servicios web y una interfaz accesible y adaptable.',
       'Planifica repositorios, pruebas, integración y despliegue.',
     ],
-    // Pendiente de escribir el dossier del caso y sus veinte preguntas. Hasta
-    // entonces, el simulacro de este bloque sortea preguntas de teoria como
-    // antes, asi que la ausencia no rompe nada.
-    materials: [],
+    // El dossier del caso. Cada pregunta del supuesto se responde cruzando
+    // estos documentos, igual que en el bloque IV.
+    materials: [
+      {
+        title: 'Requisitos funcionales del portal',
+        kind: 'tabla',
+        body: `Id      Requisito                                              Prioridad
+REQ-01  Registro de ciudadanos con identificación electrónica    Alta
+REQ-02  Presentación de solicitudes con documentación adjunta    Alta
+REQ-03  Consulta del estado de los expedientes propios           Alta
+REQ-04  Atención en las lenguas cooficiales de la comunidad      Media
+REQ-05  Detección de solicitudes duplicadas por NIF y trámite    Media
+REQ-06  Disponibilidad 24x7 salvo ventana mensual de manteni-
+        miento programada                                       Alta`,
+      },
+      {
+        title: 'Modelo de datos propuesto por el equipo',
+        kind: 'tabla',
+        body: `SOLICITUD
+  id_solicitud        entero, clave principal
+  nif_ciudadano       texto(9)
+  nombre_ciudadano    texto(60)
+  correo_ciudadano    texto(80)
+  codigo_tramite      texto(8)
+  nombre_tramite      texto(60)
+  plazo_tramite       entero (días)
+  fecha_presentacion  fecha
+  estado              texto(12)
+
+El equipo no ha definido ninguna otra tabla ni restricción.`,
+      },
+      {
+        title: 'Inventario técnico acordado',
+        kind: 'tabla',
+        body: `Componente            Versión              Observación
+JDK                   21 LTS               Plataforma de ejecución
+Jakarta EE            10                   Servlets, CDI y REST
+Motor de base          PostgreSQL 16        Relacional
+Mapeo objeto-relacional JPA 3.1 (Hibernate) Persistencia
+Repositorio            Git                  Rama principal protegida
+Integración            Pipeline en cada push Pruebas y despliegue`,
+      },
+      {
+        title: 'Contrato de la API de solicitudes',
+        kind: 'tabla',
+        body: `Método  Ruta                        Código  Descripción
+POST    /solicitudes                201     Alta de una solicitud
+GET     /solicitudes/{id}           200     Consulta de una solicitud
+GET     /solicitudes?nif=...        200     Listado por ciudadano
+PUT     /solicitudes/{id}           200     Sustitución completa
+PATCH   /solicitudes/{id}/estado    200     Cambio de estado
+DELETE  /solicitudes/{id}           204     Anulación de la solicitud`,
+      },
+      {
+        title: 'Informe de accesibilidad del portal (WCAG 2.2 AA)',
+        kind: 'tabla',
+        body: `Criterio                          Resultado  Detalle
+Contraste de texto normal         4,1:1      Por debajo del mínimo
+Etiqueta asociada en los campos   Correcto   -
+Navegación por teclado del menú   Fallo      El submenú no recibe el foco
+Texto alternativo en imágenes     Parcial    3 imágenes informativas sin texto
+Jerarquía de encabezados          Correcto   -`,
+      },
+      {
+        title: 'Estado del repositorio y de la integración',
+        kind: 'salida',
+        body: `$ git log --oneline -4
+8f2c1a4 (HEAD -> main) Actualiza el contrato de la API
+3d91b02 Anade la validacion del NIF
+a4e77c1 (correccion-plazo) Corrige el calculo del plazo
+1c05d90 Sube la version del conector
+
+$ git status
+En la rama main
+Cambios no preparados para la confirmacion:
+        modificado: src/api/EstadoResource.java
+
+$ pipeline
+etapa compilar    correcto   12 s
+etapa pruebas     FALLO      38 s   2 pruebas fallidas
+etapa desplegar   omitida        -   no se ejecuta si fallan las pruebas`,
+      },
+    ],
   },
   {
     id: 'IV',

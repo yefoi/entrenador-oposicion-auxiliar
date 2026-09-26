@@ -109,8 +109,11 @@ export function createExamSession(
   )
   const pool = linkedPool.length >= 20 ? linkedPool : scenarioPool
   const scenarioSelected = takeRandom(pool, 20)
+  // Las reservas salen del bloque entero y no solo del supuesto: cuando el
+  // caso tiene justo veinte preguntas, el conjunto vinculado se agota al
+  // seleccionarlas y no quedaria ninguna para sustituir.
   const scenarioReserves = takeRandom(
-    pool.filter(
+    scenarioPool.filter(
       (question) => !scenarioSelected.some((item) => item.id === question.id),
     ),
     5,
