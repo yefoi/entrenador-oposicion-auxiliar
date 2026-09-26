@@ -20,7 +20,7 @@ function normalizeAnswerPosition(question: Question, index: number): Question {
   return {
     ...question,
     options,
-    correctIndex: ((question.correctIndex + offset) % 4) as 0 | 1 | 2 | 3,
+    correctIndex: ((question.correctIndex - offset + 4) % 4) as 0 | 1 | 2 | 3,
   }
 }
 
