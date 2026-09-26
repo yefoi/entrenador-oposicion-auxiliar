@@ -1,146 +1,146 @@
 {
-  "B3-T01-Q01": [
-    "",
-    "Una sola tabla sin claves foráneas no modela la relación de uno a muchos.",
-    "Una columna de texto con los cursos no permite relacionar ni consultar datos.",
-    "Una tabla por persona que repite los cursos no es un modelo normalizado."
-  ],
-  "B3-T01-Q02": [
-    "Un código reutilizado como clave rompe la trazabilidad de los expedientes anteriores.",
-    "",
-    "Toda tabla necesita clave primaria para identificar sus filas.",
-    "La clave primaria no admite duplicados, así que no puede ser el código del expediente."
-  ],
-  "B3-T01-Q03": [
-    "La relación va de DEPARTAMENTO a EMPLEADO, y la clave foránea va en la tabla dependiente.",
-    "Cada empleado pertenece a un solo departamento, no a muchos.",
-    "",
-    "La clave primaria del departamento se repite en varios empleados: eso no es uno a uno."
-  ],
-  "B3-T01-Q04": [
-    "Añadir más filas no elimina la dependencia transitiva.",
-    "El nombre del empleado no es candidato a clave primaria de este modelo.",
-    "Duplicar provincia y comunidad sin relación mantiene la redundancia.",
+  "B3-T04-Q01": [
+    "La responsabilidad única pide que una clase tenga una sola razón para cambiar.",
+    "La inversión de dependencias consiste en depender de abstracciones, no en sustituir implementaciones.",
+    "El principio abierto-cerrado pide ampliar sin modificar el código existente.",
     ""
   ],
-  "B3-T01-Q05": [
+  "B3-T04-Q02": [
     "",
-    "Decidir qué entidades existen corresponde al modelado conceptual.",
-    "Establecer cardinalidades es diseño lógico, no físico.",
-    "La normalización es diseño lógico: no es una tarea de índices."
+    "Dos subclases sin relación con la clase base no son herencia polimórfica.",
+    "Duplicar la lógica del cliente en cada subclase es lo contrario a reutilizar la interfaz.",
+    "Una variable global no implementa la operación de cada objeto."
   ],
-  "B3-T01-Q06": [
-    "Duplicar las personas por curso rompe la integridad de la entidad persona.",
+  "B3-T04-Q03": [
+    "El decorador añade comportamiento a un objeto, no encapsula el acceso a datos.",
     "",
-    "Una columna de texto con cursos y notas no es un modelo relacional.",
-    "Una tabla por persona sin claves foráneas no relaciona con los cursos."
+    "El observador notifica cambios a suscriptores, no abstrae la persistencia.",
+    "El constructor privado impide instanciar la clase: no da acceso a datos."
   ],
-  "B3-T01-Q07": [
-    "Con la clave foránea obligatoria en EMPLEADO no se puede dejar una credencial libre.",
-    "Sin restricción de unicidad un empleado podría tener varias credenciales.",
+  "B3-T04-Q04": [
+    "El diagrama de clases representa estructura y relaciones entre clases.",
+    "El diagrama de componentes representa módulos y sus dependencias.",
     "",
-    "Sin UNIQUE la relación uno a uno no queda garantizada."
+    "El diagrama de despliegue muestra la distribución física sobre infraestructura."
   ],
-  "B3-T01-Q08": [
-    "Una clave foránea al primer artículo no representa la suma de los importes.",
-    "Una entidad sin relación con PEDIDO no puede derivarse de sus líneas.",
-    "Un total almacenado que puede cambiar sin recalcular queda desincronizado.",
+  "B3-T04-Q05": [
+    "El principio abierto-cerrado habla de extender sin modificar, no de separar la persistencia.",
+    "La segregación de interfaces pide interfaces cohesivas, no desacoplar la base de datos.",
+    "La responsabilidad única pide una sola razón para cambiar en cada módulo.",
     ""
   ],
-  "B3-T02-Q01": [
-    "Un texto no admite comparaciones numéricas ni impide valores negativos.",
+  "B3-T04-Q06": [
     "",
-    "Un booleano solo admite dos valores: no representa una cantidad.",
-    "Asignar valores negativos y luego mostrarlos no impide el valor negativo."
+    "El Singleton garantiza una única instancia, no algoritmos intercambiables.",
+    "Un adaptador concreto no permite cambiar de implementación sin tocar el cliente.",
+    "Un constructor privado sin interfaz impide seleccionar la implementación."
   ],
-  "B3-T02-Q02": [
-    "Invertir las estructuras no da orden inverso y a la vez orden de llegada.",
-    "Dos pilas no pueden atender tareas en orden de llegada.",
+  "B3-T04-Q07": [
+    "Una interfaz no contiene una implementación que las subclases deban cumplir.",
     "",
-    "Dos colas no recorren las rutas en orden inverso de inserción."
+    "Una clase abstracta no se puede instanciar aunque declare métodos sin cuerpo.",
+    "Un enum fija un conjunto de valores, no declara operaciones para subclases."
   ],
-  "B3-T02-Q03": [
-    "El 20 es el hijo izquierdo de la raíz, pero el preorden empieza en la raíz.",
-    "El 35 es el último del subárbol izquierdo: en preorden aparece tras el 30.",
-    "El 50 pertenece al subárbol derecho de la raíz, que se visita después.",
+  "B3-T04-Q08": [
+    "Una asociación simple no implica que la parte desaparezca con el todo.",
+    "Una generalización expresa herencia, no pertenencia al ciclo de vida.",
+    "",
+    "Una dependencia de uso temporal no implica ciclo de vida ligado."
+  ],
+  "B3-T05-Q01": [
+    "",
+    "Un archivo HTML no lo gestiona el contenedor de aplicación.",
+    "Una tabla relacional no es un componente de negocio.",
+    "Un protocolo de red no forma parte del modelo de beans."
+  ],
+  "B3-T05-Q02": [
+    "JavaScript no es el lenguaje principal de la plataforma .NET.",
+    "",
+    "HTML es un lenguaje de marcado, no de programación.",
+    "SQL manipula datos, no desarrolla una aplicación."
+  ],
+  "B3-T05-Q03": [
+    "PRINT imprime un mensaje: no demarca ninguna transacción.",
+    "El atributo alt es texto alternativo de accesibilidad.",
+    "",
+    "Una función de interfaz no gestiona el acceso a datos."
+  ],
+  "B3-T05-Q04": [
+    "Jakarta Batch se ocupa de procesos por lotes, no de autenticación.",
+    "Jakarta Messaging cubre el intercambio de mensajes.",
+    "Bean Validation valida datos, no autentica a usuarios.",
     ""
   ],
-  "B3-T02-Q04": [
+  "B3-T05-Q05": [
     "",
-    "La recursión consiste en que una función se llame a sí misma.",
-    "El polimorfismo de objetos actúa sobre clases que heredan, no sobre firmas de función.",
-    "Un bucle no define dos funciones con el mismo nombre."
+    "Una variable de JavaScript es accesible desde la página: no protege el identificador.",
+    "Sin Secure la cookie puede viajar en una conexión no cifrada.",
+    "Enviar el identificador en cada enlace lo expone en la URL y en el historial."
   ],
-  "B3-T02-Q05": [
-    "El índice 0 es el primer elemento, no el último.",
+  "B3-T05-Q06": [
+    "No se invoca desde SQL: es una clase de la aplicación web.",
     "",
-    "El 4 es el índice del quinto elemento, no el valor que hay almacenado.",
-    "El índice 4 sí existe en un vector de cinco elementos."
+    "Un componente de presentación no atiende peticiones HTTP con verbos.",
+    "Una entidad de persistencia no expone operaciones HTTP ni sustituye al servidor web."
   ],
-  "B3-T02-Q06": [
-    "Java pasa los argumentos primitivos por valor, no por referencia.",
-    "El código compila: lo que no cambia es el valor de la copia local n.",
+  "B3-T05-Q07": [
+    "Anotarla con @Path y @GET la convertiría en un recurso web, no en una entidad.",
+    "Registrarla como servlet no la asocia al modelo de persistencia.",
     "",
-    "No depende de ninguna opción de compatibilidad del compilador."
+    "Ser una clase final no configura nada respecto a la persistencia."
   ],
-  "B3-T02-Q07": [
-    "Un for no ejecuta el cuerpo tres veces salvo que se programe así.",
-    "Un while puede omitir la primera lectura, porque comprueba antes la condición.",
-    "Un if no repite ninguna lectura.",
+  "B3-T05-Q08": [
+    "Una variable global sin registro elimina cualquier garantía de resolución.",
+    "Crear la instancia en cada vista acopla el controlador a la implementación.",
+    "Leer una clave de registro en el constructor sigue siendo acoplamiento manual.",
     ""
   ],
-  "B3-T02-Q08": [
+  "B3-T06-Q01": [
+    "Dos nodos sin separación de lógica no describen tres responsabilidades.",
     "",
-    "El caso base no convierte n en un número real.",
-    "Ordenar los enteros no es la razón del caso base en un factorial.",
-    "Declarar dos funciones con el mismo nombre es sobrecarga, no recursión."
+    "La memoria compartida no es un modelo de arquitectura por capas.",
+    "Un único archivo ejecutable mezcla las tres responsabilidades."
   ],
-  "B3-T03-Q01": [
-    "INNER JOIN descarta los departamentos sin empleados: es una intersección.",
-    "CROSS JOIN devuelve el producto cartesiano, no une por clave.",
+  "B3-T06-Q02": [
+    "Un servicio sin estado no mantiene sesión de usuario permanente.",
+    "No necesita un servidor de aplicaciones por usuario.",
     "",
-    "RIGHT JOIN conserva los empleados y perdería los departamentos sin empleados."
+    "El transporte no define si el servicio es con o sin estado."
   ],
-  "B3-T03-Q02": [
-    "ORDER BY ordena el resultado, pero no forma grupos.",
-    "WHERE filtra filas y no admite una lista de columnas.",
-    "DISTINCT elimina filas repetidas, no agrupa por dos columnas.",
+  "B3-T06-Q03": [
+    "La herencia de clases es un paradigma de programación, no de servicios.",
+    "Un sistema de archivos distribuidos no usa verbos HTTP sobre recursos.",
+    "Una cola local de mensajes no describe el acceso a recursos por URL.",
     ""
   ],
-  "B3-T03-Q03": [
+  "B3-T06-Q04": [
     "",
-    "EXISTS devuelve los alumnos que sí tienen matrícula: es el criterio contrario.",
-    "El producto cartesiano devuelve alumnos con matrícula, no sin ella.",
-    "Con LEFT JOIN hay que filtrar por una columna del lado derecho que sea nula, no por m.id > 0."
+    "Normalizar datos no tiene relación con distribuir tráfico entre instancias.",
+    "Compilar código fuente no es una función de un equilibrador.",
+    "Cifrar el disco local no evita que una instancia deje de responder."
   ],
-  "B3-T03-Q04": [
-    "Una restricción CHECK valida valores, no guarda una secuencia de consultas.",
+  "B3-T06-Q05": [
+    "La mutabilidad no describe el efecto de repetir la misma solicitud.",
     "",
-    "Una vista materializada almacena un resultado, no lógica con parámetros y transacción.",
-    "GRANT concede permisos y no contiene instrucciones ejecutables."
+    "La herencia múltiple es un mecanismo de tipos, no de comportamiento de una operación.",
+    "La transparencia de ubicación no describe la repetición de una transferencia."
   ],
-  "B3-T03-Q05": [
-    "Una vista materializada no ejecuta lógica ante una actualización.",
-    "Un índice acelera consultas, no valida ni corrige valores.",
+  "B3-T06-Q06": [
+    "Mezclar entrada, datos y presentación es justamente lo contrario de MVC.",
+    "Un protocolo no sustituye al servidor de aplicaciones.",
     "",
-    "Un permiso SELECT no valida ni modifica datos."
+    "Un formato de almacenamiento de estáticos no describe la separación de MVC."
   ],
-  "B3-T03-Q06": [
-    "COUNT(nif) omite los nulos, así que no da el total de facturas.",
-    "SUM suma valores, no cuenta filas.",
-    "COUNT(DISTINCT nif) cuenta valores distintos, no facturas.",
+  "B3-T06-Q07": [
+    "Normalizar una tabla relacional es una tarea de persistencia.",
+    "Compilar microservicios no es una función de la pasarela.",
+    "Servir archivos estáticos no aplica políticas de acceso a servicios.",
     ""
   ],
-  "B3-T03-Q07": [
+  "B3-T06-Q08": [
     "",
-    "UNION elimina los duplicados del resultado combinado.",
-    "INTERSECT devuelve solo las filas presentes en ambas consultas.",
-    "EXCEPT devuelve las filas que solo aparecen en la primera consulta."
-  ],
-  "B3-T03-Q08": [
-    "GROUP BY no conserva la fila de préstamo: se queda con un grupo por socio y fecha.",
-    "",
-    "ORDER BY ordena pero no numera las filas dentro de cada socio.",
-    "DISTINCT con MAX no permite elegir el préstamo ni desempatar por identificador."
+    "HEAD solo devuelve cabeceras: no modifica el recurso.",
+    "POST puede crear un recurso distinto en cada llamada, así que no es idempotente.",
+    "PATCH aplica una modificación parcial, no una sustitución completa."
   ]
 }

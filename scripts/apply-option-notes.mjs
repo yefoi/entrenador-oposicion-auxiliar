@@ -38,7 +38,7 @@ for (const [id, list] of Object.entries(notes)) {
       'candidate', 'candidates', 'approach', 'escape', 'journeys', 'record',
       'owner', 'match', 'scale', 'reset', 'source', 'target', 'point', 'label',
       'block', 'shift', 'sprite', 'render', 'commit', 'smart',
-      'bright', 'please', 'simple',
+      'bright', 'please',
     ]
     for (const word of note.match(/[A-Za-z]{4,}/g) ?? []) {
       if (inglesas.includes(word.toLowerCase())) {

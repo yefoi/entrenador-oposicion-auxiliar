@@ -657,6 +657,12 @@ export const block3Questions: Question[] = [
       'Principio de sustitución de Liskov',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'La responsabilidad única pide que una clase tenga una sola razón para cambiar.',
+      'La inversión de dependencias consiste en depender de abstracciones, no en sustituir implementaciones.',
+      'El principio abierto-cerrado pide ampliar sin modificar el código existente.',
+      '',
+    ],
     explanation:
       'El principio de sustitución de Liskov exige que una implementación pueda sustituir a otra sin incumplir el contrato. Así, el código que consume la interfaz no depende de detalles de la implementación concreta.',
     difficulty: 'medium',
@@ -678,6 +684,12 @@ export const block3Questions: Question[] = [
       'Convertir la operación calcularArea en una variable global',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Dos subclases sin relación con la clase base no son herencia polimórfica.',
+      'Duplicar la lógica del cliente en cada subclase es lo contrario a reutilizar la interfaz.',
+      'Una variable global no implementa la operación de cada objeto.',
+    ],
     explanation:
       'La herencia polimórfica permite tratar objetos de distintas subclases mediante el tipo base y ejecutar la implementación de la operación correspondiente a cada objeto.',
     difficulty: 'easy',
@@ -694,6 +706,12 @@ export const block3Questions: Question[] = [
       'Un flujo crea objetos Repositorio, pero el código de negocio necesita una interfaz de persistencia y no la clase concreta de base de datos. ¿Qué patrón facilita esta decisión?',
     options: ['Decorador', 'Repositorio', 'Observador', 'Constructor privado'],
     correctIndex: 1,
+    optionNotes: [
+      'El decorador añade comportamiento a un objeto, no encapsula el acceso a datos.',
+      '',
+      'El observador notifica cambios a suscriptores, no abstrae la persistencia.',
+      'El constructor privado impide instanciar la clase: no da acceso a datos.',
+    ],
     explanation:
       'El patrón Repositorio encapsula el acceso a datos detrás de una abstracción. El código de negocio depende de esa abstracción, no de la implementación concreta del almacenamiento.',
     difficulty: 'easy',
@@ -715,6 +733,12 @@ export const block3Questions: Question[] = [
       'Diagrama de despliegue',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'El diagrama de clases representa estructura y relaciones entre clases.',
+      'El diagrama de componentes representa módulos y sus dependencias.',
+      '',
+      'El diagrama de despliegue muestra la distribución física sobre infraestructura.',
+    ],
     explanation:
       'El diagrama de actividad representa el flujo de trabajo mediante actividades, decisiones, condiciones y caminos de control. Los diagramas de clases, componentes y despliegue muestran otros aspectos del sistema.',
     difficulty: 'easy',
@@ -736,6 +760,12 @@ export const block3Questions: Question[] = [
       'Inversión de dependencias',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'El principio abierto-cerrado habla de extender sin modificar, no de separar la persistencia.',
+      'La segregación de interfaces pide interfaces cohesivas, no desacoplar la base de datos.',
+      'La responsabilidad única pide una sola razón para cambiar en cada módulo.',
+      '',
+    ],
     explanation:
       'La inversión de dependencias hace que los módulos de alto nivel dependan de abstracciones y no de detalles de bajo nivel. Así, la persistencia queda detrás de una abstracción que puede cambiar sin acoplarse al dominio.',
     difficulty: 'hard',
@@ -757,6 +787,12 @@ export const block3Questions: Question[] = [
       'Constructor privado sin interfaz',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El Singleton garantiza una única instancia, no algoritmos intercambiables.',
+      'Un adaptador concreto no permite cambiar de implementación sin tocar el cliente.',
+      'Un constructor privado sin interfaz impide seleccionar la implementación.',
+    ],
     explanation:
       'El patrón Strategy encapsula algoritmos intercambiables detrás de una abstracción común. El cliente puede seleccionar otra estrategia sin conocer los detalles de su implementación.',
     difficulty: 'medium',
@@ -778,6 +814,12 @@ export const block3Questions: Question[] = [
       'Es un enum que obliga a usar siempre el mismo cálculo',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Una interfaz no contiene una implementación que las subclases deban cumplir.',
+      '',
+      'Una clase abstracta no se puede instanciar aunque declare métodos sin cuerpo.',
+      'Un enum fija un conjunto de valores, no declara operaciones para subclases.',
+    ],
     explanation:
       'Una clase abstracta puede declarar métodos sin implementación y no se puede instanciar directamente. Las subclases concretas deben implementar o heredar una implementación válida de esos métodos.',
     difficulty: 'easy',
@@ -799,6 +841,12 @@ export const block3Questions: Question[] = [
       'Una dependencia de uso temporal',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Una asociación simple no implica que la parte desaparezca con el todo.',
+      'Una generalización expresa herencia, no pertenencia al ciclo de vida.',
+      '',
+      'Una dependencia de uso temporal no implica ciclo de vida ligado.',
+    ],
     explanation:
       'La composición es una relación de agregación fuerte: la parte forma parte del todo y su ciclo de vida está ligado a él. En UML se representa con un rombo relleno en el extremo del todo.',
     difficulty: 'medium',
@@ -820,6 +868,12 @@ export const block3Questions: Question[] = [
       'Un protocolo de red independiente de la aplicación',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Un archivo HTML no lo gestiona el contenedor de aplicación.',
+      'Una tabla relacional no es un componente de negocio.',
+      'Un protocolo de red no forma parte del modelo de beans.',
+    ],
     explanation:
       'CDI gestiona beans, sus dependencias y su ciclo de vida dentro del contenedor Jakarta EE. La antigua anotación ManagedBean no es necesaria en el modelo actual.',
     difficulty: 'medium',
@@ -836,6 +890,12 @@ export const block3Questions: Question[] = [
       'Una empresa selecciona la plataforma .NET y necesita un lenguaje principal para su aplicación multiplataforma. ¿Qué lenguaje corresponde a esa elección?',
     options: ['JavaScript', 'C# en .NET', 'HTML', 'SQL'],
     correctIndex: 1,
+    optionNotes: [
+      'JavaScript no es el lenguaje principal de la plataforma .NET.',
+      '',
+      'HTML es un lenguaje de marcado, no de programación.',
+      'SQL manipula datos, no desarrolla una aplicación.',
+    ],
     explanation:
       'C# es el lenguaje principal de la plataforma .NET y admite aplicaciones multiplataforma para los sistemas operativos admitidos por el entorno.',
     difficulty: 'easy',
@@ -857,6 +917,12 @@ export const block3Questions: Question[] = [
       'Una función de la interfaz de usuario',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'PRINT imprime un mensaje: no demarca ninguna transacción.',
+      'El atributo alt es texto alternativo de accesibilidad.',
+      '',
+      'Una función de interfaz no gestiona el acceso a datos.',
+    ],
     explanation:
       'Una anotación transaccional declara al contenedor dónde comenzar y finalizar la transacción. El código de negocio no necesita implementar manualmente toda la coordinación del acceso a datos.',
     difficulty: 'hard',
@@ -878,6 +944,12 @@ export const block3Questions: Question[] = [
       'Jakarta Security, con la identidad del contenedor',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Jakarta Batch se ocupa de procesos por lotes, no de autenticación.',
+      'Jakarta Messaging cubre el intercambio de mensajes.',
+      'Bean Validation valida datos, no autentica a usuarios.',
+      '',
+    ],
     explanation:
       'Jakarta Security define servicios de autenticación y autorización para aplicaciones Jakarta EE. La aplicación los integra con los mecanismos y almacenes de identidad del contenedor; las demás especificaciones cubren otros aspectos.',
     difficulty: 'medium',
@@ -899,6 +971,12 @@ export const block3Questions: Question[] = [
       'Enviar el identificador de sesión en cada enlace como texto visible',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Una variable de JavaScript es accesible desde la página: no protege el identificador.',
+      'Sin Secure la cookie puede viajar en una conexión no cifrada.',
+      'Enviar el identificador en cada enlace lo expone en la URL y en el historial.',
+    ],
     explanation:
       'El estado de servidor permite conservar la sesión y la marca HttpOnly limita el acceso al identificador desde scripts. Secure exige que la cookie solo viaje mediante una conexión protegida.',
     difficulty: 'medium',
@@ -920,6 +998,12 @@ export const block3Questions: Question[] = [
       'Es una entidad de persistencia que reemplaza al servidor web',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'No se invoca desde SQL: es una clase de la aplicación web.',
+      '',
+      'Un componente de presentación no atiende peticiones HTTP con verbos.',
+      'Una entidad de persistencia no expone operaciones HTTP ni sustituye al servidor web.',
+    ],
     explanation:
       'Jakarta RESTful Web Services, originariamente JAX-RS, permite definir recursos con rutas y métodos HTTP como GET, POST o DELETE. La clase atiende una petición y devuelve una respuesta conforme al contrato del recurso.',
     difficulty: 'medium',
@@ -941,6 +1025,12 @@ export const block3Questions: Question[] = [
       'Declararla únicamente como una clase final sin relación con el modelo',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Anotarla con @Path y @GET la convertiría en un recurso web, no en una entidad.',
+      'Registrarla como servlet no la asocia al modelo de persistencia.',
+      '',
+      'Ser una clase final no configura nada respecto a la persistencia.',
+    ],
     explanation:
       'Una entidad de persistencia se declara con una anotación @Entity y necesita una propiedad identificadora, normalmente señalada con @Id. Las demás alternativas describen un recurso web o una clase sin configuración de persistencia.',
     difficulty: 'medium',
@@ -962,6 +1052,12 @@ export const block3Questions: Question[] = [
       'Registrar el servicio en el contenedor de inyección y recibir una abstracción en el constructor',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Una variable global sin registro elimina cualquier garantía de resolución.',
+      'Crear la instancia en cada vista acopla el controlador a la implementación.',
+      'Leer una clave de registro en el constructor sigue siendo acoplamiento manual.',
+      '',
+    ],
     explanation:
       'El contenedor de inyección resuelve las dependencias declaradas por la aplicación. Si el controlador recibe una interfaz del repositorio, queda acoplado a la abstracción y no a una implementación concreta.',
     difficulty: 'medium',
@@ -983,6 +1079,12 @@ export const block3Questions: Question[] = [
       'Arquitectura de un único archivo ejecutable',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Dos nodos sin separación de lógica no describen tres responsabilidades.',
+      '',
+      'La memoria compartida no es un modelo de arquitectura por capas.',
+      'Un único archivo ejecutable mezcla las tres responsabilidades.',
+    ],
     explanation:
       'La arquitectura de tres capas separa presentación, lógica de negocio y acceso a datos. La separación permite mantener cada responsabilidad en un componente distinto.',
     difficulty: 'easy',
@@ -1004,6 +1106,12 @@ export const block3Questions: Question[] = [
       'Solo funciona con conexiones UDP',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Un servicio sin estado no mantiene sesión de usuario permanente.',
+      'No necesita un servidor de aplicaciones por usuario.',
+      '',
+      'El transporte no define si el servicio es con o sin estado.',
+    ],
     explanation:
       'Un servicio sin estado no conserva contexto de una petición a otra. Cualquier estado necesario debe viajar dentro de la petición o recuperarse desde un almacén externo.',
     difficulty: 'easy',
@@ -1025,6 +1133,12 @@ export const block3Questions: Question[] = [
       'REST',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'La herencia de clases es un paradigma de programación, no de servicios.',
+      'Un sistema de archivos distribuidos no usa verbos HTTP sobre recursos.',
+      'Una cola local de mensajes no describe el acceso a recursos por URL.',
+      '',
+    ],
     explanation:
       'REST representa recursos con identificadores y utiliza métodos HTTP para operar sobre ellos. La arquitectura puede ser sin estado y organizarse como una API independiente.',
     difficulty: 'medium',
@@ -1046,6 +1160,12 @@ export const block3Questions: Question[] = [
       'Cifrado de disco local',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Normalizar datos no tiene relación con distribuir tráfico entre instancias.',
+      'Compilar código fuente no es una función de un equilibrador.',
+      'Cifrar el disco local no evita que una instancia deje de responder.',
+    ],
     explanation:
       'El equilibrador evita enviar tráfico a una instancia no disponible y distribuye la carga entre las instancias activas. Esto mejora la disponibilidad y permite continuar el servicio si falla una instancia.',
     difficulty: 'medium',
@@ -1067,6 +1187,12 @@ export const block3Questions: Question[] = [
       'Transparencia de ubicación',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'La mutabilidad no describe el efecto de repetir la misma solicitud.',
+      '',
+      'La herencia múltiple es un mecanismo de tipos, no de comportamiento de una operación.',
+      'La transparencia de ubicación no describe la repetición de una transferencia.',
+    ],
     explanation:
       'Una operación idempotente puede ejecutarse varias veces con la misma intención y producir el mismo efecto lógico. El identificador permite reconocer el reintento y evitar una segunda transferencia.',
     difficulty: 'hard',
@@ -1088,6 +1214,12 @@ export const block3Questions: Question[] = [
       'Un formato de almacenamiento de archivos estáticos',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Mezclar entrada, datos y presentación es justamente lo contrario de MVC.',
+      'Un protocolo no sustituye al servidor de aplicaciones.',
+      '',
+      'Un formato de almacenamiento de estáticos no describe la separación de MVC.',
+    ],
     explanation:
       'MVC separa el modelo, que contiene los datos y sus reglas, de la vista, que representa la respuesta, y del controlador, que atiende la petición y coordina ambos. La separación facilita mantener responsabilidades diferentes.',
     difficulty: 'easy',
@@ -1109,6 +1241,12 @@ export const block3Questions: Question[] = [
       'Centralizar políticas de acceso y enrutar cada petición',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Normalizar una tabla relacional es una tarea de persistencia.',
+      'Compilar microservicios no es una función de la pasarela.',
+      'Servir archivos estáticos no aplica políticas de acceso a servicios.',
+      '',
+    ],
     explanation:
       'Una pasarela de API (API Gateway) es un punto de entrada que aplica políticas transversales y enruta las peticiones hacia los servicios internos. No sustituye la compilación, la persistencia ni el modelo de datos.',
     difficulty: 'medium',
@@ -1130,6 +1268,12 @@ export const block3Questions: Question[] = [
       'PATCH, porque siempre duplica la representación',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'HEAD solo devuelve cabeceras: no modifica el recurso.',
+      'POST puede crear un recurso distinto en cada llamada, así que no es idempotente.',
+      'PATCH aplica una modificación parcial, no una sustitución completa.',
+    ],
     explanation:
       'PUT representa la creación o sustitución de la representación identificada por la URI y es idempotente: repetir la misma solicitud produce el mismo estado lógico. POST no ofrece esa garantía y PATCH modifica parcialmente la representación.',
     difficulty: 'hard',
