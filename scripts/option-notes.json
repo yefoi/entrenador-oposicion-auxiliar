@@ -1,194 +1,32 @@
 {
-  "B4-T07-Q01": [
+  "B2-T01-Q05": [
+    "La ROM conserva el contenido aunque se apague el equipo.",
+    "Una memoria SSD es no volátil: conserva los datos sin alimentación.",
     "",
-    "La capa de enlace agrupa tramas en un mismo segmento y no controla el reenvío de transporte.",
-    "IP pertenece a la capa de red: dirige el paquete, no la conexión.",
-    "La capa de aplicación define el intercambio entre programas, no el control de transporte."
+    "Un disco HDD conserva los datos sin alimentación."
   ],
-  "B4-T07-Q02": [
+  "B2-T01-Q07": [
+    "Un byte son 8 bits, no los 32 de la transferencia.",
+    "2 bytes son 16 bits, la mitad de lo transferido.",
     "",
-    "TCP reenvía lo perdido y espera la confirmación: eso es justo lo que aquí sobra.",
-    "ICMP transporta mensajes de control y error, no los datos de una voz.",
-    "ARP relaciona direcciones IPv4 y MAC: no transporta la llamada."
+    "8 bytes serían 64 bits, no 32."
+  ],
+  "B2-T02-Q01": [
+    "",
+    "El trazador imprime sobre un soporte, no digitaliza documentos.",
+    "Los altavoces reproducen sonido, no convierten documentos en datos.",
+    "El SAI suministra energía cuando falla la alimentación."
+  ],
+  "B4-T03-Q02": [
+    "",
+    "POP3 descarga los mensajes y puede borrarlos del servidor.",
+    "SMTP envía correo, no consulta un buzón.",
+    "NTP sincroniza relojes entre sistemas, no recupera un buzón."
   ],
   "B4-T07-Q03": [
     "",
     "DHCP reparte configuración de red, no mensajes de diagnóstico.",
-    "DNS resuelve nombres de dominio.",
-    "SMTP transfiere correo."
-  ],
-  "B4-T07-Q04": [
-    "",
-    "DHCP reparte la configuración, no la dirección MAC del siguiente salto.",
-    "DNS traduce nombres a direcciones, no a direcciones MAC.",
-    "TLS protege el canal y no participa en la entrega de la trama local."
-  ],
-  "B4-T07-Q05": [
-    "Incluye la dirección de red .0 y la de difusión .63, que no se asignan a equipos.",
-    "Con máscara /26, la dirección .127 pertenece a la subred siguiente.",
-    "",
-    "La subred /26 va de .0 a .63: la dirección .64 ya está fuera de ella."
-  ],
-  "B4-T07-Q06": [
-    "",
-    "Ese es el orden de desmontaje: de fuera hacia dentro al procesar la trama.",
-    "El mensaje HTTP se encapsula en el segmento, no al revés.",
-    "El paquete IP envuelve al segmento TCP, nunca se inserta dentro de él."
-  ],
-  "B4-T07-Q07": [
-    "El cliente no empieza con ACK ni termina con FIN en el establecimiento.",
-    "El servidor responde con SYN-ACK y el cliente confirma con ACK.",
-    "",
-    "FIN cierra la conexión y RST la aborta: ninguno abre una sesión."
-  ],
-  "B4-T07-Q08": [
-    "32 bits es la longitud de una dirección IPv4, no de IPv6.",
-    "Una dirección IPv6 no tiene 64 bits.",
-    "La longitud es correcta, pero /32 no es el prefijo habitual de un enlace.",
-    ""
-  ],
-  "B4-T08-Q01": [
-    "",
-    "Internet no es un ordenador central: es una interconexión de redes.",
-    "HTTP es un protocolo de aplicación, no la arquitectura de Internet.",
-    "El correo no sustituye a los enrutadores ni a los proveedores de acceso."
-  ],
-  "B4-T08-Q02": [
-    "",
-    "POST envía datos que pueden crear una acción o un recurso en el servidor.",
-    "PUT sustituye la representación de un recurso: sí modifica el servidor.",
-    "PATCH aplica una modificación parcial: también cambia el recurso."
-  ],
-  "B4-T08-Q03": [
-    "",
-    "El certificado no cifra los archivos almacenados en el servidor.",
-    "Validar el certificado no autentica a cada usuario que se conecta.",
-    "El nombre del dominio y la cadena de confianza son precisamente lo que se comprueba."
-  ],
-  "B4-T08-Q04": [
-    "CNAME crea un alias de nombre y PTR es el registro inverso de una dirección.",
-    "NS delega servidores de nombres y CAA restringe qué entidades pueden emitir certificados.",
-    "SOA marca la autoridad de una zona y TXT guarda texto, como la clave de DMARC.",
-    ""
-  ],
-  "B4-T08-Q05": [
-    "",
-    "Domain y Path limitan a qué se envía la cookie, no su cifrado ni su legibilidad por scripts.",
-    "Expires y Max-Age controlan la duración, no el transporte ni el acceso desde JavaScript.",
-    "SameSite restringe el envío en peticiones de terceros, no impide leer la cookie desde la página."
-  ],
-  "B4-T08-Q06": [
-    "",
-    "El 80 es HTTP sin cifrar.",
-    "El 25 es SMTP entre servidores de correo.",
-    "DNS usa UDP 53; el 443 sobre UDP corresponde a HTTP/3, no a HTTPS sobre TCP."
-  ],
-  "B4-T08-Q07": [
-    "Cache-Control controla la caché del navegador, no el salto de HTTP a HTTPS.",
-    "",
-    "X-Forwarded-Proto informa del protocolo original y no obliga al navegador a usar HTTPS.",
-    "Set-Cookie Secure protege la cookie, pero no obliga al navegador a usar HTTPS después."
-  ],
-  "B4-T08-Q08": [
-    "ARP relaciona direcciones IPv4 y MAC: nada que ver con certificados.",
-    "Un CNAME es un alias de nombre en DNS, no una consulta de revocación.",
-    "RAID agrupa discos y no consulta el estado de un certificado.",
-    ""
-  ],
-  "B4-T09-Q01": [
-    "",
-    "Un concentrador reenvía la señal a todos los puertos sin aplicar ninguna política.",
-    "DNS traduce nombres: no convierte direcciones privadas en públicas.",
-    "Una VLAN segmenta, pero no concede confianza a lo que entra por la interfaz externa."
-  ],
-  "B4-T09-Q02": [
-    "Telnet transmite en claro y no cifra el túnel.",
-    "",
-    "Reenviar puertos de toda la interfaz privada expone servicios que no deberían abrirse.",
-    "Una carpeta compartida sin autenticación no cifra ni verifica al usuario."
-  ],
-  "B4-T09-Q03": [
-    "",
-    "Publicar una consola con contraseña compartida elimina la trazabilidad del acceso.",
-    "Una clave compartida entre administradores impide saber quién hizo cada cambio.",
-    "Una carpeta de scripts editable sin registro anula la auditoría y permite cambios no autorizados."
-  ],
-  "B4-T09-Q04": [
-    "",
-    "El año de nacimiento es un dato público y adivinable, no un segundo factor.",
-    "Compartir la contraseña elimina la verificación individual.",
-    "Desactivar las actualizaciones deja el equipo expuesto a vulnerabilidades conocidas."
-  ],
-  "B4-T09-Q05": [
-    "",
-    "Confiar en toda la VLAN de oficina es la confianza implícita que se quiere retirar.",
-    "Una cuenta administrativa permanente evita la verificación en el momento de usarla.",
-    "Abrir todos los puertos entre VLAN elimina la segmentación en lugar de reforzarla."
-  ],
-  "B4-T09-Q06": [
-    "",
-    "Un IDS pasivo solo alerta: no puede bloquear la sesión en curso.",
-    "Una VLAN no oculta direcciones IP, y menos ante un escaneo.",
-    "DNS no convierte conexiones en HTTPS ni las bloquea."
-  ],
-  "B4-T09-Q07": [
-    "El túnel completo cifra todo el tráfico, también el correo: es lo contrario de dividirlo.",
-    "",
-    "Una VPN sin cifrado que solo cambia la dirección no protege el contenido.",
-    "Duplicar la dirección del servidor en un segundo adaptador rompe el enrutamiento."
-  ],
-  "B4-T09-Q08": [
-    "Sin reglas de filtrado, la base de datos queda accesible desde el mismo segmento que el servidor web.",
-    "La red de invitados es para clientes no confiables, no para alojar la base de datos.",
-    "",
-    "Una contraseña no sustituye al cortafuegos: el puerto sigue expuesto a Internet."
-  ],
-  "B4-T10-Q01": [
-    "",
-    "En un bus todos los equipos comparten el medio: la avería de un cable afectaría a varios.",
-    "En un anillo la avería se propagaría por toda la vuelta del enlace.",
-    "Una malla completa no tiene elemento central, así que no describe un conmutador único."
-  ],
-  "B4-T10-Q02": [
-    "",
-    "La trama no lleva el nombre DNS, y la IPv4 solo existe si hay cabecera IP.",
-    "Ni la contraseña de la VLAN ni una clave privada viajan en una trama de datos.",
-    "El conmutador no conoce la ruta de Internet: solo reenvía por el puerto aprendido."
-  ],
-  "B4-T10-Q03": [
-    "",
-    "CSMA/CA evita las colisiones con confirmación y es propio del acceso inalámbrico.",
-    "El paso de testigo es otro método de acceso al medio, no de detección de colisiones.",
-    "TDMA divide el tiempo en intervalos y es propio de redes de acceso como GSM."
-  ],
-  "B4-T10-Q04": [
-    "Un concentrador repite la señal a todos los puertos: no decide por dirección IP.",
-    "Un repetidor solo regenera la señal y no separa dominios de difusión.",
-    "",
-    "Un puente reenvía tramas dentro de la misma subred y no enruta entre VLAN."
-  ],
-  "B4-T10-Q05": [
-    "",
-    "El 20 y el 21 son FTP, no DHCP.",
-    "El 123 es NTP y el 53 es DNS: ninguno reparte direcciones.",
-    "El 443 es HTTPS y el 80 HTTP: no asignan configuración de red."
-  ],
-  "B4-T10-Q06": [
-    "Un enlace independiente por equipo describe una estrella, no un backbone compartido.",
-    "",
-    "Un backbone no se transforma solo en estrella al fallar.",
-    "Una avería del medio compartido interrumpe también el tráfico unicast entre estaciones."
-  ],
-  "B4-T10-Q07": [
-    "Conservar la entrada para siempre dirigiría tráfico a un puerto equivocado.",
-    "Una dirección MAC no se convierte en IP: pertenecen a capas distintas.",
-    "",
-    "La tabla es por VLAN y por puerto: no se copia automáticamente entre VLAN."
-  ],
-  "B4-T10-Q08": [
-    "En estrella, la caída del elemento central interrumpe todos los enlaces.",
-    "Un bus comparte un único medio y no ofrece caminos alternativos.",
-    "Un anillo tiene un único camino entre nodos y propagaría la avería.",
-    ""
+    "DNS resuelve nombres de dominio, no responde a ecos ni a avisos de control.",
+    "SMTP transfiere correo, no mensajes de diagnóstico de red."
   ]
 }

@@ -61,8 +61,34 @@ describe('calidad de los distractores', () => {
       expect(question.optionNotes[question.correctIndex]).toBe('')
       for (let i = 0; i < 4; i += 1) {
         if (i === question.correctIndex) continue
-        expect(question.optionNotes[i].trim().length).toBeGreaterThan(15)
+        // Cortisima suele significar que la nota solo repite la opcion en vez
+        // de decir por que se descarta. El suelo esta en 24 porque en las
+        // preguntas de puertos las notas legas mas cortas son relaciones de
+        // eliminacion ("el 2049 corresponde a NFS").
+        expect(question.optionNotes[i].trim().length).toBeGreaterThanOrEqual(24)
       }
+    }
+  })
+
+  it('no repite notas entre preguntas ni aperturas de plantilla', () => {
+    // Una nota repetida palabra por palabra o una apertura compartida por
+    // cinco preguntas delata un texto generado, que es justo lo que el banco
+    // no debe parecer. Ambas cifras estan hoy a cero.
+    const seen = new Map<string, string>()
+    const openings = new Map<string, number>()
+    for (const question of activeQuestions) {
+      if (!question.optionNotes) continue
+      for (let i = 0; i < 4; i += 1) {
+        if (i === question.correctIndex) continue
+        const note = question.optionNotes[i].trim()
+        expect(seen.has(note)).toBe(false)
+        seen.set(note, question.id)
+        const words = note.toLowerCase().split(' ').slice(0, 4).join(' ')
+        openings.set(words, (openings.get(words) ?? 0) + 1)
+      }
+    }
+    for (const [words, count] of openings) {
+      expect(count, `apertura repetida ${count} veces: ${words}`).toBeLessThanOrEqual(4)
     }
   })
 

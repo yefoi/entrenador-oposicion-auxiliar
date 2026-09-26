@@ -447,8 +447,9 @@ export const block4Questions: Question[] = [
       '',
       'POP3 descarga los mensajes y puede borrarlos del servidor.',
       'SMTP envía correo, no consulta un buzón.',
-      'NTP sincroniza relojes entre sistemas.',
+      'NTP sincroniza relojes entre sistemas, no recupera un buzón.',
     ],
+
     explanation:
       'IMAP mantiene el estado y la estructura del buzón en el servidor y permite sincronizar varios clientes. POP3 suele descargar los mensajes y puede eliminarlos del servidor.',
     difficulty: 'easy',
@@ -1307,9 +1308,10 @@ export const block4Questions: Question[] = [
     optionNotes: [
       '',
       'DHCP reparte configuración de red, no mensajes de diagnóstico.',
-      'DNS resuelve nombres de dominio.',
-      'SMTP transfiere correo.',
+      'DNS resuelve nombres de dominio, no responde a ecos ni a avisos de control.',
+      'SMTP transfiere correo, no mensajes de diagnóstico de red.',
     ],
+
     explanation:
       'ICMP transporta mensajes de control y error, como solicitud de eco y respuesta de eco, que se emplean en ping y en herramientas de trazado de rutas. No es un protocolo de transferencia de archivos.',
     difficulty: 'easy',

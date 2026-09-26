@@ -1,6 +1,10 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 
 const target = process.argv[2]
+// Insercion por defecto: no toca preguntas que ya tienen notas, para que
+// reejecutar el lote entero sea idempotente. Con --replace rehace el bloque
+// completo, que es lo que hace falta al corregir una nota ya escrita.
+const replace = process.argv.includes('--replace')
 if (!target) {
   console.error('uso: node apply-option-notes.mjs <pregunta> [tema]')
   process.exit(1)
@@ -76,7 +80,18 @@ for (const file of files) {
     const at = source.indexOf(marker)
     if (at === -1) continue
     found.add(id)
-    if (source.slice(at, at + 900).includes('optionNotes:')) continue
+    const existingAt = source.indexOf('    optionNotes: [', at)
+    if (existingAt !== -1 && existingAt - at < 900) {
+      if (!replace) continue
+      const endAt = source.indexOf('\n    ],', existingAt)
+      if (endAt === -1) {
+        missing.add(id)
+        continue
+      }
+      source =
+        source.slice(0, existingAt) +
+        source.slice(endAt + '\n    ],'.length)
+    }
     const keyAt = source.indexOf('correctIndex:', at)
     if (keyAt === -1) {
       missing.add(id)

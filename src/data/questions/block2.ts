@@ -114,10 +114,11 @@ export const block2Questions: Question[] = [
     correctIndex: 2,
     optionNotes: [
       'La ROM conserva el contenido aunque se apague el equipo.',
-      'Una memoria SSD es no volátil.',
+      'Una memoria SSD es no volátil: conserva los datos sin alimentación.',
       '',
       'Un disco HDD conserva los datos sin alimentación.',
     ],
+
     explanation:
       'La RAM necesita alimentación continua para mantener su contenido. La ROM, las memorias SSD y los discos HDD conservan sus datos sin alimentación.',
     difficulty: 'easy',
@@ -157,11 +158,12 @@ export const block2Questions: Question[] = [
     options: ['1', '2', '4', '8'],
     correctIndex: 2,
     optionNotes: [
-      'Un byte son 8 bits.',
-      '2 bytes son 16 bits.',
+      'Un byte son 8 bits, no los 32 de la transferencia.',
+      '2 bytes son 16 bits, la mitad de lo transferido.',
       '',
       '8 bytes serían 64 bits, no 32.',
     ],
+
     explanation:
       'Cada byte ocupa 8 bits, por lo que una transferencia de 32 bits equivale a 32 ÷ 8 = 4 bytes.',
     difficulty: 'easy',
@@ -212,9 +214,10 @@ export const block2Questions: Question[] = [
     optionNotes: [
       '',
       'El trazador imprime sobre un soporte, no digitaliza documentos.',
-      'Los altavoces reproducen sonido.',
+      'Los altavoces reproducen sonido, no convierten documentos en datos.',
       'El SAI suministra energía cuando falla la alimentación.',
     ],
+
     explanation:
       'El escáner digitaliza páginas mediante un sensor y genera una representación de su imagen. El trazador imprime; los altavoces reproducen sonido y el SAI suministra energía.',
     difficulty: 'easy',
