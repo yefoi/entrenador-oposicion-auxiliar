@@ -311,10 +311,6 @@ a {
   background: rgba(255, 255, 255, 0.045);
   border-radius: 11px;
 }
-.sidebar-tip svg {
-  flex: none;
-  color: #9785ff;
-}
 .local-badge {
   display: flex;
   align-items: center;

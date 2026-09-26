@@ -200,7 +200,7 @@ export function SessionPage({
                     : 'Revisa esta idea'}
                 </span>
                 <Icon
-                  name={answer === question.correctIndex ? 'check' : 'spark'}
+                  name={answer === question.correctIndex ? 'check' : 'x'}
                   size={17}
                 />
               </div>

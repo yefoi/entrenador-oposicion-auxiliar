@@ -129,7 +129,7 @@ export function MinigamesPage({
         description="Elige un reto, concentra la atención y convierte cada respuesta en una señal para tu práctica."
         action={
           <Tag tone="purple">
-            <Icon name="spark" size={13} /> Banco propio
+            <Icon name="shield" size={13} /> Banco propio
           </Tag>
         }
       />

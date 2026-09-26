@@ -125,7 +125,7 @@ export function DashboardPage({
           <h2>Minijuegos</h2>
           <p>Flashcards, speedrun y una ronda solo con tus temas débiles.</p>
         </div>
-        <Button icon="spark" onClick={() => onNavigate('minigames')}>
+          <Button icon="grid" onClick={() => onNavigate('minigames')}>
           Abrir Minijuegos
         </Button>
       </section>
@@ -167,7 +167,7 @@ export function DashboardPage({
               <h2>Una sesión bien elegida vale más que diez al azar.</h2>
             </div>
             <span className="panel-icon">
-              <Icon name="spark" size={20} />
+              <Icon name="calendar" size={20} />
             </span>
           </div>
           {focus ? (

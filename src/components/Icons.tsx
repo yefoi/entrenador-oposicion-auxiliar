@@ -24,7 +24,6 @@ export type IconName =
   | 'info'
   | 'menu'
   | 'close'
-  | 'spark'
   | 'lock'
   | 'layers'
   | 'trend'
@@ -167,12 +166,6 @@ const paths: Record<IconName, ReactNode> = {
   close: (
     <>
       <path d="M6 6l12 12M18 6L6 18" />
-    </>
-  ),
-  spark: (
-    <>
-      <path d="m12 3 1.4 5.6L19 10l-5.6 1.4L12 17l-1.4-5.6L5 10l5.6-1.4z" />
-      <path d="m19 16 .6 2.4L22 19l-2.4.6L19 22l-.6-2.4L16 19l2.4-.6z" />
     </>
   ),
   lock: (

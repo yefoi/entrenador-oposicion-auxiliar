@@ -283,7 +283,7 @@ export function ResultsPage({
                     })}
                   </div>
                   <div className="review-explanation">
-                    <Icon name="spark" size={16} />
+                    <Icon name="info" size={16} />
                     <p>{question.explanation}</p>
                   </div>
                   {question.legalReference ? (

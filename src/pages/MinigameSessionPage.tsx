@@ -157,7 +157,7 @@ export function MinigameSessionPage({
             >
               <div className="explanation-head">
                 <span>{isCorrect ? 'Acierto' : 'Refuerza esta idea'}</span>
-                <Icon name={isCorrect ? 'check' : 'spark'} size={17} />
+                <Icon name={isCorrect ? 'check' : 'x'} size={17} />
               </div>
               <p>{question.explanation}</p>
               {question.legalReference ? (
@@ -205,7 +205,7 @@ export function MinigameSessionPage({
           <div className="minigame-streak-card">
             <div className="minigame-streak-card-head">
               <span className="section-kicker">Racha</span>
-              <Icon name="spark" size={18} />
+              <Icon name="trend" size={18} />
             </div>
             <div className="minigame-streak-values">
               <div>

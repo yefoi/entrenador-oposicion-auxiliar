@@ -146,7 +146,6 @@ export function AppShell({
             </button>
           ) : (
             <div className="sidebar-tip">
-              <Icon name="spark" size={17} />
               <span>
                 La constancia gana
                 <br />

@@ -110,7 +110,7 @@ export function Tag({
 }
 
 export function EmptyState({
-  icon = 'spark',
+  icon = 'info',
   title,
   description,
   action,

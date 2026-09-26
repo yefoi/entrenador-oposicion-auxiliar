@@ -172,7 +172,7 @@ export function ReviewsPage({
           ))}
         </div>
         <div className="review-tip">
-          <Icon name="spark" size={17} />
+          <Icon name="info" size={17} />
           <p>
             No marques una respuesta como aprendida por haberla leído: el repaso
             solo avanza cuando vuelves a responder.

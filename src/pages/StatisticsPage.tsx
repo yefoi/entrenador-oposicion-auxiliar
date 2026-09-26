@@ -169,7 +169,7 @@ export function StatisticsPage({
               <h2>Dos señales</h2>
             </div>
             <span className="panel-icon panel-icon-orange">
-              <Icon name="spark" size={20} />
+              <Icon name="trend" size={20} />
             </span>
           </div>
           <div className="insight">

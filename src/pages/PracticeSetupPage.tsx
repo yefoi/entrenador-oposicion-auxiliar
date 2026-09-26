@@ -388,7 +388,7 @@ export function PracticeSetupPage({
         <aside className="practice-aside">
           <div className="tip-card">
             <span className="tip-icon">
-              <Icon name="spark" size={19} />
+              <Icon name="info" size={19} />
             </span>
             <h3>La regla del error</h3>
             <p>
