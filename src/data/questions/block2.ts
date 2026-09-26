@@ -613,6 +613,12 @@ export const block2Questions: Question[] = [
       'No existe diferencia: programa y proceso son siempre el mismo elemento.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Es al revés: el programa es el fichero estático y el proceso el estado dinámico.',
+      'El programa no ocupa RAM por instalarse, y el proceso sí tiene estado.',
+      'Programa y proceso son conceptos distintos, no sinónimos.',
+    ],
     explanation:
       'El programa es una descripción estática de instrucciones. El proceso es una instancia en ejecución, con datos, pila, registros y demás estado gestionado por el sistema operativo.',
     difficulty: 'easy',
@@ -634,6 +640,12 @@ export const block2Questions: Question[] = [
       'Comprime automáticamente todo el contenido de la RAM y lo almacena en el disco.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'La memoria virtual no elimina la necesidad de RAM física.',
+      'No garantiza ningún tiempo de respuesta concreto.',
+      'La paginación no es una compresión de la RAM.',
+    ],
     explanation:
       'La memoria virtual asigna direcciones lógicas a páginas físicas y puede apoyarse en almacenamiento secundario. Así, cada proceso trabaja con su propio espacio de direcciones.',
     difficulty: 'medium',
@@ -654,6 +666,12 @@ export const block2Questions: Question[] = [
       'Es necesariamente un componente exclusivamente gráfico de Windows.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Un servicio no depende de que un usuario abra una sesión ni pulse un icono.',
+      'Un servicio sigue activo aunque se cierre la sesión que lo inició.',
+      'Un servicio no es un componente gráfico.',
+    ],
     explanation:
       'Los servicios de Windows son procesos de fondo que el sistema puede iniciar y mantener sin una sesión de usuario interactiva.',
     difficulty: 'easy',
@@ -675,6 +693,12 @@ export const block2Questions: Question[] = [
       'Ningún permiso para el propietario, lectura para el grupo y escritura para los demás.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El 4 del modo significa solo lectura para el propietario, no lectura y escritura.',
+      'Ese modo corresponde al 777, que concede todos los permisos.',
+      'El propietario nunca se queda sin permiso en la notación habitual.',
+    ],
     explanation:
       'Las cifras del modo corresponden a propietario, grupo y otros. En 640, el propietario tiene rw, el grupo r y los demás no tienen permisos.',
     difficulty: 'medium',
@@ -696,6 +720,12 @@ export const block2Questions: Question[] = [
       'Copiar su código a memoria no volátil en un bucle de ejecución permanente.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Mantenerla en primer plano con la pantalla apagada consume más energía.',
+      'Subir la prioridad de CPU aumenta el consumo en lugar de ahorrarlo.',
+      'Un bucle de ejecución permanente es justamente lo contrario de ahorrar energía.',
+    ],
     explanation:
       'La suspensión evita mantener la aplicación activa en segundo plano y reduce el consumo de CPU y batería, permitiendo su restauración posterior.',
     difficulty: 'medium',
@@ -717,6 +747,12 @@ export const block2Questions: Question[] = [
       'El sistema siempre los ejecuta en paralelo real, aunque solo haya una CPU disponible.',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Los hilos de un mismo proceso comparten espacio de direcciones; los procesos no.',
+      '',
+      'Sí pueden compartir datos y ejecutar la misma función: son el mismo proceso.',
+      'El sistema puede repartir los hilos entre varias CPU, pero no los ejecuta en paralelo real con una sola.',
+    ],
     explanation:
       'Los hilos de un mismo proceso comparten código, datos y espacio de direcciones virtuales. Cada hilo mantiene su propio contexto de ejecución, incluidos sus registros y pila, aunque el sistema puede repartirlos entre varias CPU.',
     difficulty: 'medium',
@@ -738,6 +774,12 @@ export const block2Questions: Question[] = [
       'La existencia de dos procesos que produzcan el mismo resultado.',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'La exclusión mutua y la ejecución paralela no bastan para producir un interbloqueo.',
+      'El número de CPU y la memoria no son condiciones de Coffman.',
+      '',
+      'Dos procesos con el mismo resultado no se bloquean entre sí.',
+    ],
     explanation:
       'Las cuatro condiciones de Coffman son exclusión mutua, retenir un recurso mientras se espera otro, impossibilitar su privación forzosa y formar un ciclo de espera. La concurrencia por sí sola no causa un interbloqueo.',
     difficulty: 'hard',
@@ -759,6 +801,12 @@ export const block2Questions: Question[] = [
       'El enlace queda roto y conserva la ruta almacenada, aunque ya no se pueda resolver.',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'El enlace simbólico guarda una ruta, no una copia del contenido.',
+      'No se convierte en enlace duro ni apunta al directorio de trabajo.',
+      'El enlace sobrevive al destino: no se elimina automáticamente.',
+      '',
+    ],
     explanation:
       'Un enlace simbólico almacena una ruta hacia otro archivo o directorio. Si se elimina el destino, el enlace sigue existiendo, pero resolver esa ruta deja de ser posible hasta crear de nuevo un destino adecuado.',
     difficulty: 'medium',
@@ -780,6 +828,12 @@ export const block2Questions: Question[] = [
       'El controlador de una impresora',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El controlador gráfico no participa en la ejecución de consultas SQL.',
+      'El mecanismo de autenticación no selecciona planes de ejecución.',
+      'El controlador de impresora no tiene relación con el SGBD.',
+    ],
     explanation:
       'El optimizador estima costes y selecciona un plan de ejecución basado en las tablas, índices, estadísticas y operadores disponibles.',
     difficulty: 'medium',
@@ -801,6 +855,12 @@ export const block2Questions: Question[] = [
       'Un archivo de registro del sistema operativo.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Una vista no impone la existencia de la fila referenciada.',
+      'La clave primaria de PEDIDOS no valida el valor de la clave foránea.',
+      'Un archivo del sistema operativo no participa en la integridad de la base de datos.',
+    ],
     explanation:
       'La clave foránea exige que el valor referenciado exista en la fila relacionada de CLIENTES, siempre que no se admita explícitamente un valor nulo.',
     difficulty: 'medium',
@@ -822,6 +882,12 @@ export const block2Questions: Question[] = [
       'Compresión: los datos modificados deben ocupar menos espacio.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El aislamiento controla la visibilidad entre transacciones, no la integridad de una sola.',
+      'La integridad referencial no exige que todas las tablas compartan clave primaria.',
+      'La compresión no afecta a la corrección de una transferencia.',
+    ],
     explanation:
       'La atomicidad garantiza que una transacción no confirme cambios parciales. Si se produce un fallo, el SGBD deshace la operación o la mantiene pendiente de forma atómica.',
     difficulty: 'medium',
@@ -843,6 +909,12 @@ export const block2Questions: Question[] = [
       'Exige que todos los objetos se guarden en un único fichero plano sin enlaces.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Prohibir la herencia contradice la herencia propia de este modelo.',
+      'Un modelo orientado a objetos no se limita a valores numéricos.',
+      'Los objetos no se guardan en un fichero plano sin enlaces.',
+    ],
     explanation:
       'El modelo orientado a objetos utiliza objetos persistentes con identidad y puede representar directamente encapsulación, herencia y asociaciones.',
     difficulty: 'hard',
@@ -864,6 +936,12 @@ export const block2Questions: Question[] = [
       'Su único formato admitido es una secuencia binaria sin metadatos.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Los documentos sí pueden contener atributos con nombre.',
+      'El esquema flexible es precisamente la característica de este tipo de almacén.',
+      'Un almacén documental maneja documentos con metadatos, no solo binarios.',
+    ],
     explanation:
       'Los almacenes documentales representan la información mediante documentos, habitualmente en formatos como JSON o BSON, y pueden admitir esquemas flexibles o distintos entre documentos.',
     difficulty: 'medium',
@@ -884,6 +962,12 @@ export const block2Questions: Question[] = [
       'Es una estructura física exenta de esquema y de claves.',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Una relación no es solo el nombre y el tipo de una columna.',
+      '',
+      'Una relación no es un fichero de archivos ni una estructura de un solo registro.',
+      'El modelo relacional sí define esquema y claves.',
+    ],
     explanation:
       'En el modelo relacional, una relación representa un conjunto de tuplas y su esquema especifica los atributos, dominios y restricciones aplicables. Una tabla SQL es la representación habitual de esa relación.',
     difficulty: 'easy',
@@ -905,6 +989,12 @@ export const block2Questions: Question[] = [
       'Únicamente filas bloqueadas de forma exclusiva hasta que finaliza la transacción.',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'READ COMMITTED no permite leer cambios sin confirmar.',
+      'Esa lectura estable corresponde a REPEATABLE READ.',
+      '',
+      'No bloquea las filas en exclusiva hasta el final de la transacción.',
+    ],
     explanation:
       'READ COMMITTED no permite leer cambios no confirmados. Sí permite lecturas no repetibles: dos consultas pueden ver valores distintos de la misma fila si una transacción concurrente confirma una actualización entre ambas.',
     difficulty: 'hard',
@@ -925,6 +1015,12 @@ export const block2Questions: Question[] = [
       'Accede a cada entrada mediante una clave y ofrece operaciones básicas para consultarla, guardarla o modificarla.',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Esa recuperación por atributos sin clave no describe un almacén clave-valor.',
+      'Nada obliga a que la clave primaria sea compuesta.',
+      'No es un modelo relacional, sino un modelo NoSQL.',
+      '',
+    ],
     explanation:
       'Un almacén clave-valor organiza las entradas alrededor de una clave única y expone operaciones como obtener, guardar, actualizar y borrar. Su API se centra en esas operaciones y no impone por sí misma las relaciones y el esquema enriquecidos del modelo relacional.',
     difficulty: 'easy',

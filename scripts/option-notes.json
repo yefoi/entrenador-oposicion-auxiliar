@@ -1,146 +1,98 @@
 {
-  "B2-T01-Q01": [
-    "127 es el máximo de 7 bits, no de 8.",
-    "128 no se alcanza: es la primera combinación que exige 9 bits.",
+  "B2-T04-Q01": [
     "",
-    "256 es el número de combinaciones posibles, no un valor representable con 8 bits."
+    "Es al revés: el programa es el fichero estático y el proceso el estado dinámico.",
+    "El programa no ocupa RAM por instalarse, y el proceso sí tiene estado.",
+    "Programa y proceso son conceptos distintos, no sinónimos."
   ],
-  "B2-T01-Q02": [
-    "Equivale a 0x46: con el dígito 5 en alto la parte alta vale 80, no 70.",
-    "Equivale a 0x55: el dígito A vale 10, no 5.",
+  "B2-T04-Q02": [
     "",
-    "Equivale a 0xA0: se han intercambiado las posiciones de los dígitos."
+    "La memoria virtual no elimina la necesidad de RAM física.",
+    "No garantiza ningún tiempo de respuesta concreto.",
+    "La paginación no es una compresión de la RAM."
   ],
-  "B2-T01-Q03": [
-    "CPU, RAM y bus son solo partes del sistema, no su definición.",
+  "B2-T04-Q03": [
     "",
-    "Una aplicación aislada sin hardware ni información no es un sistema de información.",
-    "Un dispositivo conectado a una red es un elemento, no un sistema completo."
+    "Un servicio no depende de que un usuario abra una sesión ni pulse un icono.",
+    "Un servicio sigue activo aunque se cierre la sesión que lo inició.",
+    "Un servicio no es un componente gráfico."
   ],
-  "B2-T01-Q04": [
-    "La unidad de control coordina la ejecución de la instrucción, no opera sobre los datos.",
+  "B2-T04-Q04": [
     "",
-    "La memoria CMOS guarda configuración, no ejecuta operaciones aritméticas.",
-    "El controlador de red gestiona la comunicación, no la instrucción en curso."
+    "El 4 del modo significa solo lectura para el propietario, no lectura y escritura.",
+    "Ese modo corresponde al 777, que concede todos los permisos.",
+    "El propietario nunca se queda sin permiso en la notación habitual."
   ],
-  "B2-T01-Q05": [
-    "La ROM conserva el contenido aunque se apague el equipo.",
-    "Una memoria SSD es no volátil.",
+  "B2-T04-Q05": [
     "",
-    "Un disco HDD conserva los datos sin alimentación."
+    "Mantenerla en primer plano con la pantalla apagada consume más energía.",
+    "Subir la prioridad de CPU aumenta el consumo en lugar de ahorrarlo.",
+    "Un bucle de ejecución permanente es justamente lo contrario de ahorrar energía."
   ],
-  "B2-T01-Q06": [
-    "64 correspondería a un código de 6 bits.",
+  "B2-T04-Q06": [
+    "Los hilos de un mismo proceso comparten espacio de direcciones; los procesos no.",
     "",
-    "256 es el total de la extensión de 8 bits, no del ASCII original de 7 bits.",
-    "El ASCII de 7 bits no tiene 1.024 caracteres: 1.024 exigiría 10 bits."
+    "Sí pueden compartir datos y ejecutar la misma función: son el mismo proceso.",
+    "El sistema puede repartir los hilos entre varias CPU, pero no los ejecuta en paralelo real con una sola."
   ],
-  "B2-T01-Q07": [
-    "Un byte son 8 bits.",
-    "2 bytes son 16 bits.",
+  "B2-T04-Q07": [
+    "La exclusión mutua y la ejecución paralela no bastan para producir un interbloqueo.",
+    "El número de CPU y la memoria no son condiciones de Coffman.",
     "",
-    "8 bytes serían 64 bits, no 32."
+    "Dos procesos con el mismo resultado no se bloquean entre sí."
   ],
-  "B2-T01-Q08": [
-    "Memoria y bus único para instrucciones y datos describen la arquitectura de von Neumann.",
-    "Guardar los datos solo en registros no describe la separación de memorias.",
-    "Harvard no exige que instrucción y dato compartan la misma dirección física.",
+  "B2-T04-Q08": [
+    "El enlace simbólico guarda una ruta, no una copia del contenido.",
+    "No se convierte en enlace duro ni apunta al directorio de trabajo.",
+    "El enlace sobrevive al destino: no se elimina automáticamente.",
     ""
   ],
-  "B2-T02-Q01": [
+  "B2-T05-Q01": [
     "",
-    "El trazador imprime sobre un soporte, no digitaliza documentos.",
-    "Los altavoces reproducen sonido.",
-    "El SAI suministra energía cuando falla la alimentación."
+    "El controlador gráfico no participa en la ejecución de consultas SQL.",
+    "El mecanismo de autenticación no selecciona planes de ejecución.",
+    "El controlador de impresora no tiene relación con el SGBD."
   ],
-  "B2-T02-Q02": [
+  "B2-T05-Q02": [
     "",
-    "Inyectar tinta líquida mediante cabezales térmicos describe una impresora de inyección.",
-    "La sublimación transfiere tinta a un soporte mediante calor: no es el método láser.",
-    "La polimerización dentro de un tubo describe la transferencia térmica, no la láser."
+    "Una vista no impone la existencia de la fila referenciada.",
+    "La clave primaria de PEDIDOS no valida el valor de la clave foránea.",
+    "Un archivo del sistema operativo no participa en la integridad de la base de datos."
   ],
-  "B2-T02-Q03": [
-    "1.920 es el número de píxeles de una fila, no de la imagen completa.",
-    "1.080 es el número de píxeles de una columna, no de la imagen completa.",
+  "B2-T05-Q03": [
     "",
-    "Sumar las dimensiones no da el total de píxeles: hay que multiplicarlas."
+    "El aislamiento controla la visibilidad entre transacciones, no la integridad de una sola.",
+    "La integridad referencial no exige que todas las tablas compartan clave primaria.",
+    "La compresión no afecta a la corrección de una transferencia."
   ],
-  "B2-T02-Q04": [
+  "B2-T05-Q04": [
     "",
-    "Un concentrador no duplica el ancho de banda: el enlace ascendente sigue siendo compartido.",
-    "No convierte una conexión USB en Ethernet.",
-    "No almacena de forma permanente los archivos de los periféricos conectados."
+    "Prohibir la herencia contradice la herencia propia de este modelo.",
+    "Un modelo orientado a objetos no se limita a valores numéricos.",
+    "Los objetos no se guardan en un fichero plano sin enlaces."
   ],
-  "B2-T02-Q05": [
+  "B2-T05-Q05": [
     "",
-    "Los platos magnéticos y la cabeza física describen un disco HDD.",
-    "Una SSD no depende de la RAM para conservar los datos.",
-    "Una SSD puede conectarse al equipo mediante una interfaz USB."
+    "Los documentos sí pueden contener atributos con nombre.",
+    "El esquema flexible es precisamente la característica de este tipo de almacén.",
+    "Un almacén documental maneja documentos con metadatos, no solo binarios."
   ],
-  "B2-T02-Q06": [
+  "B2-T05-Q06": [
+    "Una relación no es solo el nombre y el tipo de una columna.",
     "",
-    "2.500 no es el resultado: 10 cm son 3,94 pulgadas, y 3,94 × 600 ≈ 2.362.",
-    "6.000 sale de contar 600 píxeles por centímetro, y la resolución es por pulgada.",
-    "10.000 sale de suponer un píxel por milímetro, sin la conversión a pulgadas."
+    "Una relación no es un fichero de archivos ni una estructura de un solo registro.",
+    "El modelo relacional sí define esquema y claves."
   ],
-  "B2-T02-Q07": [
-    "M.2 es un formato físico, no un protocolo que cifre el tráfico.",
-    "M.2 no es un tipo de memoria: describe el formato del módulo.",
+  "B2-T05-Q07": [
+    "READ COMMITTED no permite leer cambios sin confirmar.",
+    "Esa lectura estable corresponde a REPEATABLE READ.",
     "",
-    "M.2 no es un estándar de impresión ni sustituye al controlador."
+    "No bloquea las filas en exclusiva hasta el final de la transacción."
   ],
-  "B2-T02-Q08": [
-    "La cinta no direcciona bloques, pero eso no impide recuperar el archivo.",
-    "El acceso a la cinta es secuencial, no aleatorio.",
-    "No hace falta cargar la cinta en RAM para leerla.",
-    ""
-  ],
-  "B2-T03-Q01": [
-    "En una pila el último insertado es el primero que sale, así que 11 sale antes que 8.",
-    "",
-    "Es el orden de una cola, no de una pila.",
-    "Una pila no devuelve los elementos en orden de inserción."
-  ],
-  "B2-T03-Q02": [
-    "",
-    "Es el orden de una pila, no de una cola.",
-    "Una cola no devuelve los elementos en orden inverso al de entrada.",
-    "Al desencolar dos elementos de [A, B, C, D, E] salen A y B, no A y B en otro orden."
-  ],
-  "B2-T03-Q03": [
-    "El orden descendente corresponde al recorrido en postorden.",
-    "",
-    "El recorrido por niveles corresponde al recorrido en anchura.",
-    "El inorden no reproduce el orden de inserción de las claves."
-  ],
-  "B2-T03-Q04": [
-    "La búsqueda binaria no resuelve el problema en una sola comparación.",
-    "Un orden lineal sería Θ(n), que es el peor caso de una búsqueda secuencial.",
-    "",
-    "Θ(n log n) es el coste de una ordenación por comparación, no de una búsqueda binaria."
-  ],
-  "B2-T03-Q05": [
-    "1.200 corresponde a la posición 10, no a la 50.",
-    "5.980 corresponde a la posición 49.",
-    "",
-    "6.001 sería la posición 50 si el primer byte ocupara el desplazamiento 1."
-  ],
-  "B2-T03-Q06": [
-    "Recorrer y reindexar la lista es innecesario para eliminar un nodo intermedio.",
-    "",
-    "Copiar el nodo al final rompe el orden de la lista.",
-    "Una lista doblemente enlazada admite operaciones locales en Θ(1)."
-  ],
-  "B2-T03-Q07": [
-    "BFS no busca la ruta más larga: esorequeriría backtracking o DFS con memoización.",
-    "BFS no necesita recorrer ciclos para alcanzar un vértice nuevo.",
-    "",
-    "El orden de descubrimiento depende de la distancia a S, no de la etiqueta del vértice."
-  ],
-  "B2-T03-Q08": [
-    "Una buena dispersión no garantiza Θ(log n) si se acumulan colisiones en un cubo.",
-    "Ninguna función de dispersión puede impedir por completo las colisiones.",
-    "Θ(1) es el coste esperado, no el peor caso.",
+  "B2-T05-Q08": [
+    "Esa recuperación por atributos sin clave no describe un almacén clave-valor.",
+    "Nada obliga a que la clave primaria sea compuesta.",
+    "No es un modelo relacional, sino un modelo NoSQL.",
     ""
   ]
 }
