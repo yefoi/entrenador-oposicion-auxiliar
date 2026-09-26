@@ -7,6 +7,27 @@ if (!target) {
 }
 
 const notes = JSON.parse(readFileSync('scripts/option-notes.json', 'utf8'))
+
+const problems = []
+for (const [id, list] of Object.entries(notes)) {
+  if (!Array.isArray(list) || list.length !== 4) {
+    problems.push(`${id}: se esperan 4 notas, hay ${list?.length}`)
+    continue
+  }
+  const empty = list.filter((note) => !note.trim()).length
+  if (empty !== 1) {
+    problems.push(`${id}: debe haber exactamente una nota vacía, hay ${empty}`)
+  }
+  for (const note of list) {
+    if (!/^[\x20-\x7E\u00C0-\u024F\u2010-\u203A¡¿·—’“”€]*$/u.test(note)) {
+      problems.push(`${id}: la nota tiene caracteres inesperados: ${note.slice(0, 40)}`)
+    }
+  }
+}
+if (problems.length) {
+  console.error('JSON inválido:\n  ' + problems.join('\n  '))
+  process.exit(1)
+}
 const files = [
   'src/data/questions/block1.ts',
   'src/data/questions/block2.ts',

@@ -1210,6 +1210,12 @@ export const block1Questions: Question[] = [
       'La firma electrónica borra el historial del documento para facilitar la modificación posterior',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Insertar un dibujo no acredita autoría ni integridad: eso es una imagen, no una firma electrónica.',
+      '',
+      'La firma electrónica sí se relaciona con la identidad del firmante y con la integridad del documento.',
+      'Borrar el historial sería lo contrario de garantizar la integridad.',
+    ],
     explanation:
       'La firma electrónica es el dato electrónico asociado a la expresión de voluntad. La atribución de autoría y la verificación de integridad dependen de sus garantías técnicas y de su nivel electrónico.',
     difficulty: 'easy',
@@ -1234,6 +1240,12 @@ export const block1Questions: Question[] = [
       'Ninguna eficacia, salvo que el documento se convierta después en papel por un proceso de fotocopia',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Un certificado cualificado sí acredita la relación con la persona, no es un valor de imagen.',
+      'Una anotación privada posterior no tiene la misma eficacia que una firma.',
+      'La eficacia no depende de convertir el documento en papel.',
+    ],
     explanation:
       'La firma electrónica cualificada ofrece la equivalencia funcional con la firma manuscrita para los datos firmados, sin eliminar otros requisitos del acto. El efecto se atribuye a la firma creada con los medios cualificados, no al certificado aislado.',
     difficulty: 'medium',
@@ -1258,6 +1270,12 @@ export const block1Questions: Question[] = [
       'Que solo sirve para abrir un navegador, por lo que nunca acredita ninguna actuación administrativa',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Una aplicación móvil no emite documentos con fuerza de BOE.',
+      '',
+      'El DNI-e no sustituye al registro civil ni elimina los datos de identidad.',
+      'El DNI-e sí acredita la identidad en las actuaciones administrativas.',
+    ],
     explanation:
       'El DNI dispone de formatos físico y digital; la identificación electrónica se realiza con mecanismos de seguridad para proteger su eficacia.',
     difficulty: 'medium',
@@ -1282,6 +1300,12 @@ export const block1Questions: Question[] = [
       'Esperar a que la ciudadanía se adapte sin ofrecer formación ni alternativas de atención',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Digitalizar formularios sin integrar ni asegurar los datos no es una estrategia de transformación.',
+      '',
+      'Dependar de un único proveedor privado sin más criterio no transforma la organización.',
+      'Esperar a que la ciudadanía se adapte sin formación ni atención alternativa deja fuera a quien no puede.',
+    ],
     explanation:
       'La transformación digital combina tecnología y cambio de procesos, servicios seguros, interoperables y accesibles, junto con capacidades digitales de la ciudadanía.',
     difficulty: 'easy',
@@ -1306,6 +1330,12 @@ export const block1Questions: Question[] = [
       'La firma solo ordena las notificaciones y la identificación impide usar medios electrónicos',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Identificación y firma son cosas distintas, y ninguna exige una firma manuscrita.',
+      '',
+      'La identificación acredita el domicilio, y una firma sin trazabilidad no es una firma electrónica.',
+      'La firma no es un mero mecanismo de notificaciones, y la identificación sí admite medios electrónicos.',
+    ],
     explanation:
       'La normativa electrónica distingue la identificación del interesado de la autenticación de su autoría y voluntad; la firma aporta trazabilidad de la expresión de voluntad cuando el acto la requiere.',
     difficulty: 'hard',
@@ -1330,6 +1360,12 @@ export const block1Questions: Question[] = [
       'Una fotografía del documento antes de enviarlo, sin conservar relación con el original',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Una imagen de la firma manuscrita no acredita la autoría del documento.',
+      'Un correo sin certificado no identifica a quien expide.',
+      'Una fotografía previa no conserva relación con el original que se envía.',
+    ],
     explanation:
       'El sello electrónico acredita la referencia al emisor y permite verificar la integridad de los datos en los términos legales. No sustituye la firma personal cuando el acto requiere la expresión de voluntad de una persona.',
     difficulty: 'medium',
@@ -1354,6 +1390,12 @@ export const block1Questions: Question[] = [
       'Sí, porque el código sustituye al certificado y elimina la necesidad de trazabilidad',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Un segundo factor no convierte automáticamente la firma en cualificada.',
+      'Cl@ve sí identifica a la persona ante servicios autorizados.',
+      '',
+      'El código no sustituye al certificado ni elimina la necesidad de trazabilidad.',
+    ],
     explanation:
       'Cl@ve ofrece mecanismos de identificación y autenticación. Una firma solo es cualificada cuando cumple los requisitos legales y se crea mediante un medio cualificado; el uso de un segundo factor no produce ese efecto automáticamente.',
     difficulty: 'hard',
@@ -1378,6 +1420,12 @@ export const block1Questions: Question[] = [
       'Que el certificado elimina la necesidad de comprobar los requisitos del acto jurídico',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'La firma no acredita que el contenido sea cierto ni que la operación sea legal.',
+      '',
+      'La firma no impide que otros lean o modifiquen el archivo, salvo que se use cifrado.',
+      'El certificado no exime de comprobar los requisitos del acto jurídico.',
+    ],
     explanation:
       'La firma electrónica acredita, según sus garantías, quién firma y que los datos firmados no han cambiado. No certifica por sí misma que las cifras sean verdaderas ni que el acto reúna todos los requisitos jurídicos.',
     difficulty: 'medium',
@@ -1402,6 +1450,12 @@ export const block1Questions: Question[] = [
       'La autorización del responsable del tratamiento como única condición, sin informar a la persona',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'La cantidad de datos no es una señal de modernidad.',
+      'Conservar todo para siempre no es la forma de evitar errores de interpretación.',
+      'La autorización del responsable no basta: hay que informar a la persona.',
+    ],
     explanation:
       'Los tratamientos deben ser lícitos y fundamentados; además, los datos deben ser adecuados y limitarse a lo necesario para la finalidad.',
     difficulty: 'easy',
@@ -1426,6 +1480,12 @@ export const block1Questions: Question[] = [
       'Permitir que el responsable elija después una base legal distinta sin explicar los cambios',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'La retirada solo afecta a lo basado en ese consentimiento, no a otras bases legales.',
+      '',
+      'El consentimiento retirado no se convierte retroactivamente en autorización.',
+      'No se puede cambiar de base legal después sin explicar el cambio.',
+    ],
     explanation:
       'Retirar el consentimiento impide continuar el tratamiento basado en él, pero no borra necesariamente la licitud de los tratamientos ya realizados.',
     difficulty: 'medium',
@@ -1450,6 +1510,12 @@ export const block1Questions: Question[] = [
       'Entregar datos históricos solo si la persona los solicita siempre en papel y no por medios electrónicos',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'No se entrega todo el expediente: hay que proteger los datos de terceros.',
+      '',
+      'No se rechaza la solicitud porque el dato no se haya declarado falso.',
+      'Los derechos se ejercen también por medios electrónicos.',
+    ],
     explanation:
       'Acceso, rectificación, supresión, limitación, oposición y portabilidad son derechos que deben canalizarse con claridad y respeto de sus límites legales.',
     difficulty: 'medium',
@@ -1474,6 +1540,12 @@ export const block1Questions: Question[] = [
       'Esperar hasta perder toda la información para que el problema desaparezca automáticamente',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Borrar los registros impide investigar y documentar el incidente.',
+      '',
+      'Comunicarlo primero en redes sociales no sustituye a la notificación legal.',
+      'Esperar a perder la información no hace que el problema desaparezca.',
+    ],
     explanation:
       'La respuesta a una brecha debe ser inmediata: mitigación, análisis del riesgo, registro y comunicación a la autoridad cuando el umbral legal se alcance.',
     difficulty: 'medium',
@@ -1497,6 +1569,12 @@ export const block1Questions: Question[] = [
       'Usar siempre la máxima cantidad de datos, aunque la ley permita una solución proporcional y menos invasiva',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Ocultar el algoritmo impide que la decisión se cuestione.',
+      '',
+      'Un algoritmo no sustituye la decisión administrativa ni al funcionario que la adopta.',
+      'La minimización también obliga aquí: no se usa la máxima cantidad de datos por sistema.',
+    ],
     explanation:
       'El RGPD exige información clara y medidas para acabar con decisiones exclusivamente automatizadas, particularmente cuando producen efectos significativos. Las garantías concretas dependen del derecho sectorial aplicable.',
     difficulty: 'hard',
@@ -1521,6 +1599,12 @@ export const block1Questions: Question[] = [
       'La compatibilidad de la nueva finalidad, la base jurídica y la información a los interesados antes de la difusión',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Que la grabación sea en vía pública no excluye la protección de datos.',
+      'Aparecer en una vía pública no obliga a aceptar cualquier uso.',
+      'Cambiar la finalidad no exige un documento firmado por todos los conductores.',
+      '',
+    ],
     explanation:
       'La finalidad original no autoriza por sí sola una difusión posterior. El responsable debe comprobar si la nueva finalidad es compatible, identificar una base jurídica y cumplir las garantías de información, minimización y proporcionalidad.',
     difficulty: 'hard',
@@ -1545,6 +1629,12 @@ export const block1Questions: Question[] = [
       'Esperar a que desaparezca la obligación legal antes de contestar a la persona',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'La obligación legal de conservación prevalece sobre la supresión.',
+      'No se cambia la base jurídica para justificar un borrado.',
+      'Hay que contestar cuando exista la obligación, no esperar a que desaparezca.',
+    ],
     explanation:
       'El derecho de supresión no es absoluto. Cuando la conservación es necesaria para cumplir una obligación legal, la entidad debe conservar los datos, limitar su uso cuando corresponda e informar a la persona del motivo del límite.',
     difficulty: 'medium',
@@ -1569,6 +1659,12 @@ export const block1Questions: Question[] = [
       'La ubicación del empleado es un dato que el gestor puede usar sin ningún límite',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Una autorización general sin informar de la finalidad no es una base legal válida.',
+      'El control de la ubicación no se limita a contactar fuera de horario.',
+      '',
+      'La ubicación del empleado no es un dato de uso ilimitado para su responsable.',
+    ],
     explanation:
       'El control de la actividad laboral debe respetar la privacidad y la proporcionalidad, informar sobre su finalidad y garantizar las garantías aplicables. También se reconoce el derecho a la desconexión digital, con la regulación específica correspondiente.',
     difficulty: 'hard',
@@ -1593,6 +1689,12 @@ export const block1Questions: Question[] = [
       'Convierte cualquier documento privado en administrativo por el solo hecho de enviarlo',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'El registro produce fecha y constancia de recepción, no es una consulta informativa.',
+      '',
+      'La presentación no sustituye a la resolución sobre el fondo.',
+      'Presentar un documento no lo convierte en administrativo.',
+    ],
     explanation:
       'El registro electrónico deja constancia de la recepción y permite acreditar la fecha de presentación dentro del procedimiento administrativo.',
     difficulty: 'easy',
@@ -1616,6 +1718,12 @@ export const block1Questions: Question[] = [
       'La impresión completa de cada página, que sustituye la necesidad de documentos electrónicos originales',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'El formato único es la regla, salvo que la normativa sectorial exija otra cosa.',
+      '',
+      'Un expediente puede abrirse por varias personas autorizadas.',
+      'La impresión no sustituye al documento electrónico original.',
+    ],
     explanation:
       'La gestión electrónica exige conservar la autenticidad, integridad y trazabilidad, y permitir la recuperación de los documentos durante todo su ciclo de vida.',
     difficulty: 'medium',
@@ -1639,6 +1747,12 @@ export const block1Questions: Question[] = [
       'La fecha del servidor es siempre distinta de la fecha de salida, sin importar el sistema utilizado',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Si la persona ha elegido canal electrónico, se respeta esa elección.',
+      '',
+      'La comunicación interna al funcionario no sustituye a la notificación al interesado.',
+      'La fecha de salida se determina por el sistema, no por una regla fija.',
+    ],
     explanation:
       'La notificación electrónica se articula mediante la puesta a disposición en el espacio habilitado y mecanismos que permitan conocerla y acceder a ella.',
     difficulty: 'medium',
@@ -1662,6 +1776,12 @@ export const block1Questions: Question[] = [
       'Delegar toda la seguridad en el proveedor que suministra el hardware, sin vigilancia ni responsabilidades',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Un antivirus no cierra el ciclo de vida de la seguridad de un sistema.',
+      '',
+      'Cerrar el sistema al menor incidente no es una medida de seguridad.',
+      'La seguridad no se delega en exclusiva en el proveedor de hardware.',
+    ],
     explanation:
       'El ENS entiende la seguridad como un proceso integral basado en riesgos, con líneas de defensa, prevención, detección, respuesta, conservación y mejora continua.',
     difficulty: 'hard',
@@ -1685,6 +1805,12 @@ export const block1Questions: Question[] = [
       'Que toda tecnología propietaria se convierta en norma técnica obligatoria para los ciudadanos',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'El color de las pantallas no es lo que hace interoperable a un sistema.',
+      '',
+      'Las bases aisladas impiden el intercambio y la coordinación.',
+      'Una tecnología propietaria no se convierte en norma obligatoria por el mero hecho de existir.',
+    ],
     explanation:
       'La interoperabilidad combina dimensiones organizativas, semánticas y técnicas; las NTI desarrollan criterios y recomendaciones aplicables a los sistemas.',
     difficulty: 'hard',
@@ -1709,6 +1835,12 @@ export const block1Questions: Question[] = [
       'Solo cuando la factura se haya pagado con efectivo',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'No es una prohibición absoluta: depende de la autenticidad de la copia.',
+      'El valor del original no basta para exigirlo siempre.',
+      '',
+      'El medio de pago no es lo que determina si se puede pedir el original.',
+    ],
     explanation:
       'Las copias digitalizadas pueden admitirse con carácter general. La Administración solo debe exigir el original cuando la copia no permita garantizar suficientemente su autenticidad o cuando una norma lo exija expresamente.',
     difficulty: 'medium',
@@ -1733,6 +1865,12 @@ export const block1Questions: Question[] = [
       'No existe plazo porque la notificación electrónica es discrecional',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'El plazo general no es de un mes ni admite prórroga automática.',
+      '',
+      'El plazo no depende de que el procedimiento sea sencillo o no.',
+      'La notificación electrónica no es discrecional: tiene plazo.',
+    ],
     explanation:
       'El plazo general para poner la notificación a disposición es de diez días. Por complejidad o volumen, puede ampliarse excepcionalmente otros diez; la suspensión tiene reglas y límites propios cuando concurren sus requisitos legales.',
     difficulty: 'medium',
@@ -1757,6 +1895,12 @@ export const block1Questions: Question[] = [
       'Sustituir todas las medidas técnicas por un seguro de responsabilidad civil',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Las medidas se aplican según la categoría de cada sistema, no uniformemente a todos.',
+      'También hay que medir el riesgo si el sistema maneja datos no personales.',
+      'Un seguro no sustituye a las medidas técnicas de seguridad.',
+    ],
     explanation:
       'El ENS obliga a clasificar los sistemas y a aplicar medidas proporcionales a su categoría y riesgos. La certificación, la auditoría y otros requisitos específicos dependen de la categoría y de las normas que correspondan.',
     difficulty: 'hard',
@@ -1781,6 +1925,12 @@ export const block1Questions: Question[] = [
       'Es una carpeta local del ciudadano que no necesita conexión ni identificación para funcionar',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Un portal de noticias no tiene efectos jurídicos en la actuación electrónica.',
+      '',
+      'Una aplicación privada no sustituye los registros y notificaciones oficiales.',
+      'Una carpeta local sin conexión ni identificación no es una sede electrónica.',
+    ],
     explanation:
       'La sede electrónica es el espacio institucional habilitado para la actuación administrativa electrónica, con las garantías definidas por la ley.',
     difficulty: 'easy',
@@ -1804,6 +1954,12 @@ export const block1Questions: Question[] = [
       'Restringir el acceso a las sedes de la Administración General y excluir a las entidades locales',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Concentrar datos personales sin base jurídica vulnera la normativa de protección de datos.',
+      '',
+      'El punto de acceso no sustituye al expediente individual ni decide sobre la solicitud.',
+      'También ofrece servicios de las entidades locales, no solo de la AGE.',
+    ],
     explanation:
       'El punto de acceso general ofrece a la ciudadanía un punto de encuentro para localizar y utilizar servicios, sin sustituir la sede de cada organismo.',
     difficulty: 'easy',
@@ -1828,6 +1984,12 @@ export const block1Questions: Question[] = [
       'Cl@ve impide usar el DNI-e o certificados, porque solo admite usuarios de empresas privadas',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Cl@ve no reemplaza todos los controles ni la identificación presencial.',
+      '',
+      'Cl@ve es un sistema de identificación y autenticación, no una red social.',
+      'Cl@ve convive con el DNI-e y los certificados, no los impide.',
+    ],
     explanation:
       'Cl@ve ofrece mecanismos de identificación y autenticación para acceder a servicios electrónicos; cada servicio aplica además sus requisitos de seguridad.',
     difficulty: 'medium',
@@ -1852,6 +2014,12 @@ export const block1Questions: Question[] = [
       'Eliminar todos los datos del expediente para que la persona no tenga que aportar la documentación',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Exigir la última versión de la aplicación cuando no se puede usar es una barrera.',
+      'Derivar a una oficina sin tomar ninguna medida no garantiza la igualdad de acceso.',
+      '',
+      'Borrar los datos del expediente no resuelve el problema de acceso.',
+    ],
     explanation:
       'La igualdad de acceso obliga a garantizar alternativas adecuadas para quien no tiene las mismas competencias digitales, sin convertir la vía electrónica en obligatoria.',
     difficulty: 'medium',
@@ -1876,6 +2044,12 @@ export const block1Questions: Question[] = [
       'Eliminar la coordinación administrativa para que cada organismo elija libremente sus técnicas',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Centralizar datos sin aplicar minimización incumple la normativa de protección de datos.',
+      '',
+      'El usuario no tiene que cambiar de navegador según el proveedor.',
+      'Sin coordinación administrativa no hay infraestructuras comunes.',
+    ],
     explanation:
       'Las infraestructuras y servicios comunes favorecen la reutilización, la eficiencia y la interoperabilidad, siempre dentro de la seguridad jurídica y la protección de datos.',
     difficulty: 'hard',
@@ -1900,6 +2074,12 @@ export const block1Questions: Question[] = [
       'La identificación del órgano, su dirección electrónica, el estado del servicio y las condiciones de acceso',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'El nombre comercial del producto no identifica al órgano responsable.',
+      'Un enlace a redes sociales no dice quién gestiona la sede ni sus condiciones.',
+      'Una dirección de correo no informa sobre procedimientos ni disponibilidad.',
+      '',
+    ],
     explanation:
       'La Ley de Procedimiento Administrativo exige publicar datos que permitan conocer la sede, el órgano responsable, su funcionamiento, disponibilidad, condiciones de acceso y elementos esenciales de los procedimientos electrónicos.',
     difficulty: 'medium',
@@ -1924,6 +2104,12 @@ export const block1Questions: Question[] = [
       'La decisión automática sobre las solicitudes presentadas a cualquier organismo',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Sustituir todas las sedes por una aplicación privada no es la función del punto de acceso.',
+      '',
+      'El punto de acceso no copia expedientes ni decide sobre las solicitudes.',
+      'Tampoco automatiza la decisión en ningún organismo.',
+    ],
     explanation:
       'El Punto de Acceso General ofrece un punto de encuentro para localizar información y servicios electrónicos y acceder a ellos. Complementa la organización de cada Administración, pero no sustituye sus sedes ni sus procedimientos.',
     difficulty: 'easy',
@@ -1948,6 +2134,12 @@ export const block1Questions: Question[] = [
       'Rechazarla salvo que el proveedor sea una autoridad pública española',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Rechazar por no proceder del DNI-e español contradice el reconocimiento mutuo.',
+      'Exigir siempre una videollamada anula la garantía del medio notificado.',
+      '',
+      'El proveedor puede ser una autoridad pública de otro Estado miembro.',
+    ],
     explanation:
       'El marco eIDAS prevé el reconocimiento de los medios de identificación electrónica de otros Estados miembros en las condiciones del servicio público en línea. El nivel de garantía debe ser adecuado y no puede exigirse por defecto un certificado emitido en España.',
     difficulty: 'hard',

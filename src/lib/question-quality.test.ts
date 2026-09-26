@@ -66,10 +66,11 @@ describe('calidad de los distractores', () => {
     }
   })
 
-  it('cubrio al menos la mitad del bloque I con notas', () => {
+  it('cubrio el bloque I completo con notas de opcion', () => {
     const blockOne = activeQuestions.filter((q) => q.blockId === 'I')
+    expect(blockOne.length).toBeGreaterThan(0)
     const covered = blockOne.filter((q) => q.optionNotes).length
-    expect(covered / blockOne.length).toBeGreaterThanOrEqual(0.5)
+    expect(covered).toBe(blockOne.length)
   })
 
   it('reparte las respuestas correctas entre las cuatro posiciones', () => {

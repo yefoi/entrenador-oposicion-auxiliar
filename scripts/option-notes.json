@@ -1,242 +1,194 @@
 {
-  "B1-T01-Q01": [
-    "La igualdad formal solo pide tratar igual a lo igual; por sí sola no corrige la desigualdad previa.",
+  "B1-T06-Q01": [
+    "Insertar un dibujo no acredita autoría ni integridad: eso es una imagen, no una firma electrónica.",
     "",
-    "El interés particular no está por encima del interés general ni justifica un trato desigual.",
-    "La discreción está acotada por la ley y por los principios de igualdad, sin ventajas sin límite."
+    "La firma electrónica sí se relaciona con la identidad del firmante y con la integridad del documento.",
+    "Borrar el historial sería lo contrario de garantizar la integridad."
   ],
-  "B1-T01-Q02": [
-    "La censura previa está prohibida por el artículo 20 de la Constitución.",
+  "B1-T06-Q02": [
     "",
-    "Que se trate de una opinión no exime del cumplimiento de la normativa de datos.",
-    "El consentimiento escrito no es el único supuesto que legitima el tratamiento."
+    "Un certificado cualificado sí acredita la relación con la persona, no es un valor de imagen.",
+    "Una anotación privada posterior no tiene la misma eficacia que una firma.",
+    "La eficacia no depende de convertir el documento en papel."
   ],
-  "B1-T01-Q03": [
-    "Una cantidad idéntica para todos es igualdad formal y no tiene en cuenta la capacidad económica.",
+  "B1-T06-Q03": [
+    "Una aplicación móvil no emite documentos con fuerza de BOE.",
     "",
-    "Los gastos públicos se financian con los ingresos del Estado, no con dinero privado.",
-    "La discrepancia con la política presupuestaria no elimina ese deber constitucional."
+    "El DNI-e no sustituye al registro civil ni elimina los datos de identidad.",
+    "El DNI-e sí acredita la identidad en las actuaciones administrativas."
   ],
-  "B1-T01-Q04": [
-    "La suspensión no puede ser permanente ni quedar fuera de control institucional.",
+  "B1-T06-Q04": [
+    "Digitalizar formularios sin integrar ni asegurar los datos no es una estrategia de transformación.",
     "",
-    "No la declara cualquier autoridad administrativa, y siempre existe control posterior.",
-    "Hay derechos que la Constitución no permite suspender, como la dignidad."
+    "Dependar de un único proveedor privado sin más criterio no transforma la organización.",
+    "Esperar a que la ciudadanía se adapte sin formación ni atención alternativa deja fuera a quien no puede."
   ],
-  "B1-T01-Q05": [
-    "El Rey no dirige los debates de las Cámaras.",
-    "La promulgación es un acto formal y exige el refrendo constitucional.",
+  "B1-T06-Q05": [
+    "Identificación y firma son cosas distintas, y ninguna exige una firma manuscrita.",
     "",
-    "El control de constitucionalidad corresponde al Tribunal Constitucional, no al Rey."
+    "La identificación acredita el domicilio, y una firma sin trazabilidad no es una firma electrónica.",
+    "La firma no es un mero mecanismo de notificaciones, y la identificación sí admite medios electrónicos."
   ],
-  "B1-T01-Q06": [
-    "La simple sospecha no basta para condenar.",
+  "B1-T06-Q06": [
     "",
-    "La presunción de inocencia protege a todas las personas, no solo a los menores.",
-    "Una confesión obtenida sin garantías no puede sostenerse si después se niega."
+    "Una imagen de la firma manuscrita no acredita la autoría del documento.",
+    "Un correo sin certificado no identifica a quien expide.",
+    "Una fotografía previa no conserva relación con el original que se envía."
   ],
-  "B1-T01-Q07": [
-    "No hay que esperar a que termine la convivencia familiar para proteger al menor.",
-    "La autonomía parental no es absoluta cuando hay riesgo para el menor.",
+  "B1-T06-Q07": [
+    "Un segundo factor no convierte automáticamente la firma en cualificada.",
+    "Cl@ve sí identifica a la persona ante servicios autorizados.",
     "",
-    "No se puede trasladar la responsabilidad a otros menores de la familia."
+    "El código no sustituye al certificado ni elimina la necesidad de trazabilidad."
   ],
-  "B1-T01-Q08": [
-    "La ratificación de tratados es una facultad distinta de la de mando supremo.",
-    "El Rey no preside el Gobierno ni revoca a los Ministros.",
-    "La convocatoria a elecciones generales se decide en las Cortes Generales.",
+  "B1-T06-Q08": [
+    "La firma no acredita que el contenido sea cierto ni que la operación sea legal.",
+    "",
+    "La firma no impide que otros lean o modifiquen el archivo, salvo que se use cifrado.",
+    "El certificado no exime de comprobar los requisitos del acto jurídico."
+  ],
+  "B1-T07-Q01": [
+    "",
+    "La cantidad de datos no es una señal de modernidad.",
+    "Conservar todo para siempre no es la forma de evitar errores de interpretación.",
+    "La autorización del responsable no basta: hay que informar a la persona."
+  ],
+  "B1-T07-Q02": [
+    "La retirada solo afecta a lo basado en ese consentimiento, no a otras bases legales.",
+    "",
+    "El consentimiento retirado no se convierte retroactivamente en autorización.",
+    "No se puede cambiar de base legal después sin explicar el cambio."
+  ],
+  "B1-T07-Q03": [
+    "No se entrega todo el expediente: hay que proteger los datos de terceros.",
+    "",
+    "No se rechaza la solicitud porque el dato no se haya declarado falso.",
+    "Los derechos se ejercen también por medios electrónicos."
+  ],
+  "B1-T07-Q04": [
+    "Borrar los registros impide investigar y documentar el incidente.",
+    "",
+    "Comunicarlo primero en redes sociales no sustituye a la notificación legal.",
+    "Esperar a perder la información no hace que el problema desaparezca."
+  ],
+  "B1-T07-Q05": [
+    "Ocultar el algoritmo impide que la decisión se cuestione.",
+    "",
+    "Un algoritmo no sustituye la decisión administrativa ni al funcionario que la adopta.",
+    "La minimización también obliga aquí: no se usa la máxima cantidad de datos por sistema."
+  ],
+  "B1-T07-Q06": [
+    "Que la grabación sea en vía pública no excluye la protección de datos.",
+    "Aparecer en una vía pública no obliga a aceptar cualquier uso.",
+    "Cambiar la finalidad no exige un documento firmado por todos los conductores.",
     ""
   ],
-  "B1-T02-Q01": [
-    "La confianza al Gobierno la otorga el Congreso, no el Senado.",
+  "B1-T07-Q07": [
     "",
-    "El Senado no sustituye al Congreso ni tiene competencias ilimitadas en estados excepcionales.",
-    "Las Cámaras tienen competencias distintas y el Senado representa al territorio."
+    "La obligación legal de conservación prevalece sobre la supresión.",
+    "No se cambia la base jurídica para justificar un borrado.",
+    "Hay que contestar cuando exista la obligación, no esperar a que desaparezca."
   ],
-  "B1-T02-Q02": [
-    "El Tribunal Supremo no tiene competencia constitucional.",
+  "B1-T07-Q08": [
+    "Una autorización general sin informar de la finalidad no es una base legal válida.",
+    "El control de la ubicación no se limita a contactar fuera de horario.",
     "",
-    "El Defensor del Pueblo no dicta sentencias con efecto vinculante.",
-    "El Gobierno no puede dejar sin efecto una ley por mayoría simple."
+    "La ubicación del empleado no es un dato de uso ilimitado para su responsable."
   ],
-  "B1-T02-Q03": [
-    "Una denuncia no anula automáticamente un acto administrativo.",
+  "B1-T08-Q01": [
+    "El registro produce fecha y constancia de recepción, no es una consulta informativa.",
     "",
-    "El Senado no ordena indemnizaciones sin demanda judicial.",
-    "El Consejo de Ministros no concede la nulidad radical a instancia de parte."
+    "La presentación no sustituye a la resolución sobre el fondo.",
+    "Presentar un documento no lo convierte en administrativo."
   ],
-  "B1-T02-Q04": [
-    "No sustituye a los tribunales ni ejecuta sentencias en nombre de nadie.",
+  "B1-T08-Q02": [
+    "El formato único es la regla, salvo que la normativa sectorial exija otra cosa.",
     "",
-    "No aprueba normas interiores con rango de ley.",
-    "No administra los recursos de la Administración ni concede ayudas."
+    "Un expediente puede abrirse por varias personas autorizadas.",
+    "La impresión no sustituye al documento electrónico original."
   ],
-  "B1-T02-Q05": [
-    "El Senado no puede vetar de forma definitiva sin más trámite.",
-    "No solo el Senado aprueba normas: ambas Cámaras tienen el mismo poder legislativo.",
+  "B1-T08-Q03": [
+    "Si la persona ha elegido canal electrónico, se respeta esa elección.",
     "",
-    "El Gobierno no decide el texto y las Cámaras no se limitan a ratificar."
+    "La comunicación interna al funcionario no sustituye a la notificación al interesado.",
+    "La fecha de salida se determina por el sistema, no por una regla fija."
   ],
-  "B1-T02-Q06": [
+  "B1-T08-Q04": [
+    "Un antivirus no cierra el ciclo de vida de la seguridad de un sistema.",
     "",
-    "La composición no la fijan las comunidades autónomas.",
-    "No hay un juez por comunidad autónoma ni los designan sus parlamentos.",
-    "El número de miembros no es diez y no los elige solo el Congreso."
+    "Cerrar el sistema al menor incidente no es una medida de seguridad.",
+    "La seguridad no se delega en exclusiva en el proveedor de hardware."
   ],
-  "B1-T02-Q07": [
+  "B1-T08-Q05": [
+    "El color de las pantallas no es lo que hace interoperable a un sistema.",
     "",
-    "La sentencia se publica y en este caso no se limita al recurrente.",
-    "Un precepto no queda derogado sin sentencia que lo declare inconstitucional.",
-    "La sentencia declara la inconstitucionalidad, no solo efectos prospectivos."
+    "Las bases aisladas impiden el intercambio y la coordinación.",
+    "Una tecnología propietaria no se convierte en norma obligatoria por el mero hecho de existir."
   ],
-  "B1-T02-Q08": [
+  "B1-T08-Q06": [
+    "No es una prohibición absoluta: depende de la autenticidad de la copia.",
+    "El valor del original no basta para exigirlo siempre.",
     "",
-    "El silencio no equivale a la confianza: se entiende rechazada.",
-    "El Senado no convalida una confianza que el Congreso ha rechazado.",
-    "No hace falta esperar cuatro años para convocar nuevas elecciones."
+    "El medio de pago no es lo que determina si se puede pedir el original."
   ],
-  "B1-T03-Q01": [
-    "Los presidentes de las Cortes y el CGPJ no forman el Gobierno.",
+  "B1-T08-Q07": [
+    "El plazo general no es de un mes ni admite prórroga automática.",
     "",
-    "El Jefe del Estado y el Defensor del Pueblo no son miembros del Gobierno.",
-    "El Presidente forma parte del Gobierno aunque no ocupe un ministerio."
+    "El plazo no depende de que el procedimiento sea sencillo o no.",
+    "La notificación electrónica no es discrecional: tiene plazo."
   ],
-  "B1-T03-Q02": [
-    "El Senado no elige al Presidente del Gobierno.",
+  "B1-T08-Q08": [
     "",
-    "El Rey no elige libremente: sigue el procedimiento constitucional.",
-    "El Tribunal Constitucional no nombra al Presidente del Gobierno."
+    "Las medidas se aplican según la categoría de cada sistema, no uniformemente a todos.",
+    "También hay que medir el riesgo si el sistema maneja datos no personales.",
+    "Un seguro no sustituye a las medidas técnicas de seguridad."
   ],
-  "B1-T03-Q03": [
-    "Los Coordinadores generales defienden la unidad de la gestión, no la independencia ministerial.",
+  "B1-T09-Q01": [
+    "Un portal de noticias no tiene efectos jurídicos en la actuación electrónica.",
     "",
-    "Las Cortes no elaboran las decisiones ministeriales de cada día.",
-    "El Consejo de Estado asesora, no sustituye al Gobierno."
+    "Una aplicación privada no sustituye los registros y notificaciones oficiales.",
+    "Una carpeta local sin conexión ni identificación no es una sede electrónica."
   ],
-  "B1-T03-Q04": [
-    "El Gobierno no puede imponer por decreto una norma con rango de ley.",
+  "B1-T09-Q02": [
+    "Concentrar datos personales sin base jurídica vulnera la normativa de protección de datos.",
     "",
-    "La aprobación interna del Gobierno no da validez legal al proyecto.",
-    "Las Cámaras intervienen también en las materias urgentes."
+    "El punto de acceso no sustituye al expediente individual ni decide sobre la solicitud.",
+    "También ofrece servicios de las entidades locales, no solo de la AGE."
   ],
-  "B1-T03-Q05": [
-    "La publicación oficial no convalida un reglamento que invade la ley.",
+  "B1-T09-Q03": [
+    "Cl@ve no reemplaza todos los controles ni la identificación presencial.",
     "",
-    "El reglamento no puede contradecir el sentido de la ley.",
-    "La actualización tecnológica no justifica vulnerar el texto legal vigente."
+    "Cl@ve es un sistema de identificación y autenticación, no una red social.",
+    "Cl@ve convive con el DNI-e y los certificados, no los impide."
   ],
-  "B1-T03-Q06": [
-    "La dimisión del Presidente cesa todo el Gobierno, no solo al Presidente.",
-    "El Gobierno no permanece hasta que el Congreso designe a todos sus miembros.",
+  "B1-T09-Q04": [
+    "Exigir la última versión de la aplicación cuando no se puede usar es una barrera.",
+    "Derivar a una oficina sin tomar ninguna medida no garantiza la igualdad de acceso.",
     "",
-    "La dimisión no anula los actos que ya se habían dictado."
+    "Borrar los datos del expediente no resuelve el problema de acceso."
   ],
-  "B1-T03-Q07": [
+  "B1-T09-Q05": [
+    "Centralizar datos sin aplicar minimización incumple la normativa de protección de datos.",
     "",
-    "El Tribunal Supremo Administrativo no impone penas.",
-    "La Audiencia Nacional no tiene competencia exclusiva sobre el Gobierno.",
-    "El Tribunal de Cuentas no declara responsabilidad criminal ni impone pena."
+    "El usuario no tiene que cambiar de navegador según el proveedor.",
+    "Sin coordinación administrativa no hay infraestructuras comunes."
   ],
-  "B1-T03-Q08": [
-    "La delegación no es oral ni traslada la responsabilidad política del Presidente.",
-    "El Presidente no puede delegar lo que la Constitución le atribuye directamente.",
-    "La delegación no necesita eliminar la collegiateidad en la toma de decisiones.",
+  "B1-T09-Q06": [
+    "El nombre comercial del producto no identifica al órgano responsable.",
+    "Un enlace a redes sociales no dice quién gestiona la sede ni sus condiciones.",
+    "Una dirección de correo no informa sobre procedimientos ni disponibilidad.",
     ""
   ],
-  "B1-T04-Q01": [
-    "La antigüedad no sustituye a la valoración de los requisitos del puesto.",
+  "B1-T09-Q07": [
+    "Sustituir todas las sedes por una aplicación privada no es la función del punto de acceso.",
     "",
-    "El parentesco está prohibido en el acceso al empleo público.",
-    "La lealtad política no es un criterio legal de selección."
+    "El punto de acceso no copia expedientes ni decide sobre las solicitudes.",
+    "Tampoco automatiza la decisión en ningún organismo."
   ],
-  "B1-T04-Q02": [
-    "La antigüedad no sustituye siempre a la evaluación del desempeño.",
-    "La antigüedad es un factor, no el único criterio de promoción.",
+  "B1-T09-Q08": [
+    "Rechazar por no proceder del DNI-e español contradice el reconocimiento mutuo.",
+    "Exigir siempre una videollamada anula la garantía del medio notificado.",
     "",
-    "La firma del jefe inmediato no sustituye el procedimiento de evaluación."
-  ],
-  "B1-T04-Q03": [
-    "Entregar información a cambio de una compensación es un regalo indebido.",
-    "",
-    "La firma de un tercero no legitima el acceso a la información interna.",
-    "La transparencia no se logra difundiendo datos internos en redes sociales."
-  ],
-  "B1-T04-Q04": [
-    "La inmediatez no puede sustituir al procedimiento con audiencia y defensa.",
-    "",
-    "No hay sanción automática por un informe favorable al crecimiento profesional.",
-    "La reserva absoluta del expediente impide el contradictorio."
-  ],
-  "B1-T04-Q05": [
-    "La publicidad activa existe precisamente sin solicitud previa de la persona.",
-    "",
-    "La Agenda 2030 no convierte los datos presupuestarios en secretos.",
-    "Transparencia y medición de resultados no son incompatibles."
-  ],
-  "B1-T04-Q06": [
-    "La temporalidad no depende de la conveniencia del jefe directo.",
-    "",
-    "La antigüedad del trabajador no sustituye a la selección pública.",
-    "Un convenio colectivo no puede convertir un puesto en estructural."
-  ],
-  "B1-T04-Q07": [
-    "La condición de empleado público no hace público su domicilio.",
-    "Denegar todo acceso sin explicar el dato protegido incumple el deber de motivación.",
-    "",
-    "Publicar el domicilio de cualquier empleado sería una vulneración de la normativa de datos."
-  ],
-  "B1-T04-Q08": [
-    "",
-    "Los Objetivos obligan solo cuando la ley atribuye la competencia.",
-    "Los Objetivos no sustituyen las leyes que regulan los contratos públicos.",
-    "Sí pueden usarse criterios ambientales sin copiarlos literalmente del pliego."
-  ],
-  "B1-T05-Q01": [
-    "No hace falta condena penal para prevenir, proteger y atender.",
-    "",
-    "Exigir a la víctima que abandone su vivienda no es la respuesta adecuada.",
-    "No es un asunto privado: hay datos que comunicar a la red de atención."
-  ],
-  "B1-T05-Q02": [
-    "",
-    "Denegar por orientación o identidad sexual produce un trato desigual injustificado.",
-    "No se puede reservar un servicio público por la orientación declarada.",
-    "La remisión automática a otro país es discriminatoria."
-  ],
-  "B1-T05-Q03": [
-    "La accesibilidad exige ajustes razonables, no usar la herramienta igual sin ayuda.",
-    "La accesibilidad no es solo física: incluye también lo digital.",
-    "",
-    "No se suprime el servicio digital hasta que la persona alcance el mismo nivel de manejo."
-  ],
-  "B1-T05-Q04": [
-    "",
-    "El plan se individualiza según capacidad, preferencias y entorno.",
-    "La ayuda económica no sustituye a los servicios ni a la participación.",
-    "La decisión se toma con la persona, no solo sobre su familia."
-  ],
-  "B1-T05-Q05": [
-    "Repartir el mismo título a todos no corrige la desigualdad de acceso.",
-    "",
-    "Exigir que se acredite recursos para informarse crea una barrera inversa.",
-    "Las medidas correctoras necesitan revisión y están sujetas a temporalidad."
-  ],
-  "B1-T05-Q06": [
-    "La medida debe estar justificada, limitada y evaluada.",
-    "La reserva no puede condicionarse a que la candidata supere en calificación.",
-    "Hay que revisar la medida cuando la desigualdad haya desaparecido.",
-    ""
-  ],
-  "B1-T05-Q07": [
-    "",
-    "La finalidad limitada impide reutilizar la lista para otra campaña.",
-    "Sin consentimiento no se publican esos datos.",
-    "Hay que informar a los interesados aunque no lo soliciten."
-  ],
-  "B1-T05-Q08": [
-    "El ajuste razonable no se rechaza porque beneficie a la persona.",
-    "No hay que pedir una excedencia antes de valorar sus capacidades.",
-    "",
-    "No se cambian sus funciones sin preguntarle nada."
+    "El proveedor puede ser una autoridad pública de otro Estado miembro."
   ]
 }
