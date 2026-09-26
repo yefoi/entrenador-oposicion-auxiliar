@@ -32,6 +32,20 @@ describe('minigames', () => {
     expect(session.questions).toHaveLength(20)
   })
 
+  it('crea una ronda de descarte sin reloj y con correccion inmediata', () => {
+    const session = createMinigameSession(activeQuestions, {
+      type: 'discard',
+      now: new Date('2026-01-01T10:00:00.000Z'),
+      random: () => 0.3,
+    })
+    expect(session.minigameType).toBe('discard')
+    expect(session.questions).toHaveLength(10)
+    expect(session.expiresAt).toBeUndefined()
+    // La respuesta sigue siendo un unico indice, como en el resto de modos: por
+    // eso el historial y los repasos no necesitan ningun cambio.
+    expect(session.answers).toEqual({})
+  })
+
   it('calcula la racha actual y la mejor racha', () => {
     const session = createMinigameSession(activeQuestions, {
       type: 'flashcards',

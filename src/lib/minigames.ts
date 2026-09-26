@@ -44,12 +44,14 @@ const questionCounts: Record<MinigameType, number> = {
   flashcards: 12,
   speedrun: 20,
   weakness: 10,
+  discard: 10,
 }
 
 const titles: Record<MinigameType, string> = {
   flashcards: 'Minijuego · Flashcards',
   speedrun: 'Minijuego · Speedrun',
   weakness: 'Minijuego · Debilidades',
+  discard: 'Minijuego · Descarte',
 }
 
 function isMinigameOptions(value: unknown): value is MinigameOptions {

@@ -6,6 +6,7 @@ import { Icon } from '../components/Icons'
 import { OptionNotes } from '../components/OptionNotes'
 import { Button, ProgressBar } from '../components/UI'
 import { Question as QuestionCard } from '../lib/pages/components/Question'
+import { DiscardQuestion } from '../lib/pages/components/DiscardQuestion'
 
 interface MinigameSessionPageProps {
   session: TrainerSession
@@ -43,6 +44,7 @@ export function MinigameSessionPage({
   const [seconds, setSeconds] = useState(() => getRemainingSeconds(session))
   const submittedRef = useRef(session.submitted)
   const isSpeedrun = session.minigameType === 'speedrun'
+  const isDiscard = session.minigameType === 'discard'
   const total = session.questions.length
   const questionEntry = session.questions[index]
   const question = questionEntry
@@ -139,18 +141,34 @@ export function MinigameSessionPage({
       </div>
       <div className="minigame-session-layout">
         <main className="question-panel minigame-question-panel">
-          <QuestionCard
-            locked={showFeedback}
-            onAnswer={(optionIndex) => {
-              if (answer === undefined) {
-                onAnswer(question.id, optionIndex)
-              }
-            }}
-            question={question}
-            questionNumber={index + 1}
-            selectedAnswer={answer}
-            total={total}
-          />
+          {isDiscard ? (
+            <DiscardQuestion
+              key={question.id}
+              locked={showFeedback}
+              onAnswer={(optionIndex) => {
+                if (answer === undefined) {
+                  onAnswer(question.id, optionIndex)
+                }
+              }}
+              question={question}
+              questionNumber={index + 1}
+              selectedAnswer={answer}
+              total={total}
+            />
+          ) : (
+            <QuestionCard
+              locked={showFeedback}
+              onAnswer={(optionIndex) => {
+                if (answer === undefined) {
+                  onAnswer(question.id, optionIndex)
+                }
+              }}
+              question={question}
+              questionNumber={index + 1}
+              selectedAnswer={answer}
+              total={total}
+            />
+          )}
           {showFeedback ? (
             <div
               aria-live="polite"
@@ -166,7 +184,7 @@ export function MinigameSessionPage({
                 <small>{question.legalReference}</small>
               ) : null}
             </div>
-          ) : (
+          ) : isDiscard ? null : (
             <p className="minigame-locked-copy">
               Elige una opción. La pregunta se bloqueará para que la explicación
               llegue antes de continuar.
@@ -234,7 +252,9 @@ export function MinigameSessionPage({
             </div>
             <div className="minigame-round-row">
               <span>Modo</span>
-              <strong>{isSpeedrun ? 'Speedrun' : 'Entreno'}</strong>
+              <strong>
+                {isSpeedrun ? 'Speedrun' : isDiscard ? 'Descarte' : 'Entreno'}
+              </strong>
             </div>
           </div>
           <div className="minigame-aside-note">

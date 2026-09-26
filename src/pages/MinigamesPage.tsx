@@ -31,7 +31,7 @@ interface GameCard {
   description: string
   detail: string
   icon: IconName
-  tone: 'purple' | 'teal' | 'orange'
+  tone: 'purple' | 'teal' | 'orange' | 'blue'
 }
 
 const gameCards: GameCard[] = [
@@ -58,6 +58,14 @@ const gameCards: GameCard[] = [
     detail: '10 preguntas · foco personal',
     icon: 'target',
     tone: 'orange',
+  },
+  {
+    type: 'discard',
+    title: 'Descarte',
+    description: 'Elimina las tres opciones falsas y defiende la que queda.',
+    detail: '10 preguntas · una por una',
+    icon: 'search',
+    tone: 'blue',
   },
 ]
 

@@ -1,7 +1,7 @@
 export type BlockId = 'I' | 'II' | 'III' | 'IV'
 export type Difficulty = 'easy' | 'medium' | 'hard'
 export type QuestionSource = 'generated' | 'adapted' | 'official'
-export type MinigameType = 'flashcards' | 'speedrun' | 'weakness'
+export type MinigameType = 'flashcards' | 'speedrun' | 'weakness' | 'discard'
 export type SessionMode = 'practice' | 'exam' | 'review' | 'minigame'
 export type ExamPart = 1 | 2
 export type AppView =

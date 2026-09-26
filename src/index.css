@@ -4177,6 +4177,10 @@ a {
   background: linear-gradient(145deg, #fff, #fff9f3);
   border-color: #f1c59d;
 }
+.minigame-card-blue.is-selected {
+  background: linear-gradient(145deg, #fff, #f4f8ff);
+  border-color: #b6cdf2;
+}
 .minigame-card-icon {
   display: grid;
   width: 43px;
@@ -4195,6 +4199,44 @@ a {
 .minigame-card-orange .minigame-card-icon {
   color: var(--orange);
   background: var(--orange-soft);
+}
+.minigame-card-blue .minigame-card-icon {
+  color: #3b6fd4;
+  background: #e8f0ff;
+}
+/* Modo descarte: las opciones se pulsan para descartarlas en lugar de elegir
+   una, asi que son botones y no etiquetas de un grupo de opciones. */
+.discard-fieldset {
+  display: grid;
+  gap: 10px;
+  border: 0;
+  padding: 0;
+}
+.discard-option {
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.discard-option.is-discarded {
+  opacity: 0.5;
+}
+.discard-option.is-discarded .option-text {
+  text-decoration: line-through;
+}
+.discard-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin-top: 14px;
+}
+.discard-hint {
+  margin: 0;
+  color: #6f6a86;
+  font-size: 12.5px;
 }
 .minigame-card-copy {
   display: block;
