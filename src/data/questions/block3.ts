@@ -14,6 +14,12 @@ export const block3Questions: Question[] = [
       'Una tabla por persona que repita internamente los datos de cada curso',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Una sola tabla sin claves foráneas no modela la relación de uno a muchos.',
+      'Una columna de texto con los cursos no permite relacionar ni consultar datos.',
+      'Una tabla por persona que repite los cursos no es un modelo normalizado.',
+    ],
     explanation:
       'La inscripción es una entidad con atributos propios y relaciones de uno a muchos con PERSONA y CURSO. Su clave primaria identifica cada inscripción y las claves foráneas preservan esas relaciones.',
     difficulty: 'easy',
@@ -35,6 +41,12 @@ export const block3Questions: Question[] = [
       'Usar el código como clave primaria y permitir duplicados históricos entre procedimientos',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Un código reutilizado como clave rompe la trazabilidad de los expedientes anteriores.',
+      '',
+      'Toda tabla necesita clave primaria para identificar sus filas.',
+      'La clave primaria no admite duplicados, así que no puede ser el código del expediente.',
+    ],
     explanation:
       'Una clave primaria estable y no reutilizada mantiene la identidad de cada fila. El código del expediente es un dato del negocio y puede cambiar o repetirse en filas históricas sin alterar esa identidad.',
     difficulty: 'medium',
@@ -56,6 +68,12 @@ export const block3Questions: Question[] = [
       'Relación uno a uno, con la clave primaria de DEPARTAMENTO en cada fila de EMPLEADO',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'La relación va de DEPARTAMENTO a EMPLEADO, y la clave foránea va en la tabla dependiente.',
+      'Cada empleado pertenece a un solo departamento, no a muchos.',
+      '',
+      'La clave primaria del departamento se repite en varios empleados: eso no es uno a uno.',
+    ],
     explanation:
       'La cardinalidad es uno a muchos desde DEPARTAMENTO hacia EMPLEADO. La clave primaria del departamento aparece en EMPLEADO como clave foránea, por lo que la misma clave foránea se repite para varios empleados de un mismo departamento.',
     difficulty: 'easy',
@@ -77,6 +95,12 @@ export const block3Questions: Question[] = [
       'Eliminar provincia y comunidad de EMPLEADO y obtenerlas mediante una relación con CODIGO_POSTAL',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Añadir más filas no elimina la dependencia transitiva.',
+      'El nombre del empleado no es candidato a clave primaria de este modelo.',
+      'Duplicar provincia y comunidad sin relación mantiene la redundancia.',
+      '',
+    ],
     explanation:
       'Código postal, provincia y comunidad forman una dependencia transitiva: provincia y comunidad dependen del código postal y no deben depender directamente de la clave primaria del empleado.',
     difficulty: 'medium',
@@ -98,6 +122,12 @@ export const block3Questions: Question[] = [
       'Transformar las dependencias del modelo en tercera forma normal',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Decidir qué entidades existen corresponde al modelado conceptual.',
+      'Establecer cardinalidades es diseño lógico, no físico.',
+      'La normalización es diseño lógico: no es una tarea de índices.',
+    ],
     explanation:
       'El diseño físico se ocupa de cómo se almacenan y acceden los datos, por ejemplo, mediante índices, tablas particionadas y parámetros del motor. Las otras opciones pertenecen al modelado conceptual o al diseño lógico.',
     difficulty: 'medium',
@@ -119,6 +149,12 @@ export const block3Questions: Question[] = [
       'Crear una tabla por persona sin claves foráneas ni tabla de cursos',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Duplicar las personas por curso rompe la integridad de la entidad persona.',
+      '',
+      'Una columna de texto con cursos y notas no es un modelo relacional.',
+      'Una tabla por persona sin claves foráneas no relaciona con los cursos.',
+    ],
     explanation:
       'La matrícula es una entidad asociativa con atributos propios. La clave primaria compuesta formada por PERSONA_ID y CURSO_ID identifica una única inscripción por persona y curso, y las claves foráneas conectan ambas entidades.',
     difficulty: 'medium',
@@ -140,6 +176,12 @@ export const block3Questions: Question[] = [
       'En CREDENCIAL, con EMPLEADO_ID opcional y sin restricción de unicidad',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Con la clave foránea obligatoria en EMPLEADO no se puede dejar una credencial libre.',
+      'Sin restricción de unicidad un empleado podría tener varias credenciales.',
+      '',
+      'Sin UNIQUE la relación uno a uno no queda garantizada.',
+    ],
     explanation:
       'La clave foránea opcional en CREDENCIAL permite que una credencial no esté asignada. La restricción UNIQUE impide que un mismo empleado aparezca en más de una credencial, por lo que se materializa la relación uno a uno.',
     difficulty: 'easy',
@@ -161,6 +203,12 @@ export const block3Questions: Question[] = [
       'Como un atributo derivado de la relación entre PEDIDO y LINEA_PEDIDO',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Una clave foránea al primer artículo no representa la suma de los importes.',
+      'Una entidad sin relación con PEDIDO no puede derivarse de sus líneas.',
+      'Un total almacenado que puede cambiar sin recalcular queda desincronizado.',
+      '',
+    ],
     explanation:
       'Un atributo derivado se calcula a partir de otros datos y no necesita almacenarse de forma independiente. En este caso, el total de PEDIDO se obtiene de los importes de sus LINEA_PEDIDO.',
     difficulty: 'easy',
@@ -182,6 +230,12 @@ export const block3Questions: Question[] = [
       'Asignar un valor negativo a todas las cantidades para alterar su signo al presentarlas',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Un texto no admite comparaciones numéricas ni impide valores negativos.',
+      '',
+      'Un booleano solo admite dos valores: no representa una cantidad.',
+      'Asignar valores negativos y luego mostrarlos no impide el valor negativo.',
+    ],
     explanation:
       'Un tipo numérico sin signo restringe el dominio en tiempo de ejecución. Esta técnica evita valores no válidos en sus variables, siempre que las operaciones posteriores respeten ese dominio.',
     difficulty: 'easy',
@@ -203,6 +257,12 @@ export const block3Questions: Question[] = [
       'Dos colas, porque el orden de salida no depende del orden de inserción',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Invertir las estructuras no da orden inverso y a la vez orden de llegada.',
+      'Dos pilas no pueden atender tareas en orden de llegada.',
+      '',
+      'Dos colas no recorren las rutas en orden inverso de inserción.',
+    ],
     explanation:
       'Una pila devuelve el último elemento insertado, por lo que recorre las rutas en orden inverso. Una cola devuelve el primero, por lo que atiende las tareas en orden de llegada.',
     difficulty: 'easy',
@@ -219,6 +279,12 @@ export const block3Questions: Question[] = [
       'Un árbol de búsqueda contiene los enteros 40, 20, 60, 10, 30, 50 y 70. Tras insertar 35, ¿qué entero se visita primero en un recorrido en preorden?',
     options: ['20', '35', '50', '40'],
     correctIndex: 3,
+    optionNotes: [
+      'El 20 es el hijo izquierdo de la raíz, pero el preorden empieza en la raíz.',
+      'El 35 es el último del subárbol izquierdo: en preorden aparece tras el 30.',
+      'El 50 pertenece al subárbol derecho de la raíz, que se visita después.',
+      '',
+    ],
     explanation:
       'El 35 es hijo izquierdo de 40 y se inserta como hijo derecho de 30. El preorden visita raíz, subárbol izquierdo y subárbol derecho, por lo que tras 40 aparecen 20, 10, 30, 35 y después 60.',
     difficulty: 'medium',
@@ -240,6 +306,12 @@ export const block3Questions: Question[] = [
       'Un bucle hacer-mientras',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'La recursión consiste en que una función se llame a sí misma.',
+      'El polimorfismo de objetos actúa sobre clases que heredan, no sobre firmas de función.',
+      'Un bucle no define dos funciones con el mismo nombre.',
+    ],
     explanation:
       'La sobrecarga permite definir varias funciones con el mismo identificador y distinta firma. El compilador selecciona la implementación según los tipos reales de los argumentos.',
     difficulty: 'medium',
@@ -261,6 +333,12 @@ export const block3Questions: Question[] = [
       'Una posición que no existe',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'El índice 0 es el primer elemento, no el último.',
+      '',
+      'El 4 es el índice del quinto elemento, no el valor que hay almacenado.',
+      'El índice 4 sí existe en un vector de cinco elementos.',
+    ],
     explanation:
       'vector.length vale 5, por lo que length - 1 vale 4. El índice 4 corresponde al quinto elemento del vector.',
     difficulty: 'easy',
@@ -282,6 +360,12 @@ export const block3Questions: Question[] = [
       'Depende de una opción de compatibilidad del compilador',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Java pasa los argumentos primitivos por valor, no por referencia.',
+      'El código compila: lo que no cambia es el valor de la copia local n.',
+      '',
+      'No depende de ninguna opción de compatibilidad del compilador.',
+    ],
     explanation:
       'En Java, un argumento de tipo primitivo int se pasa por valor. El incremento afecta a la copia local n y no cambia el valor de x en el método que llama.',
     difficulty: 'easy',
@@ -303,6 +387,12 @@ export const block3Questions: Question[] = [
       'Un do...while, porque evalúa la condición después de ejecutar el cuerpo',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Un for no ejecuta el cuerpo tres veces salvo que se programe así.',
+      'Un while puede omitir la primera lectura, porque comprueba antes la condición.',
+      'Un if no repite ninguna lectura.',
+      '',
+    ],
     explanation:
       'do...while ejecuta el cuerpo al menos una vez y después comprueba la condición para decidir si repite la lectura. while comprobaría primero la condición y podría no entrar en el bucle.',
     difficulty: 'easy',
@@ -324,6 +414,12 @@ export const block3Questions: Question[] = [
       'Para declarar dos funciones con el mismo nombre',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El caso base no convierte n en un número real.',
+      'Ordenar los enteros no es la razón del caso base en un factorial.',
+      'Declarar dos funciones con el mismo nombre es sobrecarga, no recursión.',
+    ],
     explanation:
       'El caso base proporciona una salida directa de la recursión. Sin la condición que detiene las llamadas para n=0, factorial intentaría invocar indefinidamente factorial(-1).',
     difficulty: 'easy',
@@ -345,6 +441,12 @@ export const block3Questions: Question[] = [
       'SELECT d.id, e.id FROM DEPARTAMENTO AS d RIGHT JOIN EMPLEADO AS e ON e.departamento_id = d.id',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'INNER JOIN descarta los departamentos sin empleados: es una intersección.',
+      'CROSS JOIN devuelve el producto cartesiano, no une por clave.',
+      '',
+      'RIGHT JOIN conserva los empleados y perdería los departamentos sin empleados.',
+    ],
     explanation:
       'LEFT JOIN conserva todas las filas del lado izquierdo y completa con valores nulos las columnas sin coincidencia. RIGHT JOIN conserva los empleados, aunque perdería los departamentos sin empleados.',
     difficulty: 'easy',
@@ -366,6 +468,12 @@ export const block3Questions: Question[] = [
       'GROUP BY cliente.nombre, FACTURA.fecha',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'ORDER BY ordena el resultado, pero no forma grupos.',
+      'WHERE filtra filas y no admite una lista de columnas.',
+      'DISTINCT elimina filas repetidas, no agrupa por dos columnas.',
+      '',
+    ],
     explanation:
       'Después de unir las tablas, cada fila pertenece a una combinación de nombre de cliente y fecha. GROUP BY forma un grupo por cada una de esas combinaciones, lo que permite contar las facturas del grupo.',
     difficulty: 'medium',
@@ -387,6 +495,12 @@ export const block3Questions: Question[] = [
       'SELECT a.nombre FROM ALUMNO AS a LEFT JOIN MATRICULA AS m ON m.alumno_id = a.id WHERE m.id > 0',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'EXISTS devuelve los alumnos que sí tienen matrícula: es el criterio contrario.',
+      'El producto cartesiano devuelve alumnos con matrícula, no sin ella.',
+      'Con LEFT JOIN hay que filtrar por una columna del lado derecho que sea nula, no por m.id > 0.',
+    ],
     explanation:
       'NOT EXISTS es verdadero cuando la subconsulta correlacionada no encuentra ninguna matrícula del alumno. Así se incluyen exactamente los alumnos sin filas asociadas.',
     difficulty: 'medium',
@@ -408,6 +522,12 @@ export const block3Questions: Question[] = [
       'Una sentencia GRANT sin cuerpo ejecutable',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Una restricción CHECK valida valores, no guarda una secuencia de consultas.',
+      '',
+      'Una vista materializada almacena un resultado, no lógica con parámetros y transacción.',
+      'GRANT concede permisos y no contiene instrucciones ejecutables.',
+    ],
     explanation:
       'Un procedimiento almacenado guarda en el servidor una secuencia de instrucciones SQL reutilizable. Puede recibir parámetros, incluir controles y gestionar una transacción conforme a las capacidades del motor.',
     difficulty: 'medium',
@@ -429,6 +549,12 @@ export const block3Questions: Question[] = [
       'Un permiso SELECT',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Una vista materializada no ejecuta lógica ante una actualización.',
+      'Un índice acelera consultas, no valida ni corrige valores.',
+      '',
+      'Un permiso SELECT no valida ni modifica datos.',
+    ],
     explanation:
       'Un trigger es un programa que se ejecuta automáticamente ante determinados eventos, como INSERT, UPDATE o DELETE. Permite validar o modificar la operación según las reglas del motor.',
     difficulty: 'hard',
@@ -450,6 +576,12 @@ export const block3Questions: Question[] = [
       'COUNT(*) y COUNT(nif)',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'COUNT(nif) omite los nulos, así que no da el total de facturas.',
+      'SUM suma valores, no cuenta filas.',
+      'COUNT(DISTINCT nif) cuenta valores distintos, no facturas.',
+      '',
+    ],
     explanation:
       'COUNT(*) cuenta todas las filas, incluidas las que tienen NIF nulo. COUNT(nif) omite los valores NULL, por lo que cuenta únicamente las facturas con NIF informado.',
     difficulty: 'easy',
@@ -471,6 +603,12 @@ export const block3Questions: Question[] = [
       'EXCEPT',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'UNION elimina los duplicados del resultado combinado.',
+      'INTERSECT devuelve solo las filas presentes en ambas consultas.',
+      'EXCEPT devuelve las filas que solo aparecen en la primera consulta.',
+    ],
     explanation:
       'UNION ALL concatena los resultados de ambas consultas y conserva las filas duplicadas. UNION elimina duplicados; INTERSECT devuelve coincidencias y EXCEPT filas que solo aparecen en la primera consulta.',
     difficulty: 'easy',
@@ -492,6 +630,12 @@ export const block3Questions: Question[] = [
       'SELECT DISTINCT socio_id, MAX(fecha_prestamo) sobre todas las filas',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'GROUP BY no conserva la fila de préstamo: se queda con un grupo por socio y fecha.',
+      '',
+      'ORDER BY ordena pero no numera las filas dentro de cada socio.',
+      'DISTINCT con MAX no permite elegir el préstamo ni desempatar por identificador.',
+    ],
     explanation:
       'ROW_NUMBER particiona las filas por socio y las ordena por fecha de préstamo y, en caso de empate, por identificador, ambos en orden descendente. Así, el número 1 identifica de forma determinista el préstamo más reciente de cada socio y puede filtrarse con la condición correspondiente.',
     difficulty: 'hard',

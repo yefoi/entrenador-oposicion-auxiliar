@@ -1,98 +1,146 @@
 {
-  "B2-T04-Q01": [
+  "B3-T01-Q01": [
     "",
-    "Es al revés: el programa es el fichero estático y el proceso el estado dinámico.",
-    "El programa no ocupa RAM por instalarse, y el proceso sí tiene estado.",
-    "Programa y proceso son conceptos distintos, no sinónimos."
+    "Una sola tabla sin claves foráneas no modela la relación de uno a muchos.",
+    "Una columna de texto con los cursos no permite relacionar ni consultar datos.",
+    "Una tabla por persona que repite los cursos no es un modelo normalizado."
   ],
-  "B2-T04-Q02": [
+  "B3-T01-Q02": [
+    "Un código reutilizado como clave rompe la trazabilidad de los expedientes anteriores.",
     "",
-    "La memoria virtual no elimina la necesidad de RAM física.",
-    "No garantiza ningún tiempo de respuesta concreto.",
-    "La paginación no es una compresión de la RAM."
+    "Toda tabla necesita clave primaria para identificar sus filas.",
+    "La clave primaria no admite duplicados, así que no puede ser el código del expediente."
   ],
-  "B2-T04-Q03": [
+  "B3-T01-Q03": [
+    "La relación va de DEPARTAMENTO a EMPLEADO, y la clave foránea va en la tabla dependiente.",
+    "Cada empleado pertenece a un solo departamento, no a muchos.",
     "",
-    "Un servicio no depende de que un usuario abra una sesión ni pulse un icono.",
-    "Un servicio sigue activo aunque se cierre la sesión que lo inició.",
-    "Un servicio no es un componente gráfico."
+    "La clave primaria del departamento se repite en varios empleados: eso no es uno a uno."
   ],
-  "B2-T04-Q04": [
-    "",
-    "El 4 del modo significa solo lectura para el propietario, no lectura y escritura.",
-    "Ese modo corresponde al 777, que concede todos los permisos.",
-    "El propietario nunca se queda sin permiso en la notación habitual."
-  ],
-  "B2-T04-Q05": [
-    "",
-    "Mantenerla en primer plano con la pantalla apagada consume más energía.",
-    "Subir la prioridad de CPU aumenta el consumo en lugar de ahorrarlo.",
-    "Un bucle de ejecución permanente es justamente lo contrario de ahorrar energía."
-  ],
-  "B2-T04-Q06": [
-    "Los hilos de un mismo proceso comparten espacio de direcciones; los procesos no.",
-    "",
-    "Sí pueden compartir datos y ejecutar la misma función: son el mismo proceso.",
-    "El sistema puede repartir los hilos entre varias CPU, pero no los ejecuta en paralelo real con una sola."
-  ],
-  "B2-T04-Q07": [
-    "La exclusión mutua y la ejecución paralela no bastan para producir un interbloqueo.",
-    "El número de CPU y la memoria no son condiciones de Coffman.",
-    "",
-    "Dos procesos con el mismo resultado no se bloquean entre sí."
-  ],
-  "B2-T04-Q08": [
-    "El enlace simbólico guarda una ruta, no una copia del contenido.",
-    "No se convierte en enlace duro ni apunta al directorio de trabajo.",
-    "El enlace sobrevive al destino: no se elimina automáticamente.",
+  "B3-T01-Q04": [
+    "Añadir más filas no elimina la dependencia transitiva.",
+    "El nombre del empleado no es candidato a clave primaria de este modelo.",
+    "Duplicar provincia y comunidad sin relación mantiene la redundancia.",
     ""
   ],
-  "B2-T05-Q01": [
+  "B3-T01-Q05": [
     "",
-    "El controlador gráfico no participa en la ejecución de consultas SQL.",
-    "El mecanismo de autenticación no selecciona planes de ejecución.",
-    "El controlador de impresora no tiene relación con el SGBD."
+    "Decidir qué entidades existen corresponde al modelado conceptual.",
+    "Establecer cardinalidades es diseño lógico, no físico.",
+    "La normalización es diseño lógico: no es una tarea de índices."
   ],
-  "B2-T05-Q02": [
+  "B3-T01-Q06": [
+    "Duplicar las personas por curso rompe la integridad de la entidad persona.",
     "",
-    "Una vista no impone la existencia de la fila referenciada.",
-    "La clave primaria de PEDIDOS no valida el valor de la clave foránea.",
-    "Un archivo del sistema operativo no participa en la integridad de la base de datos."
+    "Una columna de texto con cursos y notas no es un modelo relacional.",
+    "Una tabla por persona sin claves foráneas no relaciona con los cursos."
   ],
-  "B2-T05-Q03": [
+  "B3-T01-Q07": [
+    "Con la clave foránea obligatoria en EMPLEADO no se puede dejar una credencial libre.",
+    "Sin restricción de unicidad un empleado podría tener varias credenciales.",
     "",
-    "El aislamiento controla la visibilidad entre transacciones, no la integridad de una sola.",
-    "La integridad referencial no exige que todas las tablas compartan clave primaria.",
-    "La compresión no afecta a la corrección de una transferencia."
+    "Sin UNIQUE la relación uno a uno no queda garantizada."
   ],
-  "B2-T05-Q04": [
-    "",
-    "Prohibir la herencia contradice la herencia propia de este modelo.",
-    "Un modelo orientado a objetos no se limita a valores numéricos.",
-    "Los objetos no se guardan en un fichero plano sin enlaces."
-  ],
-  "B2-T05-Q05": [
-    "",
-    "Los documentos sí pueden contener atributos con nombre.",
-    "El esquema flexible es precisamente la característica de este tipo de almacén.",
-    "Un almacén documental maneja documentos con metadatos, no solo binarios."
-  ],
-  "B2-T05-Q06": [
-    "Una relación no es solo el nombre y el tipo de una columna.",
-    "",
-    "Una relación no es un fichero de archivos ni una estructura de un solo registro.",
-    "El modelo relacional sí define esquema y claves."
-  ],
-  "B2-T05-Q07": [
-    "READ COMMITTED no permite leer cambios sin confirmar.",
-    "Esa lectura estable corresponde a REPEATABLE READ.",
-    "",
-    "No bloquea las filas en exclusiva hasta el final de la transacción."
-  ],
-  "B2-T05-Q08": [
-    "Esa recuperación por atributos sin clave no describe un almacén clave-valor.",
-    "Nada obliga a que la clave primaria sea compuesta.",
-    "No es un modelo relacional, sino un modelo NoSQL.",
+  "B3-T01-Q08": [
+    "Una clave foránea al primer artículo no representa la suma de los importes.",
+    "Una entidad sin relación con PEDIDO no puede derivarse de sus líneas.",
+    "Un total almacenado que puede cambiar sin recalcular queda desincronizado.",
     ""
+  ],
+  "B3-T02-Q01": [
+    "Un texto no admite comparaciones numéricas ni impide valores negativos.",
+    "",
+    "Un booleano solo admite dos valores: no representa una cantidad.",
+    "Asignar valores negativos y luego mostrarlos no impide el valor negativo."
+  ],
+  "B3-T02-Q02": [
+    "Invertir las estructuras no da orden inverso y a la vez orden de llegada.",
+    "Dos pilas no pueden atender tareas en orden de llegada.",
+    "",
+    "Dos colas no recorren las rutas en orden inverso de inserción."
+  ],
+  "B3-T02-Q03": [
+    "El 20 es el hijo izquierdo de la raíz, pero el preorden empieza en la raíz.",
+    "El 35 es el último del subárbol izquierdo: en preorden aparece tras el 30.",
+    "El 50 pertenece al subárbol derecho de la raíz, que se visita después.",
+    ""
+  ],
+  "B3-T02-Q04": [
+    "",
+    "La recursión consiste en que una función se llame a sí misma.",
+    "El polimorfismo de objetos actúa sobre clases que heredan, no sobre firmas de función.",
+    "Un bucle no define dos funciones con el mismo nombre."
+  ],
+  "B3-T02-Q05": [
+    "El índice 0 es el primer elemento, no el último.",
+    "",
+    "El 4 es el índice del quinto elemento, no el valor que hay almacenado.",
+    "El índice 4 sí existe en un vector de cinco elementos."
+  ],
+  "B3-T02-Q06": [
+    "Java pasa los argumentos primitivos por valor, no por referencia.",
+    "El código compila: lo que no cambia es el valor de la copia local n.",
+    "",
+    "No depende de ninguna opción de compatibilidad del compilador."
+  ],
+  "B3-T02-Q07": [
+    "Un for no ejecuta el cuerpo tres veces salvo que se programe así.",
+    "Un while puede omitir la primera lectura, porque comprueba antes la condición.",
+    "Un if no repite ninguna lectura.",
+    ""
+  ],
+  "B3-T02-Q08": [
+    "",
+    "El caso base no convierte n en un número real.",
+    "Ordenar los enteros no es la razón del caso base en un factorial.",
+    "Declarar dos funciones con el mismo nombre es sobrecarga, no recursión."
+  ],
+  "B3-T03-Q01": [
+    "INNER JOIN descarta los departamentos sin empleados: es una intersección.",
+    "CROSS JOIN devuelve el producto cartesiano, no une por clave.",
+    "",
+    "RIGHT JOIN conserva los empleados y perdería los departamentos sin empleados."
+  ],
+  "B3-T03-Q02": [
+    "ORDER BY ordena el resultado, pero no forma grupos.",
+    "WHERE filtra filas y no admite una lista de columnas.",
+    "DISTINCT elimina filas repetidas, no agrupa por dos columnas.",
+    ""
+  ],
+  "B3-T03-Q03": [
+    "",
+    "EXISTS devuelve los alumnos que sí tienen matrícula: es el criterio contrario.",
+    "El producto cartesiano devuelve alumnos con matrícula, no sin ella.",
+    "Con LEFT JOIN hay que filtrar por una columna del lado derecho que sea nula, no por m.id > 0."
+  ],
+  "B3-T03-Q04": [
+    "Una restricción CHECK valida valores, no guarda una secuencia de consultas.",
+    "",
+    "Una vista materializada almacena un resultado, no lógica con parámetros y transacción.",
+    "GRANT concede permisos y no contiene instrucciones ejecutables."
+  ],
+  "B3-T03-Q05": [
+    "Una vista materializada no ejecuta lógica ante una actualización.",
+    "Un índice acelera consultas, no valida ni corrige valores.",
+    "",
+    "Un permiso SELECT no valida ni modifica datos."
+  ],
+  "B3-T03-Q06": [
+    "COUNT(nif) omite los nulos, así que no da el total de facturas.",
+    "SUM suma valores, no cuenta filas.",
+    "COUNT(DISTINCT nif) cuenta valores distintos, no facturas.",
+    ""
+  ],
+  "B3-T03-Q07": [
+    "",
+    "UNION elimina los duplicados del resultado combinado.",
+    "INTERSECT devuelve solo las filas presentes en ambas consultas.",
+    "EXCEPT devuelve las filas que solo aparecen en la primera consulta."
+  ],
+  "B3-T03-Q08": [
+    "GROUP BY no conserva la fila de préstamo: se queda con un grupo por socio y fecha.",
+    "",
+    "ORDER BY ordena pero no numera las filas dentro de cada socio.",
+    "DISTINCT con MAX no permite elegir el préstamo ni desempatar por identificador."
   ]
 }
