@@ -14,6 +14,12 @@ export const block4Questions: Question[] = [
       'Deshabilitar el servicio de impresión para eliminar la dependencia.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Borrar la clave del registro destruye la configuración del servicio y no recupera la dependencia.',
+      'Reinstalar la impresora no tiene efecto sobre un servicio que depende de otro detenido.',
+      'Deshabilitar el servicio oculta el síntoma, no resuelve la dependencia.',
+    ],
     explanation:
       'Un servicio no puede funcionar si una dependencia requerida está detenida o ha fallado. Se debe revisar la cadena de dependencias y recuperar primero el servicio del que depende el servicio de impresión.',
     difficulty: 'medium',
@@ -35,6 +41,12 @@ export const block4Questions: Question[] = [
       'Ejecutar sudo apt remove en todos los paquetes antes de volver a instalarlos.',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'apt update solo refresca los índices: no instala ningún paquete.',
+      'apt upgrade necesita índices frescos; ejecutarlo antes no fuerza nada.',
+      '',
+      'apt remove desinstala paquetes: es lo contrario de actualizar.',
+    ],
     explanation:
       'apt update descarga o refresca los índices de paquetes disponibles; no instala versiones nuevas. apt upgrade utiliza esos índices para instalar las actualizaciones disponibles.',
     difficulty: 'easy',
@@ -56,6 +68,12 @@ export const block4Questions: Question[] = [
       'bcdedit /set testsigning off',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'StartComponentCleanup purga componentes obsoletos, no repara la imagen dañada.',
+      'format C: formatea el disco y no es una reparación de componentes protegidos.',
+      'bcdedit cambia la firma de arranque, no el almacén de componentes.',
+    ],
     explanation:
       'RestoreHealth intenta reparar el almacén de componentes de Windows utilizando una fuente de reparación válida. Suele ejecutarse antes de sfc /scannow cuando los archivos protegidos están dañados.',
     difficulty: 'hard',
@@ -72,6 +90,12 @@ export const block4Questions: Question[] = [
       'En Linux, el directorio /srv/portal debe permitir al propietario leer, escribir y recorrer el directorio, al grupo leerlo y recorrerlo, y a los demás usuarios no darle ningún permiso. ¿Qué permiso chmod corresponde?',
     options: ['750', '755', '640', '700'],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El 755 concede lectura y recorrido también a los demás usuarios.',
+      'El 640 quita al grupo el permiso de recorrido, que en un directorio impide acceder a las entradas.',
+      'El 700 deja fuera al grupo, que el enunciado sí necesita.',
+    ],
     explanation:
       'El modo 750 concede rwx al propietario, r-x al grupo y ningún permiso a otros usuarios. Para un directorio, x permite recorrerlo y acceder a las entradas mediante una ruta conocida.',
     difficulty: 'easy',
@@ -93,6 +117,12 @@ export const block4Questions: Question[] = [
       'ipconfig /renew y ping app',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Listar /var/log no da el estado del servicio, y reiniciar el equipo pierde la causa.',
+      'Dar permisos 777 en /etc es una medida de riesgo, no un diagnóstico.',
+      'ipconfig y ping son órdenes de red de Windows, no de servicio en Linux.',
+    ],
     explanation:
       'systemctl status muestra el estado y los errores recientes del servicio; journalctl -u app presenta los mensajes registrados específicamente para esa unidad.',
     difficulty: 'medium',
@@ -114,6 +144,12 @@ export const block4Questions: Question[] = [
       'journalctl -u app',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Un start aislado no deja el servicio habilitado para el próximo arranque.',
+      'disable --now impide precisamente el arranque automático.',
+      'journalctl solo muestra el registro: no inicia ni habilita nada.',
+    ],
     explanation:
       'systemctl enable crea la habilitación persistente y --now también inicia la unidad en ese momento. Un start aislado no garantiza que el servicio vuelva a arrancar tras reiniciar.',
     difficulty: 'medium',
@@ -135,6 +171,12 @@ export const block4Questions: Question[] = [
       'Remove-Item C:\\Windows\\System32\\drivers\\*',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Get-Process lista procesos, no eventos.',
+      'Get-ChildItem lista el contenido de un directorio.',
+      '',
+      'Remove-Item borra archivos: es lo contrario de consultar el registro.',
+    ],
     explanation:
       'Get-WinEvent lee los registros de eventos de Windows y permite filtrar por registro, proveedor, nivel o fecha. Get-Process solo muestra procesos y las otras órdenes no consultan el registro Sistema.',
     difficulty: 'easy',
@@ -156,6 +198,12 @@ export const block4Questions: Question[] = [
       'journalctl -u app para retirar el enlace de máscara',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'mask impide el arranque, y reboot no es una orden de systemctl.',
+      'disable no retira la máscara, y borrar /etc dañaría el sistema.',
+      '',
+      'journalctl no elimina el enlace que crea la máscara.',
+    ],
     explanation:
       'Una unidad enmascarada tiene un enlace que impide su inicio. systemctl unmask elimina esa restricción y enable --now la habilita de forma persistente y la inicia inmediatamente.',
     difficulty: 'hard',
@@ -172,6 +220,12 @@ export const block4Questions: Question[] = [
       'Con tres discos, una organización necesita tolerar la pérdida de uno y aprovechar más espacio que RAID 1 con tres discos. ¿Qué nivel RAID cumple ambas condiciones?',
     options: ['RAID 5', 'RAID 0', 'RAID 1', 'RAID 6'],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'RAID 0 no tolera ninguna pérdida: sin paridad no hay redundancia.',
+      'RAID 1 con tres discos ofrece tres copias y aprovecha menos capacidad útil.',
+      'RAID 6 tolera dos fallos y necesita al menos cuatro discos.',
+    ],
     explanation:
       'RAID 5 distribuye los datos y una paridad entre al menos tres discos y tolera la caída de uno. RAID 1 con tres discos ofrece tres copias de la misma información y aprovecha menos capacidad útil.',
     difficulty: 'medium',
@@ -193,6 +247,12 @@ export const block4Questions: Question[] = [
       'Tres copias de los datos, en dos tipos de soporte, con al menos una copia fuera de las instalaciones.',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'La regla habla de copias, soportes y ubicaciones, no de carpetas ni usuarios.',
+      'Exigir que una copia esté en el mismo servidor la deja expuesta a la misma pérdida.',
+      'Habla de copias, no de años de retención.',
+      '',
+    ],
     explanation:
       'La regla 3-2-1 exige tres copias, dos medios o tecnologías diferentes y una copia fuera de las instalaciones; esa copia puede mantenerse sin conexión para dificultar su modificación.',
     difficulty: 'easy',
@@ -209,6 +269,12 @@ export const block4Questions: Question[] = [
       'Una copia completa se realiza el domingo. Las copias del lunes y del martes contienen solo los datos modificados desde la última copia completa. ¿Qué tipo de copia es la del martes?',
     options: ['Diferencial', 'Incremental', 'Completa', 'Mirror'],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'La incremental incluiría solo lo modificado desde la copia anterior, no desde la completa.',
+      'Una completa replica todo el conjunto en ese momento.',
+      'Mirror replica de forma continua y no encaja con copias de domingo a martes.',
+    ],
     explanation:
       'Una copia diferencial contiene solo los bloques o archivos modificados desde la última copia completa. Para restaurar el estado del martes se necesitan la copia completa del domingo y la diferencial del martes.',
     difficulty: 'medium',
@@ -230,6 +296,12 @@ export const block4Questions: Question[] = [
       'Una copia de seguridad en cinta sin hipervisor',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Una impresora compartida no entrega un escritorio por red.',
+      'Un clúster de Ethernet es solo conectividad, sin sistema de visualización.',
+      'Una copia en cinta es un respaldo, no un entorno de escritorio centralizado.',
+    ],
     explanation:
       'La virtualización de escritorios ejecuta o entrega entornos de usuario en infraestructura centralizada y facilita su gestión. Se distingue de ejecutar aplicaciones en un puesto local, aunque ambas técnicas pueden combinarse.',
     difficulty: 'medium',
@@ -251,6 +323,12 @@ export const block4Questions: Question[] = [
       'RAID 1 sin copias de seguridad ni registro de transacciones.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Sin registros de transacciones no se puede reconstruir un instante intermedio.',
+      'Una exportación en CSV no conserva el estado interno de la base ni permite restaurar un momento concreto.',
+      'RAID 1 evita perder un disco, no un cambio no deseado: la corrupción se replicó.',
+    ],
     explanation:
       'Una copia completa establece la base de recuperación y el WAL o registro de transacciones permite reconstruir cambios posteriores hasta un punto temporal determinado, siempre que las copias necesarias estén disponibles.',
     difficulty: 'hard',
@@ -272,6 +350,12 @@ export const block4Questions: Question[] = [
       'La instantánea cifra automáticamente todos los archivos y solo puede descifrarse con la contraseña del usuario.',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Una instantánea en el mismo almacén no sobrevive a la pérdida de ese almacén.',
+      '',
+      'Debe conservar todo el estado de la máquina, no solo datos de red.',
+      'Cifrar y descifrar no es la propiedad que define una instantánea.',
+    ],
     explanation:
       'Una instantánea permite volver a un estado anterior, pero no necesariamente crea una copia independiente. Si comparte almacenamiento o depende del mismo hipervisor, una avería o un ransomware puede afectarla; una copia de seguridad debe probarse y conservarse con esa separación.',
     difficulty: 'hard',
@@ -288,6 +372,12 @@ export const block4Questions: Question[] = [
       'Un servidor de almacenamiento presenta un volumen de bloque a varios hosts mediante iSCSI. ¿Qué puerto TCP se asocia habitualmente a la conexión con el destino iSCSI?',
     options: ['2049', '3260', '161', '445'],
     correctIndex: 1,
+    optionNotes: [
+      'El 2049 corresponde a NFS.',
+      '',
+      'El 161 es el agente SNMP, usado para gestión y no para bloques.',
+      'El 445 corresponde a SMB sobre TCP.',
+    ],
     explanation:
       'iSCSI utiliza habitualmente TCP 3260 para acceder al destino. El 2049 corresponde a NFS, el 161 al agente SNMP y el 445 a SMB sobre TCP.',
     difficulty: 'easy',
@@ -309,6 +399,12 @@ export const block4Questions: Question[] = [
       'RPO de 15 minutos y RTO de 2 horas',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Intercambia los dos valores: el RPO se mide hacia atrás y el RTO hacia delante.',
+      'El RTO es el tiempo de recuperación, aquí dos horas, no quince minutos.',
+      'El RPO de quince minutos no es el tiempo de recuperación del servicio.',
+      '',
+    ],
     explanation:
       'El RPO mide hacia atrás cuánto tiempo de cambios se acepta perder y el RTO mide hacia delante cuánto tiempo se admite tardar en recuperar el servicio. Aquí corresponden 15 minutos y 2 horas, respectivamente; la opción correcta es la que los asigna en ese orden.',
     difficulty: 'medium',
@@ -325,6 +421,12 @@ export const block4Questions: Question[] = [
       'Un servidor de correo entrega un mensaje a otro servidor de correo de Internet. ¿Qué puerto TCP se utiliza habitualmente para esa transferencia entre servidores?',
     options: ['25', '587', '993', '995'],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El 587 es para el envío autenticado desde un cliente, no entre servidores.',
+      'El 993 es IMAP sobre TLS, no SMTP.',
+      'El 995 es POP3 sobre TLS.',
+    ],
     explanation:
       'El puerto 25 es el puerto SMTP habitual para la entrega servidor a servidor. El 587 se emplea normalmente para el envío autenticado desde un cliente hacia un servidor de correo.',
     difficulty: 'easy',
@@ -341,6 +443,12 @@ export const block4Questions: Question[] = [
       'Una persona consulta el mismo buzón desde el portátil y el teléfono y quiere conservar en el servidor las carpetas, los mensajes y el estado de lectura. ¿Qué protocolo debe usar?',
     options: ['IMAP', 'POP3', 'SMTP', 'NTP'],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'POP3 descarga los mensajes y puede borrarlos del servidor.',
+      'SMTP envía correo, no consulta un buzón.',
+      'NTP sincroniza relojes entre sistemas.',
+    ],
     explanation:
       'IMAP mantiene el estado y la estructura del buzón en el servidor y permite sincronizar varios clientes. POP3 suele descargar los mensajes y puede eliminarlos del servidor.',
     difficulty: 'easy',
@@ -362,6 +470,12 @@ export const block4Questions: Question[] = [
       'Asigna automáticamente una dirección IP a cada usuario del dominio.',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'DMARC no cifra el contenido de los mensajes.',
+      '',
+      'DMARC evalúa la autenticación; no sustituye al cliente ni al envío autenticado.',
+      'Asignar direcciones IP es un servicio de nombres o de resolución.',
+    ],
     explanation:
       'DMARC permite indicar una política para los mensajes cuyo dominio autor no supera la autenticación y alineación de ninguno de los dos mecanismos. SPF y DKIM son mecanismos de autenticación evaluados por DMARC.',
     difficulty: 'hard',
@@ -383,6 +497,12 @@ export const block4Questions: Question[] = [
       'Es necesariamente un dispositivo de red que sustituye al conmutador.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Incluir su propio núcleo es lo propio de una máquina virtual.',
+      'El aislamiento se logra con espacios de nombres, sin necesitar una CPU física exclusiva.',
+      'Un contenedor es una unidad de ejecución, no un dispositivo de red.',
+    ],
     explanation:
       'Los contenedores usan mecanismos del sistema operativo para aislar procesos, memoria y sistemas de archivos, pero comparten el núcleo del anfitrión. Las máquinas virtuales sí incluyen su propio sistema operativo y núcleo.',
     difficulty: 'easy',
@@ -404,6 +524,12 @@ export const block4Questions: Question[] = [
       'Eliminar el balanceador y permitir que cada usuario localize una réplica por su cuenta.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Reiniciar réplicas sanas no es reconciliar el estado declarado.',
+      'Un contenedor no se convierte en máquina virtual al desplegarse.',
+      'Quitar el balanceador elimina justamente el control del tráfico hacia instancias sanas.',
+    ],
     explanation:
       'Un orquestador aproxima el estado real al estado declarado: crea las réplicas necesarias y usa las comprobaciones de disponibilidad para que solo el tráfico dirigido llegue a instancias preparadas.',
     difficulty: 'medium',
@@ -420,6 +546,12 @@ export const block4Questions: Question[] = [
       'Un cliente móvil se conecta a un buzón con IMAP sobre TLS implícito, sin usar STARTTLS. ¿Qué puerto TCP suele utilizar?',
     options: ['TCP 993', 'TCP 143', 'TCP 110', 'TCP 587'],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El 143 es IMAP en claro, protegido con STARTTLS y no con TLS implícito.',
+      'El 110 es POP3 en claro.',
+      'El 587 es SMTP con envío autenticado.',
+    ],
     explanation:
       'IMAP sobre TLS implícito utiliza habitualmente TCP 993. El 143 se asocia a IMAP en claro y normalmente se protege con STARTTLS; el 995 corresponde a POP3 sobre TLS y el 587 a la entrega autenticada de correo.',
     difficulty: 'easy',
@@ -441,6 +573,12 @@ export const block4Questions: Question[] = [
       'La imagen y el contenedor son dos nombres para el mismo volumen de datos del anfitrión.',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'La imagen no es un proceso en ejecución: es una plantilla de solo lectura.',
+      'Un contenedor no es una máquina virtual con núcleo propio.',
+      '',
+      'Ni la imagen ni el contenedor son un volumen de datos del anfitrión.',
+    ],
     explanation:
       'Una imagen de contenedor describe capas versionadas que se reutilizan para crear instancias. Al ejecutar una se obtiene un contenedor con proceso, recursos y capa de escritura, aislado del resto mediante los mecanismos del sistema anfitrión.',
     difficulty: 'medium',
@@ -462,6 +600,12 @@ export const block4Questions: Question[] = [
       'Gestionar la clave fuera de la imagen, inyectarla en tiempo de ejecución y ejecutar con el menor privilegio necesario.',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Una capa de la imagen viaja con ella, y el modo privilegiado anula el aislamiento.',
+      'Montar todo el sistema del anfitrión y ejecutarlo como root amplía el alcance de un compromiso.',
+      'Cifrar el registro no evita que quien consiga la clave lea el secreto.',
+      '',
+    ],
     explanation:
       'Las imágenes y sus capas pueden distribuirse o quedar en caché, por lo que no deben contener secretos. Un gestor de secretos o montaje en tiempo de ejecución, junto con usuario sin privilegios y capacidades reducidas, limita la exposición.',
     difficulty: 'hard',
