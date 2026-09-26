@@ -1,7 +1,5 @@
 import { useRef, useState } from 'react'
 import type { AppView, StudySettings, TrainerState } from '../domain/types'
-import type { CloudAuth } from '../hooks/useSupabaseAuth'
-import type { CloudSyncController } from '../hooks/useCloudSync'
 import {
   BAQUEDANO_URL,
   CONTENT_VERSION,
@@ -16,8 +14,6 @@ import { Icon } from '../components/Icons'
 import { Button, Modal, PageHeader, Tag } from '../components/UI'
 
 interface SettingsPageProps {
-  auth: CloudAuth
-  cloud: CloudSyncController
   state: TrainerState
   settings: StudySettings
   storageAvailable: boolean
@@ -28,8 +24,6 @@ interface SettingsPageProps {
 }
 
 export function SettingsPage({
-  auth,
-  cloud,
   state,
   settings,
   storageAvailable,
@@ -40,10 +34,6 @@ export function SettingsPage({
 }: SettingsPageProps) {
   const [showReset, setShowReset] = useState(false)
   const [message, setMessage] = useState('')
-  const [cloudMessage, setCloudMessage] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [authBusy, setAuthBusy] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const validation = validateContent(activeQuestions)
   const handleFile = async (file: File | undefined) => {
@@ -55,45 +45,16 @@ export function SettingsPage({
       setMessage('No se pudo importar: el archivo no es compatible.')
     }
   }
-  const handleAuth = async (action: 'signin' | 'signup') => {
-    setAuthBusy(true)
-    setCloudMessage('')
-    try {
-      if (action === 'signin') await auth.signIn(email, password)
-      else await auth.signUp(email, password)
-      setPassword('')
-    } catch (error) {
-      setCloudMessage(
-        error instanceof Error ? error.message : 'No se pudo completar la cuenta.',
-      )
-    } finally {
-      setAuthBusy(false)
-    }
-  }
-  const handleSignOut = async () => {
-    setAuthBusy(true)
-    setCloudMessage('')
-    try {
-      await auth.signOut()
-    } catch (error) {
-      setCloudMessage(
-        error instanceof Error ? error.message : 'No se pudo cerrar la sesión.',
-      )
-    } finally {
-      setAuthBusy(false)
-    }
-  }
-
   return (
     <div className="page-stack">
       <PageHeader
         eyebrow="Ajustes y datos"
         title="Tu preparación, bajo control."
-        description="Por defecto, tu progreso se guarda en este navegador. Si activas la cuenta, puedes sincronizarlo de forma opcional."
+        description="Todo se guarda en este navegador. Exporta una copia antes de limpiar el dispositivo o cambiar de equipo."
         action={
-          <Tag tone={auth.user ? 'purple' : 'success'}>
+          <Tag tone="success">
             <span className="status-dot" />
-            {auth.user ? 'Local + nube' : 'Guardado local'}
+            Guardado local
           </Tag>
         }
       />
@@ -162,9 +123,8 @@ export function SettingsPage({
           <div className="settings-note">
             <Icon name="info" size={16} />
             <span>
-              El progreso se guarda localmente. Si inicias sesión y pulsas
-              sincronizar, se envían únicamente tus ajustes, intentos y repasos
-              al servicio Supabase configurado; no se envía tu correo.
+              El progreso no contiene datos personales ni se envía a ningún
+              servidor.
             </span>
           </div>
         </section>
@@ -234,132 +194,6 @@ export function SettingsPage({
           </div>
         </section>
       </div>
-      <section className="panel cloud-panel">
-        <div className="panel-heading">
-          <div>
-            <span className="section-kicker">Cuenta y sincronización</span>
-            <h2>Guarda tu progreso donde quieras</h2>
-          </div>
-          <span className="panel-icon panel-icon-purple">
-            <Icon name="user" size={20} />
-          </span>
-        </div>
-        {!auth.configured ? (
-          <div className="cloud-disabled">
-            <Icon name="info" size={18} />
-            <div>
-              <strong>Sincronización desactivada</strong>
-              <p>
-                La app sigue funcionando solo con este navegador. Para activar
-                Supabase, configura <code>VITE_SUPABASE_URL</code> y{' '}
-                <code>VITE_SUPABASE_ANON_KEY</code> en el entorno de despliegue.
-              </p>
-            </div>
-          </div>
-        ) : auth.user ? (
-          <div className="cloud-account">
-            <div className="cloud-user">
-              <span className="cloud-avatar">
-                <Icon name="user" size={18} />
-              </span>
-              <div>
-                <strong>{auth.user.email ?? 'Cuenta conectada'}</strong>
-                <small>
-                  La nube solo se actualiza cuando pulsas sincronizar.
-                </small>
-              </div>
-            </div>
-            <div className="cloud-actions">
-              <Button
-                disabled={cloud.phase === 'syncing'}
-                icon="refresh"
-                onClick={() => void cloud.syncNow()}
-              >
-                {cloud.phase === 'syncing' ? 'Sincronizando...' : 'Sincronizar ahora'}
-              </Button>
-              <Button
-                disabled={authBusy}
-                onClick={() => void handleSignOut()}
-                variant="ghost"
-              >
-                Cerrar sesión
-              </Button>
-            </div>
-            {cloud.lastSyncedAt ? (
-              <small className="cloud-sync-time">
-                Última sincronización:{' '}
-                {new Intl.DateTimeFormat('es-ES', {
-                  dateStyle: 'short',
-                  timeStyle: 'short',
-                }).format(new Date(cloud.lastSyncedAt))}
-              </small>
-            ) : null}
-          </div>
-        ) : (
-          <div className="cloud-auth">
-            {auth.status === 'loading' ? (
-              <p className="muted-copy">Comprobando la sesión...</p>
-            ) : (
-              <>
-                <p className="muted-copy">
-                  Crea una cuenta para sincronizar ajustes, intentos y repasos
-                  entre dispositivos. La clave anonima viaja en el bundle; nunca
-                  subas una clave de servicio.
-                </p>
-                <div className="cloud-auth-grid">
-                  <label className="field-label">
-                    Correo electrónico
-                    <input
-                      autoComplete="email"
-                      onChange={(event) => setEmail(event.target.value)}
-                      type="email"
-                      value={email}
-                    />
-                  </label>
-                  <label className="field-label">
-                    Contraseña
-                    <input
-                      autoComplete="current-password"
-                      minLength={8}
-                      onChange={(event) => setPassword(event.target.value)}
-                      type="password"
-                      value={password}
-                    />
-                  </label>
-                </div>
-                <div className="cloud-actions">
-                  <Button
-                    disabled={authBusy || !email || password.length < 8}
-                    icon="user"
-                    onClick={() => void handleAuth('signin')}
-                  >
-                    Entrar
-                  </Button>
-                  <Button
-                    disabled={authBusy || !email || password.length < 8}
-                    onClick={() => void handleAuth('signup')}
-                    variant="secondary"
-                  >
-                    Crear cuenta
-                  </Button>
-                </div>
-              </>
-            )}
-          </div>
-        )}
-        {auth.notice ? (
-          <div className="form-success">
-            <Icon name="check" size={15} />
-            {auth.notice}
-          </div>
-        ) : null}
-        {cloudMessage || auth.error || cloud.error ? (
-          <div className="form-error">
-            <Icon name="info" size={15} />
-            {cloudMessage || auth.error || cloud.error}
-          </div>
-        ) : null}
-      </section>
       <section className="panel content-health">
         <div className="panel-heading">
           <div>

@@ -4,14 +4,6 @@ import { STATE_VERSION } from '../data/syllabus'
 export const STORAGE_KEY = 'tai-entrenador:state'
 export const BACKUP_KEY = 'tai-entrenador:state:backup'
 
-export function stateStorageKey(ownerId?: string | null): string {
-  return ownerId ? `${STORAGE_KEY}:${ownerId}` : STORAGE_KEY
-}
-
-function backupStorageKey(ownerId?: string | null): string {
-  return ownerId ? `${BACKUP_KEY}:${ownerId}` : BACKUP_KEY
-}
-
 function defaultExamDate(): string {
   const date = new Date()
   date.setDate(date.getDate() + 180)
@@ -54,7 +46,7 @@ export function isTrainerState(value: unknown): value is TrainerState {
   )
 }
 
-export function loadTrainerState(ownerId?: string | null): {
+export function loadTrainerState(): {
   state: TrainerState
   recovered: boolean
 } {
@@ -62,29 +54,14 @@ export function loadTrainerState(ownerId?: string | null): {
   if (typeof window === 'undefined' || !window.localStorage) {
     return { state: fallback, recovered: false }
   }
-  const key = stateStorageKey(ownerId)
-  const backupKey = backupStorageKey(ownerId)
   try {
-    let raw = window.localStorage.getItem(key)
-    if (!raw && ownerId) {
-      const legacy = window.localStorage.getItem(STORAGE_KEY)
-      if (legacy) {
-        window.localStorage.setItem(key, legacy)
-        raw = legacy
-      }
-    }
-    if (!raw) {
-      const backup = window.localStorage.getItem(backupKey)
-      if (!backup) return { state: fallback, recovered: false }
-      const parsed: unknown = JSON.parse(backup)
-      if (isTrainerState(parsed)) return { state: parsed, recovered: true }
-      return { state: fallback, recovered: true }
-    }
+    const raw = window.localStorage.getItem(STORAGE_KEY)
+    if (!raw) return { state: fallback, recovered: false }
     const parsed: unknown = JSON.parse(raw)
     if (isTrainerState(parsed)) return { state: parsed, recovered: false }
   } catch {
     try {
-      const backup = window.localStorage.getItem(backupKey)
+      const backup = window.localStorage.getItem(BACKUP_KEY)
       if (backup) {
         const parsed: unknown = JSON.parse(backup)
         if (isTrainerState(parsed)) return { state: parsed, recovered: true }
@@ -96,21 +73,16 @@ export function loadTrainerState(ownerId?: string | null): {
   return { state: fallback, recovered: true }
 }
 
-export function saveTrainerState(
-  state: TrainerState,
-  ownerId?: string | null,
-): boolean {
+export function saveTrainerState(state: TrainerState): boolean {
   if (typeof window === 'undefined' || !window.localStorage) return false
-  const key = stateStorageKey(ownerId)
-  const backupKey = backupStorageKey(ownerId)
   const serialized = JSON.stringify({
     ...state,
     lastSavedAt: state.lastSavedAt || new Date().toISOString(),
   })
   try {
-    const current = window.localStorage.getItem(key)
-    if (current) window.localStorage.setItem(backupKey, current)
-    window.localStorage.setItem(key, serialized)
+    const current = window.localStorage.getItem(STORAGE_KEY)
+    if (current) window.localStorage.setItem(BACKUP_KEY, current)
+    window.localStorage.setItem(STORAGE_KEY, serialized)
     return true
   } catch {
     return false

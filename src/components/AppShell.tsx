@@ -6,7 +6,6 @@ interface AppShellProps {
   view: AppView
   onNavigate: (view: AppView) => void
   activeSession: TrainerSession | null
-  cloudEnabled?: boolean
   children: ReactNode
 }
 
@@ -30,7 +29,6 @@ export function AppShell({
   view,
   onNavigate,
   activeSession,
-  cloudEnabled = false,
   children,
 }: AppShellProps) {
   return (
@@ -113,8 +111,7 @@ export function AppShell({
             <span>Ajustes</span>
           </button>
           <div className="local-badge">
-            <span className="online-dot" />
-            {cloudEnabled ? 'Progreso local + nube' : 'Progreso local'}
+            <span className="online-dot" /> Progreso local
           </div>
         </div>
       </aside>

@@ -1,34 +1,33 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import {
+  BACKUP_KEY,
+  STORAGE_KEY,
   createDefaultState,
   loadTrainerState,
   saveTrainerState,
-  stateStorageKey,
 } from './storage'
 
-describe('user-scoped storage', () => {
+describe('local storage', () => {
   beforeEach(() => {
     localStorage.clear()
   })
 
-  it('mantiene estados separados por usuario', () => {
-    const first = createDefaultState()
-    first.settings.targetScore = 80
-    const second = createDefaultState()
-    second.settings.targetScore = 50
-    saveTrainerState(first, 'user-a')
-    saveTrainerState(second, 'user-b')
-    expect(loadTrainerState('user-a').state.settings.targetScore).toBe(80)
-    expect(loadTrainerState('user-b').state.settings.targetScore).toBe(50)
-    expect(stateStorageKey('user-a')).not.toBe(stateStorageKey('user-b'))
+  it('guarda y recupera el estado local', () => {
+    const state = createDefaultState()
+    state.settings.targetScore = 80
+    saveTrainerState(state)
+    expect(loadTrainerState().state.settings.targetScore).toBe(80)
   })
 
-  it('migra el estado local legacy al primer usuario', () => {
-    const legacy = createDefaultState()
-    legacy.settings.targetScore = 65
-    saveTrainerState(legacy)
-    const loaded = loadTrainerState('new-user')
+  it('recupera una copia válida si la clave principal está dañada', () => {
+    const state = createDefaultState()
+    state.settings.targetScore = 65
+    saveTrainerState(state)
+    saveTrainerState({ ...state, settings: { ...state.settings, targetScore: 50 } })
+    localStorage.setItem(STORAGE_KEY, '{roto')
+    const loaded = loadTrainerState()
+    expect(loaded.recovered).toBe(true)
     expect(loaded.state.settings.targetScore).toBe(65)
-    expect(localStorage.getItem(stateStorageKey('new-user'))).not.toBeNull()
+    expect(localStorage.getItem(BACKUP_KEY)).not.toBeNull()
   })
 })
