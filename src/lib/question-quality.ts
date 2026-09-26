@@ -146,3 +146,4 @@ export const countByKind = (questions: Question[]) => {
   }
   return totals
 }
+

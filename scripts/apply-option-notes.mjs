@@ -19,8 +19,33 @@ for (const [id, list] of Object.entries(notes)) {
     problems.push(`${id}: debe haber exactamente una nota vacía, hay ${empty}`)
   }
   for (const note of list) {
-    if (!/^[\x20-\x7E\u00C0-\u024F\u2010-\u203A¡¿·—’“”€]*$/u.test(note)) {
-      problems.push(`${id}: la nota tiene caracteres inesperados: ${note.slice(0, 40)}`)
+    // Rangos que solo aparecen por corrupcion: cirilico, chino y el mojibake
+    // tipico de un texto UTF-8 leido como latin-1. Se permiten signos
+    // matematicos y alfabetos griegos, que son legitimos en este temario.
+    if (/[\u0400-\u04FF\u3000-\u303F\u4E00-\u9FFF\uFF00-\uFFEF]/.test(note)) {
+      problems.push(`${id}: la nota contiene caracteres de otro alfabeto: ${note.slice(0, 40)}`)
+    }
+    if (/[\u00C3\u00C2][\u0080-\u00BF]/.test(note)) {
+      problems.push(`${id}: la nota parece texto mal codificado: ${note.slice(0, 40)}`)
+    }
+    // Palas inglesas que se han colado de verdad al escribir estas notas.
+    // Lista corta y concreta: un filtro general de palabras seria inútil
+    // porque marcaria todo el español normal.
+    const inglesas = [
+      'player', 'string', 'safety', 'waiting', 'magic', 'correct', 'answer',
+      'journey', 'ignore', 'master', 'opening', 'share', 'spare', 'employee',
+      'employees', 'affected', 'equality', 'levine', 'situations', 'sovereignty',
+      'candidate', 'candidates', 'approach', 'escape', 'journeys', 'record',
+      'owner', 'match', 'scale', 'reset', 'source', 'target', 'point', 'label',
+      'block', 'shift', 'sprite', 'render', 'commit', 'smart',
+      'bright', 'please', 'simple',
+    ]
+    for (const word of note.match(/[A-Za-z]{4,}/g) ?? []) {
+      if (inglesas.includes(word.toLowerCase())) {
+        problems.push(
+          `${id}: palabra no esperada "${word}" en "${note.slice(0, 45)}"`,
+        )
+      }
     }
   }
 }

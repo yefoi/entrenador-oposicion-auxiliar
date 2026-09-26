@@ -9,6 +9,12 @@ export const block2Questions: Question[] = [
       'En una representación binaria de 8 bits sin signo, ¿cuál es el mayor valor decimal que puede codificarse?',
     options: ['127', '128', '255', '256'],
     correctIndex: 2,
+    optionNotes: [
+      '127 es el máximo de 7 bits, no de 8.',
+      '128 no se alcanza: es la primera combinación que exige 9 bits.',
+      '',
+      '256 es el número de combinaciones posibles, no un valor representable con 8 bits.',
+    ],
     explanation:
       'Una secuencia de 8 bits tiene 2^8 = 256 combinaciones posibles. Sin signo, esas combinaciones representan desde 0 hasta 255.',
     difficulty: 'easy',
@@ -25,6 +31,12 @@ export const block2Questions: Question[] = [
       'El valor hexadecimal 0x5A, interpretado sin signo, equivale en decimal a:',
     options: ['70', '85', '90', '160'],
     correctIndex: 2,
+    optionNotes: [
+      'Equivale a 0x46: con el dígito 5 en alto la parte alta vale 80, no 70.',
+      'Equivale a 0x55: el dígito A vale 10, no 5.',
+      '',
+      'Equivale a 0xA0: se han intercambiado las posiciones de los dígitos.',
+    ],
     explanation:
       'Cada dígito hexadecimal vale cuatro bits: 5 × 16 = 80 y A = 10. Por tanto, 0x5A = 80 + 10 = 90.',
     difficulty: 'easy',
@@ -46,6 +58,12 @@ export const block2Questions: Question[] = [
       'Cualquier dispositivo conectado a una red, con independencia de su función.',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'CPU, RAM y bus son solo partes del sistema, no su definición.',
+      '',
+      'Una aplicación aislada sin hardware ni información no es un sistema de información.',
+      'Un dispositivo conectado a una red es un elemento, no un sistema completo.',
+    ],
     explanation:
       'Un sistema de información integra recursos técnicos y organizativos para gestionar información; no se reduce a un único componente.',
     difficulty: 'easy',
@@ -67,6 +85,12 @@ export const block2Questions: Question[] = [
       'El controlador de red',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'La unidad de control coordina la ejecución de la instrucción, no opera sobre los datos.',
+      '',
+      'La memoria CMOS guarda configuración, no ejecuta operaciones aritméticas.',
+      'El controlador de red gestiona la comunicación, no la instrucción en curso.',
+    ],
     explanation:
       'La unidad aritmético-lógica ejecuta sumas, comparaciones y otras operaciones lógicas. La unidad de control coordina la ejecución de las instrucciones.',
     difficulty: 'easy',
@@ -88,6 +112,12 @@ export const block2Questions: Question[] = [
       'Un disco HDD',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'La ROM conserva el contenido aunque se apague el equipo.',
+      'Una memoria SSD es no volátil.',
+      '',
+      'Un disco HDD conserva los datos sin alimentación.',
+    ],
     explanation:
       'La RAM necesita alimentación continua para mantener su contenido. La ROM, las memorias SSD y los discos HDD conservan sus datos sin alimentación.',
     difficulty: 'easy',
@@ -104,6 +134,12 @@ export const block2Questions: Question[] = [
       'En el ASCII estándar de 7 bits, ¿cuántos caracteres distintos se pueden codificar?',
     options: ['64', '128', '256', '1.024'],
     correctIndex: 1,
+    optionNotes: [
+      '64 correspondería a un código de 6 bits.',
+      '',
+      '256 es el total de la extensión de 8 bits, no del ASCII original de 7 bits.',
+      'El ASCII de 7 bits no tiene 1.024 caracteres: 1.024 exigiría 10 bits.',
+    ],
     explanation:
       'Un ASCII de 7 bits dispone de 2^7 = 128 combinaciones, identificadas con los valores 0 a 127. Las extensiones de 8 bits no forman parte del ASCII original.',
     difficulty: 'easy',
@@ -120,6 +156,12 @@ export const block2Questions: Question[] = [
       'Si un bus de datos transfiere 32 bits en una operación, ¿cuántos bytes contiene esa transferencia?',
     options: ['1', '2', '4', '8'],
     correctIndex: 2,
+    optionNotes: [
+      'Un byte son 8 bits.',
+      '2 bytes son 16 bits.',
+      '',
+      '8 bytes serían 64 bits, no 32.',
+    ],
     explanation:
       'Cada byte ocupa 8 bits, por lo que una transferencia de 32 bits equivale a 32 ÷ 8 = 4 bytes.',
     difficulty: 'easy',
@@ -140,6 +182,12 @@ export const block2Questions: Question[] = [
       'Separa las vías de memoria y de bus destinadas a instrucciones y a datos.',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Memoria y bus único para instrucciones y datos describen la arquitectura de von Neumann.',
+      'Guardar los datos solo en registros no describe la separación de memorias.',
+      'Harvard no exige que instrucción y dato compartan la misma dirección física.',
+      '',
+    ],
     explanation:
       'La arquitectura de Harvard separa los accesos a la memoria de instrucciones y a la de datos, normalmente mediante buses independientes. Así, obtener la siguiente instrucción y leer un dato pueden solaparse; en von Neumann, ambos compiten por los mismos recursos.',
     difficulty: 'medium',
@@ -161,6 +209,12 @@ export const block2Questions: Question[] = [
       'Un SAI',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El trazador imprime sobre un soporte, no digitaliza documentos.',
+      'Los altavoces reproducen sonido.',
+      'El SAI suministra energía cuando falla la alimentación.',
+    ],
     explanation:
       'El escáner digitaliza páginas mediante un sensor y genera una representación de su imagen. El trazador imprime; los altavoces reproducen sonido y el SAI suministra energía.',
     difficulty: 'easy',
@@ -182,6 +236,12 @@ export const block2Questions: Question[] = [
       'Utiliza únicamente tinta sólida que se polimeriza dentro de un tubo de la impresora.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Inyectar tinta líquida mediante cabezales térmicos describe una impresora de inyección.',
+      'La sublimación transfiere tinta a un soporte mediante calor: no es el método láser.',
+      'La polimerización dentro de un tubo describe la transferencia térmica, no la láser.',
+    ],
     explanation:
       'En una impresora láser, el tóner se transfiere al papel y se fija al soporte con calor y presión durante la fusión.',
     difficulty: 'easy',
@@ -198,6 +258,12 @@ export const block2Questions: Question[] = [
       'Una pantalla indica una resolución de 1920 × 1080. ¿Cuántos píxeles constituye una imagen que la ocupa por completo?',
     options: ['1.920', '1.080', '2.073.600', '3.000'],
     correctIndex: 2,
+    optionNotes: [
+      '1.920 es el número de píxeles de una fila, no de la imagen completa.',
+      '1.080 es el número de píxeles de una columna, no de la imagen completa.',
+      '',
+      'Sumar las dimensiones no da el total de píxeles: hay que multiplicarlas.',
+    ],
     explanation:
       'El número total de píxeles es el producto de ambas dimensiones: 1.920 × 1.080 = 2.073.600 píxeles.',
     difficulty: 'easy',
@@ -218,6 +284,12 @@ export const block2Questions: Question[] = [
       'Almacenar de forma permanente los archivos de todos los periféricos conectados.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Un concentrador no duplica el ancho de banda: el enlace ascendente sigue siendo compartido.',
+      'No convierte una conexión USB en Ethernet.',
+      'No almacena de forma permanente los archivos de los periféricos conectados.',
+    ],
     explanation:
       'Un concentrador USB ofrece puertos adicionales para conectar dispositivos. El enlace ascendente y su ancho de banda siguen siendo compartidos por los periféricos conectados.',
     difficulty: 'medium',
@@ -238,6 +310,12 @@ export const block2Questions: Question[] = [
       'Su conexión debe ser necesariamente interna y no admite una interfaz USB.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Los platos magnéticos y la cabeza física describen un disco HDD.',
+      'Una SSD no depende de la RAM para conservar los datos.',
+      'Una SSD puede conectarse al equipo mediante una interfaz USB.',
+    ],
     explanation:
       'Un SSD almacena los datos en celdas de memoria flash no volátil y no utiliza platos ni cabezales móviles. Puede conectarse al equipo mediante interfaces como USB.',
     difficulty: 'easy',
@@ -253,9 +331,15 @@ export const block2Questions: Question[] = [
     statement:
       'Al digitalizar una franja de 10 cm con un escáner de 600 píxeles por pulgada, ¿aproximadamente cuántos píxeles se obtienen a lo largo de la franja?',
     options: ['2.362', '2.500', '6.000', '10.000'],
-    correctIndex: 1,
+    correctIndex: 0,
+    optionNotes: [
+      '',
+      '2.500 no es el resultado: 10 cm son 3,94 pulgadas, y 3,94 × 600 ≈ 2.362.',
+      '6.000 sale de contar 600 píxeles por centímetro, y la resolución es por pulgada.',
+      '10.000 sale de suponer un píxel por milímetro, sin la conversión a pulgadas.',
+    ],
     explanation:
-      'Una pulgada equivale a 2,54 cm. La franja mide 10 ÷ 2,54 pulgadas y la resolución multiplica esa longitud por 600: aproximadamente 2.362 píxeles.',
+      'Una pulgada equivale a 2,54 cm, así que 10 cm miden 10 / 2,54 ≈ 3,94 pulgadas. Al multiplicar por la resolución: 3,94 × 600 ≈ 2.362 píxeles a lo largo de la franja.',
     difficulty: 'hard',
     source: 'generated',
     sourceLabel: 'Banco propio · práctica no oficial',
@@ -274,6 +358,12 @@ export const block2Questions: Question[] = [
       'Es un estándar de impresión que sustituye al controlador de la impresora.',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'M.2 es un formato físico, no un protocolo que cifre el tráfico.',
+      'M.2 no es un tipo de memoria: describe el formato del módulo.',
+      '',
+      'M.2 no es un estándar de impresión ni sustituye al controlador.',
+    ],
     explanation:
       'M.2 describe el formato físico del módulo, no un protocolo de almacenamiento por sí solo. Según sus características y el equipo, puede utilizar una interfaz SATA o una conexión PCIe; sobre PCIe puede emplear el protocolo NVMe.',
     difficulty: 'medium',
@@ -295,6 +385,12 @@ export const block2Questions: Question[] = [
       'La cinta debe desplazarse hasta esa posición, por lo que el acceso directo suele ser más lento que en un disco.',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'La cinta no direcciona bloques, pero eso no impide recuperar el archivo.',
+      'El acceso a la cinta es secuencial, no aleatorio.',
+      'No hace falta cargar la cinta en RAM para leerla.',
+      '',
+    ],
     explanation:
       'En una cinta, los datos se recuperan avanzando o rebobinando hasta la posición correspondiente. Una vez colocada la cinta en esa posición, la lectura secuencial es eficiente, pero acceder directamente a un punto lejano exige desplazar el soporte.',
     difficulty: 'medium',
@@ -311,6 +407,12 @@ export const block2Questions: Question[] = [
       'Una pila contiene [2, 5, 8], con 8 en la cima. Se inserta 11 y después se extraen dos elementos. ¿Qué valores se extraen, en ese orden?',
     options: ['8 y 5', '11 y 8', '5 y 2', '2 y 5'],
     correctIndex: 1,
+    optionNotes: [
+      'En una pila el último insertado es el primero que sale, así que 11 sale antes que 8.',
+      '',
+      'Es el orden de una cola, no de una pila.',
+      'Una pila no devuelve los elementos en orden de inserción.',
+    ],
     explanation:
       'Una pila aplica LIFO: el último elemento insertado es el primero que sale. Tras insertar 11, las dos extracciones son 11 y después 8.',
     difficulty: 'easy',
@@ -327,6 +429,12 @@ export const block2Questions: Question[] = [
       'Una cola contiene [A, B, C]. Se encolan D y E y luego se desencolan dos elementos. ¿Qué contenido queda, de principio a fin?',
     options: ['[C, D, E]', '[E, D, C]', '[A, B, C]', '[D, E, A]'],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Es el orden de una pila, no de una cola.',
+      'Una cola no devuelve los elementos en orden inverso al de entrada.',
+      'Al desencolar dos elementos de [A, B, C, D, E] salen A y B, no A y B en otro orden.',
+    ],
     explanation:
       'Una cola aplica FIFO: sale primero el elemento que entró antes. Se eliminan A y B, por lo que permanecen C, D y E en ese orden.',
     difficulty: 'easy',
@@ -348,6 +456,12 @@ export const block2Questions: Question[] = [
       'En el mismo orden en que se insertaron las claves.',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'El orden descendente corresponde al recorrido en postorden.',
+      '',
+      'El recorrido por niveles corresponde al recorrido en anchura.',
+      'El inorden no reproduce el orden de inserción de las claves.',
+    ],
     explanation:
       'El recorrido inorden visita el subárbol izquierdo, después el nodo actual y finalmente el subárbol derecho. Esa secuencia produce las claves en orden ascendente.',
     difficulty: 'medium',
@@ -364,6 +478,12 @@ export const block2Questions: Question[] = [
       '¿Cuál es la complejidad de la búsqueda binaria en el peor caso sobre un arreglo ordenado de n elementos?',
     options: ['Θ(1)', 'Θ(n)', 'Θ(log₂ n)', 'Θ(n log₂ n)'],
     correctIndex: 2,
+    optionNotes: [
+      'La búsqueda binaria no resuelve el problema en una sola comparación.',
+      'Un orden lineal sería Θ(n), que es el peor caso de una búsqueda secuencial.',
+      '',
+      'Θ(n log n) es el coste de una ordenación por comparación, no de una búsqueda binaria.',
+    ],
     explanation:
       'La búsqueda binaria reduce a la mitad el intervalo candidato en cada comparación, por lo que su peor caso es del orden Θ(log₂ n).',
     difficulty: 'medium',
@@ -385,6 +505,12 @@ export const block2Questions: Question[] = [
       'Desplazamiento 6.001',
     ],
     correctIndex: 2,
+    optionNotes: [
+      '1.200 corresponde a la posición 10, no a la 50.',
+      '5.980 corresponde a la posición 49.',
+      '',
+      '6.001 sería la posición 50 si el primer byte ocupara el desplazamiento 1.',
+    ],
     explanation:
       'Al ser de longitud fija, el desplazamiento se obtiene multiplicando la posición por el tamaño: 50 × 120 = 6.000 bytes.',
     difficulty: 'hard',
@@ -406,6 +532,12 @@ export const block2Questions: Question[] = [
       'Ordenar de nuevo la lista, porque una lista doblemente enlazada no admite operaciones locales.',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Recorrer y reindexar la lista es innecesario para eliminar un nodo intermedio.',
+      '',
+      'Copiar el nodo al final rompe el orden de la lista.',
+      'Una lista doblemente enlazada admite operaciones locales en Θ(1).',
+    ],
     explanation:
       'Las referencias prev(X) y next(X) localizan los vecinos de X. Basta asignar next(prev(X)) = next(X) y prev(next(X)) = prev(X); actualizar un número constante de referencias elimina el nodo en Θ(1), sin recorrer la lista.',
     difficulty: 'medium',
@@ -427,6 +559,12 @@ export const block2Questions: Question[] = [
       'Es necesariamente el vértice cuya etiqueta numérica sea mayor.',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'BFS no busca la ruta más larga: para eso haría falta otro recorrido.',
+      'BFS no necesita recorrer ciclos para alcanzar un vértice nuevo.',
+      '',
+      'El orden de descubrimiento depende de la distancia a S, no de la etiqueta del vértice.',
+    ],
     explanation:
       'BFS explora por niveles: primero los vértices a una arista de S, después a dos aristas, y así sucesivamente. Por ello, el primer encuentro de v corresponde a una ruta con el menor número de aristas.',
     difficulty: 'medium',
@@ -448,6 +586,12 @@ export const block2Questions: Question[] = [
       'Se espera O(1) por búsqueda, pero puede ser Θ(n) en el peor caso si muchas claves colisionan en un mismo cubo.',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Una buena dispersión no garantiza Θ(log n) si se acumulan colisiones en un cubo.',
+      'Ninguna función de dispersión puede impedir por completo las colisiones.',
+      'Θ(1) es el coste esperado, no el peor caso.',
+      '',
+    ],
     explanation:
       'Una buena dispersión y una carga adecuada hacen que el coste esperado por búsqueda sea constante, O(1). Las colisiones no quedan totalmente excluidas; si se acumulan n claves en un cubo, localizarlas puede exigir Θ(n).',
     difficulty: 'hard',

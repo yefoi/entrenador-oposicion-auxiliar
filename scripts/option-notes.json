@@ -1,194 +1,146 @@
 {
-  "B1-T06-Q01": [
-    "Insertar un dibujo no acredita autoría ni integridad: eso es una imagen, no una firma electrónica.",
+  "B2-T01-Q01": [
+    "127 es el máximo de 7 bits, no de 8.",
+    "128 no se alcanza: es la primera combinación que exige 9 bits.",
     "",
-    "La firma electrónica sí se relaciona con la identidad del firmante y con la integridad del documento.",
-    "Borrar el historial sería lo contrario de garantizar la integridad."
+    "256 es el número de combinaciones posibles, no un valor representable con 8 bits."
   ],
-  "B1-T06-Q02": [
+  "B2-T01-Q02": [
+    "Equivale a 0x46: con el dígito 5 en alto la parte alta vale 80, no 70.",
+    "Equivale a 0x55: el dígito A vale 10, no 5.",
     "",
-    "Un certificado cualificado sí acredita la relación con la persona, no es un valor de imagen.",
-    "Una anotación privada posterior no tiene la misma eficacia que una firma.",
-    "La eficacia no depende de convertir el documento en papel."
+    "Equivale a 0xA0: se han intercambiado las posiciones de los dígitos."
   ],
-  "B1-T06-Q03": [
-    "Una aplicación móvil no emite documentos con fuerza de BOE.",
+  "B2-T01-Q03": [
+    "CPU, RAM y bus son solo partes del sistema, no su definición.",
     "",
-    "El DNI-e no sustituye al registro civil ni elimina los datos de identidad.",
-    "El DNI-e sí acredita la identidad en las actuaciones administrativas."
+    "Una aplicación aislada sin hardware ni información no es un sistema de información.",
+    "Un dispositivo conectado a una red es un elemento, no un sistema completo."
   ],
-  "B1-T06-Q04": [
-    "Digitalizar formularios sin integrar ni asegurar los datos no es una estrategia de transformación.",
+  "B2-T01-Q04": [
+    "La unidad de control coordina la ejecución de la instrucción, no opera sobre los datos.",
     "",
-    "Dependar de un único proveedor privado sin más criterio no transforma la organización.",
-    "Esperar a que la ciudadanía se adapte sin formación ni atención alternativa deja fuera a quien no puede."
+    "La memoria CMOS guarda configuración, no ejecuta operaciones aritméticas.",
+    "El controlador de red gestiona la comunicación, no la instrucción en curso."
   ],
-  "B1-T06-Q05": [
-    "Identificación y firma son cosas distintas, y ninguna exige una firma manuscrita.",
+  "B2-T01-Q05": [
+    "La ROM conserva el contenido aunque se apague el equipo.",
+    "Una memoria SSD es no volátil.",
     "",
-    "La identificación acredita el domicilio, y una firma sin trazabilidad no es una firma electrónica.",
-    "La firma no es un mero mecanismo de notificaciones, y la identificación sí admite medios electrónicos."
+    "Un disco HDD conserva los datos sin alimentación."
   ],
-  "B1-T06-Q06": [
+  "B2-T01-Q06": [
+    "64 correspondería a un código de 6 bits.",
     "",
-    "Una imagen de la firma manuscrita no acredita la autoría del documento.",
-    "Un correo sin certificado no identifica a quien expide.",
-    "Una fotografía previa no conserva relación con el original que se envía."
+    "256 es el total de la extensión de 8 bits, no del ASCII original de 7 bits.",
+    "El ASCII de 7 bits no tiene 1.024 caracteres: 1.024 exigiría 10 bits."
   ],
-  "B1-T06-Q07": [
-    "Un segundo factor no convierte automáticamente la firma en cualificada.",
-    "Cl@ve sí identifica a la persona ante servicios autorizados.",
+  "B2-T01-Q07": [
+    "Un byte son 8 bits.",
+    "2 bytes son 16 bits.",
     "",
-    "El código no sustituye al certificado ni elimina la necesidad de trazabilidad."
+    "8 bytes serían 64 bits, no 32."
   ],
-  "B1-T06-Q08": [
-    "La firma no acredita que el contenido sea cierto ni que la operación sea legal.",
-    "",
-    "La firma no impide que otros lean o modifiquen el archivo, salvo que se use cifrado.",
-    "El certificado no exime de comprobar los requisitos del acto jurídico."
-  ],
-  "B1-T07-Q01": [
-    "",
-    "La cantidad de datos no es una señal de modernidad.",
-    "Conservar todo para siempre no es la forma de evitar errores de interpretación.",
-    "La autorización del responsable no basta: hay que informar a la persona."
-  ],
-  "B1-T07-Q02": [
-    "La retirada solo afecta a lo basado en ese consentimiento, no a otras bases legales.",
-    "",
-    "El consentimiento retirado no se convierte retroactivamente en autorización.",
-    "No se puede cambiar de base legal después sin explicar el cambio."
-  ],
-  "B1-T07-Q03": [
-    "No se entrega todo el expediente: hay que proteger los datos de terceros.",
-    "",
-    "No se rechaza la solicitud porque el dato no se haya declarado falso.",
-    "Los derechos se ejercen también por medios electrónicos."
-  ],
-  "B1-T07-Q04": [
-    "Borrar los registros impide investigar y documentar el incidente.",
-    "",
-    "Comunicarlo primero en redes sociales no sustituye a la notificación legal.",
-    "Esperar a perder la información no hace que el problema desaparezca."
-  ],
-  "B1-T07-Q05": [
-    "Ocultar el algoritmo impide que la decisión se cuestione.",
-    "",
-    "Un algoritmo no sustituye la decisión administrativa ni al funcionario que la adopta.",
-    "La minimización también obliga aquí: no se usa la máxima cantidad de datos por sistema."
-  ],
-  "B1-T07-Q06": [
-    "Que la grabación sea en vía pública no excluye la protección de datos.",
-    "Aparecer en una vía pública no obliga a aceptar cualquier uso.",
-    "Cambiar la finalidad no exige un documento firmado por todos los conductores.",
+  "B2-T01-Q08": [
+    "Memoria y bus único para instrucciones y datos describen la arquitectura de von Neumann.",
+    "Guardar los datos solo en registros no describe la separación de memorias.",
+    "Harvard no exige que instrucción y dato compartan la misma dirección física.",
     ""
   ],
-  "B1-T07-Q07": [
+  "B2-T02-Q01": [
     "",
-    "La obligación legal de conservación prevalece sobre la supresión.",
-    "No se cambia la base jurídica para justificar un borrado.",
-    "Hay que contestar cuando exista la obligación, no esperar a que desaparezca."
+    "El trazador imprime sobre un soporte, no digitaliza documentos.",
+    "Los altavoces reproducen sonido.",
+    "El SAI suministra energía cuando falla la alimentación."
   ],
-  "B1-T07-Q08": [
-    "Una autorización general sin informar de la finalidad no es una base legal válida.",
-    "El control de la ubicación no se limita a contactar fuera de horario.",
+  "B2-T02-Q02": [
     "",
-    "La ubicación del empleado no es un dato de uso ilimitado para su responsable."
+    "Inyectar tinta líquida mediante cabezales térmicos describe una impresora de inyección.",
+    "La sublimación transfiere tinta a un soporte mediante calor: no es el método láser.",
+    "La polimerización dentro de un tubo describe la transferencia térmica, no la láser."
   ],
-  "B1-T08-Q01": [
-    "El registro produce fecha y constancia de recepción, no es una consulta informativa.",
+  "B2-T02-Q03": [
+    "1.920 es el número de píxeles de una fila, no de la imagen completa.",
+    "1.080 es el número de píxeles de una columna, no de la imagen completa.",
     "",
-    "La presentación no sustituye a la resolución sobre el fondo.",
-    "Presentar un documento no lo convierte en administrativo."
+    "Sumar las dimensiones no da el total de píxeles: hay que multiplicarlas."
   ],
-  "B1-T08-Q02": [
-    "El formato único es la regla, salvo que la normativa sectorial exija otra cosa.",
+  "B2-T02-Q04": [
     "",
-    "Un expediente puede abrirse por varias personas autorizadas.",
-    "La impresión no sustituye al documento electrónico original."
+    "Un concentrador no duplica el ancho de banda: el enlace ascendente sigue siendo compartido.",
+    "No convierte una conexión USB en Ethernet.",
+    "No almacena de forma permanente los archivos de los periféricos conectados."
   ],
-  "B1-T08-Q03": [
-    "Si la persona ha elegido canal electrónico, se respeta esa elección.",
+  "B2-T02-Q05": [
     "",
-    "La comunicación interna al funcionario no sustituye a la notificación al interesado.",
-    "La fecha de salida se determina por el sistema, no por una regla fija."
+    "Los platos magnéticos y la cabeza física describen un disco HDD.",
+    "Una SSD no depende de la RAM para conservar los datos.",
+    "Una SSD puede conectarse al equipo mediante una interfaz USB."
   ],
-  "B1-T08-Q04": [
-    "Un antivirus no cierra el ciclo de vida de la seguridad de un sistema.",
+  "B2-T02-Q06": [
     "",
-    "Cerrar el sistema al menor incidente no es una medida de seguridad.",
-    "La seguridad no se delega en exclusiva en el proveedor de hardware."
+    "2.500 no es el resultado: 10 cm son 3,94 pulgadas, y 3,94 × 600 ≈ 2.362.",
+    "6.000 sale de contar 600 píxeles por centímetro, y la resolución es por pulgada.",
+    "10.000 sale de suponer un píxel por milímetro, sin la conversión a pulgadas."
   ],
-  "B1-T08-Q05": [
-    "El color de las pantallas no es lo que hace interoperable a un sistema.",
+  "B2-T02-Q07": [
+    "M.2 es un formato físico, no un protocolo que cifre el tráfico.",
+    "M.2 no es un tipo de memoria: describe el formato del módulo.",
     "",
-    "Las bases aisladas impiden el intercambio y la coordinación.",
-    "Una tecnología propietaria no se convierte en norma obligatoria por el mero hecho de existir."
+    "M.2 no es un estándar de impresión ni sustituye al controlador."
   ],
-  "B1-T08-Q06": [
-    "No es una prohibición absoluta: depende de la autenticidad de la copia.",
-    "El valor del original no basta para exigirlo siempre.",
-    "",
-    "El medio de pago no es lo que determina si se puede pedir el original."
-  ],
-  "B1-T08-Q07": [
-    "El plazo general no es de un mes ni admite prórroga automática.",
-    "",
-    "El plazo no depende de que el procedimiento sea sencillo o no.",
-    "La notificación electrónica no es discrecional: tiene plazo."
-  ],
-  "B1-T08-Q08": [
-    "",
-    "Las medidas se aplican según la categoría de cada sistema, no uniformemente a todos.",
-    "También hay que medir el riesgo si el sistema maneja datos no personales.",
-    "Un seguro no sustituye a las medidas técnicas de seguridad."
-  ],
-  "B1-T09-Q01": [
-    "Un portal de noticias no tiene efectos jurídicos en la actuación electrónica.",
-    "",
-    "Una aplicación privada no sustituye los registros y notificaciones oficiales.",
-    "Una carpeta local sin conexión ni identificación no es una sede electrónica."
-  ],
-  "B1-T09-Q02": [
-    "Concentrar datos personales sin base jurídica vulnera la normativa de protección de datos.",
-    "",
-    "El punto de acceso no sustituye al expediente individual ni decide sobre la solicitud.",
-    "También ofrece servicios de las entidades locales, no solo de la AGE."
-  ],
-  "B1-T09-Q03": [
-    "Cl@ve no reemplaza todos los controles ni la identificación presencial.",
-    "",
-    "Cl@ve es un sistema de identificación y autenticación, no una red social.",
-    "Cl@ve convive con el DNI-e y los certificados, no los impide."
-  ],
-  "B1-T09-Q04": [
-    "Exigir la última versión de la aplicación cuando no se puede usar es una barrera.",
-    "Derivar a una oficina sin tomar ninguna medida no garantiza la igualdad de acceso.",
-    "",
-    "Borrar los datos del expediente no resuelve el problema de acceso."
-  ],
-  "B1-T09-Q05": [
-    "Centralizar datos sin aplicar minimización incumple la normativa de protección de datos.",
-    "",
-    "El usuario no tiene que cambiar de navegador según el proveedor.",
-    "Sin coordinación administrativa no hay infraestructuras comunes."
-  ],
-  "B1-T09-Q06": [
-    "El nombre comercial del producto no identifica al órgano responsable.",
-    "Un enlace a redes sociales no dice quién gestiona la sede ni sus condiciones.",
-    "Una dirección de correo no informa sobre procedimientos ni disponibilidad.",
+  "B2-T02-Q08": [
+    "La cinta no direcciona bloques, pero eso no impide recuperar el archivo.",
+    "El acceso a la cinta es secuencial, no aleatorio.",
+    "No hace falta cargar la cinta en RAM para leerla.",
     ""
   ],
-  "B1-T09-Q07": [
-    "Sustituir todas las sedes por una aplicación privada no es la función del punto de acceso.",
+  "B2-T03-Q01": [
+    "En una pila el último insertado es el primero que sale, así que 11 sale antes que 8.",
     "",
-    "El punto de acceso no copia expedientes ni decide sobre las solicitudes.",
-    "Tampoco automatiza la decisión en ningún organismo."
+    "Es el orden de una cola, no de una pila.",
+    "Una pila no devuelve los elementos en orden de inserción."
   ],
-  "B1-T09-Q08": [
-    "Rechazar por no proceder del DNI-e español contradice el reconocimiento mutuo.",
-    "Exigir siempre una videollamada anula la garantía del medio notificado.",
+  "B2-T03-Q02": [
     "",
-    "El proveedor puede ser una autoridad pública de otro Estado miembro."
+    "Es el orden de una pila, no de una cola.",
+    "Una cola no devuelve los elementos en orden inverso al de entrada.",
+    "Al desencolar dos elementos de [A, B, C, D, E] salen A y B, no A y B en otro orden."
+  ],
+  "B2-T03-Q03": [
+    "El orden descendente corresponde al recorrido en postorden.",
+    "",
+    "El recorrido por niveles corresponde al recorrido en anchura.",
+    "El inorden no reproduce el orden de inserción de las claves."
+  ],
+  "B2-T03-Q04": [
+    "La búsqueda binaria no resuelve el problema en una sola comparación.",
+    "Un orden lineal sería Θ(n), que es el peor caso de una búsqueda secuencial.",
+    "",
+    "Θ(n log n) es el coste de una ordenación por comparación, no de una búsqueda binaria."
+  ],
+  "B2-T03-Q05": [
+    "1.200 corresponde a la posición 10, no a la 50.",
+    "5.980 corresponde a la posición 49.",
+    "",
+    "6.001 sería la posición 50 si el primer byte ocupara el desplazamiento 1."
+  ],
+  "B2-T03-Q06": [
+    "Recorrer y reindexar la lista es innecesario para eliminar un nodo intermedio.",
+    "",
+    "Copiar el nodo al final rompe el orden de la lista.",
+    "Una lista doblemente enlazada admite operaciones locales en Θ(1)."
+  ],
+  "B2-T03-Q07": [
+    "BFS no busca la ruta más larga: esorequeriría backtracking o DFS con memoización.",
+    "BFS no necesita recorrer ciclos para alcanzar un vértice nuevo.",
+    "",
+    "El orden de descubrimiento depende de la distancia a S, no de la etiqueta del vértice."
+  ],
+  "B2-T03-Q08": [
+    "Una buena dispersión no garantiza Θ(log n) si se acumulan colisiones en un cubo.",
+    "Ninguna función de dispersión puede impedir por completo las colisiones.",
+    "Θ(1) es el coste esperado, no el peor caso.",
+    ""
   ]
 }
