@@ -62,6 +62,14 @@ describe('SEO metadata', () => {
     expect(cookies).toContain('TCF 2.2')
   })
 
+  it('publishes a real contact address in both legal pages', () => {
+    for (const page of ['public/privacidad.html', 'public/cookies.html']) {
+      const html = read(page)
+      expect(html).not.toMatch(/REEMPLAZAR|PLACEHOLDER|TODO:/)
+      expect(html).toMatch(/mailto:[^\s"']+@[^"\s']+/)
+    }
+  })
+
   it('covers the four blocks and the 33 syllabus topics with unique slugs', () => {
     expect(blockPages).toHaveLength(4)
     expect(intentPages).toHaveLength(4)
