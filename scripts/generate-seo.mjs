@@ -13,6 +13,8 @@ const adsenseSnippet = adsenseClient
 // Distintivo de CodeHype. Va en el pie de las paginas generadas, que son las
 // que se indexan, y en el de la aplicacion. Enlaza a la ficha del proyecto.
 const codehypeBadge = `<a class="site-badge" href="https://codehype.ai/product/plaza-tai?utm_source=codehype_badge" target="_blank" rel="noopener noreferrer"><img src="https://codehype.ai/badges/plaza-tai.svg?variant=find-us&amp;v=20" alt="Destacado en CodeHype" width="180" height="65" loading="lazy" decoding="async" /></a>`
+// Bandera de Espana dibujada con un degradado, igual que en la aplicacion.
+const flagEs = `<span class="flag-es" aria-hidden="true"></span> `
 const staticPages = [
   { path: '', priority: '1.0' },
   { path: 'guia-tai.html', priority: '0.8' },
@@ -85,7 +87,7 @@ const renderPage = ({
   <body>
     <main class="site-main">
       <header class="site-card">
-        <p class="eyebrow">${escapeHtml(header)}</p>
+        <p class="eyebrow">${flagEs}${escapeHtml(header)}</p>
         <h1>${escapeHtml(title)}</h1>
         <p class="lead">${escapeHtml(intro)}</p>
         <p class="site-cta">${actions}</p>

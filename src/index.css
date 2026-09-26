@@ -179,6 +179,28 @@ a {
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(94, 73, 215, 0.35);
 }
+/* Bandera de Espana civil, tres franjas. Se dibuja con un degradado en lugar
+   de una imagen o un emoji: pesa nada, escala sin pixelarse y se ve igual en
+   la aplicacion y en las paginas estaticas. */
+.flag-es {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 19px;
+  height: 13px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to bottom,
+    #aa151b 0 25%,
+    #f1bf00 25% 75%,
+    #aa151b 75% 100%
+  );
+  box-shadow: inset 0 0 0 1px rgba(37, 34, 56, 0.18);
+}
+.brand-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 .brand strong,
 .mobile-brand strong {
   display: block;

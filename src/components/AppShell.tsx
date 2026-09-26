@@ -91,7 +91,10 @@ export function AppShell({
               <Icon name="target" size={24} />
             </div>
             <div>
-              <strong>Plaza TAI</strong>
+              <span className="brand-name">
+                <strong>Plaza TAI</strong>
+                <span aria-hidden="true" className="flag-es" />
+              </span>
               <span>entrenador AGE</span>
             </div>
           </button>
@@ -184,6 +187,7 @@ export function AppShell({
               <Icon name="target" size={20} />
             </div>
             <strong>Plaza TAI</strong>
+            <span aria-hidden="true" className="flag-es" />
           </div>
           <button
             className="avatar"
