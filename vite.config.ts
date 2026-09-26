@@ -29,6 +29,11 @@ export default defineConfig(({ mode }) => {
           codeSplitting: {
             groups: [
               { name: 'react', test: /node_modules[\\/](react|react-dom|scheduler)[\\/]/ },
+              // El banco de preguntas pesa mas que todo el codigo de la
+              // aplicacion junto. En su propio fragmento se cachea entre
+              // despliegues, porque solo cambia cuando se anaden preguntas,
+              // mientras que el codigo de la aplicacion cambia a menudo.
+              { name: 'banco', test: /src[\\/]data[\\/]questions[\\/]block/ },
             ],
           },
         },
