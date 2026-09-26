@@ -10,6 +10,9 @@ const adsenseClient = process.env.VITE_ADSENSE_CLIENT?.trim()
 const adsenseSnippet = adsenseClient
   ? `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}" crossorigin="anonymous"></script>`
   : ''
+// Distintivo de CodeHype. Va en el pie de las paginas generadas, que son las
+// que se indexan, y en el de la aplicacion. Enlaza a la ficha del proyecto.
+const codehypeBadge = `<a class="site-badge" href="https://codehype.ai/product/plaza-tai?utm_source=codehype_badge" target="_blank" rel="noopener noreferrer"><img src="https://codehype.ai/badges/plaza-tai.svg?variant=find-us&amp;v=20" alt="Destacado en CodeHype" width="180" height="65" loading="lazy" decoding="async" /></a>`
 const staticPages = [
   { path: '', priority: '1.0' },
   { path: 'guia-tai.html', priority: '0.8' },
@@ -104,7 +107,7 @@ const renderPage = ({
           ${list(related, root)}
         </ul>
       </nav>
-      <footer class="site-footer"><p>Plaza TAI · práctica de oposiciones TAI sin registro · <a href="${root}privacidad.html">Privacidad</a> · <a href="${root}cookies.html">Cookies</a></p></footer>
+      <footer class="site-footer"><p>Plaza TAI · práctica de oposiciones TAI sin registro · <a href="${root}privacidad.html">Privacidad</a> · <a href="${root}cookies.html">Cookies</a></p>${codehypeBadge}</footer>
     </main>
   </body>
 </html>

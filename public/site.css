@@ -155,6 +155,20 @@ h2 {
   text-align: center;
 }
 
+.site-badge {
+  display: inline-block;
+  margin-top: 0.75rem;
+}
+
+.site-badge img {
+  display: block;
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  max-height: 65px;
+  border: 0;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --ink: #eceaf6;

@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os'
 import { resolve } from 'node:path'
 import { blockPages, intentPages } from '../scripts/seo-content.mjs'
 import { topicSeo } from '../scripts/seo-topics.mjs'
+import { activeQuestions } from './data/questions'
 
 function read(relativePath: string) {
   return readFileSync(resolve(process.cwd(), relativePath), 'utf8')
@@ -19,6 +20,52 @@ const staticContentPages = [
 ]
 
 describe('SEO metadata', () => {
+  it('no anuncia un tamano de banco que ya no es el real', () => {
+    // Los recuentos estaban escritos a mano en cuatro sitios y se quedaron en
+    // 264 mientras el banco crecia. Un numero viejo en la descripcion que ve
+    // Google es una promesa incumplida, y no habia nada que lo detectara.
+    const real = activeQuestions.length
+    // Estas si afirman el tamano del banco, asi que deben decir el real.
+    const loAfirman = [
+      'index.html',
+      'scripts/seo-content.mjs',
+      'public/preguntas-frecuentes-tai.html',
+    ]
+    // Esta puede no mencionarlo, pero si algun dia lo menciona no debe mentir.
+    const loVigilamos = [...loAfirman, 'public/guia-tai.html']
+    for (const fuente of loVigilamos) {
+      const html = read(fuente)
+      // "de 100 preguntas" describe el simulacro del examen, no el banco, asi
+      // que solo cuentan las menciones sin ese "de" delante.
+      const numeros = [...html.matchAll(/(?<!de )(\d{3,4}) preguntas/g)].map(
+        (m) => Number(m[1]),
+      )
+      for (const numero of numeros) {
+        expect(numero, `${fuente} anuncia ${numero} preguntas y hay ${real}`).toBe(real)
+      }
+    }
+    for (const fuente of loAfirman) {
+      expect(read(fuente), `${fuente} no menciona el tamano del banco`).toContain(
+        `${real} preguntas`,
+      )
+    }
+  })
+
+  it('incluye el distintivo de CodeHype en el HTML que se descarga', () => {
+    // El distintivo es la contrapartida de un backlink, y la verificacion se
+    // hace contra la pagina raiz. Si viviera solo en el pie de React, un
+    // comprobador que no ejecute JavaScript no lo encontraria, asi que ademas
+    // tiene que estar en el HTML estatico.
+    const html = read('index.html')
+    expect(html).toContain('https://codehype.ai/product/plaza-tai?utm_source=codehype_badge')
+    expect(html).toContain('rel="noopener noreferrer"')
+    expect(html).toContain('badges/plaza-tai.svg')
+    const shell = read('src/components/AppShell.tsx')
+    expect(shell).toContain('codehype.ai/product/plaza-tai')
+    const generador = read('scripts/generate-seo.mjs')
+    expect(generador).toContain('codehype.ai/product/plaza-tai')
+  })
+
   it('includes Spanish metadata, social tags and structured data', () => {
     const html = read('index.html')
     expect(html).toContain('lang="es"')
@@ -29,7 +76,6 @@ describe('SEO metadata', () => {
     expect(html).toContain('name="twitter:card"')
     expect(html).toContain('application/ld+json')
     expect(html).toContain('33 temas')
-    expect(html).toContain('264 preguntas')
     expect(html).toContain('boot-screen')
     expect(html).toContain("classList.add('js')")
   })

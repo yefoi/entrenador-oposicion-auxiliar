@@ -205,6 +205,21 @@ export function AppShell({
             <a href="./privacidad.html">Privacidad</a>
             <a href="./cookies.html">Cookies</a>
           </nav>
+          <a
+            className="footer-badge"
+            href="https://codehype.ai/product/plaza-tai?utm_source=codehype_badge"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://codehype.ai/badges/plaza-tai.svg?variant=find-us&v=20"
+              alt="Destacado en CodeHype"
+              width={180}
+              height={65}
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
         </footer>
       </div>
     </div>
