@@ -125,7 +125,7 @@ export const intentPages = [
     path: 'test-oposiciones-tai.html',
     title: 'Test gratis TAI AGE | Practica por bloques',
     description:
-      'Test gratuito de oposiciones TAI con 336 preguntas propias, explicaciones, filtros por bloque y práctica adaptativa.',
+      'Test gratuito de oposiciones TAI con 360 preguntas propias, explicaciones, filtros por bloque y práctica adaptativa.',
     intro:
       'Practica sin cuenta y sin instalar nada. El progreso se guarda en el navegador y puedes filtrar por bloques, temas, dificultad y estado.',
     sections: [
