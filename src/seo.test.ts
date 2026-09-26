@@ -57,9 +57,9 @@ describe('SEO metadata', () => {
     const privacidad = read('public/privacidad.html')
     const cookies = read('public/cookies.html')
     expect(privacidad).toContain('localStorage')
-    expect(privacidad).toContain('No hay cuentas de usuario')
+    expect(privacidad).toContain('sin servidor de cuentas')
     expect(cookies).toContain('localStorage')
-    expect(cookies).toContain('consentimiento')
+    expect(cookies).toContain('TCF 2.2')
   })
 
   it('covers the four blocks and the 33 syllabus topics with unique slugs', () => {
@@ -84,6 +84,40 @@ describe('SEO metadata', () => {
     const ads = read('public/ads.txt')
     expect(ads).toContain('google.com, pub-9757010029304189, DIRECT')
     expect(ads.trim().split('\n')).toHaveLength(1)
+  })
+
+  it('exposes a privacy policy that meets the AdSense review', () => {
+    const html = read('public/privacidad.html')
+    expect(html).toContain('Google AdSense')
+    expect(html).toContain('TCF 2.2')
+    expect(html).toContain('https://policies.google.com/privacy')
+    expect(html).toContain('https://adssettings.google.com/')
+    expect(html).toContain('https://www.aboutads.info/choices/')
+    expect(html).toContain('Espacio Económico Europeo')
+    expect(html).toContain('localStorage')
+  })
+
+  it('explains the third-party cookies in the cookie policy', () => {
+    const html = read('public/cookies.html')
+    expect(html).toContain('DoubleClick')
+    expect(html).toContain('TCF 2.2')
+    expect(html).toContain(
+      'https://policies.google.com/technologies/cookies',
+    )
+  })
+
+  it('links the legal pages from the app and the static shell', () => {
+    expect(read('index.html')).toContain('./privacidad.html')
+    expect(read('index.html')).toContain('./cookies.html')
+    const shell = read('src/components/AppShell.tsx')
+    expect(shell).toContain('href="./privacidad.html"')
+    expect(shell).toContain('href="./cookies.html"')
+  })
+
+  it('ships an AdSense logo in a raster format', () => {
+    const logo = readFileSync(resolve(process.cwd(), 'public/logo-adsense.png'))
+    expect(logo.byteLength).toBeGreaterThan(1000)
+    expect(logo.subarray(1, 4).toString('ascii')).toBe('PNG')
   })
 
   it('injects the AdSense script in the head only when configured', () => {

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" viewBox="0 0 120 60" role="img" aria-label="Oposiciones TAI">
+  <rect width="120" height="60" fill="#ffffff"/>
+  <rect x="9" y="9" width="42" height="42" rx="11" fill="#6d59e8"/>
+  <circle cx="30" cy="30" r="11" fill="none" stroke="#ffffff" stroke-width="2.6"/>
+  <path d="M30 14.5v4.2M30 41.3v4.2M14.5 30h4.2M41.3 30h4.2" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
+  <circle cx="30" cy="30" r="3.2" fill="#ffffff"/>
+  <text x="59" y="27" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#252238">Oposiciones</text>
+  <text x="59" y="43" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#6d59e8">TAI</text>
+</svg>

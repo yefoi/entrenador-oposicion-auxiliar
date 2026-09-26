@@ -342,11 +342,29 @@ a {
   padding: 46px 52px 20px;
 }
 .app-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
   padding: 8px 52px 24px;
   color: #a3a0b0;
   font-size: 10px;
   text-align: right;
   letter-spacing: 0.1px;
+}
+.footer-legal {
+  display: flex;
+  gap: 12px;
+}
+.footer-legal a {
+  color: #a3a0b0;
+  text-decoration: none;
+}
+.footer-legal a:hover,
+.footer-legal a:focus-visible {
+  color: var(--purple-dark);
+  text-decoration: underline;
 }
 .reduced-motion *,
 .reduced-motion *::before,
@@ -4385,6 +4403,8 @@ a {
   }
   .app-footer {
     padding: 8px 17px 18px;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
   }
   .body.menu-open .sidebar,

@@ -198,8 +198,13 @@ export function AppShell({
           {children}
         </main>
         <footer className="app-footer">
-          Banco propio de práctica · No oficial · Normativa de referencia:
-          convocatoria 2025
+          <span>
+            Banco propio de práctica · No oficial · Normativa de referencia: convocatoria 2025
+          </span>
+          <nav aria-label="Enlaces legales" className="footer-legal">
+            <a href="./privacidad.html">Privacidad</a>
+            <a href="./cookies.html">Cookies</a>
+          </nav>
         </footer>
       </div>
     </div>
