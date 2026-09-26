@@ -91,11 +91,11 @@ export function AppShell({
               <Icon name="target" size={24} />
             </div>
             <div>
-              <span className="brand-name">
-                <strong>Plaza TAI</strong>
+              <strong>Plaza TAI</strong>
+              <span className="brand-sub">
+                entrenador AGE
                 <span aria-hidden="true" className="flag-es" />
               </span>
-              <span>entrenador AGE</span>
             </div>
           </button>
           <button

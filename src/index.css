@@ -196,10 +196,16 @@ a {
   );
   box-shadow: inset 0 0 0 1px rgba(37, 34, 56, 0.18);
 }
-.brand-name {
+/* La bandera va con el subtitulo, no con el titulo. Las reglas se escriben
+   como .brand .algo a proposito: .brand span tiene mas especificidad que una
+   clase suelta y convertiria la bandera en un bloque de linea propia. */
+.brand .brand-sub {
   display: flex;
   align-items: center;
   gap: 6px;
+}
+.brand .flag-es {
+  display: inline-block;
 }
 .brand strong,
 .mobile-brand strong {
