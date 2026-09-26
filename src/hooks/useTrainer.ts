@@ -15,6 +15,7 @@ import {
   type SaveStatus,
 } from '../lib/storage'
 import { scoreSession } from '../lib/scoring'
+import { regradeState } from '../lib/regrade'
 import { calculateBestStreak } from '../lib/minigames'
 import {
   buildTopicStats,
@@ -67,7 +68,10 @@ function uniqueIds(values: string[]): string[] {
 }
 
 export function useTrainer() {
-  const initial = useMemo(() => loadTrainerState(), [])
+  const initial = useMemo(() => {
+    const loaded = loadTrainerState()
+    return { ...loaded, state: regradeState(loaded.state) }
+  }, [])
   const storageAvailable = useMemo(() => storageIsAvailable(), [])
   const [store, dispatch] = useReducer(trainerReducer, {
     state: initial.state,

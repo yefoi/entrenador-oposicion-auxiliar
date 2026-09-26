@@ -145,6 +145,12 @@ export interface ActivityDay {
 
 export interface TrainerState {
   version: number
+  /**
+   * Set once the stored attempts and reviews have been recomputed against the
+   * corrected answer key. Optional so states written before the regrade still
+   * pass validation.
+   */
+  regradedAtKey?: string
   sessions: TrainerSession[]
   attempts: Attempt[]
   reviews: Record<string, TopicReview>
