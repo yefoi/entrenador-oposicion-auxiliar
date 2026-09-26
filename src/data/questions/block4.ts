@@ -1260,6 +1260,12 @@ export const block4Questions: Question[] = [
       'Capa 7, aplicación',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'La capa de enlace agrupa tramas en un mismo segmento y no controla el reenvío de transporte.',
+      'IP pertenece a la capa de red: dirige el paquete, no la conexión.',
+      'La capa de aplicación define el intercambio entre programas, no el control de transporte.',
+    ],
     explanation:
       'TCP pertenece a la capa de transporte del modelo OSI y aporta una conexión orientada a flujo, con controles de orden, integridad y reenvío. IP pertenece a la capa de red.',
     difficulty: 'easy',
@@ -1276,6 +1282,12 @@ export const block4Questions: Question[] = [
       'En una llamada de voz interactiva, perder algún paquete y continuar de inmediato es preferible a esperar un reenvío que llegue tarde. ¿Qué protocolo de transporte encaja mejor?',
     options: ['UDP', 'TCP', 'ICMP', 'ARP'],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'TCP reenvía lo perdido y espera la confirmación: eso es justo lo que aquí sobra.',
+      'ICMP transporta mensajes de control y error, no los datos de una voz.',
+      'ARP relaciona direcciones IPv4 y MAC: no transporta la llamada.',
+    ],
     explanation:
       'UDP no establece una conexión, no garantiza la entrega ni conserva el orden y no retransmite automáticamente. TCP prioriza la entrega ordenada mediante controles y reenvíos, lo que puede aumentar la latencia de una aplicación en tiempo real.',
     difficulty: 'medium',
@@ -1292,6 +1304,12 @@ export const block4Questions: Question[] = [
       'Un técnico usa ping para comprobar si un equipo responde y consulta avisos de control de enrutamiento para observar saltos. ¿Qué protocolo permite estas pruebas de diagnóstico?',
     options: ['ICMP', 'DHCP', 'DNS', 'SMTP'],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'DHCP reparte configuración de red, no mensajes de diagnóstico.',
+      'DNS resuelve nombres de dominio.',
+      'SMTP transfiere correo.',
+    ],
     explanation:
       'ICMP transporta mensajes de control y error, como solicitud de eco y respuesta de eco, que se emplean en ping y en herramientas de trazado de rutas. No es un protocolo de transferencia de archivos.',
     difficulty: 'easy',
@@ -1308,6 +1326,12 @@ export const block4Questions: Question[] = [
       'Un equipo IPv4 va a enviar un paquete a una dirección que está fuera de su subred y necesita descubrir la dirección MAC de su siguiente salto. ¿Qué protocolo utiliza?',
     options: ['ARP', 'DHCP', 'DNS', 'TLS'],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'DHCP reparte la configuración, no la dirección MAC del siguiente salto.',
+      'DNS traduce nombres a direcciones, no a direcciones MAC.',
+      'TLS protege el canal y no participa en la entrega de la trama local.',
+    ],
     explanation:
       'ARP relaciona una dirección IPv4 local con una dirección MAC para entregar la trama al siguiente salto de la red. DNS resuelve nombres, DHCP distribuye configuración y TLS protege un canal; ninguno sustituye a ARP.',
     difficulty: 'medium',
@@ -1329,6 +1353,12 @@ export const block4Questions: Question[] = [
       '10.20.0.64 a 10.20.0.127',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Incluye la dirección de red .0 y la de difusión .63, que no se asignan a equipos.',
+      'Con máscara /26, la dirección .127 pertenece a la subred siguiente.',
+      '',
+      'La subred /26 va de .0 a .63: la dirección .64 ya está fuera de ella.',
+    ],
     explanation:
       'Una máscara /26 reserva 64 direcciones: .0 es la red y .63 es la difusión. Las direcciones de equipo van de .1 a .62, por lo que la puerta de enlace .1 es válida.',
     difficulty: 'hard',
@@ -1350,6 +1380,12 @@ export const block4Questions: Question[] = [
       'Paquete IP, mensaje HTTP, segmento TCP y trama Ethernet',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Ese es el orden de desmontaje: de fuera hacia dentro al procesar la trama.',
+      'El mensaje HTTP se encapsula en el segmento, no al revés.',
+      'El paquete IP envuelve al segmento TCP, nunca se inserta dentro de él.',
+    ],
     explanation:
       'Los datos de la aplicación se encapsulan primero en una unidad de transporte, después en un paquete de red y finalmente en una trama de enlace. Al descender por el medio, cada capa retira su cabecera en el destino.',
     difficulty: 'easy',
@@ -1371,6 +1407,12 @@ export const block4Questions: Question[] = [
       'Ambos extremos envían FIN, ACK y RST simultáneamente sin intercambiar números de secuencia.',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'El cliente no empieza con ACK ni termina con FIN en el establecimiento.',
+      'El servidor responde con SYN-ACK y el cliente confirma con ACK.',
+      '',
+      'FIN cierra la conexión y RST la aborta: ninguno abre una sesión.',
+    ],
     explanation:
       'El establecimiento de tres pasos es SYN, SYN-ACK y ACK. SYN sincroniza los números de secuencia iniciales y ACK confirma la recepción; no es una entrega de datos de aplicación por sí sola.',
     difficulty: 'medium',
@@ -1392,6 +1434,12 @@ export const block4Questions: Question[] = [
       '128 bits de dirección y prefijo /64',
     ],
     correctIndex: 3,
+    optionNotes: [
+      '32 bits es la longitud de una dirección IPv4, no de IPv6.',
+      'Una dirección IPv6 no tiene 64 bits.',
+      'La longitud es correcta, pero /32 no es el prefijo habitual de un enlace.',
+      '',
+    ],
     explanation:
       'Una dirección IPv6 tiene 128 bits. El prefijo /64 es una convención habitual para un enlace y define el tamaño de la red, aunque IPv6 admite otros tamaños de subred.',
     difficulty: 'medium',
@@ -1413,6 +1461,12 @@ export const block4Questions: Question[] = [
       'Un servidor de correo que sustituye a los enrutadores y a los proveedores de acceso.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Internet no es un ordenador central: es una interconexión de redes.',
+      'HTTP es un protocolo de aplicación, no la arquitectura de Internet.',
+      'El correo no sustituye a los enrutadores ni a los proveedores de acceso.',
+    ],
     explanation:
       'Internet es una interconexión de redes y sistemas autónomos que intercambian paquetes mediante protocolos como IP. DNS distribuye la información de nombres en jerarquías y permite resolver nombres hacia direcciones o servidores.',
     difficulty: 'easy',
@@ -1429,6 +1483,12 @@ export const block4Questions: Question[] = [
       'Un cliente necesita obtener la representación actual de un recurso sin provocar un cambio en el servidor. ¿Qué método HTTP es el más adecuado?',
     options: ['GET', 'POST', 'PUT', 'PATCH'],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'POST envía datos que pueden crear una acción o un recurso en el servidor.',
+      'PUT sustituye la representación de un recurso: sí modifica el servidor.',
+      'PATCH aplica una modificación parcial: también cambia el recurso.',
+    ],
     explanation:
       'GET representa una lectura y debe ser seguro e idempotente según la semántica HTTP. POST suele utilizarse para enviar datos que pueden crear una acción o recurso, mientras que PUT y PATCH modifican recursos.',
     difficulty: 'easy',
@@ -1450,6 +1510,12 @@ export const block4Questions: Question[] = [
       'Sustituye la necesidad de comprobar el nombre del dominio y la cadena de confianza.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El certificado no cifra los archivos almacenados en el servidor.',
+      'Validar el certificado no autentica a cada usuario que se conecta.',
+      'El nombre del dominio y la cadena de confianza son precisamente lo que se comprueba.',
+    ],
     explanation:
       'El certificado contiene una clave pública y datos de identidad del servidor. La validación de su firma y del nombre permite confiar en la clave para negociar TLS, que protege la confidencialidad e integridad de la comunicación, pero no autentica por sí solo a cada usuario.',
     difficulty: 'hard',
@@ -1466,6 +1532,12 @@ export const block4Questions: Question[] = [
       'Al migrar un servicio de correo, el administrador debe publicar qué servidores reciben el correo del dominio y la dirección IPv4 del servidor web. ¿Qué registros DNS corresponden?',
     options: ['CNAME y PTR', 'NS y CAA', 'SOA y TXT', 'MX y A'],
     correctIndex: 3,
+    optionNotes: [
+      'CNAME crea un alias de nombre y PTR es el registro inverso de una dirección.',
+      'NS delega servidores de nombres y CAA restringe qué entidades pueden emitir certificados.',
+      'SOA marca la autoridad de una zona y TXT guarda texto, como la clave de DMARC.',
+      '',
+    ],
     explanation:
       'El registro MX enumera servidores de intercambio de correo y sus prioridades. El registro A asocia un nombre con una dirección IPv4; AAAA hace lo propio con IPv6 y CNAME crea un alias.',
     difficulty: 'medium',
@@ -1487,6 +1559,12 @@ export const block4Questions: Question[] = [
       'SameSite=None y HttpOnly sin impacto en la transmisión',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Domain y Path limitan a qué se envía la cookie, no su cifrado ni su legibilidad por scripts.',
+      'Expires y Max-Age controlan la duración, no el transporte ni el acceso desde JavaScript.',
+      'SameSite restringe el envío en peticiones de terceros, no impide leer la cookie desde la página.',
+    ],
     explanation:
       'Secure impide que el navegador envíe la cookie por una conexión HTTP y HttpOnly impide que el JavaScript de la página la lea. Domain, Path y SameSite tienen otras funciones de alcance y compatibilidad.',
     difficulty: 'hard',
@@ -1503,6 +1581,12 @@ export const block4Questions: Question[] = [
       'Un cliente abre una conexión HTTPS tradicional sobre TCP y no especifica un puerto distinto. ¿Qué puerto debe utilizar por defecto?',
     options: ['TCP 443', 'TCP 80', 'TCP 25', 'UDP 53'],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El 80 es HTTP sin cifrar.',
+      'El 25 es SMTP entre servidores de correo.',
+      'DNS usa UDP 53; el 443 sobre UDP corresponde a HTTP/3, no a HTTPS sobre TCP.',
+    ],
     explanation:
       'El servicio HTTPS convencional sobre TCP utiliza el puerto 443. TCP 80 es HTTP sin cifrar, 25 es SMTP y 53 es DNS; HTTP/3 es un caso separado porque usa UDP, normalmente también con el número 443.',
     difficulty: 'easy',
@@ -1524,6 +1608,12 @@ export const block4Questions: Question[] = [
       'Set-Cookie: Secure',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Cache-Control controla la caché del navegador, no el salto de HTTP a HTTPS.',
+      '',
+      'X-Forwarded-Proto informa del protocolo original y no obliga al navegador a usar HTTPS.',
+      'Set-Cookie Secure protege la cookie, pero no obliga al navegador a usar HTTPS después.',
+    ],
     explanation:
       'Strict-Transport-Security (HSTS) indica al navegador que use HTTPS durante max-age y, con includeSubDomains, que aplique la política a sus subdominios. La cabecera solo se entrega de forma fiable mediante HTTPS y no protege la primera visita.',
     difficulty: 'hard',
@@ -1540,6 +1630,12 @@ export const block4Questions: Question[] = [
       'El certificado de un servidor está dentro de su período de validez y su nombre coincide, pero la clave privada se ha comprometido y el certificado ha sido revocado. ¿Qué mecanismo permite consultar el estado de revocación?',
     options: ['ARP', 'Un CNAME de DNS', 'RAID', 'OCSP'],
     correctIndex: 3,
+    optionNotes: [
+      'ARP relaciona direcciones IPv4 y MAC: nada que ver con certificados.',
+      'Un CNAME es un alias de nombre en DNS, no una consulta de revocación.',
+      'RAID agrupa discos y no consulta el estado de un certificado.',
+      '',
+    ],
     explanation:
       'OCSP permite consultar a la autoridad o a un respondedor el estado actual de revocación de un certificado X.509. Una CRL es una lista firmada que también puede distribuir ese estado, pero no es la consulta individual descrita.',
     difficulty: 'hard',
@@ -1561,6 +1657,12 @@ export const block4Questions: Question[] = [
       'Una VLAN que marque automáticamente como confiable todo el tráfico que entra por la interfaz externa.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Un concentrador reenvía la señal a todos los puertos sin aplicar ninguna política.',
+      'DNS traduce nombres: no convierte direcciones privadas en públicas.',
+      'Una VLAN segmenta, pero no concede confianza a lo que entra por la interfaz externa.',
+    ],
     explanation:
       'Un cortafuegos con estado registra las conexiones permitidas y permite el tráfico de respuesta asociado, mientras bloquea nuevas conexiones no autorizadas. La política segura parte de denegar y luego permite explícitamente lo necesario.',
     difficulty: 'medium',
@@ -1582,6 +1684,12 @@ export const block4Questions: Question[] = [
       'Una carpeta compartida sin autenticación',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Telnet transmite en claro y no cifra el túnel.',
+      '',
+      'Reenviar puertos de toda la interfaz privada expone servicios que no deberían abrirse.',
+      'Una carpeta compartida sin autenticación no cifra ni verifica al usuario.',
+    ],
     explanation:
       'Una VPN IPsec en modo túnel encapsula el tráfico entre los extremos y ofrece confidencialidad, integridad y autenticación. La autorización concreta debe definirse con reglas y controles de acceso.',
     difficulty: 'medium',
@@ -1603,6 +1711,12 @@ export const block4Questions: Question[] = [
       'Una carpeta de scripts abierta que cada persona pueda editar sin registro.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Publicar una consola con contraseña compartida elimina la trazabilidad del acceso.',
+      'Una clave compartida entre administradores impide saber quién hizo cada cambio.',
+      'Una carpeta de scripts editable sin registro anula la auditoría y permite cambios no autorizados.',
+    ],
     explanation:
       'Un servidor bastion o servidor de salto concentra y monitoriza el acceso privilegiado. La trazabilidad requiere identificar al administrador, limitar sus permisos y conservar registros de la sesión.',
     difficulty: 'hard',
@@ -1624,6 +1738,12 @@ export const block4Questions: Question[] = [
       'Desactivar las actualizaciones para que el equipo funcione más rápido.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El año de nacimiento es un dato público y adivinable, no un segundo factor.',
+      'Compartir la contraseña elimina la verificación individual.',
+      'Desactivar las actualizaciones deja el equipo expuesto a vulnerabilidades conocidas.',
+    ],
     explanation:
       'Las llaves FIDO2 vinculan la autenticación al dispositivo y resistsen credenciales de phishing más que un código robable. La actualización del punto final reduce además la exposición a vulnerabilidades conocidas.',
     difficulty: 'medium',
@@ -1645,6 +1765,12 @@ export const block4Questions: Question[] = [
       'Abrir todos los puertos entre VLAN para que la conexión sea más sencilla.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Confiar en toda la VLAN de oficina es la confianza implícita que se quiere retirar.',
+      'Una cuenta administrativa permanente evita la verificación en el momento de usarla.',
+      'Abrir todos los puertos entre VLAN elimina la segmentación en lugar de reforzarla.',
+    ],
     explanation:
       'Zero trust elimina la confianza implícita por red o ubicación. Las solicitudes se evalían individualmente, con autenticación, autorización contextual, mínimo privilegio y supervisión continua.',
     difficulty: 'hard',
@@ -1666,6 +1792,12 @@ export const block4Questions: Question[] = [
       'Un registro DNS que convierte cualquier conexión no autorizada en HTTPS.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Un IDS pasivo solo alerta: no puede bloquear la sesión en curso.',
+      'Una VLAN no oculta direcciones IP, y menos ante un escaneo.',
+      'DNS no convierte conexiones en HTTPS ni las bloquea.',
+    ],
     explanation:
       'Un IDS detecta y comunica actividad sospechosa, mientras que un IPS se sitúa en línea y puede aplicar acciones de bloqueo. La capacidad concreta depende de la política y del diseño para no interrumpir tráfico legítimo.',
     difficulty: 'medium',
@@ -1687,6 +1819,12 @@ export const block4Questions: Question[] = [
       'Un segundo adaptador que duplica la dirección del servidor y elimina la necesidad de autenticar al usuario.',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'El túnel completo cifra todo el tráfico, también el correo: es lo contrario de dividirlo.',
+      '',
+      'Una VPN sin cifrado que solo cambia la dirección no protege el contenido.',
+      'Duplicar la dirección del servidor en un segundo adaptador rompe el enrutamiento.',
+    ],
     explanation:
       'El túnel dividido separa el tráfico que entra en la VPN del que sale directamente. Puede reducir carga y latencia, pero el camino directo queda fuera del control de la VPN y requiere protección, filtrado y supervisión del equipo.',
     difficulty: 'hard',
@@ -1708,6 +1846,12 @@ export const block4Questions: Question[] = [
       'La base de datos directamente en Internet, protegida únicamente por una contraseña.',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Sin reglas de filtrado, la base de datos queda accesible desde el mismo segmento que el servidor web.',
+      'La red de invitados es para clientes no confiables, no para alojar la base de datos.',
+      '',
+      'Una contraseña no sustituye al cortafuegos: el puerto sigue expuesto a Internet.',
+    ],
     explanation:
       'La DMZ separa el servicio público de los sistemas internos. Un cortafuegos debe permitir lo necesario entre las zonas, por ejemplo solo el puerto del servicio web hacia la base de datos, y bloquear el resto del acceso directo.',
     difficulty: 'hard',
@@ -1724,6 +1868,12 @@ export const block4Questions: Question[] = [
       'Cada equipo de una red de oficina está conectado con un cable propio a un conmutador central. Si se rompe un cable, solo se afecta el equipo conectado a ese enlace. ¿Qué topología es?',
     options: ['Estrella', 'Bus', 'Anillo', 'Malla completa'],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'En un bus todos los equipos comparten el medio: la avería de un cable afectaría a varios.',
+      'En un anillo la avería se propagaría por toda la vuelta del enlace.',
+      'Una malla completa no tiene elemento central, así que no describe un conmutador único.',
+    ],
     explanation:
       'En una topología en estrella todos los nodos se conectan a un elemento central. La ventaja de aislar cada enlace se compensa con la dependencia del conmutador central y su redundancia.',
     difficulty: 'easy',
@@ -1745,6 +1895,12 @@ export const block4Questions: Question[] = [
       'La ruta completa por conmutadores y enrutadores de Internet.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'La trama no lleva el nombre DNS, y la IPv4 solo existe si hay cabecera IP.',
+      'Ni la contraseña de la VLAN ni una clave privada viajan en una trama de datos.',
+      'El conmutador no conoce la ruta de Internet: solo reenvía por el puerto aprendido.',
+    ],
     explanation:
       'El conmutador construye una tabla de direcciones MAC a puertos de salida. La trama contiene la MAC de origen y el puerto de entrada; no necesita resolver nombres ni construir una ruta de Internet.',
     difficulty: 'easy',
@@ -1761,6 +1917,12 @@ export const block4Questions: Question[] = [
       'En un segmento Ethernet heredado que funciona en modo semidúplex, dos equipos pueden transmitir a la vez y detectar el solapamiento. ¿Qué método de acceso usa ese segmento?',
     options: ['CSMA/CD', 'CSMA/CA', 'Token passing', 'TDMA'],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'CSMA/CA evita las colisiones con confirmación y es propio del acceso inalámbrico.',
+      'El paso de testigo es otro método de acceso al medio, no de detección de colisiones.',
+      'TDMA divide el tiempo en intervalos y es propio de redes de acceso como GSM.',
+    ],
     explanation:
       'CSMA/CD significa acceso al medio con detección de colisiones y se asocia al Ethernet tradicional semidúplex. En un enlace conmutado en dúplex completo no hay colisiones porque ambos extremos pueden enviar y recibir a la vez.',
     difficulty: 'easy',
@@ -1782,6 +1944,12 @@ export const block4Questions: Question[] = [
       'Un puente que únicamente reenvíe tramas dentro del mismo dominio de difusión sin rutear IP.',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Un concentrador repite la señal a todos los puertos: no decide por dirección IP.',
+      'Un repetidor solo regenera la señal y no separa dominios de difusión.',
+      '',
+      'Un puente reenvía tramas dentro de la misma subred y no enruta entre VLAN.',
+    ],
     explanation:
       'Un router o conmutador de capa 3 toma decisiones de reenvío por dirección IP y mantiene separados los dominios de difusión de cada VLAN. Un puente o conmutador de capa 2 solo reenvía tramas dentro del dominio de difusión y no enruta entre subredes.',
     difficulty: 'medium',
@@ -1803,6 +1971,12 @@ export const block4Questions: Question[] = [
       'Cliente TCP 443 y servidor TCP 80',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El 20 y el 21 son FTP, no DHCP.',
+      'El 123 es NTP y el 53 es DNS: ninguno reparte direcciones.',
+      'El 443 es HTTPS y el 80 HTTP: no asignan configuración de red.',
+    ],
     explanation:
       'En DHCPv4, el cliente utiliza habitualmente UDP 68 y el servidor UDP 67 para solicitar y recibir la configuración. En IPv6 se emplea DHCPv6 con otros puertos y mecanismos.',
     difficulty: 'medium',
@@ -1824,6 +1998,12 @@ export const block4Questions: Question[] = [
       'Solo afecta al tráfico de difusión y mantiene intactas las comunicaciones unicast.',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Un enlace independiente por equipo describe una estrella, no un backbone compartido.',
+      '',
+      'Un backbone no se transforma solo en estrella al fallar.',
+      'Una avería del medio compartido interrumpe también el tráfico unicast entre estaciones.',
+    ],
     explanation:
       'En una topología de bus o backbone, las estaciones comparten el mismo medio y dependen del segmento común. Una avería en ese elemento puede interrumpir el servicio de varias o todas las estaciones.',
     difficulty: 'easy',
@@ -1845,6 +2025,12 @@ export const block4Questions: Question[] = [
       'La copia automáticamente a todas las VLAN del conmutador.',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Conservar la entrada para siempre dirigiría tráfico a un puerto equivocado.',
+      'Una dirección MAC no se convierte en IP: pertenecen a capas distintas.',
+      '',
+      'La tabla es por VLAN y por puerto: no se copia automáticamente entre VLAN.',
+    ],
     explanation:
       'Las entradas dinámicas de MAC se mantienen durante el intervalo de antigüedad configurado y se descartan cuando no se actualizan. Si después llega una trama con ese destino y la entrada ya no existe, el conmutador la tratará como un destino desconocido dentro de la VLAN.',
     difficulty: 'hard',
@@ -1861,6 +2047,12 @@ export const block4Questions: Question[] = [
       'Una red crítica necesita rutas alternativas para que la caída de un enlace no interrumpa todos los caminos. ¿Qué topología conecta cada nodo con todos los demás?',
     options: ['Estrella', 'Bus', 'Anillo', 'Malla completa'],
     correctIndex: 3,
+    optionNotes: [
+      'En estrella, la caída del elemento central interrumpe todos los enlaces.',
+      'Un bus comparte un único medio y no ofrece caminos alternativos.',
+      'Un anillo tiene un único camino entre nodos y propagaría la avería.',
+      '',
+    ],
     explanation:
       'Una malla completa ofrece varios caminos entre los nodos y puede tolerar la caída de un enlace o nodo, pero requiere más conexiones y cableado. La topología en estrella tiene un elemento central y la de bus comparte un único medio.',
     difficulty: 'medium',

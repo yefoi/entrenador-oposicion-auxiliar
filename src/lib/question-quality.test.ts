@@ -66,9 +66,15 @@ describe('calidad de los distractores', () => {
     }
   })
 
-  it('cubrio por completo los bloques I y II con notas de opcion', () => {
-    const coveredBlocks = ['I', 'II'] as const
-    for (const block of coveredBlocks) {
+  it('cubrio el banco entero con notas de opcion', () => {
+    // Ratchet sin downstairs: el banco completo esta annotated, asi que
+    // cualquier pregunta nueva nace con sus tres notas o rompe el test.
+    const without = activeQuestions.filter((q) => !q.optionNotes)
+    expect(without.map((q) => q.id)).toEqual([])
+  })
+
+  it('mantiene el reparto de notas entre los cuatro bloques', () => {
+    for (const block of ['I', 'II', 'III', 'IV']) {
       const questions = activeQuestions.filter((q) => q.blockId === block)
       expect(questions.length).toBeGreaterThan(0)
       const covered = questions.filter((q) => q.optionNotes).length
