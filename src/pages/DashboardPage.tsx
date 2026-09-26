@@ -10,6 +10,7 @@ import type {
 import { blocks, OFFICIAL_BOE_URL, topics } from '../data/syllabus'
 import { activeQuestions } from '../data/questions'
 import { Icon } from '../components/Icons'
+import { AdSlot } from '../components/Ads'
 import {
   Button,
   EmptyState,
@@ -436,6 +437,7 @@ export function DashboardPage({
           </Button>
         </div>
       </section>
+      <AdSlot slot={import.meta.env.VITE_ADSENSE_SLOT ?? ''} />
     </div>
   )
 }

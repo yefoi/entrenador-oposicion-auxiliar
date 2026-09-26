@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { Suspense, lazy, useCallback, useMemo, useState } from 'react'
 import type { AppView } from './domain/types'
 import { activeQuestions, questionById } from './data/questions'
 import { useTrainer } from './hooks/useTrainer'
@@ -8,24 +8,50 @@ import {
   createPracticeSession,
   type PracticeOptions,
 } from './lib/session'
-import {
-  createMinigameSession,
-  type MinigameOptions,
-} from './lib/minigames'
+import { createMinigameSession, type MinigameOptions } from './lib/minigames'
 import { AppShell } from './components/AppShell'
 import { Onboarding } from './components/Onboarding'
+import { RouteLoading } from './components/RouteLoading'
+import { ConsentBanner } from './components/Ads'
 import { DashboardPage } from './pages/DashboardPage'
-import { ExamSetupPage } from './pages/ExamSetupPage'
-import { PlanPage } from './pages/PlanPage'
-import { PracticeSetupPage } from './pages/PracticeSetupPage'
-import { ResultsPage } from './pages/ResultsPage'
-import { ReviewsPage } from './pages/ReviewsPage'
-import { MinigamesPage } from './pages/MinigamesPage'
-import { MinigameSessionPage } from './pages/MinigameSessionPage'
-import { SessionPage } from './pages/SessionPage'
-import { SettingsPage } from './pages/SettingsPage'
-import { StatisticsPage } from './pages/StatisticsPage'
-import { SyllabusPage } from './pages/SyllabusPage'
+
+const ExamSetupPage = lazy(() =>
+  import('./pages/ExamSetupPage').then((m) => ({ default: m.ExamSetupPage })),
+)
+const PlanPage = lazy(() =>
+  import('./pages/PlanPage').then((m) => ({ default: m.PlanPage })),
+)
+const PracticeSetupPage = lazy(() =>
+  import('./pages/PracticeSetupPage').then((m) => ({
+    default: m.PracticeSetupPage,
+  })),
+)
+const ResultsPage = lazy(() =>
+  import('./pages/ResultsPage').then((m) => ({ default: m.ResultsPage })),
+)
+const ReviewsPage = lazy(() =>
+  import('./pages/ReviewsPage').then((m) => ({ default: m.ReviewsPage })),
+)
+const MinigamesPage = lazy(() =>
+  import('./pages/MinigamesPage').then((m) => ({ default: m.MinigamesPage })),
+)
+const MinigameSessionPage = lazy(() =>
+  import('./pages/MinigameSessionPage').then((m) => ({
+    default: m.MinigameSessionPage,
+  })),
+)
+const SessionPage = lazy(() =>
+  import('./pages/SessionPage').then((m) => ({ default: m.SessionPage })),
+)
+const SettingsPage = lazy(() =>
+  import('./pages/SettingsPage').then((m) => ({ default: m.SettingsPage })),
+)
+const StatisticsPage = lazy(() =>
+  import('./pages/StatisticsPage').then((m) => ({ default: m.StatisticsPage })),
+)
+const SyllabusPage = lazy(() =>
+  import('./pages/SyllabusPage').then((m) => ({ default: m.SyllabusPage })),
+)
 
 function App() {
   const trainer = useTrainer()
@@ -182,12 +208,19 @@ function App() {
             </span>
           </div>
         ) : null}
-        {!trainer.storageAvailable ? (
-          <div className="storage-banner">
-            <strong>El navegador no permite guardar.</strong> La sesión seguirá
-            funcionando, pero exporta tu progreso antes de cerrar.
-          </div>
-        ) : null}
+          {!trainer.storageAvailable ? (
+            <div className="storage-banner">
+              <strong>El navegador no permite guardar.</strong> La sesión seguirá
+              funcionando, pero exporta tu progreso antes de cerrar.
+            </div>
+          ) : null}
+          {trainer.storageAvailable &&
+          trainer.storageStatus === 'quota' ? (
+            <div className="storage-banner">
+              <strong>Almacenamiento local lleno.</strong> Exporta una copia desde
+              Ajustes y borra los intentos antiguos para seguir guardando.
+            </div>
+          ) : null}
         {view === 'dashboard' ? (
           <DashboardPage
             activeSession={trainer.activeSession}
@@ -198,147 +231,155 @@ function App() {
             weakTopics={trainer.weakTopics}
           />
         ) : null}
-        {view === 'syllabus' ? (
-          <SyllabusPage
-            onStart={(topicId, blockId) => {
-              setPracticeTopicId(topicId)
-              setPracticeBlockId(blockId)
-              setView('practice')
-            }}
-            stats={trainer.stats}
-          />
-        ) : null}
-        {view === 'minigames' && !minigameSessionVisible ? (
-          <MinigamesPage
-            activeSession={trainer.activeSession}
-            onNavigate={navigate}
-            onStart={startMinigame}
-            reviewTopicIds={trainer.reviewQueue.map((review) => review.topicId)}
-            weakTopicIds={trainer.weakTopics
-              .filter((topic) => topic.status === 'weak')
-              .map((topic) => topic.topicId)}
-          />
-        ) : null}
-        {view === 'minigames' &&
-        minigameSessionVisible &&
-        trainer.activeSession ? (
-          <MinigameSessionPage
-            key={trainer.activeSession.id}
-            onAnswer={answerActive}
-            onExit={() => navigate('minigames')}
-            onFlag={flagActive}
-            onSubmit={submitActive}
-            questionById={questionById}
-            session={trainer.activeSession}
-          />
-        ) : null}
-        {view === 'practice' && !practiceSessionVisible ? (
-          <PracticeSetupPage
-            initialBlockId={practiceBlockId}
-            initialTopicId={practiceTopicId}
-            onNavigate={navigate}
-            onStart={startPractice}
-            showExplanations={trainer.state.settings.showExplanations}
-            stats={trainer.stats}
-            adaptiveQuestionIds={trainer.adaptiveQuestionIds}
-          />
-        ) : null}
-        {view === 'practice' &&
-        practiceSessionVisible &&
-        trainer.activeSession ? (
-          <SessionPage
-            key={trainer.activeSession.id}
-            onAnswer={answerActive}
-            onExit={() => navigate('practice')}
-            onFlag={flagActive}
-            onSubmit={submitActive}
-            questionById={questionById}
-            session={trainer.activeSession}
-          />
-        ) : null}
-        {view === 'exam' && !examSessionVisible ? (
-          <ExamSetupPage
-            activeSession={
-              examSessionVisible
-                ? trainer.activeSession
-                : trainer.activeSession?.mode === 'exam'
-                  ? trainer.activeSession
-                  : null
-            }
-            onStart={startExam}
-          />
-        ) : null}
-        {view === 'exam' && examSessionVisible && trainer.activeSession ? (
-          <SessionPage
-            key={trainer.activeSession.id}
-            onAnswer={answerActive}
-            onExit={() => navigate('exam')}
-            onFlag={flagActive}
-            onSubmit={submitActive}
-            questionById={questionById}
-            session={trainer.activeSession}
-          />
-        ) : null}
-        {view === 'reviews' ? (
-          <ReviewsPage
-            allReviews={trainer.reviews}
-            onNavigate={navigate}
-            onStart={(topicIds, count) =>
-              startPractice({
-                count,
-                topicIds,
-                title: 'Repaso espaciado',
-                immediateFeedback: true,
-              })
-            }
-            reviewQueue={trainer.reviewQueue}
-            stats={trainer.stats}
-          />
-        ) : null}
-        {view === 'statistics' ? (
-          <StatisticsPage
-            activity={trainer.activity}
-            attempts={trainer.state.attempts}
-            onNavigate={navigate}
-            onPractice={(topicId) => {
-              setPracticeTopicId(topicId)
-              setView('practice')
-            }}
-            stats={trainer.stats}
-          />
-        ) : null}
-        {view === 'plan' ? (
-          <PlanPage
-            onNavigate={navigate}
-            onUpdate={trainer.updateSettings}
-            settings={trainer.state.settings}
-            stats={trainer.stats}
-          />
-        ) : null}
-        {view === 'settings' ? (
-          <SettingsPage
-            onClear={trainer.clearData}
-            onImport={trainer.importData}
-            onNavigate={navigate}
-            onUpdate={trainer.updateSettings}
-            settings={trainer.state.settings}
+        {view !== 'dashboard' ? (
+          <Suspense fallback={<RouteLoading />}>
+            {view === 'syllabus' ? (
+              <SyllabusPage
+                onStart={(topicId, blockId) => {
+                  setPracticeTopicId(topicId)
+                  setPracticeBlockId(blockId)
+                  setView('practice')
+                }}
+                stats={trainer.stats}
+              />
+            ) : null}
+            {view === 'minigames' && !minigameSessionVisible ? (
+              <MinigamesPage
+                activeSession={trainer.activeSession}
+                onNavigate={navigate}
+                onStart={startMinigame}
+                reviewTopicIds={trainer.reviewQueue.map(
+                  (review) => review.topicId,
+                )}
+                weakTopicIds={trainer.weakTopics
+                  .filter((topic) => topic.status === 'weak')
+                  .map((topic) => topic.topicId)}
+              />
+            ) : null}
+            {view === 'minigames' &&
+            minigameSessionVisible &&
+            trainer.activeSession ? (
+              <MinigameSessionPage
+                key={trainer.activeSession.id}
+                onAnswer={answerActive}
+                onExit={() => navigate('minigames')}
+                onFlag={flagActive}
+                onSubmit={submitActive}
+                questionById={questionById}
+                session={trainer.activeSession}
+              />
+            ) : null}
+            {view === 'practice' && !practiceSessionVisible ? (
+              <PracticeSetupPage
+                initialBlockId={practiceBlockId}
+                initialTopicId={practiceTopicId}
+                onNavigate={navigate}
+                onStart={startPractice}
+                showExplanations={trainer.state.settings.showExplanations}
+                stats={trainer.stats}
+                adaptiveQuestionIds={trainer.adaptiveQuestionIds}
+              />
+            ) : null}
+            {view === 'practice' &&
+            practiceSessionVisible &&
+            trainer.activeSession ? (
+              <SessionPage
+                key={trainer.activeSession.id}
+                onAnswer={answerActive}
+                onExit={() => navigate('practice')}
+                onFlag={flagActive}
+                onSubmit={submitActive}
+                questionById={questionById}
+                session={trainer.activeSession}
+              />
+            ) : null}
+            {view === 'exam' && !examSessionVisible ? (
+              <ExamSetupPage
+                activeSession={
+                  examSessionVisible
+                    ? trainer.activeSession
+                    : trainer.activeSession?.mode === 'exam'
+                      ? trainer.activeSession
+                      : null
+                }
+                onStart={startExam}
+              />
+            ) : null}
+            {view === 'exam' && examSessionVisible && trainer.activeSession ? (
+              <SessionPage
+                key={trainer.activeSession.id}
+                onAnswer={answerActive}
+                onExit={() => navigate('exam')}
+                onFlag={flagActive}
+                onSubmit={submitActive}
+                questionById={questionById}
+                session={trainer.activeSession}
+              />
+            ) : null}
+            {view === 'reviews' ? (
+              <ReviewsPage
+                allReviews={trainer.reviews}
+                onNavigate={navigate}
+                onStart={(topicIds, count) =>
+                  startPractice({
+                    count,
+                    topicIds,
+                    title: 'Repaso espaciado',
+                    immediateFeedback: true,
+                  })
+                }
+                reviewQueue={trainer.reviewQueue}
+                stats={trainer.stats}
+              />
+            ) : null}
+            {view === 'statistics' ? (
+              <StatisticsPage
+                activity={trainer.activity}
+                attempts={trainer.state.attempts}
+                onNavigate={navigate}
+                onPractice={(topicId) => {
+                  setPracticeTopicId(topicId)
+                  setView('practice')
+                }}
+                stats={trainer.stats}
+              />
+            ) : null}
+            {view === 'plan' ? (
+              <PlanPage
+                onNavigate={navigate}
+                onUpdate={trainer.updateSettings}
+                settings={trainer.state.settings}
+                stats={trainer.stats}
+              />
+            ) : null}
+            {view === 'settings' ? (
+              <SettingsPage
+                onClear={trainer.clearData}
+                onImport={trainer.importData}
+                onNavigate={navigate}
+                onUpdate={trainer.updateSettings}
+                settings={trainer.state.settings}
             state={trainer.state}
             storageAvailable={trainer.storageAvailable}
-          />
-        ) : null}
-        {view === 'results' ? (
-          <ResultsPage
-            attempt={selectedAttempt}
-            onBack={() => navigate('dashboard')}
-            onNavigate={navigate}
-            onPracticeWrong={repeatWrong}
-            questionById={questionById}
-          />
+            storageStatus={trainer.storageStatus}
+              />
+            ) : null}
+            {view === 'results' ? (
+              <ResultsPage
+                attempt={selectedAttempt}
+                onBack={() => navigate('dashboard')}
+                onNavigate={navigate}
+                onPracticeWrong={repeatWrong}
+                questionById={questionById}
+              />
+            ) : null}
+          </Suspense>
         ) : null}
       </AppShell>
       {showOnboarding ? (
         <Onboarding onComplete={() => setShowOnboarding(false)} />
       ) : null}
+      <ConsentBanner />
     </div>
   )
 }

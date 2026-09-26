@@ -9,7 +9,7 @@ import {
 } from '../data/syllabus'
 import { activeQuestions } from '../data/questions'
 import { validateContent } from '../lib/validation'
-import { downloadState } from '../lib/storage'
+import { downloadState, type SaveStatus } from '../lib/storage'
 import { Icon } from '../components/Icons'
 import { Button, Modal, PageHeader, Tag } from '../components/UI'
 
@@ -17,6 +17,7 @@ interface SettingsPageProps {
   state: TrainerState
   settings: StudySettings
   storageAvailable: boolean
+  storageStatus: SaveStatus
   onUpdate: (settings: Partial<StudySettings>) => void
   onClear: () => void
   onImport: (text: string) => void
@@ -27,6 +28,7 @@ export function SettingsPage({
   state,
   settings,
   storageAvailable,
+  storageStatus,
   onUpdate,
   onClear,
   onImport,
@@ -52,12 +54,21 @@ export function SettingsPage({
         title="Tu preparación, bajo control."
         description="Todo se guarda en este navegador. Exporta una copia antes de limpiar el dispositivo o cambiar de equipo."
         action={
-          <Tag tone="success">
+          <Tag tone={storageStatus === 'ok' ? 'success' : 'warning'}>
             <span className="status-dot" />
-            Guardado local
+            {storageStatus === 'ok'
+              ? 'Guardado local'
+              : storageStatus === 'quota'
+                ? 'Almacenamiento lleno'
+                : 'Sin guardar'}
           </Tag>
         }
       />
+      <p className="settings-saved">
+        {state.lastSavedAt
+          ? `Último guardado: ${new Date(state.lastSavedAt).toLocaleString('es-ES')}`
+          : 'Todavía no has guardado ninguna sesión.'}
+      </p>
       <div className="settings-grid">
         <section className="panel settings-panel">
           <div className="panel-heading">

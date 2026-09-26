@@ -9,6 +9,7 @@ import {
 } from '../data/questions'
 import { Icon } from '../components/Icons'
 import { Button, PageHeader } from '../components/UI'
+import { searchQuestions } from '../lib/search'
 
 interface PracticeSetupPageProps {
   stats: TopicStat[]
@@ -20,7 +21,7 @@ interface PracticeSetupPageProps {
   onNavigate: (view: AppView) => void
 }
 
-type Focus = 'all' | 'weak' | 'due' | 'adaptive'
+type Focus = 'all' | 'weak' | 'due' | 'adaptive' | 'search'
 
 export function PracticeSetupPage({
   stats,
@@ -40,13 +41,21 @@ export function PracticeSetupPage({
   const [focus, setFocus] = useState<Focus>('all')
   const [immediate, setImmediate] = useState(showExplanations)
   const [query, setQuery] = useState('')
+  const [textQuery, setTextQuery] = useState('')
 
   const available = useMemo(() => {
     if (scope === 'topic') return questionsByTopic.get(topicId) ?? []
     if (scope === 'block') return questionsByBlock[blockId]
     return activeQuestions
   }, [scope, blockId, topicId])
+  const textMatches = useMemo(
+    () => searchQuestions(available, textQuery),
+    [available, textQuery],
+  )
   const effectiveAvailable = useMemo(() => {
+    if (focus === 'search') {
+      return textMatches.map((match) => match.question)
+    }
     if (focus === 'adaptive') {
       return available.filter((question) =>
         adaptiveQuestionIds.includes(question.id),
@@ -62,10 +71,12 @@ export function PracticeSetupPage({
           )
           .map((item) => item.topicId),
       )
-      return available.filter((question) => matchingTopics.has(question.topicId))
+      return available.filter((question) =>
+        matchingTopics.has(question.topicId),
+      )
     }
     return available
-  }, [adaptiveQuestionIds, available, focus, stats])
+  }, [adaptiveQuestionIds, available, focus, stats, textMatches])
   const availableTopics = useMemo(
     () =>
       topics.filter((topic) =>
@@ -84,12 +95,12 @@ export function PracticeSetupPage({
       immediateFeedback: immediate,
       blockIds: scope === 'block' ? [blockId] : undefined,
       questionIds:
-        focus === 'adaptive'
+        focus === 'adaptive' || focus === 'search'
           ? effectiveAvailable.map((question) => question.id)
           : undefined,
       selectionStrategy: focus === 'adaptive' ? 'adaptive' : 'random',
       topicIds:
-        focus === 'adaptive'
+        focus === 'adaptive' || focus === 'search'
           ? undefined
           : scope === 'topic'
             ? [topicId]
@@ -105,11 +116,13 @@ export function PracticeSetupPage({
       title:
         focus === 'adaptive'
           ? 'Práctica adaptativa'
-          : scope === 'topic'
-            ? `Práctica · ${topics.find((topic) => topic.id === topicId)?.focus ?? 'Tema'}`
-            : scope === 'block'
-              ? `Práctica · Bloque ${blockId}`
-              : 'Práctica mixta',
+          : focus === 'search'
+            ? `Búsqueda · ${textQuery.trim()}`
+            : scope === 'topic'
+              ? `Práctica · ${topics.find((topic) => topic.id === topicId)?.focus ?? 'Tema'}`
+              : scope === 'block'
+                ? `Práctica · Bloque ${blockId}`
+                : 'Práctica mixta',
     })
   }
 
@@ -192,24 +205,31 @@ export function PracticeSetupPage({
                 />
               </div>
               <div className="topic-picker">
-                {availableTopics.map((topic) => {
-                  const stat = statFor(topic.id)
-                  return (
-                    <button
-                      className={`topic-pick ${topicId === topic.id ? 'is-selected' : ''}`}
-                      key={topic.id}
-                      onClick={() => setTopicId(topic.id)}
-                      type="button"
-                    >
-                      <span>
-                        {topic.blockId} ·{' '}
-                        {topic.number.toString().padStart(2, '0')}
-                      </span>
-                      <strong>{topic.focus}</strong>
-                      <small>{stat?.presented ?? 0} respuestas</small>
-                    </button>
-                  )
-                })}
+                {availableTopics.length ? (
+                  availableTopics.map((topic) => {
+                    const stat = statFor(topic.id)
+                    return (
+                      <button
+                        className={`topic-pick ${topicId === topic.id ? 'is-selected' : ''}`}
+                        key={topic.id}
+                        onClick={() => setTopicId(topic.id)}
+                        type="button"
+                      >
+                        <span>
+                          {topic.blockId} ·{' '}
+                          {topic.number.toString().padStart(2, '0')}
+                        </span>
+                        <strong>{topic.focus}</strong>
+                        <small>{stat?.presented ?? 0} respuestas</small>
+                      </button>
+                    )
+                  })
+                ) : (
+                  <p className="empty-hint" role="status">
+                    Ningún tema coincide con «{query.trim()}». Limpia la
+                    búsqueda para ver los 33 temas.
+                  </p>
+                )}
               </div>
             </>
           ) : null}
@@ -272,12 +292,58 @@ export function PracticeSetupPage({
               >
                 Adaptativo
               </button>
+              <button
+                className={focus === 'search' ? 'is-active' : ''}
+                onClick={() => setFocus('search')}
+                type="button"
+              >
+                Texto
+              </button>
             </div>
             {focus === 'adaptive' ? (
               <p className="adaptive-note">
                 Prioriza preguntas nuevas, errores recientes, temas débiles y
                 repasos vencidos, manteniendo equilibrio entre bloques.
               </p>
+            ) : null}
+            {focus === 'search' ? (
+              <div className="search-focus">
+                <div className="search-box">
+                  <Icon name="search" size={17} />
+                  <input
+                    aria-label="Buscar en el texto de las preguntas"
+                    onChange={(event) => setTextQuery(event.target.value)}
+                    placeholder="Ej.: firma electrónica, TCP, normalización..."
+                    type="search"
+                    value={textQuery}
+                  />
+                </div>
+                {textQuery.trim() ? (
+                  textMatches.length ? (
+                    <p className="adaptive-note" role="status">
+                      {textMatches.length}{' '}
+                      {textMatches.length === 1
+                        ? 'coincidencia'
+                        : 'coincidencias'}{' '}
+                      en{' '}
+                      {scope === 'mixed'
+                        ? 'todo el banco'
+                        : 'el alcance elegido'}
+                      . La búsqueda ignora mayúsculas y tildes.
+                    </p>
+                  ) : (
+                    <p className="empty-hint" role="status">
+                      Sin coincidencias para «{textQuery.trim()}». Prueba con
+                      otra palabra o amplía el alcance.
+                    </p>
+                  )
+                ) : (
+                  <p className="adaptive-note">
+                    Busca en el enunciado, las opciones, la explicación y el
+                    nombre del tema.
+                  </p>
+                )}
+              </div>
             ) : null}
           </div>
           <label className="toggle-row">
@@ -300,8 +366,7 @@ export function PracticeSetupPage({
                 }
               />
               <strong>{Math.min(effectiveAvailable.length, count)}</strong>{' '}
-              preguntas
-              disponibles
+              preguntas disponibles
               {selectedStat ? (
                 <small>
                   {' '}

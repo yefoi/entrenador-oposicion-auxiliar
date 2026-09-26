@@ -9,28 +9,28 @@ describe('App smoke flow', () => {
     localStorage.setItem(ONBOARDING_KEY, 'true')
   })
 
-  it('muestra los ajustes con persistencia local', () => {
+  it('muestra los ajustes con persistencia local', async () => {
     render(<App />)
     fireEvent.click(screen.getByRole('button', { name: 'Ajustes' }))
     expect(
-      screen.getByRole('heading', { name: /tu preparación, bajo control/i }),
+      await screen.findByRole('heading', { name: /tu preparación, bajo control/i }),
     ).toBeInTheDocument()
     expect(screen.getByText('Guardado local')).toBeInTheDocument()
   })
 
-  it('muestra el panel y permite navegar al temario y minijuegos', () => {
+  it('muestra el panel y permite navegar al temario y minijuegos', async () => {
     render(<App />)
     expect(
       screen.getByRole('heading', { name: /tu plaza, paso a paso/i }),
     ).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: 'Temario' }))
     expect(
-      screen.getByRole('heading', { name: /el temario, sin perder el hilo/i }),
+      await screen.findByRole('heading', { name: /el temario, sin perder el hilo/i }),
     ).toBeInTheDocument()
     expect(screen.getByText('33', { exact: true })).toBeInTheDocument()
     fireEvent.click(screen.getAllByRole('button', { name: 'Minijuegos' })[0])
     expect(
-      screen.getByRole('heading', { name: /minijuegos para practicar/i }),
+      await screen.findByRole('heading', { name: /minijuegos para practicar/i }),
     ).toBeInTheDocument()
   })
 })

@@ -12,6 +12,7 @@ import {
   parseImportedState,
   saveTrainerState,
   storageIsAvailable,
+  type SaveStatus,
 } from '../lib/storage'
 import { scoreSession } from '../lib/scoring'
 import { calculateBestStreak } from '../lib/minigames'
@@ -30,22 +31,34 @@ const MAX_SESSIONS = 20
 type TrainerStore = {
   state: TrainerState
   recovered: boolean
+  storageStatus: SaveStatus
 }
 
-type TrainerAction = {
-  type: 'update'
-  updater: (state: TrainerState) => TrainerState
-  stamp?: boolean
-}
+type TrainerAction =
+  | {
+      type: 'update'
+      updater: (state: TrainerState) => TrainerState
+      stamp?: boolean
+    }
+  | { type: 'saved'; status: SaveStatus }
 
-function trainerReducer(store: TrainerStore, action: TrainerAction): TrainerStore {
+function trainerReducer(
+  store: TrainerStore,
+  action: TrainerAction,
+): TrainerStore {
+  if (action.type === 'saved') {
+    return store.storageStatus === action.status
+      ? store
+      : { ...store, storageStatus: action.status }
+  }
   const next = action.updater(store.state)
   return {
     ...store,
     recovered: false,
-    state: action.stamp === false
-      ? next
-      : { ...next, lastSavedAt: new Date().toISOString() },
+    state:
+      action.stamp === false
+        ? next
+        : { ...next, lastSavedAt: new Date().toISOString() },
   }
 }
 
@@ -55,15 +68,16 @@ function uniqueIds(values: string[]): string[] {
 
 export function useTrainer() {
   const initial = useMemo(() => loadTrainerState(), [])
+  const storageAvailable = useMemo(() => storageIsAvailable(), [])
   const [store, dispatch] = useReducer(trainerReducer, {
     state: initial.state,
     recovered: initial.recovered,
+    storageStatus: storageAvailable ? 'ok' : 'unavailable',
   })
-  const { state, recovered } = store
-  const storageAvailable = useMemo(() => storageIsAvailable(), [])
+  const { state, recovered, storageStatus } = store
 
   useEffect(() => {
-    saveTrainerState(state)
+    dispatch({ type: 'saved', status: saveTrainerState(state) })
   }, [state])
 
   const updateState = useCallback(
@@ -217,6 +231,7 @@ export function useTrainer() {
     activity,
     recovered,
     storageAvailable,
+    storageStatus,
     addSession,
     answerQuestion,
     toggleFlag,

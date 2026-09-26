@@ -74,8 +74,21 @@ export function loadTrainerState(): {
   return { state: fallback, recovered: true }
 }
 
-export function saveTrainerState(state: TrainerState): boolean {
-  if (typeof window === 'undefined' || !window.localStorage) return false
+export type SaveStatus = 'ok' | 'unavailable' | 'quota'
+
+const isQuotaError = (error: unknown) => {
+  if (!error || typeof error !== 'object') return false
+  const { name, code } = error as { name?: unknown; code?: unknown }
+  return (
+    name === 'QuotaExceededError' ||
+    name === 'NS_ERROR_DOM_QUOTA_REACHED' ||
+    code === 22 ||
+    code === 1014
+  )
+}
+
+export function saveTrainerState(state: TrainerState): SaveStatus {
+  if (typeof window === 'undefined' || !window.localStorage) return 'unavailable'
   const serialized = JSON.stringify({
     ...state,
     lastSavedAt: state.lastSavedAt || new Date().toISOString(),
@@ -84,9 +97,9 @@ export function saveTrainerState(state: TrainerState): boolean {
     const current = window.localStorage.getItem(STORAGE_KEY)
     if (current) window.localStorage.setItem(BACKUP_KEY, current)
     window.localStorage.setItem(STORAGE_KEY, serialized)
-    return true
-  } catch {
-    return false
+    return 'ok'
+  } catch (error) {
+    return isQuotaError(error) ? 'quota' : 'unavailable'
   }
 }
 

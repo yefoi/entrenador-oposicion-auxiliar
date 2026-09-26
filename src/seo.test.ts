@@ -1,10 +1,22 @@
 import { describe, expect, it } from 'vitest'
-import { readFileSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
+import { mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import { resolve } from 'node:path'
+import { blockPages, intentPages } from '../scripts/seo-content.mjs'
+import { topicSeo } from '../scripts/seo-topics.mjs'
 
 function read(relativePath: string) {
   return readFileSync(resolve(process.cwd(), relativePath), 'utf8')
 }
+
+const staticContentPages = [
+  'guia-tai.html',
+  'minijuegos-tai.html',
+  'preguntas-frecuentes-tai.html',
+  'privacidad.html',
+  'cookies.html',
+]
 
 describe('SEO metadata', () => {
   it('includes Spanish metadata, social tags and structured data', () => {
@@ -29,32 +41,98 @@ describe('SEO metadata', () => {
     expect(html).toContain('rel="manifest"')
     expect(manifest).toContain('"display": "standalone"')
     expect(serviceWorker).toContain("addEventListener('fetch'")
-    for (const page of [
-      'guia-tai.html',
-      'minijuegos-tai.html',
-      'preguntas-frecuentes-tai.html',
-    ]) {
+    for (const page of staticContentPages) {
       const content = read(`public/${page}`)
       expect(content).toContain('<h1>')
       expect(content).toContain('rel="canonical"')
     }
   })
 
-  it('keeps robots and sitemap aligned with the canonical URL', () => {
-    const html = read('index.html')
-    const robots = read('public/robots.txt')
-    const sitemap = read('public/sitemap.xml')
-    const url = 'https://yefoi.github.io/entrenador-oposicion-auxiliar/'
-    expect(html).toContain(url)
-    expect(robots).toContain('Allow: /')
-    expect(robots).toContain(`${url}sitemap.xml`)
-    expect(sitemap).toContain(`<loc>${url}</loc>`)
-    for (const page of [
-      'guia-tai.html',
-      'minijuegos-tai.html',
-      'preguntas-frecuentes-tai.html',
-    ]) {
-      expect(sitemap).toContain(`${url}${page}`)
+  it('declares no personal data in the legal pages', () => {
+    const privacidad = read('public/privacidad.html')
+    const cookies = read('public/cookies.html')
+    expect(privacidad).toContain('localStorage')
+    expect(privacidad).toContain('No hay cuentas de usuario')
+    expect(cookies).toContain('localStorage')
+    expect(cookies).toContain('consentimiento')
+  })
+
+  it('covers the four blocks and the 33 syllabus topics with unique slugs', () => {
+    expect(blockPages).toHaveLength(4)
+    expect(intentPages).toHaveLength(4)
+    expect(topicSeo).toHaveLength(33)
+    const ids = topicSeo.map(([id]) => id)
+    const slugs = topicSeo.map(([, , , slug]) => slug)
+    expect(new Set(ids).size).toBe(33)
+    expect(new Set(slugs).size).toBe(33)
+    for (const [id, title, focus, slug] of topicSeo) {
+      expect(id).toMatch(/^B[1-4]-T\d{2}$/)
+      expect(title.length).toBeGreaterThan(10)
+      expect(focus.length).toBeGreaterThan(15)
+      expect(slug).toMatch(/^[a-z0-9-]+$/)
     }
+    const blocks = new Set(topicSeo.map(([id]) => id.slice(0, 2)))
+    expect([...blocks].sort()).toEqual(['B1', 'B2', 'B3', 'B4'])
+  })
+
+  it('generates a sitemap, robots and indexable pages aligned with SITE_URL', () => {
+    const outDir = mkdtempSync(resolve(tmpdir(), 'tai-seo-'))
+    const siteUrl = 'https://www.example.test/'
+    writeFileSync(
+      resolve(outDir, 'guia-tai.html'),
+      '<html lang="es"><body><main><h1>Guía</h1></main></body></html>',
+    )
+    execFileSync('node', ['scripts/generate-seo.mjs'], {
+      env: { ...process.env, SITE_URL: siteUrl, SEO_OUT_DIR: outDir },
+      stdio: 'pipe',
+    })
+
+    const robots = readFileSync(resolve(outDir, 'robots.txt'), 'utf8')
+    expect(robots).toContain('Allow: /')
+    expect(robots).toContain('Sitemap: https://www.example.test/sitemap.xml')
+
+    const sitemap = readFileSync(resolve(outDir, 'sitemap.xml'), 'utf8')
+    const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
+      (m) => m[1],
+    )
+    expect(new Set(locations).size).toBe(locations.length)
+    for (const location of locations) {
+      expect(location.startsWith(siteUrl)).toBe(true)
+    }
+    for (const page of [
+      ...staticContentPages,
+      ...intentPages.map((p) => p.path),
+      ...blockPages.map((p) => p.path),
+    ]) {
+      expect(locations).toContain(`${siteUrl}${page}`)
+    }
+    for (const [, , , slug] of topicSeo) {
+      expect(locations).toContain(`${siteUrl}temas/${slug}.html`)
+    }
+
+    const topicFiles = readdirSync(resolve(outDir, 'temas'))
+    expect(topicFiles).toHaveLength(33)
+
+    const sample = readFileSync(
+      resolve(outDir, `temas/${topicSeo[0][3]}.html`),
+      'utf8',
+    )
+    expect(sample).toContain(
+      `rel="canonical" href="${siteUrl}temas/${topicSeo[0][3]}.html"`,
+    )
+    expect(sample).toContain(topicSeo[0][1])
+    expect(sample).toContain('application/ld+json')
+    expect(sample).toContain('lang="es"')
+
+    const hub = readFileSync(resolve(outDir, 'guia-tai.html'), 'utf8')
+    expect(hub).toContain('id="seo-hub"')
+    expect(hub).toContain('bloque-4-sistemas-comunicaciones.html')
+    expect(hub).toContain('test-oposiciones-tai.html')
+
+    const generated = readFileSync(resolve(outDir, 'temario-tai.html'), 'utf8')
+    expect(generated).toContain(
+      'bloque-1-organizacion-administracion-electronica.html',
+    )
+    expect(generated).toContain('como-estudiar-tai.html')
   })
 })

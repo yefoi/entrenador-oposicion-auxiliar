@@ -17,5 +17,16 @@ export default defineConfig(({ mode }) => {
         },
       },
     ],
+    build: {
+      rolldownOptions: {
+        output: {
+          codeSplitting: {
+            groups: [
+              { name: 'react', test: /node_modules[\\/](react|react-dom|scheduler)[\\/]/ },
+            ],
+          },
+        },
+      },
+    },
   }
 })

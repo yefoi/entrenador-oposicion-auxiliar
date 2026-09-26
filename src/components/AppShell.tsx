@@ -37,11 +37,10 @@ export function AppShell({
         Saltar al contenido
       </a>
       <aside className="sidebar">
-        <div
+        <button
           className="brand"
           onClick={() => onNavigate('dashboard')}
-          role="button"
-          tabIndex={0}
+          type="button"
         >
           <div className="brand-mark">
             <Icon name="target" size={24} />
@@ -50,7 +49,7 @@ export function AppShell({
             <strong>Plaza TAI</strong>
             <span>entrenador AGE</span>
           </div>
-        </div>
+        </button>
         <div className="sidebar-rule" />
         <nav aria-label="Navegación principal" className="main-nav">
           {navigation.map((item) => (
