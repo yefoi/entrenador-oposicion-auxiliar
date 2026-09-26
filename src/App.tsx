@@ -3,6 +3,7 @@ import type { AppView } from './domain/types'
 import { activeQuestions, questionById } from './data/questions'
 import { useTrainer } from './hooks/useTrainer'
 import { hasSeenOnboarding } from './lib/storage'
+import { currentSearch, readDeepLink } from './lib/deeplink'
 import {
   createExamSession,
   createPracticeSession,
@@ -58,14 +59,17 @@ function App() {
   const [showOnboarding, setShowOnboarding] = useState(
     () => !hasSeenOnboarding(),
   )
-  const [view, setView] = useState<AppView>('dashboard')
+  const deepLink = useMemo(() => readDeepLink(currentSearch()), [])
+  const [view, setView] = useState<AppView>(deepLink.view ?? 'dashboard')
   const [selectedAttemptId, setSelectedAttemptId] = useState<string | null>(
     null,
   )
-  const [practiceTopicId, setPracticeTopicId] = useState<string | undefined>()
+  const [practiceTopicId, setPracticeTopicId] = useState<string | undefined>(
+    deepLink.topicId,
+  )
   const [practiceBlockId, setPracticeBlockId] = useState<
     'I' | 'II' | 'III' | 'IV' | undefined
-  >()
+  >(deepLink.blockId)
 
   const navigate = useCallback((next: AppView) => {
     setView(next)

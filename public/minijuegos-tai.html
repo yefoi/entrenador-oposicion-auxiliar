@@ -9,33 +9,26 @@
     <meta property="og:title" content="Minijuegos TAI AGE | Practica y repasa">
     <meta property="og:description" content="Tres modos de práctica breve para aprender TAI con racha, explicación y seguimiento local.">
     <meta property="og:type" content="article">
-    <style>
-      :root { color-scheme: light; font-family: system-ui, sans-serif; color: #252238; background: #f7f6fb; }
-      body { margin: 0; }
-      main { max-width: 820px; margin: auto; padding: 48px 22px 72px; }
-      a { color: #5744c9; }
-      .eyebrow { color: #117f75; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: .78rem; }
-      h1 { font-size: clamp(2rem, 7vw, 3.6rem); line-height: 1.05; margin: .6rem 0 1rem; }
-      h2 { margin-top: 2.4rem; }
-      p, li { line-height: 1.7; }
-      .card { background: #fff; border: 1px solid #dcece8; border-radius: 18px; padding: 22px; margin: 18px 0; }
-      nav { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 28px; }
-    </style>
+    <link rel="stylesheet" href="./site.css">
   </head>
   <body>
-    <main>
+    <main class="site-main">
       <div class="eyebrow">Plaza TAI · Práctica breve</div>
       <h1>Minijuegos para estudiar TAI</h1>
-      <p>Los minijuegos convierten el repaso en una sesión corta y medible. No sustituyen un simulacro completo, pero son útiles para mantener viva la información cuando el tiempo es limitado.</p>
-      <div class="card">
+      <p class="lead">Los minijuegos convierten el repaso en una sesión corta y medible. No sustituyen un simulacro completo, pero son útiles para mantener viva la información cuando el tiempo es limitado.</p>
+      <p class="site-cta">
+        <a class="button button-primary" href="./?vista=minijuegos">Abrir minijuegos</a>
+        <a class="button button-secondary" href="./?vista=practica">Practicar por temas</a>
+      </p>
+      <div class="site-card">
         <h2>Flashcards</h2>
         <p>Responde una selección de preguntas y revisa la explicación después de cada acierto o error. Sirve para recorrer conceptos de los cuatro bloques sin repetir siempre las mismas preguntas.</p>
       </div>
-      <div class="card">
+      <div class="site-card">
         <h2>Speedrun</h2>
         <p>Responde el máximo posible dentro de 60 segundos. El objetivo es ganar confianza y localizar rápido los conceptos que todavía requieren estudio, no demostrar una puntuación oficial.</p>
       </div>
-      <div class="card">
+      <div class="site-card">
         <h2>Debilidades</h2>
         <p>La ronda se concentra en temas con menor rendimiento o repasos pendientes. Es útil después de una sesión de tests, cuando ya existe un historial local que permite priorizar lo que más cuesta.</p>
       </div>
@@ -46,7 +39,7 @@
         <li>Repite el mismo tema en días distintos: la recuperación espaciada importa más que hacer muchas seguidas.</li>
       </ol>
       <p>El progreso se guarda en el navegador del dispositivo. No se envían respuestas a un servidor. Las preguntas y explicaciones son un banco propio de práctica, no material oficial de la AGE o del INAP.</p>
-      <nav aria-label="Navegación principal">
+      <nav class="site-nav" aria-label="Navegación principal">
         <a href="./">Abrir el entrenador</a>
         <a href="./guia-tai.html">Leer la guía de estudio</a>
         <a href="./preguntas-frecuentes-tai.html">Leer preguntas frecuentes</a>

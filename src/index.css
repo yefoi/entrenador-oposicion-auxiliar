@@ -1493,6 +1493,66 @@ a {
 .search-focus .empty-hint {
   margin: 0;
 }
+.topic-review {
+  margin: 12px 0 0;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+.topic-review > summary {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 11px 14px;
+  cursor: pointer;
+  list-style: none;
+}
+.topic-review > summary::-webkit-details-marker {
+  display: none;
+}
+.topic-review > summary::after {
+  content: '+';
+  position: absolute;
+  right: 14px;
+  font-size: 16px;
+  color: var(--muted);
+}
+.topic-review {
+  position: relative;
+}
+.topic-review[open] > summary::after {
+  content: '−';
+}
+.topic-review > summary span {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--purple-dark);
+}
+.topic-review > summary small {
+  color: var(--muted);
+  font-size: 11px;
+}
+.topic-review > summary:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: -2px;
+  border-radius: var(--radius-sm);
+}
+.topic-review__body {
+  padding: 0 14px 13px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.topic-review__body p {
+  margin: 0 0 7px;
+}
+.topic-review__note a {
+  color: var(--purple-dark);
+  font-weight: 600;
+  text-decoration: none;
+}
+.topic-review__note a:hover {
+  text-decoration: underline;
+}
 .topic-pick {
   display: flex;
   min-height: 61px;

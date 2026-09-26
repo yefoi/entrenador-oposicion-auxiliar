@@ -41,10 +41,15 @@ describe('SEO metadata', () => {
     expect(html).toContain('rel="manifest"')
     expect(manifest).toContain('"display": "standalone"')
     expect(serviceWorker).toContain("addEventListener('fetch'")
+    const siteCss = read('public/site.css')
+    expect(siteCss).toContain('--purple:')
+    expect(siteCss).toContain('.site-card')
     for (const page of staticContentPages) {
       const content = read(`public/${page}`)
       expect(content).toContain('<h1>')
       expect(content).toContain('rel="canonical"')
+      expect(content).toContain('href="./site.css"')
+      expect(content).toContain('class="site-main"')
     }
   })
 
@@ -123,6 +128,16 @@ describe('SEO metadata', () => {
     expect(sample).toContain(topicSeo[0][1])
     expect(sample).toContain('application/ld+json')
     expect(sample).toContain('lang="es"')
+    expect(sample).toContain('href="../site.css"')
+    expect(sample).toContain('../?tema=B1-T01&vista=practica')
+    expect(sample).toContain('href="../temario-tai.html"')
+
+    const blockPage = readFileSync(
+      resolve(outDir, 'bloque-3-desarrollo-sistemas.html'),
+      'utf8',
+    )
+    expect(blockPage).toContain('href="./?bloque=III&vista=practica"')
+    expect(blockPage).toContain('href="./site.css"')
 
     const hub = readFileSync(resolve(outDir, 'guia-tai.html'), 'utf8')
     expect(hub).toContain('id="seo-hub"')

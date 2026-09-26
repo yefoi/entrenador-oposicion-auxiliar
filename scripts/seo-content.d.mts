@@ -5,6 +5,7 @@ export interface SeoPage {
   intro: string
   sections: [string, string][]
   keywords: string[]
+  blockId?: 'I' | 'II' | 'III' | 'IV'
 }
 
 export declare const blockPages: SeoPage[]

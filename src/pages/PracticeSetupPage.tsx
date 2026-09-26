@@ -8,6 +8,7 @@ import {
   questionsByTopic,
 } from '../data/questions'
 import { Icon } from '../components/Icons'
+import { TopicReviewPanel } from '../components/TopicReviewPanel'
 import { Button, PageHeader } from '../components/UI'
 import { searchQuestions } from '../lib/search'
 
@@ -233,6 +234,7 @@ export function PracticeSetupPage({
               </div>
             </>
           ) : null}
+          {scope === 'topic' ? <TopicReviewPanel topicId={topicId} /> : null}
           <div className="setup-step second-step">
             <span className="step-number">2</span>
             <div>

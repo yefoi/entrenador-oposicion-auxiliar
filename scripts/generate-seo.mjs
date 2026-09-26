@@ -35,10 +35,27 @@ const escapeHtml = (value) =>
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
-const list = (items) =>
-  items.map(([label, path]) => `<li><a href="${path}">${escapeHtml(label)}</a></li>`).join('\n          ')
-const renderPage = ({ path, title, description, intro, sections, keywords, jsonLd, header }) =>
-  `<!doctype html>
+const list = (items, root = './') =>
+  items
+    .map(
+      ([label, path]) =>
+        `<li><a href="${root}${path}">${escapeHtml(label)}</a></li>`,
+    )
+    .join('\n          ')
+const renderPage = ({
+  path,
+  title,
+  description,
+  intro,
+  sections,
+  keywords,
+  jsonLd,
+  header,
+  actions,
+  depth = 0,
+}) => {
+  const root = depth ? '../' : './'
+  return `<!doctype html>
 <html lang="es">
   <head>
     <meta charset="utf-8" />
@@ -55,60 +72,39 @@ const renderPage = ({ path, title, description, intro, sections, keywords, jsonL
     <meta name="twitter:card" content="summary" />
     <meta name="keywords" content="${escapeHtml(keywords.join(', '))}" />
     <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
-    <style>
-      :root { color-scheme: light dark; }
-      * { box-sizing: border-box; }
-      body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.65; color: #1c2230; background: #f6f7fb; }
-      main { max-width: 60rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-      header, section, nav, .cta { background: #fff; border: 1px solid #e2e5ee; border-radius: 0.75rem; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; }
-      h1 { margin-top: 0; font-size: clamp(1.6rem, 4vw, 2.25rem); line-height: 1.2; }
-      h2 { margin-top: 0; font-size: 1.25rem; }
-      a { color: #1d4ed8; }
-      .eyebrow { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem; color: #5b6478; margin: 0 0 0.5rem; }
-      .lead { font-size: 1.1rem; color: #38405a; }
-      nav ul, section ul { padding-left: 1.1rem; }
-      nav li { margin-bottom: 0.35rem; }
-      .cta a { display: inline-block; background: #1d4ed8; color: #fff; padding: 0.7rem 1.1rem; border-radius: 0.5rem; text-decoration: none; font-weight: 600; }
-      .note { font-size: 0.9rem; color: #5b6478; }
-      footer { color: #5b6478; font-size: 0.9rem; text-align: center; padding-bottom: 2rem; }
-      @media (prefers-color-scheme: dark) {
-        body { background: #10131b; color: #e7eaf3; }
-        header, section, nav, .cta { background: #181d29; border-color: #2a3040; }
-        .lead, .note, .eyebrow, footer { color: #a7b0c4; }
-        a { color: #93b4ff; }
-      }
-    </style>
+    <link rel="stylesheet" href="${root}site.css" />
   </head>
   <body>
-    <main>
-      <header>
+    <main class="site-main">
+      <header class="site-card">
         <p class="eyebrow">${escapeHtml(header)}</p>
         <h1>${escapeHtml(title)}</h1>
         <p class="lead">${escapeHtml(intro)}</p>
-        <p class="cta"><a href="./">Abrir el entrenador gratis</a></p>
+        <p class="site-cta">${actions}</p>
       </header>
       ${sections
         .map(
           ([heading, body]) =>
-            `<section><h2>${escapeHtml(heading)}</h2><p>${escapeHtml(body)}</p></section>`,
+            `<section class="site-card"><h2>${escapeHtml(heading)}</h2><p>${escapeHtml(body)}</p></section>`,
         )
         .join('\n      ')}
-      <section>
+      <section class="site-card">
         <h2>En Plaza TAI</h2>
         <p>Este contenido forma parte de una plataforma de práctica libre para el Cuerpo de Técnicos Auxiliares de Informática de la AGE. Funciona en el navegador, guarda el progreso en localStorage y no necesita registro.</p>
         <p class="note">El banco de preguntas y las explicaciones son propios y no oficiales. Verifica siempre la convocatoria y el BOE vigentes.</p>
       </section>
-      <nav aria-label="Páginas relacionadas">
+      <nav class="site-card site-nav" aria-label="Páginas relacionadas">
         <h2>Ver también</h2>
         <ul>
-          ${list(related)}
+          ${list(related, root)}
         </ul>
       </nav>
-      <footer><p>Plaza TAI · práctica de oposiciones TAI sin registro · <a href="./privacidad.html">Privacidad</a> · <a href="./cookies.html">Cookies</a></p></footer>
+      <footer class="site-footer"><p>Plaza TAI · práctica de oposiciones TAI sin registro · <a href="${root}privacidad.html">Privacidad</a> · <a href="${root}cookies.html">Cookies</a></p></footer>
     </main>
   </body>
 </html>
 `
+}
 const breadcrumb = (name, path) => ({
   '@type': 'BreadcrumbList',
   itemListElement: [
@@ -127,13 +123,55 @@ const readIfExists = async (target) => {
   }
 }
 const generated = []
+const actions = {
+  test: [
+    ['Practicar este bloque', './?bloque=III&vista=practica', 'button-primary'],
+    ['Ver el temario', './?vista=temario', 'button-secondary'],
+  ],
+  exam: [
+    ['Ir al simulacro', './?vista=simulacro', 'button-primary'],
+    ['Practicar por bloques', './?vista=practica', 'button-secondary'],
+  ],
+  syllabus: [
+    ['Explorar los 33 temas', './?vista=temario', 'button-primary'],
+    ['Empezar a practicar', './?vista=practica', 'button-secondary'],
+  ],
+  study: [
+    ['Practicar ahora', './?vista=practica', 'button-primary'],
+    ['Ver el temario', './?vista=temario', 'button-secondary'],
+  ],
+}
+const blockAction = (id) => [
+  [`Practicar el bloque ${id}`, `./?bloque=${id}&vista=practica`, 'button-primary'],
+  ['Practicar otro bloque', './?vista=practica', 'button-secondary'],
+]
+const actionButtons = (items) =>
+  items
+    .map(
+      ([label, href, variant]) =>
+        `<a class="button ${variant}" href="${href}">${escapeHtml(label)}</a>`,
+    )
+    .join('\n        ')
 for (const page of [...intentPages, ...blockPages]) {
-  const header = page.path.startsWith('bloque-') ? 'Bloque del temario' : 'Recurso'
+  const isBlock = page.path.startsWith('bloque-')
+  const header = isBlock ? 'Bloque del temario' : 'Recurso'
+  const key = isBlock
+    ? 'block'
+    : page.path.startsWith('test-')
+      ? 'test'
+      : page.path.startsWith('simulacro-')
+        ? 'exam'
+        : page.path.startsWith('temario-')
+          ? 'syllabus'
+          : 'study'
   await writeFile(
     resolve(dist, page.path),
     renderPage({
       ...page,
       header,
+      actions: actionButtons(
+        isBlock ? blockAction(page.blockId) : actions[key],
+      ),
       jsonLd: breadcrumb(page.title.split('|')[0].trim(), page.path),
     }),
   )
@@ -171,6 +209,11 @@ for (const [id, title, focus, slug] of topicSeo) {
       intro: `${title}. ${focus}.`,
       sections,
       header: `Tema ${id} · ${block[0]}`,
+      depth: 1,
+      actions: actionButtons([
+        [`Practicar el tema ${id}`, `../?tema=${encodeURIComponent(id)}&vista=practica`, 'button-primary'],
+        ['Ver el temario completo', '../?vista=temario', 'button-secondary'],
+      ]),
       keywords: [focus, 'temario TAI', 'preguntas TAI'],
       jsonLd: breadcrumb(`${title} (${id})`, path),
     }),

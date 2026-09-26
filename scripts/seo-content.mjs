@@ -1,6 +1,7 @@
 export const blockPages = [
   {
     path: 'bloque-1-organizacion-administracion-electronica.html',
+    blockId: 'I',
     title: 'Bloque 1 TAI | Organización del Estado y administración electrónica',
     description:
       'Temario TAI del Bloque 1: Constitución, Cortes Generales, función pública, transparencia, identidad, protección de datos y administración electrónica.',
@@ -24,6 +25,7 @@ export const blockPages = [
   },
   {
     path: 'bloque-2-tecnologia-basica.html',
+    blockId: 'II',
     title: 'Bloque 2 TAI | Tecnología básica y fundamentos técnicos',
     description:
       'Temario TAI del Bloque 2: hardware, periféricos, algoritmos, estructuras de datos, sistemas operativos y bases de datos.',
@@ -47,6 +49,7 @@ export const blockPages = [
   },
   {
     path: 'bloque-3-desarrollo-sistemas.html',
+    blockId: 'III',
     title: 'Bloque 3 TAI | Desarrollo de sistemas',
     description:
       'Temario TAI del Bloque 3: modelado de datos, programación, SQL, Java y .NET, arquitectura, web, accesibilidad, calidad y Git.',
@@ -70,6 +73,7 @@ export const blockPages = [
   },
   {
     path: 'bloque-4-sistemas-comunicaciones.html',
+    blockId: 'IV',
     title: 'Bloque 4 TAI | Sistemas, seguridad y comunicaciones',
     description:
       'Temario TAI del Bloque 4: administración de sistemas, backup, seguridad, redes, TCP/IP, Internet, VPN, DNS, HTTP y redes locales.',
