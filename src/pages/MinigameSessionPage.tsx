@@ -7,6 +7,8 @@ import { OptionNotes } from '../components/OptionNotes'
 import { Button, ProgressBar } from '../components/UI'
 import { Question as QuestionCard } from '../lib/pages/components/Question'
 import { DiscardQuestion } from '../lib/pages/components/DiscardQuestion'
+import { ScenarioMaterials } from '../lib/pages/components/ScenarioMaterials'
+import { scenarios } from '../data/syllabus'
 
 interface MinigameSessionPageProps {
   session: TrainerSession
@@ -52,6 +54,11 @@ export function MinigameSessionPage({
     : undefined
   const answer = questionEntry
     ? session.answers[questionEntry.questionId]
+    : undefined
+  // Un minijuego puede sacar preguntas de un supuesto, y entonces necesita sus
+  // materiales: sin ellos la pregunta no se puede responder.
+  const scenario = question?.scenarioId
+    ? scenarios.find((item) => item.id === question.scenarioId)
     : undefined
   const answered = useMemo(
     () =>
@@ -169,6 +176,7 @@ export function MinigameSessionPage({
               total={total}
             />
           )}
+          {scenario ? <ScenarioMaterials scenario={scenario} /> : null}
           {showFeedback ? (
             <div
               aria-live="polite"

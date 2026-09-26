@@ -34,12 +34,13 @@ export function SessionPage({
     : undefined
   const isExam = session.mode === 'exam'
   const currentPart = questionEntry?.part ?? 1
-  // El caso solo se ofrece en las preguntas del supuesto, y solo en el bloque
-  // que el alumno eligio al configurar el simulacro.
-  const scenario =
-    question?.scenarioId && session.scenarioBlock === question.scenarioId
-      ? scenarios.find((item) => item.id === question.scenarioId)
-      : undefined
+  // Los materiales acompanan a la pregunta siempre que pertenezca a un
+  // supuesto, sea cual sea el modo. Antes solo se mostraban en el simulacro, de
+  // modo que una pregunta del caso que cayera en una practica o en un minijuego
+  // pedia consultar unos documentos que no estaban a la vista.
+  const scenario = question?.scenarioId
+    ? scenarios.find((item) => item.id === question.scenarioId)
+    : undefined
   const answered = useMemo(
     () =>
       session.questions.filter(
