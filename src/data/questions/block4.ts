@@ -627,6 +627,12 @@ export const block4Questions: Question[] = [
       'Activar el cifrado de la contraseña del conmutador en lugar de separar las redes.',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'Sin separar VLANs, la difusión sigue llegando a todos los puertos del segmento.',
+      'Un repetidor no separa la difusión: la reparte a todos sus puertos.',
+      '',
+      'Cifrar la contraseña del conmutador protege el acceso al equipo, no el tráfico entre departamentos.',
+    ],
     explanation:
       'Las VLANs separan dominios de difusión de capa 2. El conmutador debe tener asignaciones de VLAN coherentes y, si se necesita comunicación entre departamentos, una ACL o un cortafuegos debe autorizar el tráfico de forma explícita.',
     difficulty: 'medium',
@@ -648,6 +654,12 @@ export const block4Questions: Question[] = [
       'Desactivar las tramas unicast y usar únicamente difusiones globales.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Más concentradores amplían el mismo dominio de colisión y pueden empeorarlo.',
+      'Las direcciones de difusión no identifican a un equipo y anulan la entrega unicast.',
+      'Eliminar las tramas unicast impide cualquier comunicación entre equipos.',
+    ],
     explanation:
       'Un conmutador aprende direcciones MAC y reenvía las tramas unicast solo al puerto asociado, mientras que un concentrador repite la señal a todos sus puertos.',
     difficulty: 'easy',
@@ -669,6 +681,12 @@ export const block4Questions: Question[] = [
       'Máscara 255.255.0.0 y puerta de enlace 192.168.40.0.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Con máscara /28, el equipo 192.168.40.129 y la puerta 192.168.40.1 quedan en subredes distintas.',
+      'La dirección del propio equipo no puede usarse como puerta de enlace.',
+      'Con máscara /16 la puerta sí cae en la misma red, pero no es la máscara de la red /24 indicada.',
+    ],
     explanation:
       'En una red /24, 192.168.40.129 es una dirección de equipo válida y la máscara es 255.255.255.0. La puerta de enlace indicada por la administración es 192.168.40.1; también debe estar en la misma subred, mientras que la dirección de red y la de difusión no pueden asignarse a un equipo.',
     difficulty: 'medium',
@@ -685,6 +703,12 @@ export const block4Questions: Question[] = [
       'Una plataforma de monitorización consulta el estado de los dispositivos y sus contadores de interfaz mediante SNMP. ¿En qué puerto UDP escucha normalmente el agente?',
     options: ['161', '443', '53', '22'],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'El 443 es HTTPS: no es el puerto del agente SNMP.',
+      'El 53 resuelve nombres de dominio.',
+      'El 22 es SSH, para acceso remoto.',
+    ],
     explanation:
       'El agente SNMP escucha consultas en el puerto UDP 161. Las notificaciones traps e informs suelen usar el puerto UDP 162, que es un puerto distinto.',
     difficulty: 'easy',
@@ -706,6 +730,12 @@ export const block4Questions: Question[] = [
       'Dividir cada trama en VLANs nuevas antes de enviarla al IDS.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Un concentrador no permite definir un puerto de análisis con el mismo sentido del tráfico.',
+      'NAT cambia direcciones y no captura tramas para analizarlas.',
+      'Segmentar la trama en VLANs no es una operación de captura, es separación de redes.',
+    ],
     explanation:
       'El puerto espejo copia las tramas seleccionadas hacia un puerto de análisis sin cambiar el camino normal de conmutación. NAT modifica direcciones y NAT no es un mecanismo de captura de tráfico.',
     difficulty: 'hard',
@@ -727,6 +757,12 @@ export const block4Questions: Question[] = [
       'Activar DHCP snooping sin configurar ningún protocolo de puente.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Un concentrador para las VLANs aumenta las difusiones y el bucle seguiría existiendo.',
+      'NAT no participa en la conmutación de capa 2 ni en la detección de bucles.',
+      'DHCP snooping vigila las direcciones asignadas, no las tramas BPDU de los puentes.',
+    ],
     explanation:
       'STP y su variante RSTP intercambian tramas BPDU para elegir un puente raíz y poner en bloqueo los puertos redundantes. Así se evita la circulación indefinida de tramas por el bucle; RSTP ofrece una convergencia más rápida que STP clásico.',
     difficulty: 'medium',
@@ -743,6 +779,12 @@ export const block4Questions: Question[] = [
       'La administración quiere agrupar dos enlaces Ethernet de 1 Gbps en un puerto lógico y negociar esa agregación con los dispositivos vecinos. ¿Qué protocolo debe utilizar?',
     options: ['LACP', 'RSTP', 'DHCP', 'RADIUS'],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'RSTP bloquea puertos redundantes, no agrupa enlaces.',
+      'DHCP reparte direcciones IP, no negocia la agregación de enlaces.',
+      'RADIUS autentica a los usuarios, no negocia puertos.',
+    ],
     explanation:
       'LACP, definido en el estándar IEEE 802.1AX, negocia la agregación de enlaces físicos y mantiene un puerto lógico. RSTP evita bucles, DHCP distribuye configuración y RADIUS controla el acceso; no son protocolos de agregación.',
     difficulty: 'medium',
@@ -764,6 +806,12 @@ export const block4Questions: Question[] = [
       'Revisar latiguillo, conectores, transceptor o fibra, potencia óptica y dúplex.',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Un concentrador comparte el medio y añade colisiones: no elimina tramas corruptas.',
+      'Las VLAN y la máscara son de capa 2 y 3; un error CRC es físico.',
+      'Borrar la tabla ARP no altera el medio físico ni sus conectores.',
+      '',
+    ],
     explanation:
       'Los errores CRC o FCS indican tramas alteradas después de la capa de enlace. La causa más directa suele estar en el medio físico, los conectores, la óptica o la configuración de velocidad y dúplex, antes de descartar un problema de capa superior.',
     difficulty: 'hard',
@@ -785,6 +833,12 @@ export const block4Questions: Question[] = [
       'Pedir al guardia que olvide la identidad de las visitas si trabajan con un proveedor habitual.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Cambiar la contraseña del empleado no impide que otra persona cruce la puerta con él.',
+      'Dejar las tarjetas a la vista permite usarlas sin autenticación real.',
+      'Pedir al guardia que olvide a quién deja entrar elimina el control de acceso.',
+    ],
     explanation:
       'El tailgating se combate con controles de puerta que evitan la apertura no autenticada para más de una persona y con identificación y registro de visitantes. Una contraseña o una tarjeta compartida no resuelve el problema físico.',
     difficulty: 'medium',
@@ -806,6 +860,12 @@ export const block4Questions: Question[] = [
       'Que el algoritmo oculte el archivo durante su transferencia por cualquier red.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Un hash no es reversible: no recupera el contenido cifrado ni acepta contraseña.',
+      'La huella es de solo lectura; nadie puede modificarla sin romper la verificación.',
+      'El hash no cifra ni oculta el archivo durante la transferencia.',
+    ],
     explanation:
       'Una función hash produce una huella de longitud fija y no es reversible. SHA-256 ofrece una resistencia elevada a las colisiones: comparar su resultado con una fuente de confianza ayuda a detectar cambios, aunque por sí sola no cifra ni autentica al proveedor.',
     difficulty: 'easy',
@@ -827,6 +887,12 @@ export const block4Questions: Question[] = [
       'Autorización automática de todas las cuentas del proveedor.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'La firma no cifra: el contenido sigue siendo legible por cualquiera.',
+      'Una copia de seguridad no es una propiedad de la firma digital.',
+      'La firma acredita al firmante, no concede permisos a sus cuentas.',
+    ],
     explanation:
       'La firma digital vincula el contenido a la clave del firmante y permite detectar su alteración mediante una clave pública de confianza. No proporciona confidencialidad ni sustituye los controles de autorización.',
     difficulty: 'medium',
@@ -848,6 +914,12 @@ export const block4Questions: Question[] = [
       'Aislar el equipo, documentar la detección y aplicar el protocolo de conservación.',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Borrar los registros destruye la evidencia y oculta la actividad del atacante.',
+      'Reformatear elimina la prueba antes de investigarla.',
+      'Conectar a la red de invitados mantiene el equipo dentro de una red, no lo aísla.',
+      '',
+    ],
     explanation:
       'Aislar el equipo evita la propagación y permite iniciar la investigación. La conservación de memoria y disco debe coordinarse con el protocolo de respuesta; apagar puede ser necesario en algunos escenarios, pero no es una decisión universal.',
     difficulty: 'hard',
@@ -869,6 +941,12 @@ export const block4Questions: Question[] = [
       'Conceder al contratista una cuenta local sin caducidad y sin monitorización.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Publicar la administración con contraseña compartida elimina la verificación individual.',
+      'Enviar credenciales por correo y mantener la cuenta indefinidamente deja acceso permanente sin control.',
+      'Una cuenta local sin caducidad ni monitorización impide saber qué se hizo y revocarla a tiempo.',
+    ],
     explanation:
       'El acceso remoto debe cifrar el canal, verificar al usuario y limitar los privilegios del contratista. Una VPN o un servidor bastion, por sí solos, no bastan si se mantienen credenciales permanentes y sin supervisión.',
     difficulty: 'hard',
@@ -890,6 +968,12 @@ export const block4Questions: Question[] = [
       'Un cable de red compartido entre la sala de servidores y el grupo electrógeno.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'La batería de un portátil no cubre un CPD ni tiene un procedimiento de prueba.',
+      'Una política de contraseñas no protege frente a una caída de tensión.',
+      'Un cable de red compartido no alimenta al equipo ni cubre cortes largos.',
+    ],
     explanation:
       'El UPS proporciona autonomía y una transición ordenada para cortes cortos; un generador y una estrategia de continuidad cubren interrupciones prolongadas. Los controles ambientales, el mantenimiento y las pruebas periódicas son parte de la seguridad física del CPD.',
     difficulty: 'medium',
@@ -911,6 +995,12 @@ export const block4Questions: Question[] = [
       'Aplicar RSA directamente a cada bloque del volumen porque su clave pública es la más rápida para el cifrado masivo.',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Enviar la clave en claro por el mismo canal anula el cifrado por completo.',
+      '',
+      'SHA-256 es una función hash: no cifra el volumen ni produce una clave de descifrado.',
+      'RSA es muy lento para cifrar bloques masivos; el esquema híbrido lo reserva a la clave.',
+    ],
     explanation:
       'Los algoritmos simétricos son eficientes para cifrar grandes volúmenes. Un esquema asimétrico puede autenticar al receptor y proteger el intercambio o el envoltorio de la clave, sin necesidad de hacer el cifrado masivo con RSA.',
     difficulty: 'hard',
@@ -932,6 +1022,12 @@ export const block4Questions: Question[] = [
       'Eliminar la imagen original después de copiarla en una unidad personal del analista.',
     ],
     correctIndex: 2,
+    optionNotes: [
+      'El veredicto del antivirus no identifica a nadie ni documenta cómo se obtuvo la evidencia.',
+      'Un grupo compartido sin anotaciones impide saber quién tocó la evidencia.',
+      '',
+      'Eliminar el original rompe la trazabilidad: solo debe conservarse la copia verificada.',
+    ],
     explanation:
       'La cadena de custodia documenta responsables, fechas, procedimiento y transferencias de la evidencia. Calcular un hash y verificarlo después ayuda a demostrar que la copia no cambió; conservar el original sigue siendo necesario.',
     difficulty: 'medium',
@@ -953,6 +1049,12 @@ export const block4Questions: Question[] = [
       'Almacenamiento y reenvío (store-and-forward)',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'La semidúplex permite turnos, y aquí no hay comunicación inversa.',
+      'La dúplex completa exige envío y recepción simultáneos, que no ocurren.',
+      'Almacenar y reenviar describe cómo se guardan los datos, no si existe retorno.',
+    ],
     explanation:
       'En comunicación síplex, la comunicación es unidireccional: un extremo transmite y el otro recibe, pero no hay comunicación inversa. La comunicación semidúplex permite turnos y la dúplex completa permite enviar y recibir simultáneamente.',
     difficulty: 'easy',
@@ -974,6 +1076,12 @@ export const block4Questions: Question[] = [
       'Enlace inalámbrico de corto alcance',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'El par trenzado sin apantallar es el medio más afectado por las interferencias.',
+      '',
+      'El cobre coaxial también sufre interferencias y su atenuación limita la distancia.',
+      'El enlace inalámbrico no es la opción cuando hay cable disponible entre los edificios.',
+    ],
     explanation:
       'La fibra óptica transmite luz y no se ve afectada por la interferencia electromagnética; además, admite distancias largas. Los medios eléctricos deben dimensionarse y protegerse para evitar interferencias y pérdidas.',
     difficulty: 'easy',
@@ -995,6 +1103,12 @@ export const block4Questions: Question[] = [
       'Por conmutación de paquetes',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'En banda base la señal digital viaja sin modulación sobre el medio.',
+      'Símplex describe el sentido de la comunicación, no la modulación de una portadora.',
+      'La conmutación de paquetes es un método de conmutación, no una modalidad de transmisión.',
+    ],
     explanation:
       'La transmisión de banda ancha modula una portadora para representar la información sobre un medio analónico. En banda base, la señal digital se transmite directamente sobre el medio.',
     difficulty: 'medium',
@@ -1016,6 +1130,12 @@ export const block4Questions: Question[] = [
       'Frecuencia de línea telefónica analógica',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'La banda de 2,4 GHz tiene menos canales y se congestiona antes en zonas densas.',
+      '900 MHz no es una banda de uso general para redes Ethernet.',
+      'La frecuencia de la línea telefónica no es una banda para redes inalámbricas de datos.',
+    ],
     explanation:
       'La banda de 5 GHz ofrece más canales y menor congestión en muchos entornos, a cambio de menor alcance y mayor atenuación por paredes. La banda de 2,4 GHz suele aportar más cobertura, pero tiene menos capacidad y más interferencias.',
     difficulty: 'easy',
@@ -1037,6 +1157,12 @@ export const block4Questions: Question[] = [
       'La posibilidad de tratar el enlace como un segmento Ethernet local sin revisar la MTU.',
     ],
     correctIndex: 0,
+    optionNotes: [
+      '',
+      'Un satélite está mucho más lejos que un enlace de cobre: la latencia es mayor, no menor.',
+      'La latencia elevada y el retardo variable no permiten garantizar la calidad de servicio.',
+      'Un enlace por satélite no es un segmento Ethernet local: cambian la MTU y los tiempos.',
+    ],
     explanation:
       'Un satélite geoestacionario está a gran distancia de la Tierra y la señal viaja una larga distancia, por lo que la latencia es elevada. Esto puede afectar a VoIP, juegos y protocolos interactivos aunque el ancho de banda sea suficiente.',
     difficulty: 'medium',
@@ -1058,6 +1184,12 @@ export const block4Questions: Question[] = [
       'Cada trama debe esperar a que un nodo intermedio la reenvíe después de almacenarla.',
     ],
     correctIndex: 1,
+    optionNotes: [
+      'Que solo uno transmita mientras el otro espera es la definición de semidúplex.',
+      '',
+      'La comunicación en un solo sentido es síplex, como la cámara hacia el grabador.',
+      'Un nodo intermedio que almacena y reenvía describe otro mecanismo, no un enlace conmutado.',
+    ],
     explanation:
       'En dúplex completo los dos extremos pueden enviar y recibir al mismo tiempo. Los enlaces conmutados no comparten el dominio de colisión del Ethernet tradicional y no necesitan detectar colisiones para funcionar.',
     difficulty: 'easy',
@@ -1074,6 +1206,12 @@ export const block4Questions: Question[] = [
       'Un instalador va a desplegar 1000BASE-T sobre cable de par trenzado y necesita respetar la longitud máxima del canal. ¿Qué longitud máxima admite el diseño de cobre?',
     options: ['55 metros', '90 metros', '100 metros', '200 metros'],
     correctIndex: 2,
+    optionNotes: [
+      'Los 55 metros no bastan para el canal 1000BASE-T.',
+      'Los 90 metros son solo el cable horizontal permanente, no el canal completo.',
+      '',
+      'Los 200 metros superan el límite del cobre y exigen otra solución.',
+    ],
     explanation:
       'El canal 1000BASE-T admite 100 metros: hasta 90 metros de cable horizontal permanente más los latiguillos y equipos, hasta un total de 10 metros. Superar el límite requiere fibra, conmutación activa u otra solución de canal.',
     difficulty: 'medium',
@@ -1095,6 +1233,12 @@ export const block4Questions: Question[] = [
       'Sustituye el PSK de WPA2 por SAE, lo que dificulta adivinar contraseñas sin conexión.',
     ],
     correctIndex: 3,
+    optionNotes: [
+      'Mantener WPA2-PSK no elimina la debilidad frente a ataques de diccionario.',
+      'WEP con clave de 40 bits es la opción más débil: su clave se resuelve en minutos.',
+      'Ocultar el SSID no impide asociarse a la red, solo esconde el nombre en la lista.',
+      '',
+    ],
     explanation:
       'WPA3-Personal utiliza SAE, un método de autenticación diseñado para resistir ataques de diccionario fuera de línea. La protección depende también de una contraseña fuerte y única; WPA2 y WEP no ofrecen esa misma garantía.',
     difficulty: 'hard',
