@@ -30,10 +30,13 @@ export default defineConfig(({ mode }) => {
             groups: [
               { name: 'react', test: /node_modules[\\/](react|react-dom|scheduler)[\\/]/ },
               // El banco de preguntas pesa mas que todo el codigo de la
-              // aplicacion junto. En su propio fragmento se cachea entre
-              // despliegues, porque solo cambia cuando se anaden preguntas,
-              // mientras que el codigo de la aplicacion cambia a menudo.
-              { name: 'banco', test: /src[\\/]data[\\/]questions[\\/]block/ },
+              // aplicacion junto, y crece cada vez que se anaden preguntas. En
+              // fragmentos por bloque, cada uno queda holgadamente por debajo
+              // del aviso de tamano y solo se invalida el bloque que cambia.
+              { name: 'banco-1', test: /questions[\\/]block1\.ts/ },
+              { name: 'banco-2', test: /questions[\\/]block2\.ts/ },
+              { name: 'banco-3', test: /questions[\\/]block3\.ts/ },
+              { name: 'banco-4', test: /questions[\\/]block4\.ts/ },
             ],
           },
         },
