@@ -9,6 +9,7 @@ import { blocks, topics } from '../data/syllabus'
 import { activeQuestions, questionsByBlock } from '../data/questions'
 import {
   getMinigameQuestionCount,
+  isShortQuestion,
   type MinigameOptions,
 } from '../lib/minigames'
 import { Icon, type IconName } from '../components/Icons'
@@ -74,6 +75,7 @@ export function MinigamesPage({
   const [selectedType, setSelectedType] = useState<MinigameType>('flashcards')
   const [count, setCount] = useState(12)
   const [blockId, setBlockId] = useState<BlockFilter>('all')
+  const [timedSpeedrun, setTimedSpeedrun] = useState(true)
   const weakIds = useMemo(() => unique(weakTopicIds), [weakTopicIds])
   const reviewIds = useMemo(() => unique(reviewTopicIds), [reviewTopicIds])
   const weaknessIds = useMemo(() => {
@@ -94,7 +96,9 @@ export function MinigamesPage({
       ? availableQuestions.filter((question) =>
           weaknessIds.includes(question.topicId),
         )
-      : availableQuestions
+      : selectedType === 'speedrun' && !timedSpeedrun
+        ? availableQuestions.filter(isShortQuestion)
+        : availableQuestions
   const plannedCount = Math.min(count, availableForSelection.length)
   const topicLabel = (id: string) =>
     topics.find((topic) => topic.id === id)?.focus ?? id
@@ -114,6 +118,7 @@ export function MinigamesPage({
       type: selectedType,
       count,
       blockId: blockId === 'all' ? undefined : blockId,
+      timed: selectedType === 'speedrun' ? timedSpeedrun : undefined,
       topicIds:
         selectedType === 'weakness' && weaknessIds.length
           ? weaknessIds
@@ -260,11 +265,31 @@ export function MinigamesPage({
               ))}
             </div>
           </div>
+          {selectedType === 'speedrun' ? (
+            <label className="toggle-row speedrun-toggle">
+              <span>
+                <strong>Con reloj</strong>
+                <small>
+                  {timedSpeedrun
+                    ? '60 segundos para todas las preguntas'
+                    : 'Sin límite de tiempo, solo enunciados breves'}
+                </small>
+              </span>
+              <input
+                checked={timedSpeedrun}
+                onChange={(event) => setTimedSpeedrun(event.target.checked)}
+                type="checkbox"
+              />
+              <span className="toggle-ui" />
+            </label>
+          ) : null}
           <div className="minigame-selection-note">
             <Icon name="info" size={16} />
             <span>
               {selectedType === 'speedrun'
-                ? `Tienes 60 segundos para responder ${count} preguntas. Al llegar a cero se envía automáticamente.`
+                ? timedSpeedrun
+                  ? `Tienes 60 segundos para ${count} preguntas. Al llegar a cero se envía automáticamente.`
+                  : 'Sin reloj. Se seleccionan solo preguntas breves para que el ritmo no penalice la lectura.'
                 : selectedType === 'flashcards'
                   ? 'Sin límite de tiempo: lee la explicación antes de continuar.'
                   : 'La ronda prioriza los temas débiles y los que están esperando repaso.'}

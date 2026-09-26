@@ -17,6 +17,22 @@ export interface MinigameOptions {
   count?: number
   now?: Date
   random?: () => number
+  /** Speedrun only. Defaults to true; false gives the same questions untimed. */
+  timed?: boolean
+}
+
+/**
+ * A statement a candidate can read in about three seconds. Speedrun is only
+ * fair on these, so untimed speedrun is restricted to the short ones and the
+ * timed one may draw from the whole bank.
+ */
+export const SHORT_STATEMENT_CHARS = 140
+
+export function isShortQuestion(question: Question): boolean {
+  return (
+    question.statement.length <= SHORT_STATEMENT_CHARS &&
+    question.options.every((option) => option.length <= 90)
+  )
 }
 
 export interface MinigameStreak {
@@ -107,6 +123,9 @@ export function createMinigameSession(
     if (!question.active || seen.has(question.id)) return false
     if (blockSet.size > 0 && !blockSet.has(question.blockId)) return false
     if (topicSet.size > 0 && !topicSet.has(question.topicId)) return false
+    if (type === 'speedrun' && !options.timed && !isShortQuestion(question)) {
+      return false
+    }
     seen.add(question.id)
     return true
   })
@@ -124,7 +143,7 @@ export function createMinigameSession(
     part: 1,
   }))
   const expiresAt =
-    type === 'speedrun'
+    type === 'speedrun' && options.timed !== false
       ? new Date(now.getTime() + 60 * 1000).toISOString()
       : undefined
 

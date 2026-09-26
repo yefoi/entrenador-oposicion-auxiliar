@@ -1494,6 +1494,12 @@ a {
   font-size: 12px;
   max-width: 62ch;
 }
+.speedrun-toggle {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
 .settings-saved {
   margin: -6px 0 0;
   color: var(--muted);
