@@ -316,7 +316,7 @@ export const block1Questions: Question[] = [
     statement:
       'Una vacante del Tribunal Constitucional debe cubrirse. ¿Qué composición y procedimiento de elección exige la Constitución?',
     options: [
-      'Doce miembros: cuatro propuestos por el Congreso, cuatro por el Senado, dos por el Gobierno y dos por el CGPJ; nombrados por el Rey e inamovibles',
+      'Doce miembros: cuatro del Congreso, cuatro del Senado, dos del Gobierno y dos del CGPJ, nombrados por el Rey e inamovibles',
       'Nueve miembros elegidos por las comunidades autónomas y tres por el Jefe del Estado',
       'Doce jueces, uno por cada comunidad autónoma, designados por sus parlamentos',
       'Diez jueces elegidos por el Congreso entre juristas',
@@ -701,7 +701,7 @@ export const block1Questions: Question[] = [
       'Un organismo quiere contratar cinco personas durante muchos años para un trabajo permanente. ¿Qué exige el Estatuto Básico?',
     options: [
       'Puede usar personal temporal si el jefe lo considera conveniente',
-      'Debe justificar una necesidad y urgencia expresas y no usar la temporalidad para cubrir de forma estructural un puesto permanente',
+      'Debe justificar una necesidad y urgencia expresas, sin cubrir un puesto estructural',
       'La antigüedad del trabajador sustituye la selección pública',
       'Un convenio colectivo puede convertir cualquier puesto temporal en permanente',
     ],
@@ -726,7 +726,7 @@ export const block1Questions: Question[] = [
     options: [
       'Entregarlo siempre porque el empleado presta un servicio público',
       'Denegar todo acceso sin explicar qué dato se protege',
-      'Ponderar el interés público y los datos personales, y proteger o disociar el dato si el acceso resulta desproporcionado',
+      'Pesar el interés público y proteger o disociar el dato si el acceso resulta desproporcionado',
       'Publicar el domicilio de cualquier empleado que participe en un procedimiento',
     ],
     correctIndex: 2,
@@ -895,7 +895,7 @@ export const block1Questions: Question[] = [
       'Reservar siempre todos los puestos a mujeres sin explicar el problema que corrige',
       'Aceptar la reserva solo si la persona candidata tiene una calificación superior',
       'Usar la reserva sin plazo de revisión aunque la desigualdad haya desaparecido',
-      'Adoptar una acción positiva habilitada por ley o por las normas y decisiones generales administrativas aplicables, necesaria, proporcionada y evaluada',
+      'Adoptar una acción positiva habilitada por ley, necesaria, proporcionada y evaluada',
     ],
     correctIndex: 3,
     explanation:
@@ -1704,7 +1704,7 @@ export const block1Questions: Question[] = [
     options: [
       'Rechazar la identidad por no proceder del DNI-e español',
       'Exigir siempre una videollamada nueva, aunque el medio esté notificado y tenga garantía suficiente',
-      'Reconocerla cuando la garantía del medio satisfaga el nivel exigido por el servicio, sin exigir por defecto un certificado español',
+      'Reconocerla si la garantía del medio satisface el nivel exigido, sin exigir certificado español',
       'Rechazarla salvo que el proveedor sea una autoridad pública española',
     ],
     correctIndex: 2,

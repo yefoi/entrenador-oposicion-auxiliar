@@ -41,7 +41,7 @@ export const block2Questions: Question[] = [
       '¿Cuál de estas afirmaciones describe correctamente un sistema de información?',
     options: [
       'Solo la CPU, la memoria RAM y el bus del sistema.',
-      'El conjunto de hardware, software, datos, personas y procedimientos usados para almacenar, tratar e intercambiar información.',
+      'Hardware, software, datos, personas y procedimientos que tratan información.',
       'Una aplicación aislada que no necesita hardware ni información.',
       'Cualquier dispositivo conectado a una red, con independencia de su función.',
     ],
@@ -714,7 +714,7 @@ export const block2Questions: Question[] = [
     statement:
       '¿Qué caracteriza al almacenamiento de documentos en una base de datos NoSQL de tipo documental?',
     options: [
-      'Los documentos pueden tener campos anidados y estructuras propias sin estar obligados a seguir un único esquema de tabla relacional.',
+      'Los documentos admiten campos anidados sin un esquema relacional fijo.',
       'Los documentos no pueden contener atributos con nombre.',
       'Todos los documentos deben tener exactamente los mismos campos y valores.',
       'Su único formato admitido es una secuencia binaria sin metadatos.',

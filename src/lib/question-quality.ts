@@ -43,6 +43,12 @@ const similarity = (a: string, b: string) => {
   return shared / Math.min(left.size, right.size)
 }
 
+const LITERAL = /^[A-Za-z][\w-]*\s*:|^[\d.,\s]+\s*(?:s|ms|bit|bits|bytes|Hz|kHz|MHz|GHz)?$|^[A-Z]{2,}$/
+
+/** Headers, ports, commands and plain numbers cannot be shortened without
+ * becoming a different answer, so the length rule does not apply to them. */
+const allLiterals = (options: string[]) => options.every((text) => LITERAL.test(text.trim()))
+
 /**
  * Detects distractors that can be eliminated without reading the statement,
  * which is what makes a question feel guessable.
@@ -68,6 +74,7 @@ export function auditQuestion(question: Question): DistractorIssue[] {
   const wrongLengths = wrong.map(({ text }) => text.length)
   const reference = median(wrongLengths)
   if (
+    !allLiterals(options) &&
     reference > 0 &&
     correctLength > reference * 1.7 &&
     correctLength - reference > 18

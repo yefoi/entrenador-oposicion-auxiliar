@@ -7,7 +7,7 @@ import { auditQuestions } from './question-quality'
  * giveaway distractor has to be a conscious decision, not an accident.
  */
 const BUDGET = {
-  longitud: 34,
+  longitud: 0,
   'muy-corta': 0,
   parecida: 19,
 }

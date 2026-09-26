@@ -245,7 +245,7 @@ export const block4Questions: Question[] = [
     statement:
       'Tras un UPDATE no deseado en una base de datos, el administrador debe recuperar el estado anterior a ese instante. ¿Qué combinación de copias permite una recuperación en un punto concreto?',
     options: [
-      'Copias completas periódicas y copias continuas del WAL o registro de transacciones, con una secuencia de restauración probada.',
+      'Copias completas periódicas más copia continua del WAL, con restauración probada.',
       'Una única copia de los archivos de datos sin registros de transacciones.',
       'Una exportación CSV realizada todos los días sin copia de la base original.',
       'RAID 1 sin copias de seguridad ni registro de transacciones.',
@@ -357,7 +357,7 @@ export const block4Questions: Question[] = [
       'Una organización detecta correos que suplantan su dominio remitente. ¿Qué afirmación describe correctamente la función de DMARC?',
     options: [
       'Cifra el contenido de todos los mensajes enviados desde el servidor.',
-      'Permite publicar una política para los correos en los que ni SPF ni DKIM están alineados y definir qué hacer con ellos.',
+      'Publica una política para los correos sin SPF ni DKIM alineados y qué hacer con ellos.',
       'Sustituye la autenticación del cliente en el servidor de correo.',
       'Asigna automáticamente una dirección IP a cada usuario del dominio.',
     ],
@@ -437,7 +437,7 @@ export const block4Questions: Question[] = [
     options: [
       'La imagen es el proceso que ya se está ejecutando y el contenedor es solo una copia de configuración.',
       'Cada contenedor es necesariamente una máquina virtual con su propio núcleo.',
-      'La imagen es una plantilla de capas normalmente de solo lectura y el contenedor es una instancia ejecutable con proceso y capa de escritura aislada.',
+      'La imagen es una plantilla de capas de solo lectura y el contenedor una instancia ejecutable con capa de escritura propia.',
       'La imagen y el contenedor son dos nombres para el mismo volumen de datos del anfitrión.',
     ],
     correctIndex: 2,
@@ -498,7 +498,7 @@ export const block4Questions: Question[] = [
     statement:
       'Un segmento Ethernet compartido tiene colisiones frecuentes porque todos los equipos utilizan el mismo medio. ¿Qué cambio mejora directamente la conmutación?',
     options: [
-      'Sustituir el concentrador por un conmutador que aprenda direcciones MAC y envíe las tramas por el puerto correspondiente.',
+      'Sustituir el concentrador por un conmutador que aprenda direcciones MAC.',
       'Añadir más concentradores al mismo segmento para aumentar la señal.',
       'Cambiar todas las direcciones IP por direcciones de difusión.',
       'Desactivar las tramas unicast y usar únicamente difusiones globales.',
@@ -617,7 +617,7 @@ export const block4Questions: Question[] = [
       'Sustituir el conmutador por un concentrador para eliminar las tramas incorrectas.',
       'Desactivar todas las VLAN y cambiar la máscara de la interfaz.',
       'Borrar repetidamente la tabla ARP de todos los equipos.',
-      'Revisar el latiguillo, los conectores, el transceptor o la fibra, la potencia óptica y la velocidad y dúplex negociados.',
+      'Revisar latiguillo, conectores, transceptor o fibra, potencia óptica y dúplex.',
     ],
     correctIndex: 3,
     explanation:
@@ -635,7 +635,7 @@ export const block4Questions: Question[] = [
     statement:
       'Una persona no autorizada sigue a un empleado autorizado hasta una sala segura del CPD tras pasar el control de acceso. ¿Qué control físico evita mejor ese acceso no autorizado?',
     options: [
-      'Impedir que una segunda persona entre sin autenticarse y registrar las visitas con un procedimiento de control de acceso.',
+      'Impide que una segunda persona entre sin autenticarse y registra las visitas.',
       'Cambiar la contraseña del empleado cada vez que entra en la sala.',
       'Guardar las tarjetas de acceso en una caja abierta junto a la puerta.',
       'Pedir al guardia que olvide la identidad de las visitas si trabajan con un proveedor habitual.',
@@ -677,7 +677,7 @@ export const block4Questions: Question[] = [
     statement:
       'Un proveedor firma digitalmente una versión de software y el cliente verifica la firma con la clave pública de confianza. ¿Qué garantía ofrece principalmente esa firma?',
     options: [
-      'Integridad del contenido y autenticación del firmante: la firma se crea con su clave privada y se verifica con la clave pública.',
+      'Integridad del contenido y autenticación del firmante.',
       'Confidencialidad del archivo para que cualquiera pueda descifrarlo.',
       'Una copia de seguridad automática de los sistemas del cliente.',
       'Autorización automática de todas las cuentas del proveedor.',
@@ -701,7 +701,7 @@ export const block4Questions: Question[] = [
       'Borrar inmediatamente todos los registros de seguridad para evitar que el atacante los vea.',
       'Reformatear el disco y cerrar el caso sin conservar una imagen forense.',
       'Conectar el equipo a la red de invitados para que el ransomware se distribuya menos.',
-      'Aislar el equipo, documentar la detección y aplicar el protocolo de conservación; apagar o formatear solo si el riesgo y el procedimiento lo requieren.',
+      'Aislar el equipo, documentar la detección y aplicar el protocolo de conservación.',
     ],
     correctIndex: 3,
     explanation:
@@ -719,7 +719,7 @@ export const block4Questions: Question[] = [
     statement:
       'Un contratista debe administrar ocasionalmente servidores de producción desde fuera. ¿Qué diseño ofrece el control más adecuado?',
     options: [
-      'Acceso mediante VPN o servidor bastion, autenticación multifactor, privilegio mínimo, credenciales temporales y registro de sesiones.',
+      'Acceso mediante VPN o bastion, MFA, privilegio mínimo y registro de sesiones.',
       'Publicar la administración remota en Internet con una contraseña compartida.',
       'Enviar las credenciales por correo y mantener la cuenta administrativa indefinidamente.',
       'Conceder al contratista una cuenta local sin caducidad y sin monitorización.',
@@ -740,7 +740,7 @@ export const block4Questions: Question[] = [
     statement:
       'Un CPD debe sostener sus cargas críticas durante un corte breve y disponer de una continuidad prolongada tras un apagón prolongado. ¿Qué diseño físico es más completo?',
     options: [
-      'Un UPS con transferencia automática y mantenimiento probado para las cargas críticas, apoyado en un generador y controles ambientales para periodos largos.',
+      'Un UPS con transferencia automática y mantenimiento probado.',
       'Una batería de portátil conectada a un solo servidor y sin procedimiento de prueba.',
       'Una política de contraseñas robustas, porque sustituye la protección eléctrica del edificio.',
       'Un cable de red compartido entre la sala de servidores y el grupo electrógeno.',
@@ -948,7 +948,7 @@ export const block4Questions: Question[] = [
       'Mantiene WPA2-PSK y solo cambia el nombre de la red.',
       'Utiliza WEP con una clave de 40 bits para facilitar la recuperación.',
       'Ocultar el SSID impide que un atacante pueda asociarse a la red.',
-      'Sustituye el intercambio PSK de WPA2 por SAE, lo que dificulta en gran medida el adivinado de contraseñas sin conexión.',
+      'Sustituye el PSK de WPA2 por SAE, lo que dificulta adivinar contraseñas sin conexión.',
     ],
     correctIndex: 3,
     explanation:
@@ -1394,7 +1394,7 @@ export const block4Questions: Question[] = [
       'La política permite que solo el tráfico de la aplicación interna viaje por la VPN, mientras el resto puede salir directamente desde el equipo remoto. ¿Qué describe esa configuración y qué riesgo debe considerarse?',
     options: [
       'Túnel completo: todo el tráfico, incluido el correo, se cifra y bloquea por la VPN.',
-      'Túnel dividido (split tunneling): el tráfico seleccionado atraviesa la VPN y el resto sigue una ruta directa, que debe estar protegida por controles del extremo.',
+      'Túnel dividido (split tunneling): el tráfico seleccionado va por la VPN y el resto sale directo.',
       'Una VPN sin cifrado que solo cambia la dirección IP de todas las aplicaciones.',
       'Un segundo adaptador que duplica la dirección del servidor y elimina la necesidad de autenticar al usuario.',
     ],
@@ -1451,7 +1451,7 @@ export const block4Questions: Question[] = [
     statement:
       'Un conmutador Ethernet recibe una trama de un equipo cuyo origen es A4:5E:60:11:22:33. ¿Qué información aprende directamente de esa trama?',
     options: [
-      'La dirección MAC de origen y el puerto por el que llegó, para reenviar tráfico a A en ese puerto.',
+      'La dirección MAC de origen y el puerto por el que llegó.',
       'La dirección IPv4 de origen y el nombre DNS del equipo.',
       'La contraseña de la VLAN y la clave privada del servidor.',
       'La ruta completa por conmutadores y enrutadores de Internet.',

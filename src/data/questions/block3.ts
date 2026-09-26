@@ -114,7 +114,7 @@ export const block3Questions: Question[] = [
       'Una persona puede apuntarse a varios cursos y cada curso puede tener varias personas. La relación incluye fecha de inscripción y nota, y la regla es que una persona solo puede tener una matrícula por curso. ¿Qué diseño relacional representa mejor ese caso?',
     options: [
       'Duplicar las personas dentro de una tabla independiente para cada curso',
-      'Crear MATRICULA con PERSONA_ID y CURSO_ID como clave primaria compuesta, además de fecha y nota, y declarar ambas claves foráneas',
+      'MATRICULA con PERSONA_ID y CURSO_ID como clave primaria compuesta, con claves foráneas',
       'Añadir a PERSONA una columna de texto que contenga todos los cursos y sus notas',
       'Crear una tabla por persona sin claves foráneas ni tabla de cursos',
     ],
@@ -629,7 +629,7 @@ export const block3Questions: Question[] = [
       'Una clase Figura declara el método calcularArea como abstracto y todas sus subclases deben implementarlo. ¿Qué propiedad tiene la clase Figura?',
     options: [
       'Es una interfaz que solo puede contener constantes',
-      'No se puede instanciar directamente y puede definir una operación abstracta para sus subclases',
+      'Es abstracta: no se instancia y define la operación para sus subclases',
       'Es una clase concreta que se instancia aunque no tenga implementación',
       'Es un enum que obliga a usar siempre el mismo cálculo',
     ],
@@ -651,7 +651,7 @@ export const block3Questions: Question[] = [
     options: [
       'Una asociación simple sin multiplicidad',
       'Una generalización entre dos clases',
-      'Una composición, representada con un rombo relleno en el extremo del todo',
+      'Una composición, con rombo relleno en el extremo del todo',
       'Una dependencia de uso temporal',
     ],
     correctIndex: 2,
@@ -670,7 +670,7 @@ export const block3Questions: Question[] = [
     statement:
       'Una aplicación Jakarta EE expone un recurso de negocio y usa un contenedor que gestiona el ciclo de vida e inyecta dependencias. ¿Qué es un bean gestionado por CDI en este contexto?',
     options: [
-      'Un componente bajo gestión del contenedor, que administra su ciclo de vida y sus dependencias',
+      'Componente gestionado por el contenedor, que controla su ciclo de vida',
       'Un archivo HTML ejecutado directamente por el servidor web',
       'Una tabla relacional creada sin usar Java',
       'Un protocolo de red independiente de la aplicación',
@@ -690,7 +690,7 @@ export const block3Questions: Question[] = [
     blockId: 'III',
     statement:
       'Una empresa selecciona la plataforma .NET y necesita un lenguaje principal para su aplicación multiplataforma. ¿Qué lenguaje corresponde a esa elección?',
-    options: ['JavaScript', 'C# en el contexto de .NET', 'HTML', 'SQL'],
+    options: ['JavaScript', 'C# en .NET', 'HTML', 'SQL'],
     correctIndex: 1,
     explanation:
       'C# es el lenguaje principal de la plataforma .NET y admite aplicaciones multiplataforma para los sistemas operativos admitidos por el entorno.',
@@ -709,7 +709,7 @@ export const block3Questions: Question[] = [
     options: [
       'Una sentencia PRINT de SQL',
       'Un atributo alt de HTML',
-      'Una demarcación transaccional declarativa sobre el método de negocio',
+      'Una demarcación transaccional declarativa',
       'Una función de la interfaz de usuario',
     ],
     correctIndex: 2,
@@ -731,7 +731,7 @@ export const block3Questions: Question[] = [
       'La especificación Jakarta Batch',
       'La especificación Jakarta Messaging',
       'La especificación Jakarta Bean Validation',
-      'La especificación Jakarta Security, integrada con mecanismos de identidad del contenedor',
+      'Jakarta Security, con la identidad del contenedor',
     ],
     correctIndex: 3,
     explanation:
@@ -896,7 +896,7 @@ export const block3Questions: Question[] = [
     statement:
       'Un equilibrador de carga distribuye peticiones entre varios servidores de aplicación y deja de enviar tráfico a un servidor que no supera la comprobación de salud. ¿Qué problema resuelve?',
     options: [
-      'Alta disponibilidad y tolerancia a fallos',
+      'Alta disponibilidad',
       'Normalización de datos',
       'Compilación de código fuente',
       'Cifrado de disco local',
@@ -962,7 +962,7 @@ export const block3Questions: Question[] = [
       'Normalizar los datos de una tabla relacional',
       'Compilar el código de cada microservicio en tiempo de ejecución',
       'Servir archivos estáticos sin pasar por la red',
-      'Centralizar políticas de acceso y dirigir cada petición al servicio correspondiente',
+      'Centralizar políticas de acceso y enrutar cada petición',
     ],
     correctIndex: 3,
     explanation:
@@ -1020,7 +1020,7 @@ export const block3Questions: Question[] = [
       'Diseño de escritorio con anchura fija',
       'Una tabla HTML usada para controlar la pantalla',
       'Una captura de pantalla usada como menú',
-      'Diseño adaptable con puntos de ruptura y contenido esencial preservado',
+      'Diseño adaptable con puntos de ruptura',
     ],
     correctIndex: 3,
     explanation:
@@ -1162,7 +1162,7 @@ export const block3Questions: Question[] = [
       'Añadir solo un asterisco de color al icono',
       'Transmitir el estado únicamente mediante el ancho del icono',
       'Eliminar la etiqueta y dejar solo un color de fondo',
-      'Conservar el icono como elemento decorativo y ofrecer la etiqueta y el estado como texto accesible',
+      'Icono decorativo y etiqueta y estado como texto accesible',
     ],
     correctIndex: 3,
     explanation:
@@ -1202,7 +1202,7 @@ export const block3Questions: Question[] = [
       'Una persona navega únicamente con teclado y un menú desplegable depende de JavaScript para mostrar sus opciones. ¿Qué diseño es más usable y accesible?',
     options: [
       'Un menú que solo responda al ratón y no pueda recibir foco',
-      'Un patrón de menú accesible que permita enfocar, abrir, recorrer y activar sus opciones con teclado',
+      'Menú accesible: enfocar, abrir, recorrer y activar con teclado',
       'Una lista sin enlaces ni controles de teclado',
       'Una imagen del menú sin nombre accesible ni orden de tabulación',
     ],
@@ -1406,7 +1406,7 @@ export const block3Questions: Question[] = [
     statement:
       'Una plataforma de integración continua compila cada cambio y detiene el despliegue cuando una prueba automática falla. ¿Qué ventaja aporta al equipo?',
     options: [
-      'Detectar fallos de forma temprana y bloquear entregas que no superan las comprobaciones',
+      'Detectar fallos temprano y bloquear entregas que no pasan las pruebas',
       'Eliminar la necesidad de revisar el código',
       'Convertir todos los errores en fallos ignorados',
       'Hacer opcional la ejecución de las pruebas',
