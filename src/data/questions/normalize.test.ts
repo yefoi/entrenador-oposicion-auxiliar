@@ -72,4 +72,28 @@ describe('normalizacion de la posicion correcta', () => {
       expect(count).toBeGreaterThan(questions.length * 0.15)
     }
   })
+
+  it('mantiene el tamano de cada bloque en multiplo de cuatro', () => {
+    // El desplazamiento depende de la POSICION en el banco, no del id, y las
+    // respuestas guardadas en el navegador son indices a la opcion que se
+    // pulso. Si un bloque creciera en una cantidad que no sea multiplo de
+    // cuatro, todas las preguntas de los bloques siguientes girarian a otra
+    // posicion y esos indices pasarian a senalar OTRA opcion: el historial de
+    // quien ya practicaba quedaria mal puntuado sin que nada fallara.
+    //
+    // Con bloques que son multiplos de cuatro y anadidos al final, cualquier
+    // lote cuyo tamano sea multiplo de cuatro conserva los desplazamientos.
+    const bloques: Array<[string, number]> = [
+      ['I', block1Questions.length],
+      ['II', block2Questions.length],
+      ['III', block3Questions.length],
+      ['IV', block4Questions.length],
+    ]
+    for (const [nombre, tamano] of bloques) {
+      expect(
+        tamano % 4,
+        `el bloque ${nombre} tiene ${tamano} preguntas: un cambio como este mueve el desplazamiento de las preguntas posteriores`,
+      ).toBe(0)
+    }
+  })
 })
