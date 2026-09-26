@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import type { AppView, Attempt, TopicStat } from '../domain/types'
 import { blocks, topics } from '../data/syllabus'
 import { getBlockStats } from '../lib/statistics'
+import { getMasteryReport } from '../lib/mastery'
 import { Icon } from '../components/Icons'
 import {
   Button,
@@ -34,6 +35,7 @@ export function StatisticsPage({
   onNavigate,
 }: StatisticsPageProps) {
   const [now] = useState(() => Date.now())
+  const mastery = useMemo(() => getMasteryReport(attempts), [attempts])
   const blockStats = getBlockStats(stats)
   const totalPresented = stats.reduce((sum, stat) => sum + stat.presented, 0)
   const totalCorrect = stats.reduce((sum, stat) => sum + stat.correct, 0)
@@ -65,6 +67,78 @@ export function StatisticsPage({
           </Button>
         }
       />
+      <section className="panel mastery-panel">
+        <div className="panel-heading">
+          <div>
+            <span className="section-kicker">Lectura separada</span>
+            <h2>Actividad, cobertura y dominio</h2>
+          </div>
+          <span className="panel-icon">
+            <Icon name="chart" size={20} />
+          </span>
+        </div>
+        <p className="mastery-lead">
+          No es lo mismo haber practicado mucho, haber visto todo el temario o
+          dominar realmente el contenido. Un acierto nada más ver la explicación
+          cuenta menos que acertar la misma pregunta días después.
+        </p>
+        <div className="mastery-grid">
+          <div className="mastery-item">
+            <span className="mastery-label">Actividad</span>
+            <strong>{mastery.actividad.preguntasPresentadas}</strong>
+            <small>
+              preguntas · {mastery.actividad.intentos} intentos ·{' '}
+              {mastery.actividad.diasActivos} días activos
+            </small>
+          </div>
+          <div className="mastery-item">
+            <span className="mastery-label">Cobertura</span>
+            <strong>
+              {mastery.cobertura.temasTocados}/{mastery.cobertura.temasTotales}
+            </strong>
+            <small>
+              temas · {mastery.cobertura.preguntasVistas}/
+              {mastery.cobertura.preguntasTotales} del banco vistas
+            </small>
+          </div>
+          <div className="mastery-item">
+            <span className="mastery-label">Dominio en primera</span>
+            <strong>
+              {mastery.dominio.primeras.presented
+                ? `${Math.round(mastery.dominio.primeras.accuracy * 100)}%`
+                : '—'}
+            </strong>
+            <small>
+              {mastery.dominio.primeras.correct} de{' '}
+              {mastery.dominio.primeras.presented} sin haberla visto antes
+            </small>
+          </div>
+          <div className="mastery-item">
+            <span className="mastery-label">Dominio al repetir</span>
+            <strong>
+              {mastery.dominio.repeticiones.presented
+                ? `${Math.round(mastery.dominio.repeticiones.accuracy * 100)}%`
+                : '—'}
+            </strong>
+            <small>
+              {mastery.dominio.repeticiones.correct} de{' '}
+              {mastery.dominio.repeticiones.presented} al volver a verla
+            </small>
+          </div>
+          <div className="mastery-item mastery-item-wide">
+            <span className="mastery-label">Recuperación de errores</span>
+            <strong>
+              {mastery.dominio.retencion.recuperadas}/
+              {mastery.dominio.retencion.recuperadas +
+                mastery.dominio.retencion.pendientes}
+            </strong>
+            <small>
+              preguntas falladas que ya has vuelto a acertar. Quedan{' '}
+              {mastery.dominio.retencion.pendientes} sin recuperar.
+            </small>
+          </div>
+        </div>
+      </section>
       <div className="stats-grid stats-grid-four">
         <div className="stat-card stat-purple">
           <div className="stat-card-top">
