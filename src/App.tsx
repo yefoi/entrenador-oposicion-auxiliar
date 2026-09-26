@@ -77,6 +77,7 @@ function App() {
     'I' | 'II' | 'III' | 'IV' | undefined
   >(deepLink.blockId)
   const [pendingStart, setPendingStart] = useState<PendingStart | null>(null)
+  const [exitPending, setExitPending] = useState(false)
 
   const navigate = useCallback((next: AppView) => {
     setView(next)
@@ -160,6 +161,47 @@ function App() {
       mode === 'minigame' ? 'minigames' : mode === 'exam' ? 'exam' : 'practice',
     )
   }, [trainer.activeSession])
+
+  /**
+   * Salir de una sesion tiene que descartarla, no solo cambiar de vista: la
+   * pantalla de la sesion se dibuja cuando la vista coincide con su modo y hay
+   * sesion activa, asi que navegar a esa misma vista la volvia a mostrar y el
+   * boton parecia no hacer nada.
+   *
+   * Si no se ha respondido nada no hay nada que perder y se sale sin preguntar;
+   * con respuestas de por medio se pide confirmacion, porque descartar borra el
+   * trabajo hecho.
+   */
+  const exitActive = useCallback(() => {
+    const session = trainer.activeSession
+    if (!session) return
+    if (Object.keys(session.answers).length > 0) {
+      setExitPending(true)
+      return
+    }
+    trainer.discardSession(session.id)
+    setView(
+      session.mode === 'minigame'
+        ? 'minigames'
+        : session.mode === 'exam'
+          ? 'exam'
+          : 'practice',
+    )
+  }, [trainer])
+
+  const confirmExit = useCallback(() => {
+    const session = trainer.activeSession
+    setExitPending(false)
+    if (!session) return
+    trainer.discardSession(session.id)
+    setView(
+      session.mode === 'minigame'
+        ? 'minigames'
+        : session.mode === 'exam'
+          ? 'exam'
+          : 'practice',
+    )
+  }, [trainer])
 
   const submitActive = useCallback(
     (durationSeconds: number) => {
@@ -290,7 +332,7 @@ function App() {
                 <MinigameSessionPage
                   key={trainer.activeSession.id}
                   onAnswer={answerActive}
-                  onExit={() => navigate('minigames')}
+                  onExit={exitActive}
                   onFlag={flagActive}
                   onSubmit={submitActive}
                   questionById={questionById}
@@ -314,7 +356,7 @@ function App() {
                 <SessionPage
                   key={trainer.activeSession.id}
                   onAnswer={answerActive}
-                  onExit={() => navigate('practice')}
+                  onExit={exitActive}
                   onFlag={flagActive}
                   onSubmit={submitActive}
                   questionById={questionById}
@@ -339,7 +381,7 @@ function App() {
                 <SessionPage
                   key={trainer.activeSession.id}
                   onAnswer={answerActive}
-                  onExit={() => navigate('exam')}
+                  onExit={exitActive}
                   onFlag={flagActive}
                   onSubmit={submitActive}
                   questionById={questionById}
@@ -409,6 +451,23 @@ function App() {
       </AppShell>
       {showOnboarding ? (
         <Onboarding onComplete={() => setShowOnboarding(false)} />
+      ) : null}
+      {exitPending && trainer.activeSession ? (
+        <Modal onClose={() => setExitPending(false)} title="¿Salir de la sesión?">
+          <p className="modal-lead">
+            Vas a salir de <strong>{trainer.activeSession.title}</strong> y se
+            perderán las respuestas que llevas. Si prefieres continuar más
+            tarde, elige seguir y retómala desde el menú.
+          </p>
+          <div className="modal-actions">
+            <Button onClick={confirmExit} icon="x">
+              Salir y descartar
+            </Button>
+            <Button onClick={() => setExitPending(false)} variant="secondary">
+              Seguir con la sesión
+            </Button>
+          </div>
+        </Modal>
       ) : null}
       {pendingStart && trainer.activeSession ? (
         <Modal
