@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from 'react'
 import type { AppView } from './domain/types'
 import { activeQuestions, questionById } from './data/questions'
 import { useTrainer } from './hooks/useTrainer'
+import { hasSeenOnboarding } from './lib/storage'
 import {
   createExamSession,
   createPracticeSession,
@@ -12,6 +13,7 @@ import {
   type MinigameOptions,
 } from './lib/minigames'
 import { AppShell } from './components/AppShell'
+import { Onboarding } from './components/Onboarding'
 import { DashboardPage } from './pages/DashboardPage'
 import { ExamSetupPage } from './pages/ExamSetupPage'
 import { PlanPage } from './pages/PlanPage'
@@ -27,6 +29,9 @@ import { SyllabusPage } from './pages/SyllabusPage'
 
 function App() {
   const trainer = useTrainer()
+  const [showOnboarding, setShowOnboarding] = useState(
+    () => !hasSeenOnboarding(),
+  )
   const [view, setView] = useState<AppView>('dashboard')
   const [selectedAttemptId, setSelectedAttemptId] = useState<string | null>(
     null,
@@ -331,6 +336,9 @@ function App() {
           />
         ) : null}
       </AppShell>
+      {showOnboarding ? (
+        <Onboarding onComplete={() => setShowOnboarding(false)} />
+      ) : null}
     </div>
   )
 }

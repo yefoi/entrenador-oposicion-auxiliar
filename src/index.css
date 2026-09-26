@@ -2374,6 +2374,51 @@ a {
   gap: 8px;
   margin-top: 22px;
 }
+.onboarding {
+  display: grid;
+  gap: 12px;
+}
+.onboarding-progress {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.onboarding-progress span {
+  width: 28px;
+  height: 4px;
+  background: #e8e5f1;
+  border-radius: 99px;
+}
+.onboarding-progress span.is-active {
+  background: var(--purple);
+}
+.onboarding-icon {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  color: var(--purple);
+  background: var(--purple-soft);
+  border-radius: 13px;
+}
+.onboarding h2 {
+  margin: 0;
+  color: var(--ink);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -0.6px;
+}
+.onboarding p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+}
+.onboarding-actions {
+  justify-content: space-between;
+  align-items: center;
+}
 
 .result-verdict {
   display: flex;

@@ -1,10 +1,12 @@
 import { describe, expect, it, beforeEach } from 'vitest'
 import { fireEvent, render, screen } from '@testing-library/react'
 import App from './App'
+import { ONBOARDING_KEY } from './lib/storage'
 
 describe('App smoke flow', () => {
   beforeEach(() => {
     localStorage.clear()
+    localStorage.setItem(ONBOARDING_KEY, 'true')
   })
 
   it('muestra los ajustes con persistencia local', () => {

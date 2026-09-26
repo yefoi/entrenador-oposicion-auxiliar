@@ -3,6 +3,7 @@ import { STATE_VERSION } from '../data/syllabus'
 
 export const STORAGE_KEY = 'tai-entrenador:state'
 export const BACKUP_KEY = 'tai-entrenador:state:backup'
+export const ONBOARDING_KEY = 'tai-entrenador:onboarding-complete'
 
 function defaultExamDate(): string {
   const date = new Date()
@@ -107,6 +108,24 @@ export function downloadState(state: TrainerState): void {
   anchor.download = `tai-entrenador-${new Date().toISOString().slice(0, 10)}.json`
   anchor.click()
   URL.revokeObjectURL(url)
+}
+
+export function hasSeenOnboarding(): boolean {
+  if (typeof window === 'undefined' || !window.localStorage) return false
+  try {
+    return window.localStorage.getItem(ONBOARDING_KEY) === 'true'
+  } catch {
+    return false
+  }
+}
+
+export function markOnboardingSeen(): void {
+  if (typeof window === 'undefined' || !window.localStorage) return
+  try {
+    window.localStorage.setItem(ONBOARDING_KEY, 'true')
+  } catch {
+    return
+  }
 }
 
 export function storageIsAvailable(): boolean {

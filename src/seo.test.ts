@@ -18,6 +18,8 @@ describe('SEO metadata', () => {
     expect(html).toContain('application/ld+json')
     expect(html).toContain('33 temas')
     expect(html).toContain('264 preguntas')
+    expect(html).toContain('boot-screen')
+    expect(html).toContain("classList.add('js')")
   })
 
   it('includes installable offline metadata and static content pages', () => {

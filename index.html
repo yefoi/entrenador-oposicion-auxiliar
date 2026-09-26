@@ -60,6 +60,15 @@
       content="https://yefoi.github.io/entrenador-oposicion-auxiliar/og-image.svg"
     />
     <title>TAI AGE | Entrenador de temario y simulacros</title>
+    <script>
+      document.documentElement.classList.add('js')
+      window.setTimeout(function () {
+        var root = document.getElementById('root')
+        if (root && root.firstElementChild?.classList.contains('boot-screen')) {
+          document.documentElement.classList.remove('js')
+        }
+      }, 5000)
+    </script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -92,35 +101,95 @@
         ]
       }
     </script>
-    <style>
-      .seo-fallback {
-        max-width: 760px;
-        margin: 0 auto;
-        padding: 12vh 24px;
-        color: #252238;
-        font-family: system-ui, sans-serif;
-        line-height: 1.6;
-      }
-      .seo-fallback h1 {
-        font-size: clamp(2rem, 6vw, 4rem);
-        line-height: 1.1;
-      }
-      .seo-fallback h2 {
-        margin-top: 2rem;
-      }
-      .seo-fallback a {
-        color: #5744c9;
-      }
-      .seo-fallback-nav {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        margin-top: 24px;
-      }
-    </style>
+     <style>
+       .boot-screen {
+         display: none;
+         min-height: 100vh;
+         place-items: center;
+         color: #252238;
+         background: #f7f6fb;
+         font-family: system-ui, sans-serif;
+         text-align: center;
+       }
+       .js .boot-screen {
+         display: grid;
+       }
+       .boot-content {
+         display: grid;
+         gap: 14px;
+         justify-items: center;
+       }
+       .boot-mark {
+         display: grid;
+         width: 58px;
+         height: 58px;
+         place-items: center;
+         color: #fff;
+         background: #6d59e8;
+         border-radius: 18px;
+         font-size: 24px;
+         font-weight: 800;
+       }
+       .boot-spinner {
+         width: 26px;
+         height: 26px;
+         border: 3px solid #ded9f8;
+         border-top-color: #6d59e8;
+         border-radius: 50%;
+         animation: boot-spin 0.8s linear infinite;
+       }
+       .boot-copy {
+         color: #6b6880;
+         font-size: 13px;
+       }
+       @keyframes boot-spin {
+         to {
+           transform: rotate(360deg);
+         }
+       }
+       @media (prefers-reduced-motion: reduce) {
+         .boot-spinner {
+           animation: none;
+         }
+       }
+       .js .seo-fallback {
+         display: none;
+       }
+       .seo-fallback {
+         max-width: 760px;
+         margin: 0 auto;
+         padding: 12vh 24px;
+         color: #252238;
+         font-family: system-ui, sans-serif;
+         line-height: 1.6;
+       }
+       .seo-fallback h1 {
+         font-size: clamp(2rem, 6vw, 4rem);
+         line-height: 1.1;
+       }
+       .seo-fallback h2 {
+         margin-top: 2rem;
+       }
+       .seo-fallback a {
+         color: #5744c9;
+       }
+       .seo-fallback-nav {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 16px;
+         margin-top: 24px;
+       }
+     </style>
   </head>
   <body>
     <div id="root">
+      <div aria-live="polite" class="boot-screen" role="status">
+        <div class="boot-content">
+          <span aria-hidden="true" class="boot-mark">T</span>
+          <span class="boot-copy">Preparando tu preparación…</span>
+          <span aria-hidden="true" class="boot-spinner" />
+        </div>
+      </div>
       <main class="seo-fallback">
         <h1>Entrenador de oposiciones TAI de la AGE</h1>
         <p>
