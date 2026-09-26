@@ -4238,6 +4238,76 @@ a {
   color: #6f6a86;
   font-size: 12.5px;
 }
+/* Materiales del supuesto practico: son la fuente para responder, asi que
+   tienen que poder abrirse sin perder de vista la pregunta. */
+.scenario-materials {
+  margin: 14px 0 0;
+  background: #fbfaff;
+  border: 1px solid #e4e0f6;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.scenario-materials-toggle {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.scenario-materials-toggle > span {
+  display: grid;
+  gap: 2px;
+  font-weight: 600;
+  font-size: 13.5px;
+}
+.scenario-materials-toggle small {
+  color: #6f6a86;
+  font-size: 11.5px;
+  font-weight: 500;
+}
+.scenario-materials-panel {
+  padding: 0 14px 14px;
+  border-top: 1px solid #ece9f9;
+}
+.scenario-materials-context {
+  margin: 12px 0;
+  color: #4b4761;
+  font-size: 13px;
+}
+.scenario-material + .scenario-material {
+  margin-top: 14px;
+}
+.scenario-material h3 {
+  margin: 0 0 6px;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #6f6a86;
+}
+.scenario-material-body {
+  margin: 0;
+  padding: 12px;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  background: #fff;
+  border: 1px solid #ece9f9;
+  border-radius: 10px;
+}
+.scenario-material-body.is-mono {
+  font-family: ui-monospace, 'SFMono-Regular', 'Menlo', monospace;
+  font-size: 12.5px;
+  white-space: pre;
+  overflow-x: auto;
+  background: #f7f6fb;
+}
 .minigame-card-copy {
   display: block;
   min-width: 0;

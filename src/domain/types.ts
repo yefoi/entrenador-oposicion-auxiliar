@@ -52,6 +52,21 @@ export interface Question {
   legalReference?: string
   reviewedOn: string
   active: boolean
+  /**
+   * Cuando esta indicado, la pregunta pertenece al supuesto practico de ese
+   * bloque y solo se responde consultando los materiales del caso.
+   */
+  scenarioId?: 'III' | 'IV'
+}
+
+export interface ScenarioMaterial {
+  title: string
+  body: string
+  /**
+   * 'salida' y 'tabla' se muestran en monoespaciado, porque reproducen
+   * pantallas de comandos o cuadros de datos que hay que poder leer alineados.
+   */
+  kind?: 'texto' | 'salida' | 'tabla'
 }
 
 export interface Scenario {
@@ -60,6 +75,7 @@ export interface Scenario {
   title: string
   context: string
   tasks: string[]
+  materials: ScenarioMaterial[]
 }
 
 export interface SessionQuestion {

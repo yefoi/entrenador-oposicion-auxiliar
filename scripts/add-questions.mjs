@@ -68,7 +68,7 @@ ${seccionNotas}    explanation:
     sourceLabel: ${quote(question.sourceLabel ?? 'Banco propio · práctica no oficial')},
     reviewedOn: ${quote(question.reviewedOn ?? new Date().toISOString().slice(0, 10))},
     active: true,
-  },
+${question.scenarioId ? `    scenarioId: ${quote(question.scenarioId)},\n` : ''}  },
 `
 }
 

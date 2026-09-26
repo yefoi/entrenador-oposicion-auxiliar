@@ -362,6 +362,10 @@ export const scenarios: Scenario[] = [
       'Diseña servicios web y una interfaz accesible y adaptable.',
       'Planifica repositorios, pruebas, integración y despliegue.',
     ],
+    // Pendiente de escribir el dossier del caso y sus veinte preguntas. Hasta
+    // entonces, el simulacro de este bloque sortea preguntas de teoria como
+    // antes, asi que la ausencia no rompe nada.
+    materials: [],
   },
   {
     id: 'IV',
@@ -374,6 +378,84 @@ export const scenarios: Scenario[] = [
       'Investiga autenticación, correo, cortafuegos y exposición de servicios.',
       'Aplica copias, virtualización, seguridad física y procedimientos de incidencia.',
       'Documenta causa, contención, recuperación y prevención.',
+    ],
+    materials: [
+      {
+        title: 'Plan de direccionamiento de la sede',
+        kind: 'tabla',
+        body: `VLAN  Red              Máscara           Puerta de enlace  Uso
+10    10.20.10.0/26    255.255.255.192   10.20.10.1        Puestos de gestión
+20    10.20.20.0/27    255.255.255.224   10.20.20.1        Servidores de aplicación
+30    10.20.30.0/30    255.255.255.252   10.20.30.1        Enlace con sede remota
+99    10.20.99.0/28    255.255.255.240   10.20.99.1        Gestión de red`,
+      },
+      {
+        title: 'Estado del conmutador de acceso',
+        kind: 'salida',
+        body: `SW-ACCESO-1# show interfaces status
+Port      Estado        Velocidad  Dúplex  VLAN
+Gi1/0/1   conectado     1000       full    10
+Gi1/0/2   conectado     1000       full    10
+Gi1/0/3   conectado      100       half    10
+Gi1/0/4   no conectado       -        -    -
+Gi1/0/5   conectado     1000       full    20
+Gi1/0/24  conectado     1000       full    trunk
+
+SW-ACCESO-1# show interfaces counters errors
+Port      CRC/FCS   Late
+Gi1/0/2         0      0
+Gi1/0/3      1482    517
+Gi1/0/5         0      0`,
+      },
+      {
+        title: 'Diagnóstico del servidor de aplicación',
+        kind: 'salida',
+        body: `$ systemctl status app-portal
+● app-portal.service - Portal de trámites
+     Active: failed (Result: exit-code)
+    Process: ExecStart=/opt/portal/app (code=exited, status=1)
+
+$ journalctl -u app-portal -n 2 --no-pager
+app-portal[1183]: FATAL: no puede conectar con 10.20.20.9:5432
+
+$ ss -tulpn | grep LISTEN
+tcp  LISTEN 0.0.0.0:443    users:(("nginx",pid=901))
+tcp  LISTEN 0.0.0.0:22     users:(("sshd",pid=744))
+tcp  LISTEN 127.0.0.1:5432 users:(("postgres",pid=1180))
+
+$ df -h /var
+S.archivos  Tam.  Usado  Disp.  Uso%  Montaje
+/dev/sda2    40G    39G     0G  100%  /var`,
+      },
+      {
+        title: 'Registros publicados del dominio',
+        kind: 'tabla',
+        body: `Tipo  Nombre                    Valor
+MX    organismo.gob             correo.organismo.gob (prioridad 10)
+TXT   organismo.gob             v=spf1 include:_spf.organismo.gob -all
+TXT   _dmarc.organismo.gob      v=DMARC1; p=quarantine; rua=mailto:dmarc@organismo.gob
+A     portal.organismo.gob      10.20.20.5
+A     correo.organismo.gob      10.20.20.9`,
+      },
+      {
+        title: 'Plan de copias vigente',
+        kind: 'tabla',
+        body: `Trabajo         Tipo        Frecuencia              Retención   Destino
+COPIA-COMPLETA  Completa    Domingo 01:00           8 semanas   Cinta en caja fuerte
+COPIA-DIARIA    Diferencial Lunes a sábado 01:00    7 días      NAS de la sede
+COPIA-BD        Registro continuo             30 días     NAS de la sede`,
+      },
+      {
+        title: 'Registro de actuaciones del incidente INC-4471',
+        kind: 'tabla',
+        body: `Hora   Actuación                                    Responsable
+09:12  Usuarios avisan de lentitud general             -
+09:20  Se abre la incidencia INC-4471                  Guardia
+09:35  Se detectan errores en Gi1/0/3 de SW-ACCESO-1    Guardia
+10:05  Se reinicia el servidor de aplicación            Guardia
+10:40  Se restablece el servicio                       Equipo
+11:15  Se copian los registros a un equipo local       Guardia`,
+      },
     ],
   },
 ]

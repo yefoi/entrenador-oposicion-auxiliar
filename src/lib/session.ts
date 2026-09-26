@@ -100,9 +100,17 @@ export function createExamSession(
   const scenarioPool = allQuestions.filter(
     (question) => question.active && question.blockId === scenarioBlock,
   )
-  const scenarioSelected = takeRandom(scenarioPool, 20)
+  // El supuesto tira de las preguntas escritas para el caso, que solo se
+  // pueden responder consultando sus materiales. Si todavia no hay veinte,
+  // cae en el sorteo por bloque de siempre para que el simulacro no se quede
+  // corto mientras se escribe el contenido.
+  const linkedPool = allQuestions.filter(
+    (question) => question.active && question.scenarioId === scenarioBlock,
+  )
+  const pool = linkedPool.length >= 20 ? linkedPool : scenarioPool
+  const scenarioSelected = takeRandom(pool, 20)
   const scenarioReserves = takeRandom(
-    scenarioPool.filter(
+    pool.filter(
       (question) => !scenarioSelected.some((item) => item.id === question.id),
     ),
     5,

@@ -4,6 +4,8 @@ import { formatTimer, getRemainingSeconds } from '../lib/session'
 import { Icon } from '../components/Icons'
 import { OptionNotes } from '../components/OptionNotes'
 import { Button, Modal, ProgressBar } from '../components/UI'
+import { ScenarioMaterials } from '../lib/pages/components/ScenarioMaterials'
+import { scenarios } from '../data/syllabus'
 
 interface SessionPageProps {
   session: TrainerSession
@@ -32,6 +34,12 @@ export function SessionPage({
     : undefined
   const isExam = session.mode === 'exam'
   const currentPart = questionEntry?.part ?? 1
+  // El caso solo se ofrece en las preguntas del supuesto, y solo en el bloque
+  // que el alumno eligio al configurar el simulacro.
+  const scenario =
+    question?.scenarioId && session.scenarioBlock === question.scenarioId
+      ? scenarios.find((item) => item.id === question.scenarioId)
+      : undefined
   const answered = useMemo(
     () =>
       session.questions.filter(
@@ -141,6 +149,7 @@ export function SessionPage({
             </span>
             <h1>{question.statement}</h1>
           </div>
+          {scenario ? <ScenarioMaterials scenario={scenario} /> : null}
           <fieldset className="answer-fieldset">
             <legend className="sr-only">Selecciona una respuesta</legend>
             {question.options.map((option, optionIndex) => {

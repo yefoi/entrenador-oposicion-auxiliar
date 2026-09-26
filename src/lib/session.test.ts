@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { activeQuestions } from '../data/questions'
+import { scenarios } from '../data/syllabus'
 import { createExamSession, createPracticeSession } from './session'
 
 describe('session builders', () => {
@@ -41,6 +42,33 @@ describe('session builders', () => {
     const ids = session.questions.map((entry) => entry.questionId)
     expect(new Set(ids).size).toBe(100)
     expect(session.scenarioBlock).toBe('III')
+  })
+
+  it('la parte 2 del bloque IV sale del supuesto, no de la teoría', () => {
+    const session = createExamSession(activeQuestions, 'IV', new Date('2026-01-01'))
+    const parte2 = session.questions.filter((entry) => entry.part === 2)
+    expect(parte2).toHaveLength(20)
+    // Cada pregunta de la parte 2 tiene que pertenecer al supuesto: si alguna
+    // no lo hiciera, el alumno se encontraria una pregunta de teoria suelta
+    // dentro del caso, sin materiales con los que responderla.
+    for (const entry of parte2) {
+      const question = activeQuestions.find((item) => item.id === entry.questionId)
+      expect(question?.scenarioId, `${entry.questionId} no pertenece al supuesto`).toBe('IV')
+    }
+    // Y el banco tiene que tener al menos veinte, o el generador cae en el
+    // sorteo por bloque de siempre y el supuesto deja de usarse en silencio.
+    const vinculadas = activeQuestions.filter((q) => q.scenarioId === 'IV')
+    expect(vinculadas.length).toBeGreaterThanOrEqual(20)
+  })
+
+  it('el escenario del bloque IV trae materiales que consultar', () => {
+    const scenario = scenarios.find((item) => item.id === 'IV')
+    expect(scenario).toBeDefined()
+    expect(scenario!.materials.length).toBeGreaterThan(0)
+    for (const material of scenario!.materials) {
+      expect(material.title.trim().length).toBeGreaterThan(0)
+      expect(material.body.trim().length).toBeGreaterThan(0)
+    }
   })
 
   it('permite elegir el bloque IV sin mezclarlo con el III', () => {
