@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import type { AppView, TrainerSession } from '../domain/types'
 import { Icon, type IconName } from './Icons'
@@ -31,25 +32,78 @@ export function AppShell({
   activeSession,
   children,
 }: AppShellProps) {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const toggleRef = useRef<HTMLButtonElement>(null)
+
+  const closeMenu = useCallback(() => setMenuOpen(false), [])
+
+  useEffect(() => {
+    if (!menuOpen) return
+    document.body.classList.add('menu-open')
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false)
+        toggleRef.current?.focus()
+      }
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.body.classList.remove('menu-open')
+      document.removeEventListener('keydown', onKeyDown)
+    }
+  }, [menuOpen])
+
+  const go = useCallback(
+    (next: AppView) => {
+      setMenuOpen(false)
+      onNavigate(next)
+    },
+    [onNavigate],
+  )
+
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main-content">
         Saltar al contenido
       </a>
-      <aside className="sidebar">
+      {menuOpen ? (
         <button
-          className="brand"
-          onClick={() => onNavigate('dashboard')}
+          aria-hidden="true"
+          className="sidebar-backdrop"
+          onClick={closeMenu}
+          tabIndex={-1}
           type="button"
-        >
-          <div className="brand-mark">
-            <Icon name="target" size={24} />
-          </div>
-          <div>
-            <strong>Plaza TAI</strong>
-            <span>entrenador AGE</span>
-          </div>
-        </button>
+        />
+      ) : null}
+      <aside
+        aria-label="Menú principal"
+        className="sidebar"
+        data-adsbygoogle-exclude="navigation"
+        id="app-sidebar"
+      >
+        <div className="sidebar-head">
+          <button
+            className="brand"
+            onClick={() => go('dashboard')}
+            type="button"
+          >
+            <div className="brand-mark">
+              <Icon name="target" size={24} />
+            </div>
+            <div>
+              <strong>Plaza TAI</strong>
+              <span>entrenador AGE</span>
+            </div>
+          </button>
+          <button
+            aria-label="Cerrar menú"
+            className="sidebar-close"
+            onClick={closeMenu}
+            type="button"
+          >
+            <Icon name="close" />
+          </button>
+        </div>
         <div className="sidebar-rule" />
         <nav aria-label="Navegación principal" className="main-nav">
           {navigation.map((item) => (
@@ -57,7 +111,7 @@ export function AppShell({
               aria-current={view === item.id ? 'page' : undefined}
               className={`nav-item ${view === item.id ? 'is-active' : ''}`}
               key={item.id}
-              onClick={() => onNavigate(item.id)}
+              onClick={() => go(item.id)}
               type="button"
             >
               <Icon name={item.icon} size={19} />
@@ -72,7 +126,7 @@ export function AppShell({
           {activeSession ? (
             <button
               className="resume-card"
-              onClick={() => onNavigate(getSessionView(activeSession))}
+              onClick={() => go(getSessionView(activeSession))}
               type="button"
             >
               <span className="resume-icon">
@@ -103,7 +157,7 @@ export function AppShell({
           <button
             aria-current={view === 'settings' ? 'page' : undefined}
             className={`nav-item ${view === 'settings' ? 'is-active' : ''}`}
-            onClick={() => onNavigate('settings')}
+            onClick={() => go('settings')}
             type="button"
           >
             <Icon name="settings" size={19} />
@@ -117,12 +171,14 @@ export function AppShell({
       <div className="main-column">
         <header className="mobile-header">
           <button
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
             className="mobile-menu"
-            onClick={() => document.body.classList.toggle('menu-open')}
+            onClick={() => setMenuOpen((open) => !open)}
+            ref={toggleRef}
             type="button"
-            aria-label="Abrir menú"
           >
-            <Icon name="menu" />
+            <Icon name={menuOpen ? 'close' : 'menu'} />
           </button>
           <div className="mobile-brand">
             <div className="brand-mark">
