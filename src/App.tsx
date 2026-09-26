@@ -229,6 +229,26 @@ function App() {
     [startPractice],
   )
 
+  /**
+   * Estudiar un supuesto sin sentarse el simulacro entero: sus veinte preguntas,
+   * con sus materiales, correccion inmediata y sin reloj. Las preguntas se
+   * toman en el orden del caso, que va recorriendo las tareas del enunciado.
+   */
+  const practiceScenario = useCallback(
+    (scenario: 'III' | 'IV') => {
+      const questionIds = activeQuestions
+        .filter((question) => question.scenarioId === scenario)
+        .map((question) => question.id)
+      startPractice({
+        count: questionIds.length,
+        questionIds,
+        immediateFeedback: true,
+        title: `Supuesto práctico · Bloque ${scenario}`,
+      })
+    },
+    [startPractice],
+  )
+
   const selectedAttempt = useMemo(
     () =>
       trainer.state.attempts.find(
@@ -373,6 +393,7 @@ function App() {
                         : null
                   }
                   onStart={startExam}
+                  onPracticeScenario={practiceScenario}
                 />
               ) : null}
               {view === 'exam' &&

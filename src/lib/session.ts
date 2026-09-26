@@ -68,15 +68,14 @@ export function createPracticeSession(
     if (options.questionIds && !questionSet.has(question.id)) return false
     return true
   })
-  const selected =
-    options.selectionStrategy === 'adaptive' && options.questionIds
-      ? options.questionIds
-          .map((questionId) =>
-            filtered.find((question) => question.id === questionId),
-          )
-          .filter((question): question is Question => Boolean(question))
-          .slice(0, options.count)
-      : takeRandom(filtered, options.count)
+  const selected = options.questionIds
+    ? options.questionIds
+        .map((questionId) =>
+          filtered.find((question) => question.id === questionId),
+        )
+        .filter((question): question is Question => Boolean(question))
+        .slice(0, options.count)
+    : takeRandom(filtered, options.count)
   return {
     id: makeId('practice'),
     mode: options.mode ?? 'practice',

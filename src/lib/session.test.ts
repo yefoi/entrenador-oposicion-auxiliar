@@ -33,6 +33,27 @@ describe('session builders', () => {
     expect(session.questions).toHaveLength(0)
   })
 
+  it('estudiar un supuesto reune sus veinte preguntas en el orden del caso', () => {
+    for (const bloque of ['III', 'IV'] as const) {
+      const delCaso = activeQuestions
+        .filter((question) => question.scenarioId === bloque)
+        .map((question) => question.id)
+      expect(delCaso).toHaveLength(20)
+
+      const session = createPracticeSession(activeQuestions, {
+        count: delCaso.length,
+        questionIds: delCaso,
+        immediateFeedback: true,
+        title: `Supuesto práctico · Bloque ${bloque}`,
+      })
+      expect(session.questions).toHaveLength(20)
+      expect(session.immediateFeedback).toBe(true)
+      // Con los identificadores dados, el orden se respeta: el caso recorre sus
+      // tareas y las preguntas siguen ese hilo en lugar de barajarse.
+      expect(session.questions.map((entry) => entry.questionId)).toEqual(delCaso)
+    }
+  })
+
   it('crea un simulacro con 80 de teoría y 20 de un bloque', () => {
     const session = createExamSession(activeQuestions, 'III', new Date('2026-01-01'))
     expect(session.questions.filter((entry) => entry.part === 1)).toHaveLength(80)

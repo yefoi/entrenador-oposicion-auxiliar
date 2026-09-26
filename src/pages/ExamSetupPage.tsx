@@ -13,9 +13,14 @@ import { Button, PageHeader, Tag } from '../components/UI'
 interface ExamSetupPageProps {
   activeSession: TrainerSession | null
   onStart: (scenario: 'III' | 'IV') => void
+  onPracticeScenario: (scenario: 'III' | 'IV') => void
 }
 
-export function ExamSetupPage({ activeSession, onStart }: ExamSetupPageProps) {
+export function ExamSetupPage({
+  activeSession,
+  onStart,
+  onPracticeScenario,
+}: ExamSetupPageProps) {
   const [scenario, setScenario] = useState<'III' | 'IV'>('III')
   const [confirmed, setConfirmed] = useState(false)
   const selected = scenarios.find((item) => item.id === scenario)
@@ -163,6 +168,19 @@ export function ExamSetupPage({ activeSession, onStart }: ExamSetupPageProps) {
                     {task}
                   </span>
                 ))}
+              </div>
+              <div className="scenario-practice">
+                <p>
+                  Las veinte preguntas de este supuesto, con sus materiales y
+                  corrección inmediata, sin reloj ni el resto del examen.
+                </p>
+                <Button
+                  icon="search"
+                  onClick={() => onPracticeScenario(selected.id)}
+                  variant="secondary"
+                >
+                  Estudiar el supuesto
+                </Button>
               </div>
             </div>
           ) : null}
