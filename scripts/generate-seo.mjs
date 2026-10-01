@@ -51,6 +51,44 @@ const list = (items, root = './') =>
         `<li><a href="${root}${path}">${escapeHtml(label)}</a></li>`,
     )
     .join('\n          ')
+
+const renderFigure = (image, root) => `<figure class="site-figure">
+        <img src="${root}capturas/${image.file}" alt="${escapeHtml(image.alt)}" width="${image.width}" height="${image.height}" loading="lazy" decoding="async" />
+        <figcaption>${escapeHtml(image.caption)}</figcaption>
+      </figure>`
+
+/**
+ * Cuatro preguntas reales del tema con la explicacion de por que falla cada
+ * opcion. Es el contenido que no tiene ninguna otra web del sector: la mayoria
+ * ensena la respuesta correcta y se guarda el resto.
+ */
+const renderSamples = (muestras) => `<section class="site-card site-questions">
+        <h2>Preguntas reales de este tema</h2>
+        <p>Cuatro preguntas del banco con la razón por la que falla cada opción incorrecta. El tema completo tiene dieciséis y se practica en la aplicación.</p>
+        ${muestras
+          .map(
+            (question) => `<article class="site-question">
+          <h3>${escapeHtml(question.statement)}</h3>
+          <ul class="site-options">
+            ${question.options
+              .map((option, index) => {
+                const correct = index === question.correctIndex
+                const note = question.optionNotes?.[index]
+                return `<li class="${correct ? 'is-correct' : 'is-wrong'}">
+              <span class="site-option-letter">${String.fromCharCode(65 + index)}</span>
+              <span class="site-option-text">${escapeHtml(option)}</span>
+              ${correct ? '<span class="site-option-tag">Correcta</span>' : ''}
+              ${!correct && note ? `<p class="site-option-note">${escapeHtml(note)}</p>` : ''}
+            </li>`
+              })
+              .join('\n            ')}
+          </ul>
+          <p class="site-answer"><strong>Por qué:</strong> ${escapeHtml(question.explanation)}</p>
+        </article>`,
+          )
+          .join('\n        ')}
+      </section>`
+
 const renderPage = ({
   path,
   title,
@@ -61,6 +99,10 @@ const renderPage = ({
   jsonLd,
   header,
   actions,
+  // Bloque HTML que ya viene formateado. Se usa para las muestras de preguntas,
+  // que no son texto plano como el resto de secciones.
+  rawHtml = '',
+  image,
   depth = 0,
 }) => {
   const root = depth ? '../' : './'
@@ -98,10 +140,12 @@ const renderPage = ({
             `<section class="site-card"><h2>${escapeHtml(heading)}</h2><p>${escapeHtml(body)}</p></section>`,
         )
         .join('\n      ')}
+      ${rawHtml}
+      ${image ? renderFigure(image, root) : ''}
       <section class="site-card">
         <h2>En Plaza TAI</h2>
-        <p>Este contenido forma parte de una plataforma de práctica libre para el Cuerpo de Técnicos Auxiliares de Informática de la AGE. Funciona en el navegador, guarda el progreso en localStorage y no necesita registro.</p>
-        <p class="note">El banco de preguntas y las explicaciones son propios y no oficiales. Verifica siempre la convocatoria y el BOE vigentes.</p>
+        <p>Plaza TAI es una plataforma de práctica libre para el Cuerpo de Técnicos Auxiliares de Informática de la AGE. Funciona en el navegador y guarda el progreso en el propio equipo, sin registro.</p>
+        <p class="note">Banco de preguntas propio y no oficial. Contrasta siempre con el BOE y las bases vigentes.</p>
       </section>
       <nav class="site-card site-nav" aria-label="Páginas relacionadas">
         <h2>Ver también</h2>
@@ -123,6 +167,21 @@ const breadcrumb = (name, path) => ({
   ],
 })
 const dist = resolve(process.env.SEO_OUT_DIR ?? 'dist')
+
+/**
+ * Muestras reales del banco, una por tema. Las deja el build en un JSON porque
+ * este script no puede importar TypeScript. Si falta el fichero, las paginas se
+ * generan igualmente sin la seccion de preguntas: es preferible una pagina mas
+ * corta que un build roto.
+ */
+let muestrasPorTema = {}
+try {
+  muestrasPorTema = JSON.parse(
+    await readFile(resolve(dist, 'seo-muestras.json'), 'utf8'),
+  )
+} catch {
+  console.warn('SEO: sin muestras del banco, las paginas de tema iran sin preguntas')
+}
 await mkdir(dist, { recursive: true })
 const readIfExists = async (target) => {
   try {
@@ -189,27 +248,20 @@ for (const page of [...intentPages, ...blockPages]) {
 }
 await mkdir(resolve(dist, 'temas'), { recursive: true })
 for (const [id, title, focus, slug] of topicSeo) {
-  const path = `temas/${slug}.html`
+    const path = `temas/${slug}.html`
+    const muestras = muestrasPorTema[id]
   const block = blockMeta.find((_, index) => id.startsWith(`B${index + 1}`)) ?? blockMeta[0]
   const description = `${title} (${id}). ${focus}. Explicación y práctica guiada de este tema del temario TAI AGE.`
-  const sections = [
-    [
-      'Qué abarca este tema',
-      `${title} aparece en el ${block[0]} del temario de Técnico Auxiliar de Informática de la AGE, dentro del bloque «${block[1]}». El foco de estudio es ${focus}.`,
-    ],
-    [
-      'Ideas que conviene dominar',
-      `Relaciona ${focus} con su contexto: qué problema resuelve, qué componentes implica y qué efecto tiene en la vida de la persona usuaria de un servicio público. Practica ocho preguntas del tema ${id} y revisa la explicación de cada respuesta.`,
-    ],
-    [
-      'Cómo estudiarlo en Plaza TAI',
-      'Alterna teoría con práctica: una lectura corta, ocho preguntas propias y un repaso de los errores. Vuelve a este tema cuando el simulacro te señale como débil, en lugar de repetir el temario entero.',
-    ],
-    [
-      'Fuente y revisión',
-      'El temario reproduce la convocatoria de referencia. El contenido de Plaza TAI es propio y no oficial; contrasta siempre con el BOE y las bases vigentes.',
-    ],
-  ]
+    const sections = [
+      [
+        'Qué abarca este tema',
+        `${title} aparece en el ${block[0]} del temario de Técnico Auxiliar de Informática de la AGE, dentro del bloque «${block[1]}». El foco de estudio es ${focus}.`,
+      ],
+      [
+        'Ideas que conviene dominar',
+        `Relaciona ${focus} con su contexto: qué problema resuelve, qué componentes implica y qué efecto tiene en la vida de la persona usuaria de un servicio público. Debajo tienes cuatro preguntas reales del tema ${id} con la explicación de cada opción; el resto se practica en la aplicación, que además lleva el repaso de los errores.`,
+      ],
+    ]
   await writeFile(
     resolve(dist, path),
     renderPage({
@@ -224,8 +276,17 @@ for (const [id, title, focus, slug] of topicSeo) {
         [`Practicar el tema ${id}`, `../?tema=${encodeURIComponent(id)}&vista=practica`, 'button-primary'],
         ['Ver el temario completo', '../?vista=temario', 'button-secondary'],
       ]),
-      keywords: [focus, 'temario TAI', 'preguntas TAI'],
-      jsonLd: breadcrumb(`${title} (${id})`, path),
+        keywords: [focus, 'temario TAI', 'preguntas TAI'],
+        rawHtml: muestras ? renderSamples(muestras) : '',
+        image: {
+          file: 'practica-tai-explicacion-opciones.png',
+          alt: `Pregunta del tema ${id} en Plaza TAI con la explicaciÃ³n de por quÃ© falla cada opciÃ³n`,
+          caption:
+            'Cada pregunta explica por qué falla cada opción incorrecta, no solo cuál es la correcta.',
+          width: 1280,
+          height: 860,
+        },
+        jsonLd: breadcrumb(`${title} (${id})`, path),
     }),
   )
   generated.push({ path, priority: '0.7' })
@@ -277,5 +338,13 @@ for (const page of staticPages.slice(1)) {
     html = html.replace('</head>', `  ${adsenseSnippet}\n  </head>`)
   }
   await writeFile(path, html)
+}
+// El volcado de muestras es un intermediario del build, no un recurso del
+// sitio: no tiene por que llegar a produccion.
+try {
+  const { unlink } = await import('node:fs/promises')
+  await unlink(resolve(dist, 'seo-muestras.json'))
+} catch {
+  // Si no existe, no hay nada que borrar.
 }
 console.log(`SEO: ${pages.length} URLs en el sitemap (${generated.length} generadas)`)

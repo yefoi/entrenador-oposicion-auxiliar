@@ -287,4 +287,53 @@ describe('SEO metadata', () => {
     )
     expect(generated).toContain('como-estudiar-tai.html')
   })
+
+  it('publica preguntas reales del tema con la explicación de cada opción', () => {
+    // Las muestras las deja el build en un JSON porque el generador no puede
+    // importar TypeScript. Aqui se escriben a mano con preguntas reales del
+    // banco para comprobar que el generador las pinta bien.
+    const outDir = mkdtempSync(resolve(tmpdir(), 'tai-seo-muestras-'))
+    const tema = 'B1-T01'
+    const delTema = activeQuestions.filter((q) => q.topicId === tema).slice(0, 4)
+    writeFileSync(
+      resolve(outDir, 'seo-muestras.json'),
+      JSON.stringify({ [tema]: delTema }),
+    )
+    execFileSync('node', ['scripts/generate-seo.mjs'], {
+      env: { ...process.env, SEO_OUT_DIR: outDir },
+      stdio: 'pipe',
+    })
+
+    const pagina = readFileSync(
+      resolve(outDir, 'temas/corona-constitucion-tai.html'),
+      'utf8',
+    )
+    const primera = delTema[0]!
+    expect(pagina).toContain(primera.statement.slice(0, 60))
+    // Cada opcion incorrecta lleva su nota, que es lo que no publica nadie mas.
+    const notas = primera.optionNotes!.filter(Boolean)
+    expect(notas.length).toBe(3)
+    for (const nota of notas) {
+      expect(pagina).toContain(nota.slice(0, 50))
+    }
+    expect(pagina).toContain('site-option-tag')
+    expect(pagina).toContain('capturas/practica-tai-explicacion-opciones.png')
+    // Y la seccion no debe quedarse con un hueco vacio sin muestras.
+    expect(pagina).not.toContain('Preguntas reales de este tema\n      \n')
+  })
+
+  it('la página de tema sobrevive sin el volcado de muestras', () => {
+    // El generador tiene que degradar, no romperse, si el JSON no esta.
+    const outDir = mkdtempSync(resolve(tmpdir(), 'tai-seo-sin-muestras-'))
+    execFileSync('node', ['scripts/generate-seo.mjs'], {
+      env: { ...process.env, SEO_OUT_DIR: outDir },
+      stdio: 'pipe',
+    })
+    const pagina = readFileSync(
+      resolve(outDir, 'temas/corona-constitucion-tai.html'),
+      'utf8',
+    )
+    expect(pagina).toContain('Qué abarca este tema')
+    expect(pagina).not.toContain('Preguntas reales de este tema')
+  })
 })
