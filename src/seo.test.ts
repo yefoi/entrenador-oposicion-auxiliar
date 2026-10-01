@@ -288,6 +288,36 @@ describe('SEO metadata', () => {
     expect(generated).toContain('como-estudiar-tai.html')
   })
 
+  it('las medidas escritas a mano coinciden con la captura real', () => {
+    // En las paginas escritas a mano el ancho y el alto estan fijos, mientras
+    // que las generadas los leen del PNG. Si alguien vuelve a capturar una
+    // imagen, los numeros fijos quedarian mintiendo y la pagina daria un salto
+    // al cargar. Este test los ata al fichero de verdad.
+    const fuentes = [
+      'index.html',
+      'public/guia-tai.html',
+      'public/minijuegos-tai.html',
+    ]
+    for (const fuente of fuentes) {
+      const html = readFileSync(resolve(process.cwd(), fuente), 'utf8')
+      const imgs = [
+        ...html.matchAll(/capturas\/([a-z0-9-]+\.png)[^>]*?width="(\d+)"\s*\n?\s*height="(\d+)"/g),
+      ]
+      expect(imgs.length, `${fuente} no tiene capturas`).toBeGreaterThan(0)
+      for (const [, file, width, height] of imgs) {
+        const bin = readFileSync(
+          resolve(process.cwd(), 'public/capturas', file!),
+        )
+        expect(Number(width), `${fuente}: ancho declarado de ${file}`).toBe(
+          bin.readUInt32BE(16),
+        )
+        expect(Number(height), `${fuente}: alto declarado de ${file}`).toBe(
+          bin.readUInt32BE(20),
+        )
+      }
+    }
+  })
+
   it('publica preguntas reales del tema con la explicación de cada opción', () => {
     // Las muestras las deja el build en un JSON porque el generador no puede
     // importar TypeScript. Aqui se escriben a mano con preguntas reales del
