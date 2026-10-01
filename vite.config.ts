@@ -52,7 +52,7 @@ export default defineConfig(({ mode }) => {
             lista.push(question)
             porTema.set(question.topicId, lista)
           }
-          const muestras: Record<string, unknown[]> = {}
+          const temas: Record<string, unknown> = {}
           for (const [topicId, todas] of porTema) {
             // Repartidas por todo el tema en lugar de coger las primeras, para
             // que la muestra ensene la variedad de lo que se pregunta.
@@ -61,21 +61,26 @@ export default defineConfig(({ mode }) => {
               { length: Math.min(SAMPLE_PER_TOPIC, todas.length) },
               (_, i) => todas[Math.min(todas.length - 1, i * paso)],
             )
-            muestras[topicId] = elegidas.map((q) => ({
-              id: q.id,
-              statement: q.statement,
-              options: q.options,
-              correctIndex: q.correctIndex,
-              optionNotes: q.optionNotes ?? [],
-              explanation: q.explanation,
-            }))
+            temas[topicId] = {
+              // El recuento va aqui para que las paginas puedan decir cuantas
+              // preguntas tiene cada tema sin escribirlo a mano.
+              total: todas.length,
+              muestras: elegidas.map((q) => ({
+                id: q.id,
+                statement: q.statement,
+                options: q.options,
+                correctIndex: q.correctIndex,
+                optionNotes: q.optionNotes ?? [],
+                explanation: q.explanation,
+              })),
+            }
           }
           const { mkdir, writeFile } = await import('node:fs/promises')
           const { resolve } = await import('node:path')
           await mkdir(resolve('dist'), { recursive: true })
           await writeFile(
             resolve('dist', 'seo-muestras.json'),
-            JSON.stringify(muestras),
+            JSON.stringify({ total: activeQuestions.length, temas }),
           )
         },
       },

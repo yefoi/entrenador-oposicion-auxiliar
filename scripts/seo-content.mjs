@@ -108,11 +108,11 @@ export const intentPages = [
     sections: [
       [
         'Estructura del temario',
-        'El programa se organiza en cuatro bloques: organización y administración electrónica, tecnología básica, desarrollo de sistemas y sistemas y comunicaciones. El contenido se distribuye en 33 temas numerados.',
+        'El programa se organiza en cuatro bloques y 33 temas numerados. Los dos primeros son comunes a la primera parte del examen: organización del Estado y administración electrónica, y tecnología básica. Los bloques III y IV son además las dos vías del supuesto práctico, así que quien prepare un itinerario técnico encontrará ahí el mayor peso.',
       ],
       [
         'Cómo usarlo',
-        'Lee el tema, practica ocho preguntas propias y revisa la explicación de cada respuesta. Después vuelve al punto que más errores haya generado.',
+        'Cada tema tiene dieciséis preguntas propias y la explicación de cada opción incorrecta. El recorrido que funciona es leer el tema, contestar sin mirar, leer por qué fallan los distractores que elegiste y volver a ese tema cuando el simulacro lo señale como flojo. Abajo tienes los 33 temas agrupados por bloque, con sus preguntas, para entrar directamente en el que toque.',
       ],
       [
         'Fuente y alcance',

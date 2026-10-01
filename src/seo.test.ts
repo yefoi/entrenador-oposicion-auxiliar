@@ -289,6 +289,41 @@ describe('SEO metadata', () => {
     expect(generated).toContain('como-estudiar-tai.html')
   })
 
+  it('el temario y los bloques enlazan y cuentan todos los temas', () => {
+    // Las paginas de tema no recibian ni un enlace interno: solo estaban en el
+    // sitemap, y eran justo las unicas sin impresiones. Este test impide que
+    // vuelvan a quedarse sin enlazar desde donde se las espera.
+    const outDir = mkdtempSync(resolve(tmpdir(), 'tai-seo-indice-'))
+    execFileSync('node', ['scripts/generate-seo.mjs'], {
+      env: { ...process.env, SEO_OUT_DIR: outDir },
+      stdio: 'pipe',
+    })
+
+    const temario = readFileSync(resolve(outDir, 'temario-tai.html'), 'utf8')
+    const enlaces = new Set(
+      [...temario.matchAll(/temas\/([a-z0-9-]+)\.html/g)].map((m) => m[1]),
+    )
+    expect(enlaces.size).toBe(topicSeo.length)
+    for (const [, , , slug] of topicSeo) {
+      expect(enlaces.has(slug), `el temario no enlaza ${slug}`).toBe(true)
+    }
+
+    // Y cada pagina de bloque enlaza exactamente los suyos.
+    for (const [prefijo, slugBloque] of [
+      ['B1', 'bloque-1-organizacion-administracion-electronica.html'],
+      ['B2', 'bloque-2-tecnologia-basica.html'],
+      ['B3', 'bloque-3-desarrollo-sistemas.html'],
+      ['B4', 'bloque-4-sistemas-comunicaciones.html'],
+    ] as const) {
+      const pagina = readFileSync(resolve(outDir, slugBloque), 'utf8')
+      const suyos = topicSeo.filter(([id]) => id.startsWith(prefijo))
+      const puestos = new Set(
+        [...pagina.matchAll(/temas\/([a-z0-9-]+)\.html/g)].map((m) => m[1]),
+      )
+      expect(puestos.size).toBe(suyos.length)
+    }
+  })
+
   it('las cifras del simulacro salen de las reglas del examen', () => {
     const outDir = mkdtempSync(resolve(tmpdir(), 'tai-seo-simulacro-'))
     execFileSync('node', ['scripts/generate-seo.mjs'], {
@@ -391,7 +426,10 @@ describe('SEO metadata', () => {
     const delTema = activeQuestions.filter((q) => q.topicId === tema).slice(0, 4)
     writeFileSync(
       resolve(outDir, 'seo-muestras.json'),
-      JSON.stringify({ [tema]: delTema }),
+      JSON.stringify({
+        total: delTema.length,
+        temas: { [tema]: { total: delTema.length, muestras: delTema } },
+      }),
     )
     execFileSync('node', ['scripts/generate-seo.mjs'], {
       env: { ...process.env, SEO_OUT_DIR: outDir },

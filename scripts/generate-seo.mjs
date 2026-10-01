@@ -107,6 +107,44 @@ const renderSamples = (muestras) => `<section class="site-card site-questions">
           .join('\n        ')}
       </section>`
 
+/**
+ * Indice de los 33 temas con enlace a cada uno y su numero de preguntas.
+ *
+ * Antes las paginas de tema no recibian un solo enlace interno: vivian solo en
+ * el sitemap, mientras que las unicas cuatro URLs con impresiones en Search
+ * Console eran justo las que si estaban enlazadas desde aqui. Ademas de servir
+ * al lector, esta tabla es la via por la que el buscador las encuentra.
+ */
+const renderTopicIndex = (banco, soloBloque) => {
+  const bloques = [
+    ['B1', 'I', 'Organización del Estado y administración electrónica'],
+    ['B2', 'II', 'Tecnología básica'],
+    ['B3', 'III', 'Desarrollo de sistemas'],
+    ['B4', 'IV', 'Sistemas y comunicaciones'],
+  ].filter(([, numero]) => !soloBloque || numero === soloBloque)
+  return bloques
+    .map(([prefijo, numero, materias]) => {
+      const temas = topicSeo.filter(([id]) => id.startsWith(prefijo))
+      if (!temas.length) return ''
+      const filas = temas
+        .map(([id, title, focus, slug]) => {
+          const total = banco.temas?.[id]?.total
+          return `<tr><td><a href="./temas/${slug}.html">${escapeHtml(title)}</a></td><td>${escapeHtml(focus)}</td><td>${total ?? '—'}</td></tr>`
+        })
+        .join('\n            ')
+      return `<h3>Bloque ${numero}. ${escapeHtml(materias)}</h3>
+        <table class="site-table">
+          <thead>
+            <tr><th scope="col">Tema</th><th scope="col">Qué se estudia</th><th scope="col">Preguntas</th></tr>
+          </thead>
+          <tbody>
+            ${filas}
+          </tbody>
+        </table>`
+    })
+    .join('\n        ')
+}
+
 const renderPage = ({
   path,
   title,
@@ -192,11 +230,9 @@ const dist = resolve(process.env.SEO_OUT_DIR ?? 'dist')
  * generan igualmente sin la seccion de preguntas: es preferible una pagina mas
  * corta que un build roto.
  */
-let muestrasPorTema = {}
+let banco = { total: 0, temas: {} }
 try {
-  muestrasPorTema = JSON.parse(
-    await readFile(resolve(dist, 'seo-muestras.json'), 'utf8'),
-  )
+  banco = JSON.parse(await readFile(resolve(dist, 'seo-muestras.json'), 'utf8'))
 } catch {
   console.warn('SEO: sin muestras del banco, las paginas de tema iran sin preguntas')
 }
@@ -256,6 +292,14 @@ for (const page of [...intentPages, ...blockPages]) {
     renderPage({
       ...page,
       header,
+      // El temario lleva el indice completo y cada bloque el suyo, para que las
+      // paginas de tema reciban enlaces internos desde donde se las espera.
+      rawHtml:
+        page.path === 'temario-tai.html'
+          ? `${page.rawHtml ?? ''}\n      <section class="site-card">\n        <h2>Los 33 temas, con sus preguntas</h2>\n        <p>Cada tema tiene su propia página con una introducción y cuatro preguntas reales explicadas opción por opción.</p>\n        ${renderTopicIndex(banco)}\n      </section>`
+          : isBlock
+            ? `${page.rawHtml ?? ''}\n      <section class="site-card">\n        <h2>Los temas de este bloque</h2>\n        ${renderTopicIndex(banco, page.blockId)}\n      </section>`
+            : page.rawHtml,
       actions: actionButtons(
         isBlock ? blockAction(page.blockId) : actions[key],
       ),
@@ -267,7 +311,7 @@ for (const page of [...intentPages, ...blockPages]) {
 await mkdir(resolve(dist, 'temas'), { recursive: true })
 for (const [id, title, focus, slug] of topicSeo) {
     const path = `temas/${slug}.html`
-    const muestras = muestrasPorTema[id]
+    const muestras = banco.temas?.[id]?.muestras
   const block = blockMeta.find((_, index) => id.startsWith(`B${index + 1}`)) ?? blockMeta[0]
   const description = `${title} (${id}). ${focus}. Explicación y práctica guiada de este tema del temario TAI AGE.`
     const sections = [
