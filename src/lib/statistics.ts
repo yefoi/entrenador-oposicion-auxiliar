@@ -9,7 +9,7 @@ import type {
 import { topics } from '../data/syllabus'
 
 const DAY = 24 * 60 * 60 * 1000
-const REVIEW_INTERVALS = [1, 3, 7, 14, 30, 60]
+export const REVIEW_INTERVALS = [1, 3, 7, 14, 30, 60]
 
 function dateKey(date: Date): string {
   return date.toISOString().slice(0, 10)

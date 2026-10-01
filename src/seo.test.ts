@@ -7,6 +7,7 @@ import { blockPages, intentPages } from '../scripts/seo-content.mjs'
 import { topicSeo } from '../scripts/seo-topics.mjs'
 import { activeQuestions } from './data/questions'
 import { topics, examRules } from './data/syllabus'
+import { REVIEW_INTERVALS } from './lib/statistics'
 
 function read(relativePath: string) {
   return readFileSync(resolve(process.cwd(), relativePath), 'utf8')
@@ -287,6 +288,21 @@ describe('SEO metadata', () => {
       'bloque-1-organizacion-administracion-electronica.html',
     )
     expect(generated).toContain('como-estudiar-tai.html')
+  })
+
+  it('los intervalos de repaso de la guía son los que usa la aplicación', () => {
+    // La guia es HTML escrito a mano y promete unos intervalos concretos. Si
+    // cambian en el motor de repaso, la guia estaria mintiendo al lector.
+    const guia = readFileSync(
+      resolve(process.cwd(), 'public/guia-tai.html'),
+      'utf8',
+    )
+    // Se leen los dias de la tabla y se comparan con los del motor, en orden:
+    // asi da igual que la fila este en singular o en plural.
+    const enGuia = [...guia.matchAll(/<td>(\d+) días?<\/td>/g)].map((m) =>
+      Number(m[1]),
+    )
+    expect(enGuia).toEqual([...REVIEW_INTERVALS])
   })
 
   it('el temario y los bloques enlazan y cuentan todos los temas', () => {
