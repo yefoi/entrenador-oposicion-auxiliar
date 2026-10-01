@@ -184,12 +184,27 @@
           max-height: 65px;
           border: 0;
         }
-       .seo-fallback-nav {
-         display: flex;
-         flex-wrap: wrap;
-         gap: 16px;
-         margin-top: 24px;
-       }
+      .seo-fallback-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 24px;
+      }
+      .seo-fallback-figure {
+        margin: 32px 0 0;
+      }
+      .seo-fallback-figure img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid #e8e6ef;
+        border-radius: 12px;
+      }
+      .seo-fallback-figure figcaption {
+        margin-top: 10px;
+        color: #77758a;
+        font-size: 0.85rem;
+      }
      </style>
   </head>
   <body>
@@ -214,7 +229,7 @@
           <li>568 preguntas propias para práctica con explicaciones.</li>
           <li>Simulacro cronometrado de 80 + 20 preguntas.</li>
           <li>Repaso espaciado, estadísticas y plan de estudio local.</li>
-          <li>Minijuegos de flashcards, speedrun y debilidades.</li>
+          <li>Minijuegos de flashcards, speedrun, debilidades y descarte.</li>
         </ul>
         <p>
           Banco de preguntas propio, práctico y no oficial. Consulta el
@@ -225,6 +240,20 @@
             >BOE de referencia</a
           >.
         </p>
+        <figure class="seo-fallback-figure">
+          <img
+            src="./capturas/panel-progreso-tai.png"
+            alt="Panel de Plaza TAI con la cobertura del temario, el dominio por bloque y los temas a repasar"
+            width="1038"
+            height="820"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>
+            El panel resume la cobertura del temario y señala qué conviene
+            repasar antes del examen.
+          </figcaption>
+        </figure>
         <nav aria-label="Navegación SEO" class="seo-fallback-nav">
           <a href="./guia-tai.html">Guía de estudio TAI</a>
           <a href="./minijuegos-tai.html">Minijuegos TAI</a>

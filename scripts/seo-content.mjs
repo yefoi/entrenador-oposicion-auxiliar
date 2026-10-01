@@ -120,6 +120,11 @@ export const intentPages = [
       ],
     ],
     keywords: ['temario TAI', 'programa TAI', 'técnico auxiliar informática'],
+    image: {
+      file: 'practica-tai-pregunta.png',
+      alt: 'Pregunta del test TAI con cuatro opciones y su nivel de dificultad',
+      caption: 'Cada tema se practica con preguntas propias de cuatro opciones.',
+    },
   },
   {
     path: 'test-oposiciones-tai.html',
@@ -143,6 +148,11 @@ export const intentPages = [
       ],
     ],
     keywords: ['test TAI', 'preguntas TAI', 'test oposiciones informática'],
+    image: {
+      file: 'practica-tai-explicacion-opciones.png',
+      alt: 'Corrección de una pregunta TAI con la explicación de por qué falla cada opción',
+      caption: 'Al responder, cada opción incorrecta explica por qué lo es.',
+    },
   },
   {
     path: 'simulacro-tai.html',
@@ -166,6 +176,11 @@ export const intentPages = [
       ],
     ],
     keywords: ['simulacro TAI', 'examen TAI', 'oposiciones AGE informática'],
+    image: {
+      file: 'supuesto-practico-tai-materiales.png',
+      alt: 'Materiales del supuesto práctico TAI: plan de direccionamiento y estado del conmutador',
+      caption: 'El supuesto práctico trae sus propios documentos, como en el examen.',
+    },
   },
   {
     path: 'como-estudiar-tai.html',
@@ -189,5 +204,10 @@ export const intentPages = [
       ],
     ],
     keywords: ['cómo estudiar TAI', 'preparar oposiciones TAI', 'método oposiciones'],
+    image: {
+      file: 'panel-progreso-tai.png',
+      alt: 'Panel de Plaza TAI con el progreso por temas y la cobertura del temario',
+      caption: 'El panel muestra la cobertura y los temas que conviene repasar.',
+    },
   },
 ]

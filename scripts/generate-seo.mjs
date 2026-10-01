@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { blockPages, intentPages } from './seo-content.mjs'
@@ -52,10 +53,27 @@ const list = (items, root = './') =>
     )
     .join('\n          ')
 
-const renderFigure = (image, root) => `<figure class="site-figure">
-        <img src="${root}capturas/${image.file}" alt="${escapeHtml(image.alt)}" width="${image.width}" height="${image.height}" loading="lazy" decoding="async" />
+/** Medidas reales de un PNG, leidas de su cabecera. */
+const pngSize = (file) => {
+  try {
+    const bytes = readFileSync(resolve('public', 'capturas', file))
+    return { width: bytes.readUInt32BE(16), height: bytes.readUInt32BE(20) }
+  } catch {
+    return {}
+  }
+}
+
+const renderFigure = (image, root) => {
+  // Las medidas se leen del propio fichero: escribirlas a mano es justo el
+  // dato que se queda obsoleto en cuanto se recorta una captura.
+  const size = pngSize(image.file)
+  const width = image.width ?? size.width ?? 1280
+  const height = image.height ?? size.height ?? 860
+  return `<figure class="site-figure">
+        <img src="${root}capturas/${image.file}" alt="${escapeHtml(image.alt)}" width="${width}" height="${height}" loading="lazy" decoding="async" />
         <figcaption>${escapeHtml(image.caption)}</figcaption>
       </figure>`
+}
 
 /**
  * Cuatro preguntas reales del tema con la explicacion de por que falla cada
@@ -134,6 +152,7 @@ const renderPage = ({
         <p class="lead">${escapeHtml(intro)}</p>
         <p class="site-cta">${actions}</p>
       </header>
+      ${image ? renderFigure(image, root) : ''}
       ${sections
         .map(
           ([heading, body]) =>
@@ -141,7 +160,6 @@ const renderPage = ({
         )
         .join('\n      ')}
       ${rawHtml}
-      ${image ? renderFigure(image, root) : ''}
       <section class="site-card">
         <h2>En Plaza TAI</h2>
         <p>Plaza TAI es una plataforma de práctica libre para el Cuerpo de Técnicos Auxiliares de Informática de la AGE. Funciona en el navegador y guarda el progreso en el propio equipo, sin registro.</p>
@@ -280,11 +298,9 @@ for (const [id, title, focus, slug] of topicSeo) {
         rawHtml: muestras ? renderSamples(muestras) : '',
         image: {
           file: 'practica-tai-explicacion-opciones.png',
-          alt: `Pregunta del tema ${id} en Plaza TAI con la explicaciÃ³n de por quÃ© falla cada opciÃ³n`,
+          alt: `Pregunta real del tema ${id} en Plaza TAI, con la explicación de por qué falla cada opción`,
           caption:
             'Cada pregunta explica por qué falla cada opción incorrecta, no solo cuál es la correcta.',
-          width: 1280,
-          height: 860,
         },
         jsonLd: breadcrumb(`${title} (${id})`, path),
     }),
