@@ -6,6 +6,7 @@ import { resolve } from 'node:path'
 import { blockPages, intentPages } from '../scripts/seo-content.mjs'
 import { topicSeo } from '../scripts/seo-topics.mjs'
 import { activeQuestions } from './data/questions'
+import { topics } from './data/syllabus'
 
 function read(relativePath: string) {
   return readFileSync(resolve(process.cwd(), relativePath), 'utf8')
@@ -286,6 +287,40 @@ describe('SEO metadata', () => {
       'bloque-1-organizacion-administracion-electronica.html',
     )
     expect(generated).toContain('como-estudiar-tai.html')
+  })
+
+  it('las cifras por bloque de la página del test salen del banco real', () => {
+    // Es una tabla de numeros escrita a mano: si el banco crece, miente. Este
+    // test la ata a los datos de verdad.
+    const outDir = mkdtempSync(resolve(tmpdir(), 'tai-seo-bloques-'))
+    execFileSync('node', ['scripts/generate-seo.mjs'], {
+      env: { ...process.env, SEO_OUT_DIR: outDir },
+      stdio: 'pipe',
+    })
+    const pagina = readFileSync(
+      resolve(outDir, 'test-oposiciones-tai.html'),
+      'utf8',
+    )
+
+    const filas = [
+      ...pagina.matchAll(
+        /<tr><td>([IV]+)<\/td><td>[^<]*<\/td><td>(\d+)<\/td><td>(\d+)<\/td>/g,
+      ),
+    ]
+    expect(filas.length).toBe(4)
+
+    for (const [, bloque, temas, preguntas] of filas) {
+      const reales = activeQuestions.filter((q) => q.blockId === bloque)
+      expect(Number(preguntas), `preguntas del bloque ${bloque}`).toBe(
+        reales.length,
+      )
+      expect(Number(temas), `temas del bloque ${bloque}`).toBe(
+        topics.filter((topic) => topic.blockId === bloque).length,
+      )
+    }
+    // Y el total que anuncia la pagina tiene que ser el del banco.
+    const total = activeQuestions.length
+    expect(pagina).toContain(`${total} preguntas`)
   })
 
   it('las medidas escritas a mano coinciden con la captura real', () => {
