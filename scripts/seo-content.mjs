@@ -212,8 +212,12 @@ export const intentPages = [
       'El simulacro reproduce la mecánica de la convocatoria de referencia para entrenar ritmo, lectura y decisión bajo penalización.',
     sections: [
       [
-        'Formato',
-        'Una parte teórica de hasta 80 preguntas, un supuesto de 20 preguntas en el bloque III o IV, cinco preguntas de reserva por parte y dos horas de duración.',
+        'Formato, tal como está en el BOE',
+        'El Anexo V de la convocatoria vigente fija un ejercicio único de dos partes que se realizan juntas: hasta 80 preguntas sobre todo el programa y un supuesto práctico de 20 preguntas elegido entre los bloques III y IV. Hay 5 preguntas de reserva por parte, 120 minutos para el conjunto y una penalización de un tercio por cada error, con las blancas sin penalizar.',
+      ],
+      [
+        'Qué reparte el simulacro, y qué no publica la convocatoria',
+        'La convocatoria dice que la primera parte versa sobre el programa completo, pero no publica cuántas preguntas corresponden a cada bloque. El simulacro hace un reparto propio, ponderado por el peso de cada bloque, y lo dice aquí para que no se confunda con un dato oficial. La segunda parte sí es fiel al original: veinte preguntas de un solo supuesto, con sus documentos, y cinco de reserva.',
       ],
       [
         'Qué significa orientativo',
@@ -221,9 +225,43 @@ export const intentPages = [
       ],
       [
         'Cómo estudiarlo',
-        'Practica primero por temas y reserva uno o dos simulacros completos para simular la presión de tiempo.',
+        'Practica primero por temas y reserva los simulacros completos para entrenar la presión de tiempo, que es lo que no se puede entrenar de otra forma. Un simulacro a la semana en las últimas seis es más útil que seis seguidos la última.',
       ],
     ],
+    rawHtml: `<section class="site-card">
+        <h2>Los 72 segundos</h2>
+        <p>Cien preguntas en 120 minutos son 72 segundos por pregunta. Y el supuesto práctico no se puede responder sin leer antes sus documentos, así que ese tiempo sale del mismo presupuesto. Es la restricción que decide el examen, más que saber o no la materia.</p>
+        <table class="site-table">
+          <caption>Reparto del tiempo propuesto para el simulacro</caption>
+          <thead>
+            <tr><th scope="col">Tramo</th><th scope="col">Minutos</th><th scope="col">Para qué</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lectura del supuesto</td><td>8</td><td>Leer los documentos del caso antes de empezar a contestar</td></tr>
+            <tr><td>Primera vuelta</td><td>72</td><td>Contestar lo que se sabe y marcar lo dudoso, sin detenerse</td></tr>
+            <tr><td>Segunda vuelta</td><td>35</td><td>Volver a las marcadas con el descarte ya hecho</td></tr>
+            <tr><td>Cierre</td><td>5</td><td>Comprobar que el supuesto elegido está marcado</td></tr>
+          </tbody>
+        </table>
+        <p>La primera vuelta sale a 43 segundos por pregunta: el objetivo no es acertarlas todas, es no quedarse atascado en ninguna. Una pregunta que se lleva cuatro minutos cuesta tanto como tres que no llegas a leer.</p>
+        <p>Y el último tramo no es decorativo: la convocatoria dice que si no está señalado el supuesto elegido, si se señalan los dos o si la marca no es válida, la segunda parte no se corrige.</p>
+      </section>
+      <section class="site-card">
+        <h2>Los dos supuestos, lado a lado</h2>
+        <p>En el examen se elige uno de los dos y solo se corrigen las preguntas de ese. En el simulacro se elige antes de empezar, igual que allí.</p>
+        <table class="site-table">
+          <thead>
+            <tr><th scope="col"></th><th scope="col">Bloque III</th><th scope="col">Bloque IV</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Caso</td><td>Portal de servicios al ciudadano</td><td>Incidente en un servicio corporativo</td></tr>
+            <tr><td>Documentos</td><td>Seis, incluidos modelo de datos, contrato de la API e informe de accesibilidad</td><td>Seis, incluidos plan de direccionamiento, estado del conmutador y registros del dominio</td></tr>
+            <tr><td>Qué se trabaja</td><td>Modelado y normalización, plataformas de desarrollo, servicios web, accesibilidad, pruebas y repositorios</td><td>Direccionamiento y VLAN, conmutadores, correo y DNS, copias y diagnóstico del servidor</td></tr>
+            <tr><td>Encaja mejor si</td><td>Te resulta más natural diseñar y construir</td><td>Te resulta más natural diagnosticar y operar</td></tr>
+          </tbody>
+        </table>
+        <p>Si dudas, haz un simulacro de cada uno antes de decidir. Elegir el que se te da mejor vale más que elegir el que suena más difícil.</p>
+      </section>`,
     keywords: ['simulacro TAI', 'examen TAI', 'oposiciones AGE informática'],
     image: {
       file: 'supuesto-practico-tai-materiales.png',

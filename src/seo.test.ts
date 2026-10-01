@@ -6,7 +6,7 @@ import { resolve } from 'node:path'
 import { blockPages, intentPages } from '../scripts/seo-content.mjs'
 import { topicSeo } from '../scripts/seo-topics.mjs'
 import { activeQuestions } from './data/questions'
-import { topics } from './data/syllabus'
+import { topics, examRules } from './data/syllabus'
 
 function read(relativePath: string) {
   return readFileSync(resolve(process.cwd(), relativePath), 'utf8')
@@ -287,6 +287,35 @@ describe('SEO metadata', () => {
       'bloque-1-organizacion-administracion-electronica.html',
     )
     expect(generated).toContain('como-estudiar-tai.html')
+  })
+
+  it('las cifras del simulacro salen de las reglas del examen', () => {
+    const outDir = mkdtempSync(resolve(tmpdir(), 'tai-seo-simulacro-'))
+    execFileSync('node', ['scripts/generate-seo.mjs'], {
+      env: { ...process.env, SEO_OUT_DIR: outDir },
+      stdio: 'pipe',
+    })
+    const pagina = readFileSync(resolve(outDir, 'simulacro-tai.html'), 'utf8')
+
+    expect(pagina).toContain(`hasta ${examRules.theoryQuestions} preguntas`)
+    expect(pagina).toContain(`${examRules.scenarioQuestions} preguntas`)
+    expect(pagina).toContain(`${examRules.scenarioReserves} preguntas de reserva`)
+    expect(pagina).toContain(`${examRules.durationMinutes} minutos`)
+
+    // Los segundos por pregunta son una division, no un dato de la convocatoria:
+    // si cambia la duracion o el numero de preguntas, aqui se recalcula.
+    const total = examRules.theoryQuestions + examRules.scenarioQuestions
+    const segundos = Math.round((examRules.durationMinutes * 60) / total)
+    expect(pagina).toContain(`${segundos} segundos`)
+
+    // El reparto del tiempo es una propuesta, pero tiene que sumar la duracion
+    // real: una tabla que no cuadra con el examen seria peor que no tenerla.
+    const desde = pagina.indexOf('Reparto del tiempo propuesto')
+    const tramos = [...pagina.slice(desde).matchAll(/<td>(\d+)<\/td>/g)]
+      .slice(0, 4)
+      .map((m) => Number(m[1]))
+    expect(tramos).toHaveLength(4)
+    expect(tramos.reduce((a, b) => a + b, 0)).toBe(examRules.durationMinutes)
   })
 
   it('las cifras por bloque de la página del test salen del banco real', () => {
