@@ -169,6 +169,8 @@ const tema = await evaluar(`(() => {
     cargada: img ? img.naturalWidth > 0 : false,
     ancho: Math.round(ancho),
     caja: Math.round(caja),
+    fechaVisible: document.querySelector('.site-updated')?.textContent?.trim() ?? '',
+    fechaMarcada: document.querySelector('script[type="application/ld+json"]')?.textContent ?? '',
   }
 })()`)
 if (!tema?.preguntas) fallo('preguntas', 'la pagina de tema no muestra preguntas')
@@ -181,6 +183,21 @@ else if (tema.ancho > tema.caja + 1)
     `la imagen mide ${tema.ancho} px en una caja de ${tema.caja}: se sale`,
   )
 else ok(`la captura encaja en su caja (${tema.ancho} de ${tema.caja} px)`)
+
+// --- La fecha de revision, visible y declarada ---
+if (!tema?.fechaVisible) {
+  fallo('fecha', 'la pagina de tema no muestra fecha de actualización')
+} else if (!/"dateModified"\s*:\s*"\d{4}-\d{2}-\d{2}"/.test(tema.fechaMarcada)) {
+  fallo('fecha', 'no declara dateModified en el marcado')
+} else {
+  const declarada = tema.fechaMarcada.match(/"dateModified"\s*:\s*"([^"]+)"/)[1]
+  const anioVisible = tema.fechaVisible.match(/(\d{4})/)?.[1]
+  if (anioVisible && !declarada.startsWith(anioVisible)) {
+    fallo('fecha', `la visible (${tema.fechaVisible}) y la declarada (${declarada}) no cuadran`)
+  } else {
+    ok(`fecha de revisión visible y declarada (${declarada})`)
+  }
+}
 
 // --- El sitemap declara lo que debe ---
 try {

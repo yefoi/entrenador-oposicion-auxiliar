@@ -266,6 +266,12 @@ h2 {
   font-size: 0.82rem;
 }
 
+.site-updated {
+  margin: 0.5rem 0 0;
+  color: var(--muted-2);
+  font-size: 0.78rem;
+}
+
 /* Tablas de datos: reglas del examen, aritmetica de la penalizacion y
    recuento por bloque. En movil se desplazan en horizontal en lugar de
    romperse, porque son cifras que hay que poder comparar en columna. */

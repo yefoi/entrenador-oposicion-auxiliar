@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { blockPages, intentPages } from './seo-content.mjs'
@@ -221,6 +222,7 @@ const renderPage = ({
         <p class="eyebrow">${flagEs}${escapeHtml(header)}</p>
         <h1>${escapeHtml(title)}</h1>
         <p class="lead">${escapeHtml(intro)}</p>
+        ${renderUpdated(fechaSitio, root)}
         <p class="site-cta">${actions}</p>
       </header>
       ${image ? renderFigure(image, root) : ''}
@@ -269,6 +271,81 @@ try {
 } catch {
   console.warn('SEO: sin muestras del banco, las paginas de tema iran sin preguntas')
 }
+
+/** Fecha en castellano a partir de un ISO corto. */
+const MESES = [
+  'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+  'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre',
+]
+const enCastellano = (iso) => {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso ?? '')) return ''
+  const [a, m, d] = iso.split('-')
+  return `${Number(d)} de ${MESES[Number(m) - 1]} de ${a}`
+}
+
+/**
+ * Fecha de revision, visible y en el marcado.
+ *
+ * Google trata dateModified como una senal de frescura de primer orden, y la
+ * visible tiene que coincidir con la declarada: si el marcado dijera una fecha
+ * que el lector no ve, seria marcado enganoso.
+ */
+const renderUpdated = (iso) =>
+  iso
+    ? `<p class="site-updated">Actualizado el ${enCastellano(iso)}.</p>`
+    : ''
+
+/**
+ * Fecha del ultimo cambio de esos ficheros en el repositorio.
+ *
+ * Es la unica senal honesta de frescura: la fecha del banco dice cuando se
+ * reviso una pregunta, pero no cuando cambio el texto de una pagina. La del
+ * despliegue tampoco sirve, porque diria que todo se actualiza a diario aunque
+ * nada cambie. Si Git no esta disponible, se cae a la del banco.
+ */
+const fechaDeGit = (rutas) => {
+  try {
+    const salida = execFileSync(
+      'git',
+      ['log', '-1', '--format=%cs', '--', ...rutas],
+      { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] },
+    ).trim()
+    return /^\d{4}-\d{2}-\d{2}$/.test(salida) ? salida : ''
+  } catch {
+    return ''
+  }
+}
+
+/**
+ * Las paginas generadas salen del banco y de los guiones que las componen: su
+ * fecha es la del ultimo cambio en cualquiera de ellos.
+ */
+const FUENTES_DEL_SITIO = [
+  'src/data/questions',
+  'scripts/seo-content.mjs',
+  'scripts/seo-topics.mjs',
+  'scripts/generate-seo.mjs',
+]
+const fechaSitio = fechaDeGit(FUENTES_DEL_SITIO) || banco.revisadoEl
+
+/** Un unico bloque con varios nodos, sin el @context suelto de cada uno. */
+const grafo = (...nodos) => ({
+  '@context': 'https://schema.org',
+  '@graph': nodos.map((nodo) => {
+    const copia = { ...nodo }
+    delete copia['@context']
+    return copia
+  }),
+})
+
+const webPage = (name, path, iso) => ({
+  '@type': 'WebPage',
+  name,
+  url: `${siteUrl}${path}`,
+  inLanguage: 'es',
+  ...(iso ? { dateModified: iso } : {}),
+  isPartOf: { '@type': 'WebSite', name: 'Plaza TAI', url: siteUrl },
+})
 await mkdir(dist, { recursive: true })
 const readIfExists = async (target) => {
   try {
@@ -336,7 +413,10 @@ for (const page of [...intentPages, ...blockPages]) {
       actions: actionButtons(
         isBlock ? blockAction(page.blockId) : actions[key],
       ),
-      jsonLd: breadcrumb(page.title.split('|')[0].trim(), page.path),
+      jsonLd: grafo(
+        breadcrumb(page.title.split('|')[0].trim(), page.path),
+        webPage(page.title.split('|')[0].trim(), page.path, fechaSitio),
+      ),
     }),
   )
   generated.push({ path: page.path, priority: '0.9' })
@@ -379,7 +459,10 @@ for (const [id, title, focus, slug] of topicSeo) {
           caption:
             'Cada pregunta explica por qué falla cada opción incorrecta, no solo cuál es la correcta.',
         },
-        jsonLd: breadcrumb(`${title} (${id})`, path),
+        jsonLd: grafo(
+          breadcrumb(`${title} (${id})`, path),
+          webPage(`${title} (${id})`, path, fechaSitio),
+        ),
     }),
   )
   generated.push({ path, priority: '0.7' })
@@ -426,11 +509,35 @@ for (const page of staticPages.slice(1)) {
   const path = resolve(dist, page.path)
   const original = await readIfExists(path)
   if (!original) continue
-  let html = original.replaceAll(defaultSiteUrl, siteUrl)
-  if (adsenseSnippet && !html.includes('adsbygoogle.js')) {
-    html = html.replace('</head>', `  ${adsenseSnippet}\n  </head>`)
-  }
-  await writeFile(path, html)
+    let html = original.replaceAll(defaultSiteUrl, siteUrl)
+    if (adsenseSnippet && !html.includes('adsbygoogle.js')) {
+      html = html.replace('</head>', `  ${adsenseSnippet}\n  </head>`)
+    }
+    // Estas paginas se escriben a mano y no pasan por la plantilla, asi que la
+    // fecha de revision y su marcado se anaden aqui. Solo si la pagina no lo
+    // trae ya, para que reejecutar el generador sea idempotente.
+    // Cada pagina escrita a mano lleva la fecha de su propio fichero, que es
+    // cuando se reviso su texto.
+    const fechaPagina =
+      fechaDeGit([`public/${page.path}`]) || banco.revisadoEl
+    if (!html.includes('site-updated') && fechaPagina) {
+      html = html.replace(
+        '</main>',
+        `  ${renderUpdated(fechaPagina)}\n    </main>`,
+      )
+    }
+    if (!html.includes('"WebPage"')) {
+      // Estas entradas de staticPages solo llevan ruta y prioridad: el nombre se
+      // toma del propio titulo de la pagina.
+      const titulo =
+        html.match(/<title>([^<]+)<\/title>/)?.[1]?.trim() ?? page.path
+      const nodo = JSON.stringify(grafo(webPage(titulo, page.path, fechaPagina)))
+      html = html.replace(
+        '</head>',
+        `  <script type="application/ld+json">${nodo}</script>\n  </head>`,
+      )
+    }
+    await writeFile(path, html)
 }
 // El volcado de muestras es un intermediario del build, no un recurso del
 // sitio: no tiene por que llegar a produccion.

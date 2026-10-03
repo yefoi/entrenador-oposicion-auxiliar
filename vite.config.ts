@@ -44,6 +44,7 @@ export default defineConfig(({ mode }) => {
               correctIndex: number
               optionNotes?: string[]
               explanation: string
+              reviewedOn: string
             }[]
           }
           const porTema = new Map<string, typeof activeQuestions>()
@@ -77,10 +78,23 @@ export default defineConfig(({ mode }) => {
           }
           const { mkdir, writeFile } = await import('node:fs/promises')
           const { resolve } = await import('node:path')
+          // La fecha que se publica es la ultima revision real de una pregunta,
+          // no la del despliegue: si se usara la de hoy, la pagina diria que se
+          // actualiza a diario aunque no cambie nada, y eso es mentir al lector
+          // y al buscador.
+          const revisadoEl = activeQuestions
+            .map((q) => q.reviewedOn)
+            .filter(Boolean)
+            .sort()
+            .at(-1)
           await mkdir(resolve('dist'), { recursive: true })
           await writeFile(
             resolve('dist', 'seo-muestras.json'),
-            JSON.stringify({ total: activeQuestions.length, temas }),
+            JSON.stringify({
+              total: activeQuestions.length,
+              revisadoEl,
+              temas,
+            }),
           )
         },
       },

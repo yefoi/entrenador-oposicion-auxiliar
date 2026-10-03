@@ -13,6 +13,21 @@ import {
   getMinigameQuestionCount,
 } from './lib/minigames'
 
+const MESES = [
+  'enero',
+  'febrero',
+  'marzo',
+  'abril',
+  'mayo',
+  'junio',
+  'julio',
+  'agosto',
+  'septiembre',
+  'octubre',
+  'noviembre',
+  'diciembre',
+]
+
 function read(relativePath: string) {
   return readFileSync(resolve(process.cwd(), relativePath), 'utf8')
 }
@@ -292,6 +307,47 @@ describe('SEO metadata', () => {
       'bloque-1-organizacion-administracion-electronica.html',
     )
     expect(generated).toContain('como-estudiar-tai.html')
+  })
+
+  it('la fecha visible coincide con la declarada en el marcado', () => {
+    // Google pide que el marcado describa lo que el lector ve, y dateModified
+    // es una senal de frescura: declarar una fecha que no aparece en la pagina
+    // seria marcado enganoso.
+    const outDir = mkdtempSync(resolve(tmpdir(), 'tai-seo-fecha-'))
+    execFileSync('node', ['scripts/generate-seo.mjs'], {
+      env: { ...process.env, SEO_OUT_DIR: outDir },
+      stdio: 'pipe',
+    })
+
+    const paginas = [
+      'test-oposiciones-tai.html',
+      'temario-tai.html',
+      'simulacro-tai.html',
+      'como-estudiar-tai.html',
+      'temas/corona-constitucion-tai.html',
+      'bloque-4-sistemas-comunicaciones.html',
+    ]
+
+    for (const pagina of paginas) {
+      const html = readFileSync(resolve(outDir, pagina), 'utf8')
+      const visible = html.match(/Actualizado el (\d{1,2}) de (\w+) de (\d{4})/)
+      const declarada = html.match(/"dateModified":\s*"(\d{4})-(\d{2})-(\d{2})"/)
+
+      expect(visible, `${pagina} no muestra la fecha`).not.toBeNull()
+      expect(declarada, `${pagina} no declara dateModified`).not.toBeNull()
+      expect(
+        Number(visible![3]),
+        `${pagina}: el año visible no coincide con el declarado`,
+      ).toBe(Number(declarada![1]))
+      expect(
+        MESES.indexOf(visible![2]!) + 1,
+        `${pagina}: el mes visible no coincide con el declarado`,
+      ).toBe(Number(declarada![2]))
+      expect(
+        Number(visible![1]),
+        `${pagina}: el día visible no coincide con el declarado`,
+      ).toBe(Number(declarada![3]))
+    }
   })
 
   it('todas las páginas declaran un favicon que Google admite', () => {

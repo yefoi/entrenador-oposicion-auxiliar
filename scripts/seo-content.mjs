@@ -6,7 +6,7 @@ export const blockPages = [
     description:
       'Temario TAI del Bloque 1: Constitución, Cortes Generales, función pública, transparencia, identidad, protección de datos y administración electrónica.',
     intro:
-      'El primer bloque conecta la organización constitucional y la función pública con los servicios electrónicos que un técnico auxiliar debe entender para atender a la ciudadanía.',
+      'El bloque I es el de organización del Estado y administración electrónica: la Constitución, el empleo público, la protección de datos y los servicios digitales. Es el bloque con más peso en la primera parte del examen y no entra en el supuesto práctico.',
     sections: [
       [
         'Qué abarca este bloque',
@@ -30,7 +30,7 @@ export const blockPages = [
     description:
       'Temario TAI del Bloque 2: hardware, periféricos, algoritmos, estructuras de datos, sistemas operativos y bases de datos.',
     intro:
-      'La tecnología básica es la base para razonar sobre errores, rendimiento y funcionamiento de los equipos que aparecen en un examen técnico.',
+      'El bloque II es el de tecnología básica: representación de la información, hardware, periféricos, estructuras de datos, sistemas operativos y bases de datos. Es la base sobre la que se apoyan los dos bloques técnicos y entra solo en la primera parte.',
     sections: [
       [
         'Qué abarca este bloque',
@@ -54,7 +54,7 @@ export const blockPages = [
     description:
       'Temario TAI del Bloque 3: modelado de datos, programación, SQL, Java y .NET, arquitectura, web, accesibilidad, calidad y Git.',
     intro:
-      'Este bloque exige conectar el modelo del problema con su implementación, su persistencia, su seguridad, su interfaz y su ciclo de vida.',
+      'El bloque III es el de desarrollo de sistemas: modelado y normalización, programación, SQL, orientación a objetos, plataformas, web, pruebas y repositorios. Sus materias entran en la primera parte y además es una de las dos vías del supuesto práctico.',
     sections: [
       [
         'Qué abarca este bloque',
@@ -78,7 +78,7 @@ export const blockPages = [
     description:
       'Temario TAI del Bloque 4: administración de sistemas, backup, seguridad, redes, TCP/IP, Internet, VPN, DNS, HTTP y redes locales.',
     intro:
-      'El cuarto bloque se centra en cómo se mantienen, comunican y protegen los sistemas en un entorno real, con criterios de disponibilidad, seguridad y diagnóstico.',
+      'El bloque IV es el de sistemas y comunicaciones: administración de Windows y Linux, copias y virtualización, redes, protocolos, seguridad y operación de CPD. Entra en la primera parte y es la otra vía posible del supuesto práctico, junto con el bloque III.',
     sections: [
       [
         'Qué abarca este bloque',
@@ -104,7 +104,7 @@ export const intentPages = [
     description:
       'Consulta el temario de Técnico Auxiliar de Informática de la AGE, organizado en cuatro bloques y 33 temas, con acceso a práctica libre.',
     intro:
-      'Este índice reúne el temario de referencia del Cuerpo de Técnicos Auxiliares de Informática de la AGE y te lleva a la práctica de cada tema.',
+      'El temario de TAI son 33 temas repartidos en cuatro bloques, y aquí tienes los cuatro con sus preguntas: 568 en total, dieciséis por tema, cada una con la explicación de por qué falla cada opción incorrecta.',
     sections: [
       [
         'Estructura del temario',
@@ -132,7 +132,7 @@ export const intentPages = [
     description:
       'Test gratuito de oposiciones TAI con 568 preguntas propias, explicaciones, filtros por bloque y práctica adaptativa.',
     intro:
-      'Practica sin cuenta y sin instalar nada. El progreso se guarda en el navegador y puedes filtrar por bloques, temas, dificultad y estado.',
+      'El examen de TAI es un ejercicio único de 80 preguntas y un supuesto práctico de 20, en 120 minutos, donde cada error descuenta un tercio. Aquí puedes practicarlo por bloques, por temas o con una sesión adaptativa, sin registro y con la explicación de cada opción incorrecta.',
     sections: [
       [
         'Cómo se corrige el examen, regla por regla',
@@ -209,7 +209,7 @@ export const intentPages = [
     description:
       'Simulacro orientativo del examen TAI: 80 preguntas de teoría, 20 de supuesto y 120 minutos con penalización por error.',
     intro:
-      'El simulacro reproduce la mecánica de la convocatoria de referencia para entrenar ritmo, lectura y decisión bajo penalización.',
+      'El simulacro reproduce el examen de TAI: 80 preguntas de todo el programa, un supuesto de 20 a elegir entre los bloques III y IV, 120 minutos y un descuento de un tercio por cada error. Con sus cinco preguntas de reserva por parte y la elección de supuesto antes de empezar, como en el examen.',
     sections: [
       [
         'Formato, tal como está en el BOE',
@@ -275,7 +275,7 @@ export const intentPages = [
     description:
       'Guía práctica para estudiar TAI AGE: organiza el temario en ciclos, usa tests, corrige errores, revisa con repasos y reserva simulacros.',
     intro:
-      'Estudiar TAI de forma eficaz es una cuestión de ciclo: entender, practicar, corregir y volver al punto que todavía no dominas.',
+      'Estudiar TAI con método es un ciclo de cuatro pasos: leer el tema, contestar sin mirar, entender por qué falla la opción que elegiste y volver a él cuando el repaso toca. El repaso se programa a 1, 3, 7, 14, 30 o 60 días según cómo respondas.',
     sections: [
       [
         'Un ciclo de cuatro pasos',
