@@ -17,6 +17,15 @@ export interface QuestionMatch {
   blockId: string
 }
 
+/**
+ * Todo lo que se mira al buscar: enunciado, explicacion, opciones y tambien las
+ * notas de cada opcion descartada y la referencia legal.
+ *
+ * Las notas son lo mas util del banco para estudiar, porque dicen por que se
+ * cae cada distractor. Dejarlas fuera hacia que un termino que solo aparece en
+ * ellas no encontrara nada, que es justo lo contrario de lo que espera quien lo
+ * busca.
+ */
 export const questionHaystack = (question: Question) => {
   const topic = topicById.get(question.topicId)
   const block = topic ? blockById.get(topic.blockId) : undefined
@@ -25,6 +34,8 @@ export const questionHaystack = (question: Question) => {
       question.statement,
       question.explanation,
       ...question.options,
+      ...(question.optionNotes ?? []),
+      question.legalReference ?? '',
       topic?.title ?? '',
       topic?.focus ?? '',
       block?.title ?? '',
