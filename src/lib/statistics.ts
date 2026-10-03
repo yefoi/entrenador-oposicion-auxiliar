@@ -6,10 +6,38 @@ import type {
   TopicReview,
   TopicStat,
 } from '../domain/types'
-import { topics } from '../data/syllabus'
+import { examRules, topics } from '../data/syllabus'
 
 const DAY = 24 * 60 * 60 * 1000
 export const REVIEW_INTERVALS = [1, 3, 7, 14, 30, 60]
+
+/**
+ * Segundos que la convocatoria concede por pregunta de las que cuentan: las 80
+ * de teoria y las 20 del supuesto. No incluye las diez de reserva, que solo se
+ * corrigen si sustituyen a otra, aunque leerlas gaste reloj: quien las repase
+ * tendra un ritmo real algo mas justo que esta referencia.
+ *
+ * Sale de examRules y no de un numero escrito a mano para que un cambio de
+ * convocatoria mueva la referencia sola.
+ */
+export const SECONDS_PER_SCORED_QUESTION =
+  (examRules.durationMinutes * 60) /
+  (examRules.theoryQuestions + examRules.scenarioQuestions)
+
+/**
+ * Ritmo medio de un intento, en segundos por pregunta presentada.
+ *
+ * Se mide sobre el papel entero y no sobre lo contestado: en el examen el
+ * tiempo se va tambien en leer y descartar. Devuelve null cuando no hay nada
+ * que medir, para que la interfaz pueda callarse en vez de mostrar un cero.
+ */
+export function getPace(
+  durationSeconds: number,
+  questionCount: number,
+): number | null {
+  if (questionCount <= 0 || durationSeconds <= 0) return null
+  return Math.round(durationSeconds / questionCount)
+}
 
 function dateKey(date: Date): string {
   return date.toISOString().slice(0, 10)

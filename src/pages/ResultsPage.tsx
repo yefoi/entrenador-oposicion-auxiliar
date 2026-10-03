@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react'
 import type { AppView, Attempt, Question } from '../domain/types'
 import { formatDirect, overallScore } from '../lib/scoring'
-import { topics } from '../data/syllabus'
+import { getPace, SECONDS_PER_SCORED_QUESTION } from '../lib/statistics'
+import { examRules, topics } from '../data/syllabus'
 import { Icon } from '../components/Icons'
 import {
   Button,
@@ -70,6 +71,10 @@ export function ResultsPage({
   const isExam = attempt.mode === 'exam'
   const isMinigame = attempt.mode === 'minigame'
   const duration = `${Math.floor(attempt.durationSeconds / 60)} min ${attempt.durationSeconds % 60} s`
+  const pace = isExam
+    ? getPace(attempt.durationSeconds, attempt.questions.length)
+    : null
+  const examPace = Math.round(SECONDS_PER_SCORED_QUESTION)
   const partLabel = isExam
     ? 'Parte'
     : isMinigame
@@ -120,6 +125,19 @@ export function ResultsPage({
             tone={overall.passed ? 'teal' : 'orange'}
             value={overall.estimated}
           />
+          {pace !== null ? (
+            <small className="score-foot">
+              Ritmo medio: {pace} s por pregunta · el examen reparte {examPace}{' '}
+              s ({examRules.durationMinutes} min entre{' '}
+              {examRules.theoryQuestions + examRules.scenarioQuestions}{' '}
+              preguntas)
+              {pace > examPace
+                ? ` · vas ${pace - examPace} s por encima`
+                : pace < examPace
+                  ? ` · te sobran ${examPace - pace} s`
+                  : ''}
+            </small>
+          ) : null}
         </div>
         {attempt.scores.map((score) => (
           <div className="result-part" key={score.part}>
