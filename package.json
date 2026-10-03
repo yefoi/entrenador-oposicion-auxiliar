@@ -9,7 +9,8 @@
     "typecheck": "tsc -b --pretty false",
     "lint": "oxlint",
     "test": "vitest run",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "smoke": "node scripts/smoke.mjs"
   },
   "dependencies": {
     "react": "^19.2.8",
