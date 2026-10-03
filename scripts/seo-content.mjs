@@ -279,17 +279,38 @@ export const intentPages = [
     sections: [
       [
         'Un ciclo de cuatro pasos',
-        'Lee con objetivos, responde sin mirar, corrige leyendo las explicaciones y programa un repaso. Alterna bloques para comprobar que el conocimiento se conecta.',
+        'Leer no basta, y hacer tests sin corregirlos tampoco. El ciclo que funciona tiene cuatro pasos: leer el tema con un objetivo concreto, contestar sin mirar, leer por qué fallan los distractores que elegiste y programar la vuelta. Alternar bloques evita que el conocimiento quede aislado en una sola sesión.',
       ],
       [
-        'Repaso recomendado',
-        'Vuelve a los errores y a los temas débiles después de uno, tres, siete, catorce y treinta días. La recuperación espaciada pesa más que hacer muchas sesiones juntas.',
+        'Repaso espaciado: cuándo volver',
+        'El sistema de repaso devuelve cada tema según cómo lo has respondido: un día después de un fallo, y tres, siete, catorce, treinta o sesenta días a medida que encadenas aciertos. Un tema no se estudia una vez, se estudia y se vuelve a él justo cuando estás a punto de olvidarlo. Recorrer los cuatro bloques una sola vez no es suficiente.',
+      ],
+      [
+        'Qué hacer con los errores',
+        'Un error no se corrige leyendo la respuesta correcta, sino entendiendo por qué elegiste la que elegiste. Cada opción incorrecta de este banco lleva su propia nota explicando qué falla en ella. Cuando el error venga de no haber leído bien la pregunta, ese es otro problema distinto: entrena el ritmo con el simulacro, porque las dos partes suman cien preguntas en 120 minutos, que son 72 segundos por pregunta.',
       ],
       [
         'Empieza ahora',
-        'Configura tu fecha objetivo, entra en el temario y lanza una sesión adaptativa de diez minutos.',
+        'Configura tu fecha objetivo en el plan, entra en el temario y lanza una sesión adaptativa de diez minutos. Si vas justo de tiempo, cubre el temario entero con menos profundidad antes que dejar bloques sin abrir: los bloques III y IV llevan además el supuesto práctico.',
       ],
     ],
+    rawHtml: `<section class="site-card">
+        <h2>Los intervalos de repaso, en una tabla</h2>
+        <p>Son los que aplica la aplicación, no una recomendación genérica. El nivel sube con cada acierto y vuelve a cero con cada fallo.</p>
+        <table class="site-table">
+          <thead>
+            <tr><th scope="col">Situación del tema</th><th scope="col">Vuelve a los</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Acabas de fallarlo</td><td>1 día</td></tr>
+            <tr><td>Un acierto seguido</td><td>3 días</td></tr>
+            <tr><td>Dos aciertos</td><td>7 días</td></tr>
+            <tr><td>Tres aciertos</td><td>14 días</td></tr>
+            <tr><td>Cuatro aciertos</td><td>30 días</td></tr>
+            <tr><td>Cinco aciertos o más</td><td>60 días</td></tr>
+          </tbody>
+        </table>
+      </section>`,
     keywords: ['cómo estudiar TAI', 'preparar oposiciones TAI', 'método oposiciones'],
     image: {
       file: 'panel-progreso-tai.png',

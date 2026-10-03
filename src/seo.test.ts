@@ -308,19 +308,35 @@ describe('SEO metadata', () => {
     expect(marcado).toEqual(visibles)
   })
 
-  it('los intervalos de repaso de la guía son los que usa la aplicación', () => {
-    // La guia es HTML escrito a mano y promete unos intervalos concretos. Si
-    // cambian en el motor de repaso, la guia estaria mintiendo al lector.
-    const guia = readFileSync(
-      resolve(process.cwd(), 'public/guia-tai.html'),
-      'utf8',
-    )
-    // Se leen los dias de la tabla y se comparan con los del motor, en orden:
-    // asi da igual que la fila este en singular o en plural.
-    const enGuia = [...guia.matchAll(/<td>(\d+) días?<\/td>/g)].map((m) =>
-      Number(m[1]),
-    )
-    expect(enGuia).toEqual([...REVIEW_INTERVALS])
+  it('los intervalos de repaso son los que usa la aplicación, en todas las páginas', () => {
+    // Estas paginas prometen unos intervalos concretos. Si cambian en el motor
+    // de repaso, estarian mintiendo al lector. La guia se escribe a mano y la
+    // de como estudiar la genera el script, asi que se comprueban por separado.
+    const outDir = mkdtempSync(resolve(tmpdir(), 'tai-seo-repaso-'))
+    execFileSync('node', ['scripts/generate-seo.mjs'], {
+      env: { ...process.env, SEO_OUT_DIR: outDir },
+      stdio: 'pipe',
+    })
+
+    const paginas: [string, string][] = [
+      [
+        'guia-tai.html',
+        readFileSync(resolve(process.cwd(), 'public/guia-tai.html'), 'utf8'),
+      ],
+      [
+        'como-estudiar-tai.html',
+        readFileSync(resolve(outDir, 'como-estudiar-tai.html'), 'utf8'),
+      ],
+    ]
+
+    for (const [nombre, html] of paginas) {
+      // Se leen los dias de la tabla y se comparan con los del motor, en orden:
+      // asi da igual que la fila este en singular o en plural.
+      const enPagina = [...html.matchAll(/<td>(\d+) días?<\/td>/g)].map((m) =>
+        Number(m[1]),
+      )
+      expect(enPagina, `intervalos en ${nombre}`).toEqual([...REVIEW_INTERVALS])
+    }
   })
 
   it('el temario y los bloques enlazan y cuentan todos los temas', () => {
