@@ -294,6 +294,41 @@ describe('SEO metadata', () => {
     expect(generated).toContain('como-estudiar-tai.html')
   })
 
+  it('todas las páginas declaran un favicon que Google admite', () => {
+    // Google Search no admite SVG como favicon: admite BMP, GIF, ICO, PNG,
+    // JPEG, PPM y TIFF. El sitio declaraba solo un SVG, asi que el buscador no
+    // tenia ningun icono que usar. Con las paginas generadas pasaba ademas que
+    // no declaraban ninguno.
+    const outDir = mkdtempSync(resolve(tmpdir(), 'tai-seo-favicon-'))
+    execFileSync('node', ['scripts/generate-seo.mjs'], {
+      env: { ...process.env, SEO_OUT_DIR: outDir },
+      stdio: 'pipe',
+    })
+
+    const aMano = [
+      'index.html',
+      'public/guia-tai.html',
+      'public/minijuegos-tai.html',
+      'public/preguntas-frecuentes-tai.html',
+      'public/privacidad.html',
+      'public/cookies.html',
+    ].map((ruta) => [ruta, readFileSync(resolve(process.cwd(), ruta), 'utf8')] as const)
+
+    const generadas = readdirSync(outDir, { recursive: true })
+      .filter((f) => String(f).endsWith('.html'))
+      .slice(0, 5)
+      .map((f) => [
+        String(f),
+        readFileSync(resolve(outDir, String(f)), 'utf8'),
+      ] as const)
+
+    for (const [nombre, html] of [...aMano, ...generadas]) {
+      expect(html, `${nombre} no declara favicon PNG`).toMatch(
+        /rel="icon"[^>]*type="image\/png"/,
+      )
+    }
+  })
+
   it('la página de minijuegos describe todos los que existen', () => {
     // Se anadio Descarte a la aplicacion y la pagina siguio hablando de tres
     // durante semanas. Ahora la lista de nombres sale del propio modulo.

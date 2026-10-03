@@ -192,6 +192,29 @@ try {
   fallo('sitemap', String(error))
 }
 
+// --- El favicon que Google puede usar ---
+try {
+  const res = await fetch(`${BASE}/favicon-96.png`)
+  const tipo = res.headers.get('content-type') ?? ''
+  if (!res.ok) {
+    fallo('favicon', `favicon-96.png responde ${res.status}`)
+  } else if (!tipo.includes('image/png')) {
+    fallo('favicon', `se sirve como ${tipo}, y Google espera un PNG`)
+  } else {
+    // Un PNG cuadrado: ancho y alto en la cabecera IHDR.
+    const bytes = Buffer.from(await res.arrayBuffer())
+    const ancho = bytes.readUInt32BE(16)
+    const alto = bytes.readUInt32BE(20)
+    if (ancho !== alto || ancho < 48) {
+      fallo('favicon', `mide ${ancho}x${alto}: debe ser cuadrado y mayor de 48`)
+    } else {
+      ok(`el favicon es un PNG cuadrado de ${ancho}x${alto}`)
+    }
+  }
+} catch (error) {
+  fallo('favicon', String(error))
+}
+
 // --- Las capturas se sirven ---
 const capturas = [
   'practica-tai-explicacion-opciones.png',

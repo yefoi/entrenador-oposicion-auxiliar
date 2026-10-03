@@ -197,6 +197,12 @@ const renderPage = ({
     <title>${escapeHtml(title)}</title>
     <meta name="description" content="${escapeHtml(description)}" />
     <link rel="canonical" href="${siteUrl}${path}" />
+    <!-- Google Search no admite SVG como favicon: su lista es BMP, GIF, ICO,
+         PNG, JPEG, PPM y TIFF. El PNG va primero y el SVG queda como mejora
+         para los navegadores, que si lo aceptan. -->
+    <link rel="icon" type="image/png" sizes="96x96" href="${root}favicon-96.png" />
+    <link rel="icon" type="image/svg+xml" href="${root}favicon.svg" />
+    <link rel="apple-touch-icon" href="${root}icon-192.png" />
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Plaza TAI" />
     <meta property="og:locale" content="es_ES" />
