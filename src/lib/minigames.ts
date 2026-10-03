@@ -40,6 +40,18 @@ export interface MinigameStreak {
   best: number
 }
 
+/**
+ * Nombre corto de cada minijuego. Se usa en la interfaz y tambien para
+ * comprobar que la pagina estatica los describe todos: cuando se anadio
+ * Descarte, la pagina siguio hablando de tres durante semanas.
+ */
+export const MINIGAME_LABELS: Record<MinigameType, string> = {
+  flashcards: 'Flashcards',
+  speedrun: 'Speedrun',
+  weakness: 'Debilidades',
+  discard: 'Descarte',
+}
+
 const questionCounts: Record<MinigameType, number> = {
   flashcards: 12,
   speedrun: 20,

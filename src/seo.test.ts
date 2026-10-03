@@ -8,6 +8,10 @@ import { topicSeo } from '../scripts/seo-topics.mjs'
 import { activeQuestions } from './data/questions'
 import { topics, examRules } from './data/syllabus'
 import { REVIEW_INTERVALS } from './lib/statistics'
+import {
+  MINIGAME_LABELS,
+  getMinigameQuestionCount,
+} from './lib/minigames'
 
 function read(relativePath: string) {
   return readFileSync(resolve(process.cwd(), relativePath), 'utf8')
@@ -288,6 +292,30 @@ describe('SEO metadata', () => {
       'bloque-1-organizacion-administracion-electronica.html',
     )
     expect(generated).toContain('como-estudiar-tai.html')
+  })
+
+  it('la página de minijuegos describe todos los que existen', () => {
+    // Se anadio Descarte a la aplicacion y la pagina siguio hablando de tres
+    // durante semanas. Ahora la lista de nombres sale del propio modulo.
+    const pagina = readFileSync(
+      resolve(process.cwd(), 'public/minijuegos-tai.html'),
+      'utf8',
+    )
+    const filas = new Map(
+      [...pagina.matchAll(/<tr>\s*<td>([^<]+)<\/td>\s*<td>(\d+)/g)].map((m) => [
+        m[1]!.trim(),
+        Number(m[2]),
+      ]),
+    )
+
+    expect(filas.size).toBe(Object.keys(MINIGAME_LABELS).length)
+    for (const [tipo, etiqueta] of Object.entries(MINIGAME_LABELS)) {
+      expect(filas.has(etiqueta), `la página no describe ${etiqueta}`).toBe(true)
+      expect(
+        filas.get(etiqueta),
+        `preguntas anunciadas para ${etiqueta}`,
+      ).toBe(getMinigameQuestionCount(tipo as keyof typeof MINIGAME_LABELS))
+    }
   })
 
   it('el marcado de la FAQ coincide con las preguntas visibles', () => {

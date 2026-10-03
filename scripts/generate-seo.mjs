@@ -145,6 +145,33 @@ const renderTopicIndex = (banco, soloBloque) => {
     .join('\n        ')
 }
 
+/**
+ * Entradilla de una pagina de bloque: cuantos temas y preguntas tiene y donde
+ * entra en el examen. Los numeros se calculan, no se escriben, y el aviso del
+ * supuesto practico solo aparece en los bloques que lo son.
+ */
+const renderBlockIntro = (banco, blockId) => {
+  const prefijo = { I: 'B1', II: 'B2', III: 'B3', IV: 'B4' }[blockId]
+  const temas = topicSeo.filter(([id]) => id.startsWith(prefijo ?? ''))
+  const preguntas = temas.reduce(
+    (suma, [id]) => suma + (banco.temas?.[id]?.total ?? 0),
+    0,
+  )
+  const esSupuesto = blockId === 'III' || blockId === 'IV'
+  const partes = esSupuesto
+    ? 'la primera parte del examen y, además, es una de las dos vías del supuesto práctico'
+    : 'la primera parte del examen'
+  return `<section class="site-card">
+        <h2>Dónde entra este bloque</h2>
+        <p>El bloque ${blockId} tiene ${temas.length} temas del programa y ${preguntas} preguntas en el banco, cada una con la explicación de por qué falla cada opción incorrecta.</p>
+        <p>Sus materias entran en ${partes}.${
+          esSupuesto
+            ? ' En el supuesto se elige entre el bloque III y el bloque IV, así que este compite con el otro: decide con un simulacro de cada uno.'
+            : ' El supuesto práctico se elige siempre entre los bloques III y IV.'
+        }</p>
+      </section>`
+}
+
 const renderPage = ({
   path,
   title,
@@ -298,7 +325,7 @@ for (const page of [...intentPages, ...blockPages]) {
         page.path === 'temario-tai.html'
           ? `${page.rawHtml ?? ''}\n      <section class="site-card">\n        <h2>Los 33 temas, con sus preguntas</h2>\n        <p>Cada tema tiene su propia página con una introducción y cuatro preguntas reales explicadas opción por opción.</p>\n        ${renderTopicIndex(banco)}\n      </section>`
           : isBlock
-            ? `${page.rawHtml ?? ''}\n      <section class="site-card">\n        <h2>Los temas de este bloque</h2>\n        ${renderTopicIndex(banco, page.blockId)}\n      </section>`
+            ? `${renderBlockIntro(banco, page.blockId)}\n      ${page.rawHtml ?? ''}\n      <section class="site-card">\n        <h2>Los temas de este bloque</h2>\n        ${renderTopicIndex(banco, page.blockId)}\n      </section>`
             : page.rawHtml,
       actions: actionButtons(
         isBlock ? blockAction(page.blockId) : actions[key],
