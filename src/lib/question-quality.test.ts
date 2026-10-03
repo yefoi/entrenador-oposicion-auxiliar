@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
+import type { Question } from '../domain/types'
 import { activeQuestions, questionById, questions } from '../data/questions'
-import { auditQuestions } from './question-quality'
+import { auditQuestion, auditQuestions } from './question-quality'
 
 /**
  * Budgets are ratchets: they may go down, never up. Adding a question with a
@@ -9,7 +10,7 @@ import { auditQuestions } from './question-quality'
 const BUDGET = {
   longitud: 0,
   'muy-corta': 0,
-  parecida: 19,
+  repetida: 0,
 }
 
 describe('calidad de los distractores', () => {
@@ -27,11 +28,42 @@ describe('calidad de los distractores', () => {
     expect(tooShort.length).toBeLessThanOrEqual(BUDGET['muy-corta'])
   })
 
-  it('no supera el presupuesto de opciones casi identicas', () => {
-    const similar = auditQuestions(activeQuestions).filter((entry) =>
-      entry.issues.some((issue) => issue.kind === 'parecida'),
+  it('ninguna pregunta repite una opción', () => {
+    const repeated = auditQuestions(activeQuestions).filter((entry) =>
+      entry.issues.some((issue) => issue.kind === 'repetida'),
     )
-    expect(similar.length).toBeLessThanOrEqual(BUDGET.parecida)
+    expect(repeated.length).toBeLessThanOrEqual(BUDGET.repetida)
+  })
+
+  it('señala la opción repetida y no el par mínimo legítimo', () => {
+    // La regla anterior, por vocabulario compartido, marcaba UNION frente a
+    // UNION ALL. La actual tiene que distinguir ese par, que es correcto, de
+    // dos opciones que son literalmente la misma.
+    const base: Question = {
+      id: 'TMP-Q01',
+      topicId: 'B3-T03',
+      blockId: 'III',
+      statement: 'Prueba',
+      options: ['UNION ALL', 'UNION', 'INTERSECT', 'EXCEPT'],
+      correctIndex: 0,
+      explanation: 'Prueba',
+      difficulty: 'medium',
+      source: 'generated',
+      sourceLabel: 'Prueba',
+      reviewedOn: '2026-01-01',
+      active: true,
+    }
+    expect(auditQuestion(base).map((issue) => issue.kind)).not.toContain(
+      'repetida',
+    )
+
+    const conRepetida: Question = {
+      ...base,
+      options: ['UNION', 'union ', 'INTERSECT', 'EXCEPT'],
+    }
+    expect(auditQuestion(conRepetida).map((issue) => issue.kind)).toContain(
+      'repetida',
+    )
   })
 
   it('conserva la respuesta correcta al normalizar el orden', () => {

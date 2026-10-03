@@ -17,7 +17,7 @@ describe('auditoria del banco', () => {
       ),
     )
     const ambiguous = flagged.filter((entry) =>
-      entry.issues.some((issue) => issue.kind === 'parecida'),
+      entry.issues.some((issue) => issue.kind === 'repetida'),
     )
     console.log('--- calidad del banco ---')
     console.log('preguntas:', activeQuestions.length)
@@ -31,9 +31,9 @@ describe('auditoria del banco', () => {
       const issue = issues.find((i) => i.kind === 'longitud')!
       console.log(`  ${question.id} ${question.difficulty} :: ${issue.detail}`)
     }
-    console.log('POSIBLE AMBIGUEDAD (opciones casi iguales):', ambiguous.length)
+    console.log('OPCIONES REPETIDAS (dos candidatas identicas):', ambiguous.length)
     for (const { question, issues } of ambiguous) {
-      const issue = issues.find((i) => i.kind === 'parecida')!
+      const issue = issues.find((i) => i.kind === 'repetida')!
       console.log(`  ${question.id} :: ${issue.detail}`)
     }
   })

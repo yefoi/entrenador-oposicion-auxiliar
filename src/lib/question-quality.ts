@@ -5,7 +5,7 @@ export type IssueKind =
   | 'longitud'
   | 'negacion'
   | 'muy-corta'
-  | 'parecida'
+  | 'repetida'
 
 export interface DistractorIssue {
   kind: IssueKind
@@ -34,16 +34,8 @@ const median = (values: number[]) => {
   return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2
 }
 
-const similarity = (a: string, b: string) => {
-  const left = new Set(normalizeOption(a).split(' '))
-  const right = new Set(normalizeOption(b).split(' '))
-  if (!left.size || !right.size) return 0
-  let shared = 0
-  for (const word of left) if (right.has(word)) shared += 1
-  return shared / Math.min(left.size, right.size)
-}
-
-const LITERAL = /^[A-Za-z][\w-]*\s*:|^[\d.,\s]+\s*(?:s|ms|bit|bits|bytes|Hz|kHz|MHz|GHz)?$|^[A-Z]{2,}$/
+const LITERAL =
+  /^[A-Za-z][\w-]*\s*:|^[\d.,\s]+\s*(?:s|ms|bit|bits|bytes|Hz|kHz|MHz|GHz)?$|^[A-Z]{2,}$/
 
 /** Headers, ports, commands and plain numbers cannot be shortened without
  * becoming a different answer, so the length rule does not apply to them. */
@@ -110,12 +102,20 @@ export function auditQuestion(question: Question): DistractorIssue[] {
     })
   }
 
+  // Aqui vivia una regla que marcaba dos opciones con mas del 80% de palabras
+  // en comun. Revisados uno a uno los 19 avisos que daba sobre el banco, los 19
+  // eran pares minimos deliberados: UNION frente a UNION ALL, LEFT JOIN frente a
+  // INNER JOIN, minimo frente a maximo numero de aristas, RPO frente a RTO. Es
+  // como discrimina el examen real, asi que la regla no señalaba un defecto sino
+  // la forma correcta de escribir distractores tecnicos. Lo que si es un defecto
+  // es que dos opciones sean la misma: entonces la pregunta no tiene una unica
+  // respuesta y no se puede contestar bien.
   for (let i = 0; i < options.length; i += 1) {
     for (let j = i + 1; j < options.length; j += 1) {
-      if (similarity(options[i], options[j]) > 0.8) {
+      if (normalizeOption(options[i]) === normalizeOption(options[j])) {
         issues.push({
-          kind: 'parecida',
-          detail: `Las opciones ${i + 1} y ${j + 1} son casi idénticas`,
+          kind: 'repetida',
+          detail: `Las opciones ${i + 1} y ${j + 1} son la misma`,
           optionIndexes: [i, j],
         })
       }
@@ -139,7 +139,7 @@ export const countByKind = (questions: Question[]) => {
     longitud: 0,
     negacion: 0,
     'muy-corta': 0,
-    parecida: 0,
+    repetida: 0,
   }
   for (const question of questions) {
     for (const issue of auditQuestion(question)) totals[issue.kind] += 1
