@@ -176,9 +176,12 @@ const todas = []
 let revisadas = 0
 
 const auditar = async (nombre) => {
-  const dibujada = await evaluar(
-    `document.getElementById('root')?.children.length ?? 0`,
-  )
+  const dibujada = await evaluar(`(() => {
+    // La aplicacion monta sobre #root; las paginas estaticas son HTML suelto.
+    const raiz = document.getElementById('root')
+    if (raiz) return raiz.children.length
+    return document.body.textContent.trim().length > 200 ? 1 : 0
+  })()`)
   if (!dibujada) {
     console.log(`  FALLA ${nombre}: no se dibuja`)
     todas.push({
@@ -267,6 +270,29 @@ if (!minijuego) {
 } else {
   await sleep(1800)
   await auditar('minijuego en marcha')
+}
+
+// --- Las paginas estaticas ---
+// Otra superficie y otra hoja de estilos: son las que Google indexa y las que
+// recibe quien llega desde una busqueda. Se revisan todas las escritas a mano y
+// una de cada tipo generado, porque las generadas comparten plantilla.
+const ESTATICAS = [
+  ['temario', 'temario-tai.html'],
+  ['test', 'test-oposiciones-tai.html'],
+  ['simulacro', 'simulacro-tai.html'],
+  ['como estudiar', 'como-estudiar-tai.html'],
+  ['bloque', 'bloque-4-sistemas-comunicaciones.html'],
+  ['tema', 'temas/accesibilidad-wcag-usabilidad-seguridad.html'],
+  ['guia', 'guia-tai.html'],
+  ['preguntas frecuentes', 'preguntas-frecuentes-tai.html'],
+  ['minijuegos', 'minijuegos-tai.html'],
+  ['privacidad', 'privacidad.html'],
+  ['cookies', 'cookies.html'],
+]
+for (const [nombre, ruta] of ESTATICAS) {
+  await enviar('Page.navigate', { url: `${BASE}/${ruta}` })
+  await sleep(1800)
+  await auditar(`estática: ${nombre}`)
 }
 
 // --- Teclado: foco visible en todo lo que se puede pulsar ---

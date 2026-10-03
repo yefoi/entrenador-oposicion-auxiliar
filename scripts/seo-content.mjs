@@ -251,7 +251,7 @@ export const intentPages = [
         <p>En el examen se elige uno de los dos y solo se corrigen las preguntas de ese. En el simulacro se elige antes de empezar, igual que allí.</p>
         <table class="site-table">
           <thead>
-            <tr><th scope="col"></th><th scope="col">Bloque III</th><th scope="col">Bloque IV</th></tr>
+              <tr><th scope="col">Aspecto</th><th scope="col">Bloque III</th><th scope="col">Bloque IV</th></tr>
           </thead>
           <tbody>
             <tr><td>Caso</td><td>Portal de servicios al ciudadano</td><td>Incidente en un servicio corporativo</td></tr>

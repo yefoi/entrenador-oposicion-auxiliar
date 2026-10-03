@@ -2,19 +2,19 @@
    Keep in sync with the :root block in src/index.css. */
 :root {
   --ink: #252238;
-  --muted: #77758a;
-  --muted-2: #9a98aa;
+  --muted: #6b6a7d;
+  --muted-2: #706d85;
   --line: #e8e6ef;
   --line-strong: #dad7e6;
   --surface: #ffffff;
   --surface-soft: #fbfaff;
-  --purple: #6d59e8;
+  --purple: #6752e7;
   --purple-dark: #5744c9;
   --purple-soft: #efedff;
-  --teal: #159b8d;
+  --teal: #117b70;
   --orange: #e78b42;
   --rose: #d35c78;
-  --green: #278e62;
+  --green: #227c56;
   --shadow-sm: 0 4px 16px rgba(40, 31, 82, 0.05);
   --shadow: 0 12px 34px rgba(40, 31, 82, 0.08);
   --radius: 18px;
