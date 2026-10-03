@@ -290,6 +290,24 @@ describe('SEO metadata', () => {
     expect(generated).toContain('como-estudiar-tai.html')
   })
 
+  it('el marcado de la FAQ coincide con las preguntas visibles', () => {
+    // Google exige que el marcado FAQPage describa contenido que el lector ve.
+    // Si se anade una pregunta a la pagina y no al JSON, o al reves, esto falla.
+    const faq = readFileSync(
+      resolve(process.cwd(), 'public/preguntas-frecuentes-tai.html'),
+      'utf8',
+    )
+    const visibles = [
+      ...faq.matchAll(/<summary[^>]*>([^<]+)<\/summary>/g),
+    ].map((m) => m[1]!.trim())
+    const marcado = [...faq.matchAll(/"name":\s*"([^"]+)"/g)].map((m) =>
+      m[1]!.trim(),
+    )
+
+    expect(visibles.length).toBeGreaterThanOrEqual(10)
+    expect(marcado).toEqual(visibles)
+  })
+
   it('los intervalos de repaso de la guía son los que usa la aplicación', () => {
     // La guia es HTML escrito a mano y promete unos intervalos concretos. Si
     // cambian en el motor de repaso, la guia estaria mintiendo al lector.
