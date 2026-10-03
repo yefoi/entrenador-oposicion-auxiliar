@@ -50,7 +50,14 @@ export function Onboarding({ onComplete }: { onComplete: () => void }) {
   return (
     <Modal title="Bienvenido a Plaza TAI" onClose={finish}>
       <div className="onboarding">
-        <div className="onboarding-progress" aria-label={`Paso ${step + 1} de ${steps.length}`}>
+        <div
+          aria-label="Progreso de la introducción"
+          aria-valuemax={steps.length}
+          aria-valuemin={1}
+          aria-valuenow={step + 1}
+          className="onboarding-progress"
+          role="progressbar"
+        >
           {steps.map((item, index) => (
             <span
               className={index <= step ? 'is-active' : ''}

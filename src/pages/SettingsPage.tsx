@@ -185,6 +185,7 @@ export function SettingsPage({
             </Button>
             <input
               accept="application/json,.json"
+              aria-label="Importar progreso desde un archivo"
               className="sr-only"
               onChange={(event) => handleFile(event.target.files?.[0])}
               ref={inputRef}

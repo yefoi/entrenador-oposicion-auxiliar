@@ -6,24 +6,29 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   --ink: #252238;
-  --muted: #77758a;
-  --muted-2: #9a98aa;
+  --muted: #6b6a7d;
+  --muted-2: #706d85;
   --line: #e8e6ef;
   --line-strong: #dad7e6;
   --surface: #ffffff;
   --surface-soft: #fbfaff;
   --sidebar: #201a3b;
   --sidebar-2: #2c2450;
-  --purple: #6d59e8;
+  --purple: #6752e7;
   --purple-dark: #5744c9;
   --purple-soft: #efedff;
-  --teal: #159b8d;
+  --teal: #117b70;
   --teal-soft: #e6f7f3;
   --orange: #e78b42;
   --orange-soft: #fff1e5;
+  /* El naranja y el rosa del sistema son colores de relleno: como texto sobre
+     fondo claro se quedan en 2,3 y 3,8. Estas variantes oscurecidas son las que
+     se usan cuando el color va en una letra. */
+  --orange-ink: #aa5716;
   --rose: #d35c78;
   --rose-soft: #ffedf1;
-  --green: #278e62;
+  --rose-ink: #c63557;
+  --green: #227c56;
   --green-soft: #e8f7ef;
   --shadow-sm: 0 4px 16px rgba(40, 31, 82, 0.05);
   --shadow: 0 12px 34px rgba(40, 31, 82, 0.08);
@@ -344,7 +349,7 @@ a {
   align-items: center;
   gap: 7px;
   padding: 12px 14px 0;
-  color: #827d9b;
+  color: #8884a0;
   font-size: 10px;
 }
 .online-dot,
@@ -376,7 +381,7 @@ a {
   justify-content: space-between;
   gap: 8px 16px;
   padding: 8px 52px 24px;
-  color: #a3a0b0;
+  color: var(--muted);
   font-size: 10px;
   text-align: right;
   letter-spacing: 0.1px;
@@ -400,7 +405,7 @@ a {
   border: 0;
 }
 .footer-legal a {
-  color: #a3a0b0;
+  color: var(--muted);
   text-decoration: none;
 }
 .footer-legal a:hover,
@@ -1407,7 +1412,7 @@ a {
   font-size: 16px;
 }
 .bank-counter span {
-  color: #518e86;
+  color: #447770;
   font-size: 10px;
 }
 .practice-layout {
@@ -2006,7 +2011,7 @@ a {
 }
 .exam-notice p {
   margin: 4px 0 0;
-  color: #8b7545;
+  color: #846f42;
   font-size: 10px;
   line-height: 1.45;
 }
@@ -2022,7 +2027,7 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  color: #9a6c17;
+  color: #966916;
   font-size: 10px;
   font-weight: 700;
   text-decoration: none;
@@ -2078,7 +2083,7 @@ a {
   font-size: 9px;
 }
 .exam-part b {
-  color: var(--orange);
+  color: var(--orange-ink);
   font-family: 'Space Grotesk', sans-serif;
   font-size: 17px;
 }
@@ -2133,7 +2138,7 @@ a {
 }
 .choice-required {
   padding: 4px 7px;
-  color: var(--rose);
+  color: var(--rose-ink);
   font-size: 9px;
   font-weight: 700;
   background: var(--rose-soft);
@@ -2297,7 +2302,7 @@ a {
   align-items: center;
   gap: 7px;
   padding: 9px 12px;
-  color: var(--orange);
+  color: var(--orange-ink);
   font-family: 'Space Grotesk', sans-serif;
   font-size: 14px;
   font-weight: 700;
@@ -3809,7 +3814,7 @@ a {
   display: block;
 }
 .danger-zone strong {
-  color: var(--rose);
+  color: var(--rose-ink);
   font-size: 11px;
 }
 .danger-zone small {

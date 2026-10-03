@@ -347,6 +347,7 @@ export function StatisticsPage({
                     <small>{percent}%</small>
                   </span>
                   <button
+                    aria-label={`Practicar ${topic?.focus ?? stat.topicId}`}
                     className="row-action"
                     onClick={() => onPractice(stat.topicId)}
                     type="button"

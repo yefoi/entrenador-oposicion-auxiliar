@@ -1,3 +1,4 @@
+import { useId } from 'react'
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import { Icon, type IconName } from './Icons'
 
@@ -151,6 +152,9 @@ export function Modal({
   children: ReactNode
   onClose: () => void
 }) {
+  // El titulo se ve, pero un lector de pantalla necesita que el dialogo se
+  // anuncie con el: sin nombre, al abrirlo solo dice "dialogo".
+  const titleId = useId()
   return (
     <div
       className="modal-backdrop"
@@ -158,9 +162,14 @@ export function Modal({
         if (event.target === event.currentTarget) onClose()
       }}
     >
-      <div aria-modal="true" className="modal" role="dialog">
+      <div
+        aria-labelledby={titleId}
+        aria-modal="true"
+        className="modal"
+        role="dialog"
+      >
         <div className="modal-head">
-          <h2>{title}</h2>
+          <h2 id={titleId}>{title}</h2>
           <button
             className="icon-button"
             onClick={onClose}

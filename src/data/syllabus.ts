@@ -60,7 +60,7 @@ export const blocks: Block[] = [
     shortTitle: 'Desarrollo',
     description:
       'Modelado, programación, SQL, arquitectura, web, calidad y control de versiones.',
-    accent: '#d06b24',
+    accent: '#b55d1f',
   },
   {
     id: 'IV',

@@ -147,7 +147,7 @@ export function MinigameSessionPage({
         />
       </div>
       <div className="minigame-session-layout">
-        <main className="question-panel minigame-question-panel">
+        <div className="question-panel minigame-question-panel">
           {isDiscard ? (
             <DiscardQuestion
               key={question.id}
@@ -228,7 +228,7 @@ export function MinigameSessionPage({
               </Button>
             </div>
           </div>
-        </main>
+        </div>
         <aside className="minigame-session-aside">
           <div className="minigame-streak-card">
             <div className="minigame-streak-card-head">

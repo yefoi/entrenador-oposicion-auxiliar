@@ -127,7 +127,7 @@ export function SessionPage({
         </div>
       ) : null}
       <div className="session-layout">
-        <main className="question-panel">
+        <div className="question-panel">
           <div className="question-meta">
             <span>
               Pregunta {index + 1} de {session.questions.length}
@@ -250,7 +250,7 @@ export function SessionPage({
               )}
             </div>
           </div>
-        </main>
+        </div>
         <aside className="navigator-panel">
           <div className="navigator-head">
             <div>

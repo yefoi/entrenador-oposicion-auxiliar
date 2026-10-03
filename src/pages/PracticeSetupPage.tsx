@@ -150,8 +150,16 @@ export function PracticeSetupPage({
               <p>Elige el alcance de esta sesión.</p>
             </div>
           </div>
-          <div className="scope-tabs" role="tablist">
+          {/* Son botones que eligen un alcance, no pestanas de verdad: no hay
+              paneles con role tabpanel ni navegacion con flechas, asi que se
+              anuncian como grupo de botones con su estado pulsado. */}
+          <div
+            aria-label="Alcance de la sesión"
+            className="scope-tabs"
+            role="group"
+          >
             <button
+              aria-pressed={scope === 'mixed'}
               className={scope === 'mixed' ? 'is-active' : ''}
               onClick={() => setScope('mixed')}
               type="button"
@@ -159,6 +167,7 @@ export function PracticeSetupPage({
               Mixto
             </button>
             <button
+              aria-pressed={scope === 'block'}
               className={scope === 'block' ? 'is-active' : ''}
               onClick={() => setScope('block')}
               type="button"
@@ -166,6 +175,7 @@ export function PracticeSetupPage({
               Por bloque
             </button>
             <button
+              aria-pressed={scope === 'topic'}
               className={scope === 'topic' ? 'is-active' : ''}
               onClick={() => setScope('topic')}
               type="button"

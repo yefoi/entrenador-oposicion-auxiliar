@@ -223,6 +223,11 @@ export function PlanPage({
                 {blocks.find((block) => block.id === task.blockId)?.shortTitle}
               </Tag>
               <button
+                aria-label={
+                  task.topicId
+                    ? `Practicar ${task.title}`
+                    : `Ir al simulacro · ${task.title}`
+                }
                 className="task-action"
                 onClick={() =>
                   task.topicId ? onNavigate('practice') : onNavigate('exam')
