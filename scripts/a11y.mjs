@@ -286,6 +286,8 @@ const ESTATICAS = [
   ['guia', 'guia-tai.html'],
   ['preguntas frecuentes', 'preguntas-frecuentes-tai.html'],
   ['minijuegos', 'minijuegos-tai.html'],
+  ['sobre el proyecto', 'sobre-el-proyecto.html'],
+  ['aviso legal', 'aviso-legal.html'],
   ['privacidad', 'privacidad.html'],
   ['cookies', 'cookies.html'],
 ]

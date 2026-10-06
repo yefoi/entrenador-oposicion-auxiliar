@@ -22,6 +22,10 @@ const staticPages = [
   { path: 'guia-tai.html', priority: '0.8' },
   { path: 'minijuegos-tai.html', priority: '0.8' },
   { path: 'preguntas-frecuentes-tai.html', priority: '0.7' },
+  // Quien publica y con que criterio: un revisor de AdSense no puede valorar
+  // un sitio que no dice quien esta detras ni como se escribio el contenido.
+  { path: 'sobre-el-proyecto.html', priority: '0.5' },
+  { path: 'aviso-legal.html', priority: '0.2' },
   { path: 'privacidad.html', priority: '0.2' },
   { path: 'cookies.html', priority: '0.2' },
 ]
@@ -244,7 +248,7 @@ const renderPage = ({
           ${list(related, root)}
         </ul>
       </nav>
-      <footer class="site-footer"><p>Plaza TAI · práctica de oposiciones TAI sin registro · <a href="${root}privacidad.html">Privacidad</a> · <a href="${root}cookies.html">Cookies</a></p>${codehypeBadge}</footer>
+      <footer class="site-footer"><p>Plaza TAI · práctica de oposiciones TAI sin registro · <a href="${root}sobre-el-proyecto.html">Sobre el proyecto</a> · <a href="${root}aviso-legal.html">Aviso legal</a> · <a href="${root}privacidad.html">Privacidad</a> · <a href="${root}cookies.html">Cookies</a></p>${codehypeBadge}</footer>
     </main>
   </body>
 </html>

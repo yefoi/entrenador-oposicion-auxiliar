@@ -206,6 +206,8 @@ export function AppShell({
             Banco propio de práctica · No oficial · Normativa de referencia: convocatoria 2025
           </span>
           <nav aria-label="Enlaces legales" className="footer-legal">
+            <a href="./sobre-el-proyecto.html">Sobre el proyecto</a>
+            <a href="./aviso-legal.html">Aviso legal</a>
             <a href="./privacidad.html">Privacidad</a>
             <a href="./cookies.html">Cookies</a>
           </nav>

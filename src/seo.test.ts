@@ -36,6 +36,8 @@ const staticContentPages = [
   'guia-tai.html',
   'minijuegos-tai.html',
   'preguntas-frecuentes-tai.html',
+  'sobre-el-proyecto.html',
+  'aviso-legal.html',
   'privacidad.html',
   'cookies.html',
 ]
