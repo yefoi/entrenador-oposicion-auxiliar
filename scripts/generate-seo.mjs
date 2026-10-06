@@ -3,6 +3,7 @@ import { execFileSync } from 'node:child_process'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { blockPages, intentPages } from './seo-content.mjs'
+import { topicNotes } from './seo-topic-notes.mjs'
 import { topicSeo } from './seo-topics.mjs'
 
 const defaultSiteUrl = 'https://yefoi.github.io/entrenador-oposicion-auxiliar/'
@@ -192,6 +193,10 @@ const renderPage = ({
   rawHtml = '',
   image,
   depth = 0,
+  // En las paginas de tema el texto ya dice que es y como se practica. Repetir
+  // el mismo parrafo de presentacion en las 33 seria el contenido duplicado
+  // que un revisor descarta sin leer.
+  pitch = true,
 }) => {
   const root = depth ? '../' : './'
   return `<!doctype html>
@@ -231,17 +236,23 @@ const renderPage = ({
       </header>
       ${image ? renderFigure(image, root) : ''}
       ${sections
-        .map(
-          ([heading, body]) =>
-            `<section class="site-card"><h2>${escapeHtml(heading)}</h2><p>${escapeHtml(body)}</p></section>`,
-        )
+        .map(([heading, body]) => {
+          const paras = Array.isArray(body) ? body : [body]
+          return `<section class="site-card"><h2>${escapeHtml(heading)}</h2>${paras
+            .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
+            .join('')}</section>`
+        })
         .join('\n      ')}
       ${rawHtml}
-      <section class="site-card">
+      ${
+        pitch
+          ? `<section class="site-card">
         <h2>En Plaza TAI</h2>
         <p>Plaza TAI es una plataforma de práctica libre para el Cuerpo de Técnicos Auxiliares de Informática de la AGE. Funciona en el navegador y guarda el progreso en el propio equipo, sin registro.</p>
         <p class="note">Banco de preguntas propio y no oficial. Contrasta siempre con el BOE y las bases vigentes.</p>
-      </section>
+      </section>`
+          : `<p class="note">Banco de preguntas propio y no oficial. Contrasta siempre con el BOE y las bases vigentes.</p>`
+      }
       <nav class="site-card site-nav" aria-label="Páginas relacionadas">
         <h2>Ver también</h2>
         <ul>
@@ -430,24 +441,21 @@ for (const [id, title, focus, slug] of topicSeo) {
     const path = `temas/${slug}.html`
     const muestras = banco.temas?.[id]?.muestras
   const block = blockMeta.find((_, index) => id.startsWith(`B${index + 1}`)) ?? blockMeta[0]
-  const description = `${title} (${id}). ${focus}. Explicación y práctica guiada de este tema del temario TAI AGE.`
-    const sections = [
-      [
-        'Qué abarca este tema',
-        `${title} aparece en el ${block[0]} del temario de Técnico Auxiliar de Informática de la AGE, dentro del bloque «${block[1]}». El foco de estudio es ${focus}.`,
-      ],
-      [
-        'Ideas que conviene dominar',
-        `Relaciona ${focus} con su contexto: qué problema resuelve, qué componentes implica y qué efecto tiene en la vida de la persona usuaria de un servicio público. Debajo tienes cuatro preguntas reales del tema ${id} con la explicación de cada opción; el resto se practica en la aplicación, que además lleva el repaso de los errores.`,
-      ],
-    ]
+  const nota = topicNotes[id]
+  if (!nota) {
+    throw new Error(
+      `El tema ${id} no tiene nota de estudio. Sin ella la pagina solo repetiria la plantilla, que es el contenido de poco valor que hay que evitar.`,
+    )
+  }
+  const description = `${title} (${id}). ${nota.lead}`
+    const sections = [['Lo que se pregunta', nota.paragraphs]]
   await writeFile(
     resolve(dist, path),
     renderPage({
       path,
       title: `${title} | ${id} Temario TAI AGE`,
       description,
-      intro: `${title}. ${focus}.`,
+      intro: nota.lead,
       sections,
       header: `Tema ${id} · ${block[0]}`,
       depth: 1,
@@ -460,9 +468,9 @@ for (const [id, title, focus, slug] of topicSeo) {
         image: {
           file: 'practica-tai-explicacion-opciones.png',
           alt: `Pregunta real del tema ${id} en Plaza TAI, con la explicación de por qué falla cada opción`,
-          caption:
-            'Cada pregunta explica por qué falla cada opción incorrecta, no solo cuál es la correcta.',
+          caption: `Pregunta del tema ${id}. Cada opción descartada explica por qué no vale, no solo cuál es la correcta.`,
         },
+        pitch: false,
         jsonLd: grafo(
           breadcrumb(`${title} (${id})`, path),
           webPage(`${title} (${id})`, path, fechaSitio),

@@ -4,6 +4,7 @@ import { mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { resolve } from 'node:path'
 import { blockPages, intentPages } from '../scripts/seo-content.mjs'
+import { topicNotes } from '../scripts/seo-topic-notes.mjs'
 import { topicSeo } from '../scripts/seo-topics.mjs'
 import { activeQuestions } from './data/questions'
 import { topics, examRules } from './data/syllabus'
@@ -636,7 +637,27 @@ describe('SEO metadata', () => {
       resolve(outDir, 'temas/corona-constitucion-tai.html'),
       'utf8',
     )
-    expect(pagina).toContain('Qué abarca este tema')
+    expect(pagina).toContain('Lo que se pregunta')
+    expect(pagina).toContain('Es inviolable y no está sujeto a responsabilidad')
+    expect(pagina).not.toContain('El foco de estudio es')
     expect(pagina).not.toContain('Preguntas reales de este tema')
+  })
+
+  it('cada tema tiene una nota propia y ninguna repite la plantilla', () => {
+    const frases = new Set<string>()
+    for (const [id] of topicSeo) {
+      const nota = topicNotes[id as keyof typeof topicNotes]
+      expect(nota, `${id} no tiene nota de estudio`).toBeDefined()
+      expect(nota.lead.length).toBeGreaterThan(40)
+      const texto = nota.paragraphs.join(' ')
+      expect(texto.length, `${id} tiene una nota demasiado corta`).toBeGreaterThan(
+        280,
+      )
+      expect(texto).not.toContain('El foco de estudio es')
+      expect(texto).not.toContain('persona usuaria de un servicio público')
+      expect(frases.has(texto), `${id} repite la nota de otro tema`).toBe(false)
+      frases.add(texto)
+    }
+    expect(frases.size).toBe(topicSeo.length)
   })
 })
