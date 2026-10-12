@@ -86,9 +86,9 @@ const renderFigure = (image, root) => {
  * opcion. Es el contenido que no tiene ninguna otra web del sector: la mayoria
  * ensena la respuesta correcta y se guarda el resto.
  */
-const renderSamples = (muestras) => `<section class="site-card site-questions">
-        <h2>Preguntas reales de este tema</h2>
-        <p>Cuatro preguntas del banco con la razón por la que falla cada opción incorrecta. El tema completo tiene dieciséis y se practica en la aplicación.</p>
+const renderSamples = (muestras, totalDelTema) => `<section class="site-card site-questions">
+  <h2>Preguntas reales de este tema</h2>
+  <p>Cuatro preguntas del banco con la razón por la que falla cada opción incorrecta. El tema completo tiene ${totalDelTema ?? muestras.length} y se practica en la aplicación.</p>
         ${muestras
           .map(
             (question) => `<article class="site-question">
@@ -464,7 +464,7 @@ for (const [id, title, focus, slug] of topicSeo) {
         ['Ver el temario completo', '../?vista=temario', 'button-secondary'],
       ]),
         keywords: [focus, 'temario TAI', 'preguntas TAI'],
-        rawHtml: muestras ? renderSamples(muestras) : '',
+        rawHtml: muestras ? renderSamples(muestras, banco.temas?.[id]?.total) : '',
         image: {
           file: 'practica-tai-explicacion-opciones.png',
           alt: `Pregunta real del tema ${id} en Plaza TAI, con la explicación de por qué falla cada opción`,

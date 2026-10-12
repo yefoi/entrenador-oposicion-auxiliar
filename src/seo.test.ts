@@ -596,11 +596,15 @@ describe('SEO metadata', () => {
     const outDir = mkdtempSync(resolve(tmpdir(), 'tai-seo-muestras-'))
     const tema = 'B1-T01'
     const delTema = activeQuestions.filter((q) => q.topicId === tema).slice(0, 4)
+    // El total va aparte de las muestras y con un numero que no sea el de
+    // ningun tema real: la pagina lo decia escrito a mano ("dieciseis") y era
+    // falso en todos los temas que tienen mas.
+    const totalReal = 23
     writeFileSync(
       resolve(outDir, 'seo-muestras.json'),
       JSON.stringify({
-        total: delTema.length,
-        temas: { [tema]: { total: delTema.length, muestras: delTema } },
+        total: totalReal,
+        temas: { [tema]: { total: totalReal, muestras: delTema } },
       }),
     )
     execFileSync('node', ['scripts/generate-seo.mjs'], {
@@ -612,6 +616,8 @@ describe('SEO metadata', () => {
       resolve(outDir, 'temas/corona-constitucion-tai.html'),
       'utf8',
     )
+    expect(pagina).toContain(`El tema completo tiene ${totalReal}`)
+    expect(pagina).not.toContain('El tema completo tiene dieciséis')
     const primera = delTema[0]!
     expect(pagina).toContain(primera.statement.slice(0, 60))
     // Cada opcion incorrecta lleva su nota, que es lo que no publica nadie mas.
