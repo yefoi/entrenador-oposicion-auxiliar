@@ -14,6 +14,7 @@
     "a11y": "node scripts/a11y.mjs"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
