@@ -358,6 +358,37 @@ describe('SEO metadata', () => {
         `${pagina}: el día visible no coincide con el declarado`,
       ).toBe(Number(declarada![3]))
     }
+
+    // El sitemap no puede decir una fecha distinta de la que declara la pagina:
+    // antes ponia la del despliegue a las 49 URLs, asi que cambiaba a diario
+    // aunque el texto no se tocara, y el buscador aprende a ignorarla.
+    const sitemap = readFileSync(resolve(outDir, 'sitemap.xml'), 'utf8')
+    const fechas = new Map(
+      [...sitemap.matchAll(/<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)].map(
+        (m) => [m[1], m[2]],
+      ),
+    )
+    for (const pagina of paginas) {
+      const html = readFileSync(resolve(outDir, pagina), 'utf8')
+      const declarada = html.match(/"dateModified":\s*"(\d{4}-\d{2}-\d{2})"/)![1]
+      const enSitemap = [...fechas].find(([loc]) => loc.endsWith(pagina))?.[1]
+      expect(enSitemap, `${pagina} no aparece en el sitemap`).toBe(declarada)
+    }
+    for (const [, fecha] of fechas) {
+      expect(fecha).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+    }
+  })
+
+  it('no queda ninguna URL del despliegue antiguo en el marcado', () => {
+    // GitHub Pages publicaba una copia entera del sitio con canonical a si
+    // misma: dos versiones completas compitiendo. La URL vieja no puede volver
+    // ni en la portada ni como valor por defecto de los guiones que la generan.
+    const casa = read('index.html')
+    expect(casa).not.toContain('yefoi.github.io')
+    expect(casa).toContain('og-plaza-tai.png')
+    expect(casa).not.toContain('og-image.svg')
+    expect(read('vite.config.ts')).not.toContain('yefoi.github.io')
+    expect(read('scripts/generate-seo.mjs')).not.toContain('yefoi.github.io')
   })
 
   it('todas las páginas declaran un favicon que Google admite', () => {

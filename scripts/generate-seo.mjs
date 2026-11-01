@@ -6,7 +6,7 @@ import { blockPages, intentPages } from './seo-content.mjs'
 import { topicNotes } from './seo-topic-notes.mjs'
 import { topicSeo } from './seo-topics.mjs'
 
-const defaultSiteUrl = 'https://yefoi.github.io/entrenador-oposicion-auxiliar/'
+const defaultSiteUrl = 'https://www.oposiciones-tai.app/'
 const siteUrl = (process.env.SITE_URL ?? defaultSiteUrl).replace(/\/$/, '') + '/'
 const date = new Date().toISOString().slice(0, 10)
 const adsenseClient = process.env.VITE_ADSENSE_CLIENT?.trim()
@@ -504,7 +504,7 @@ for (const page of [...intentPages, ...blockPages]) {
       ),
     }),
   )
-  generated.push({ path: page.path, priority: '0.9' })
+  generated.push({ path: page.path, priority: '0.9', fecha: fechaSitio })
 }
 await mkdir(resolve(dist, 'temas'), { recursive: true })
 for (const [id, title, focus, slug] of topicSeo) {
@@ -574,7 +574,7 @@ for (const [id, title, focus, slug] of topicSeo) {
         ),
     }),
   )
-  generated.push({ path, priority: '0.7' })
+  generated.push({ path, priority: '0.7', fecha: fechaSitio })
 }
 const hubLinks = [
   ...intentPages.map((page) => [page.title.split('|')[0].trim(), `./${page.path}`]),
@@ -594,14 +594,27 @@ for (const target of hubTargets) {
   if (!html || html.includes('id="seo-hub"') || !html.includes('</main>')) continue
   await writeFile(path, html.replace('</main>', `${hubHtml}    </main>`))
 }
-const pages = [...staticPages, ...generated]
+/**
+ * La fecha del sitemap tiene que ser la de cada pagina, no la del despliegue.
+ * Si las 49 dicen "hoy" en cada build, el buscador aprende a ignorar la senal.
+ */
+const fechaDeEstatica = (relPath) =>
+  fechaDeGit([`public/${relPath}`]) || banco.revisadoEl
+const fechaDeCasa = () => fechaDeGit(['index.html']) || banco.revisadoEl
+const pages = [
+  ...staticPages.map((page) => ({
+    ...page,
+    fecha: page.path ? fechaDeEstatica(page.path) : fechaDeCasa(),
+  })),
+  ...generated,
+]
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${pages
   .map(
     (page) => `  <url>
     <loc>${siteUrl}${page.path}</loc>
-    <lastmod>${date}</lastmod>
+    <lastmod>${page.fecha ?? date}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>${page.priority}</priority>
   </url>`,
@@ -671,8 +684,7 @@ for (const page of staticPages.slice(1)) {
     // trae ya, para que reejecutar el generador sea idempotente.
     // Cada pagina escrita a mano lleva la fecha de su propio fichero, que es
     // cuando se reviso su texto.
-    const fechaPagina =
-      fechaDeGit([`public/${page.path}`]) || banco.revisadoEl
+    const fechaPagina = fechaDeEstatica(page.path)
     if (!html.includes('site-updated') && fechaPagina) {
       html = html.replace(
         '</main>',

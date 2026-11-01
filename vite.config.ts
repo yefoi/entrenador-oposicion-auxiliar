@@ -1,7 +1,7 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig, loadEnv } from 'vite'
 
-const defaultSiteUrl = 'https://yefoi.github.io/entrenador-oposicion-auxiliar/'
+const defaultSiteUrl = 'https://www.oposiciones-tai.app/'
 /** Cuantas preguntas de cada tema se publican como muestra en su pagina. */
 const SAMPLE_PER_TOPIC = 4
 
