@@ -30,8 +30,14 @@ describe('App smoke flow', () => {
 
   it('muestra el panel y permite navegar al temario y minijuegos', async () => {
     render(<App />)
+    // El h1 de la portada tiene que decir de que va el sitio: durante meses fue
+    // un eslogan sin una sola palabra del tema, y es la pagina con mas
+    // impresiones en el buscador.
     expect(
-      screen.getByRole('heading', { name: /tu plaza, paso a paso/i }),
+      screen.getByRole('heading', {
+        level: 1,
+        name: /entrenador de oposiciones tai/i,
+      }),
     ).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: 'Temario' }))
     expect(

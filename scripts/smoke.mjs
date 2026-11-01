@@ -147,6 +147,13 @@ else if (app.nodosDentro === 0)
 else ok('la aplicación se dibuja')
 if (!app?.tieneNavegacion) fallo('navegacion', 'no aparece el menu principal')
 else ok('el menú principal está presente')
+// El h1 de la portada es lo que lee el buscador para saber de que va el sitio.
+// Durante meses fue un eslogan sin una sola palabra del tema.
+const h1 = await evaluar(
+  `document.querySelector('#root h1')?.textContent?.trim() ?? ''`,
+)
+if (!/TAI/.test(h1)) fallo('portada', `el h1 no menciona TAI: "${h1}"`)
+else ok(`la portada se anuncia como «${h1}»`)
 const fondo = app?.fondoBarra ?? ''
 if (!app?.hojas) fallo('estilos', 'el navegador no cargó ninguna hoja de estilos')
 else if (fondo === 'rgba(0, 0, 0, 0)' || fondo === '')

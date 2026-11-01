@@ -100,7 +100,7 @@ export const blockPages = [
 export const intentPages = [
   {
     path: 'temario-tai.html',
-    title: 'Temario TAI AGE | 33 temas y bloques explicados',
+    title: 'Temario TAI gratis | Los 33 temas y sus preguntas',
     description:
       'Consulta el temario de Técnico Auxiliar de Informática de la AGE, organizado en cuatro bloques y 33 temas, con acceso a práctica libre.',
     intro:

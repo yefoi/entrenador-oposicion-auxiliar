@@ -75,8 +75,8 @@ export function DashboardPage({
     <div className="page-stack">
       <PageHeader
         eyebrow="Panel de preparación"
-        title="Tu plaza, paso a paso."
-        description="Entrena con método, mide lo que importa y llega al examen con margen."
+        title="Entrenador de oposiciones TAI"
+        description="Tu plaza, paso a paso. 568 preguntas con la explicación de cada opción, simulacros con la mecánica real y repaso espaciado. Sin registro."
         action={
           <Button icon="play" onClick={() => onNavigate('practice')}>
             Empezar práctica
@@ -411,7 +411,7 @@ export function DashboardPage({
       <section className="panel seo-content-panel">
         <div className="seo-content-copy">
           <span className="section-kicker">Guía rápida</span>
-          <h2>Entrenador de oposiciones TAI de la AGE</h2>
+          <h2>Qué incluye el entrenador</h2>
           <p>
             Esta aplicación reúne el temario de {topics.length} temas en 4
             bloques, {activeQuestions.length} preguntas propias, tests con
