@@ -197,6 +197,12 @@ const renderPage = ({
   // el mismo parrafo de presentacion en las 33 seria el contenido duplicado
   // que un revisor descarta sin leer.
   pitch = true,
+  // Migas de pan visibles, ya en HTML y con las rutas relativas resueltas.
+  migas = '',
+  // El titulo de la pestana y el encabezado visible no tienen por que ser el
+  // mismo: en los temas, meter el identificador y el sufijo SEO en el h1 lo
+  // alarga hasta ocupar media pantalla en el movil.
+  h1 = title,
 }) => {
   const root = depth ? '../' : './'
   return `<!doctype html>
@@ -219,7 +225,11 @@ const renderPage = ({
     <meta property="og:title" content="${escapeHtml(title)}" />
     <meta property="og:description" content="${escapeHtml(description)}" />
     <meta property="og:url" content="${siteUrl}${path}" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content="${siteUrl}og-plaza-tai.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Plaza TAI, entrenador de oposiciones TAI: practica con la explicación de cada opción descartada" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="keywords" content="${escapeHtml(keywords.join(', '))}" />
     <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
     ${adsenseSnippet}
@@ -227,9 +237,10 @@ const renderPage = ({
   </head>
   <body>
     <main class="site-main">
+      ${migas}
       <header class="site-card">
         <p class="eyebrow">${flagEs}${escapeHtml(header)}</p>
-        <h1>${escapeHtml(title)}</h1>
+        <h1>${escapeHtml(h1)}</h1>
         <p class="lead">${escapeHtml(intro)}</p>
         ${renderUpdated(fechaSitio, root)}
         <p class="site-cta">${actions}</p>
@@ -311,6 +322,61 @@ const renderUpdated = (iso) =>
     : ''
 
 /**
+ * Migas de pan visibles. El marcado ya declaraba el BreadcrumbList desde el
+ * principio, pero el lector no veia donde estaba: la ultima pieza va como texto
+ * y no como enlace, porque enlazar la pagina en la que ya estas no lleva a
+ * ningun sitio.
+ */
+const renderMigas = (niveles) => `<nav class="site-breadcrumb" aria-label="Migas de pan">${niveles
+  .map(([nombre, href], indice) =>
+    indice === niveles.length - 1
+      ? `<span aria-current="page">${escapeHtml(nombre)}</span>`
+      : `<a href="${href}">${escapeHtml(nombre)}</a><span aria-hidden="true">›</span>`,
+  )
+  .join('')}</nav>`
+
+const breadcrumbDeTema = (titulo, path, numeroBloque, pathBloque) => ({
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: siteUrl },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Temario',
+      item: `${siteUrl}temario-tai.html`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: `Bloque ${numeroBloque}`,
+      item: `${siteUrl}${pathBloque}`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 4,
+      name: titulo,
+      item: `${siteUrl}${path}`,
+    },
+  ],
+})
+
+/**
+ * Tema anterior y siguiente dentro del bloque, para poder recorrer el temario
+ * sin volver al indice. rel="prev" y rel="next" ya no los usa Google para
+ * rastrear, pero siguen describiendo bien el enlace.
+ */
+const renderPager = (anterior, siguiente) => {
+  const enlace = (tema, clase, etiqueta, rel) =>
+    tema
+      ? `<a class="site-pager-link ${clase}" href="./${tema[3]}.html" rel="${rel}"><small>${etiqueta}</small><span>${escapeHtml(tema[1])}</span></a>`
+      : ''
+  const html = `${enlace(anterior, 'site-pager-prev', 'Tema anterior', 'prev')}${enlace(siguiente, 'site-pager-next', 'Tema siguiente', 'next')}`
+  return html
+    ? `<nav class="site-pager" aria-label="Temas del bloque">${html}</nav>`
+    : ''
+}
+
+/**
  * Fecha del ultimo cambio de esos ficheros en el repositorio.
  *
  * Es la unica senal honesta de frescura: la fecha del banco dice cuando se
@@ -360,6 +426,10 @@ const webPage = (name, path, iso) => ({
   inLanguage: 'es',
   ...(iso ? { dateModified: iso } : {}),
   isPartOf: { '@type': 'WebSite', name: 'Plaza TAI', url: siteUrl },
+  // Quien responde del contenido, con el mismo nombre que figura en el aviso
+  // legal. Un buscador y un revisor de publicidad pueden comprobar que existe.
+  author: { '@type': 'Person', name: 'Luis Borrego Ruiz' },
+  publisher: { '@type': 'Organization', name: 'Plaza TAI', url: siteUrl },
 })
 await mkdir(dist, { recursive: true })
 const readIfExists = async (target) => {
@@ -449,22 +519,44 @@ for (const [id, title, focus, slug] of topicSeo) {
   }
   const description = `${title} (${id}). ${nota.lead}`
     const sections = [['Lo que se pregunta', nota.paragraphs]]
+  // El bloque sale del prefijo del identificador: B1 es el bloque I.
+  const numeroBloque = { B1: 'I', B2: 'II', B3: 'III', B4: 'IV' }[
+    id.slice(0, 2)
+  ]
+  const paginaBloque = blockPages.find(
+    (item) => item.blockId === numeroBloque,
+  )
+  const enBloque = topicSeo.filter(([otroId]) =>
+    otroId.startsWith(id.slice(0, 2)),
+  )
+  const posicion = enBloque.findIndex(([otroId]) => otroId === id)
+  const anterior = enBloque[posicion - 1]
+  const siguiente = enBloque[posicion + 1]
   await writeFile(
     resolve(dist, path),
     renderPage({
       path,
       title: `${title} | ${id} Temario TAI AGE`,
+      h1: title,
       description,
       intro: nota.lead,
       sections,
       header: `Tema ${id} · ${block[0]}`,
       depth: 1,
+      migas: renderMigas([
+        ['Inicio', '../'],
+        ['Temario', '../temario-tai.html'],
+        [`Bloque ${numeroBloque}`, `../${paginaBloque?.path ?? 'temario-tai.html'}`],
+        [title, path],
+      ]),
       actions: actionButtons([
         [`Practicar el tema ${id}`, `../?tema=${encodeURIComponent(id)}&vista=practica`, 'button-primary'],
         ['Ver el temario completo', '../?vista=temario', 'button-secondary'],
       ]),
         keywords: [focus, 'temario TAI', 'preguntas TAI'],
-        rawHtml: muestras ? renderSamples(muestras, banco.temas?.[id]?.total) : '',
+        rawHtml:
+          (muestras ? renderSamples(muestras, banco.temas?.[id]?.total) : '') +
+          renderPager(anterior, siguiente),
         image: {
           file: 'practica-tai-explicacion-opciones.png',
           alt: `Pregunta real del tema ${id} en Plaza TAI, con la explicación de por qué falla cada opción`,
@@ -472,7 +564,12 @@ for (const [id, title, focus, slug] of topicSeo) {
         },
         pitch: false,
         jsonLd: grafo(
-          breadcrumb(`${title} (${id})`, path),
+          breadcrumbDeTema(
+            `${title} (${id})`,
+            path,
+            numeroBloque,
+            paginaBloque?.path ?? 'temario-tai.html',
+          ),
           webPage(`${title} (${id})`, path, fechaSitio),
         ),
     }),
@@ -522,6 +619,50 @@ for (const page of staticPages.slice(1)) {
   const original = await readIfExists(path)
   if (!original) continue
     let html = original.replaceAll(defaultSiteUrl, siteUrl)
+    // Las paginas escritas a mano no traen imagen para compartir, y algunas ni
+    // og:title. Se completa solo lo que falta, sin duplicar lo que ya existe.
+    const yaTiene = (clave) => html.includes(`"${clave}"`)
+    const tituloPagina =
+      html.match(/<title>([^<]+)<\/title>/)?.[1]?.trim() ?? 'Plaza TAI'
+    const descripcionPagina =
+      html.match(/<meta\s+name="description"\s+content="([^"]*)"/)?.[1] ?? ''
+    const sociales = []
+    if (!yaTiene('og:type'))
+      sociales.push('<meta property="og:type" content="website" />')
+    if (!yaTiene('og:site_name'))
+      sociales.push('<meta property="og:site_name" content="Plaza TAI" />')
+    if (!yaTiene('og:locale'))
+      sociales.push('<meta property="og:locale" content="es_ES" />')
+    if (!yaTiene('og:title'))
+      sociales.push(
+        `<meta property="og:title" content="${escapeHtml(tituloPagina)}" />`,
+      )
+    if (!yaTiene('og:description') && descripcionPagina)
+      sociales.push(
+        `<meta property="og:description" content="${escapeHtml(descripcionPagina)}" />`,
+      )
+    if (!yaTiene('og:url'))
+      sociales.push(
+        `<meta property="og:url" content="${siteUrl}${page.path}" />`,
+      )
+    if (!yaTiene('og:image')) {
+      sociales.push(
+        `<meta property="og:image" content="${siteUrl}og-plaza-tai.png" />`,
+        '<meta property="og:image:width" content="1200" />',
+        '<meta property="og:image:height" content="630" />',
+        '<meta property="og:image:alt" content="Plaza TAI, entrenador de oposiciones TAI: practica con la explicación de cada opción descartada" />',
+      )
+    }
+    if (!yaTiene('twitter:card'))
+      sociales.push(
+        '<meta name="twitter:card" content="summary_large_image" />',
+      )
+    if (sociales.length) {
+      html = html.replace(
+        '</head>',
+        `  ${sociales.join('\n    ')}\n  </head>`,
+      )
+    }
     if (adsenseSnippet && !html.includes('adsbygoogle.js')) {
       html = html.replace('</head>', `  ${adsenseSnippet}\n  </head>`)
     }

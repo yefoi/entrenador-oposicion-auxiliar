@@ -382,3 +382,105 @@ h2 {
     color: #c9bcff;
   }
 }
+
+/* Migas de pan y navegación entre temas. */
+.site-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 0 1rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.site-breadcrumb a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.site-breadcrumb a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+.site-breadcrumb [aria-current="page"] {
+  color: var(--ink);
+  font-weight: 600;
+}
+.site-breadcrumb span[aria-hidden="true"] {
+  opacity: 0.55;
+}
+.site-breadcrumb a:focus-visible,
+.site-pager-link:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 3px;
+}
+.site-pager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 1.4rem 0 0;
+}
+.site-pager-link {
+  display: flex;
+  flex: 1 1 220px;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.9rem 1rem;
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+.site-pager-link:hover {
+  border-color: var(--line-strong);
+}
+.site-pager-link small {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.site-pager-link span {
+  font-weight: 600;
+  line-height: 1.35;
+}
+.site-pager-next {
+  text-align: right;
+}
+
+/* Índice de la guía: enlaces a las secciones, con foco visible. */
+.site-toc {
+  margin: 0 0 1.25rem;
+  padding: 1rem 1.2rem;
+  font-size: 0.92rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+.site-toc p {
+  margin: 0 0 0.45rem;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.site-toc ol {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.site-toc li {
+  margin: 0.18rem 0;
+}
+.site-toc a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.site-toc a:hover {
+  text-decoration: underline;
+}
+.site-toc a:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 3px;
+}

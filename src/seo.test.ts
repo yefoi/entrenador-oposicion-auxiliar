@@ -114,13 +114,20 @@ describe('SEO metadata', () => {
     const siteCss = read('public/site.css')
     expect(siteCss).toContain('--purple:')
     expect(siteCss).toContain('.site-card')
-    for (const page of staticContentPages) {
-      const content = read(`public/${page}`)
-      expect(content).toContain('<h1>')
-      expect(content).toContain('rel="canonical"')
-      expect(content).toContain('href="./site.css"')
-      expect(content).toContain('class="site-main"')
+  for (const page of staticContentPages) {
+    const content = read(`public/${page}`)
+    expect(content).toContain('<h1>')
+    expect(content).toContain('rel="canonical"')
+    expect(content).toContain('href="./site.css"')
+    expect(content).toContain('class="site-main"')
+    // Un indice interno que apunte a una seccion que ya no existe manda al
+    // lector a la misma pagina sin moverse, y no lo detecta nada mas.
+    for (const [, ancla] of content.matchAll(/href="#([^"]+)"/g)) {
+      expect(content, `${page}: el enlace #${ancla} no tiene destino`).toContain(
+        `id="${ancla}"`,
+      )
     }
+  }
   })
 
   it('declares no personal data in the legal pages', () => {
@@ -647,6 +654,59 @@ describe('SEO metadata', () => {
     expect(pagina).toContain('Es inviolable y no está sujeto a responsabilidad')
     expect(pagina).not.toContain('El foco de estudio es')
     expect(pagina).not.toContain('Preguntas reales de este tema')
+  })
+
+  it('publica imagen para compartir y migas de pan en los temas', () => {
+    const outDir = mkdtempSync(resolve(tmpdir(), 'tai-seo-social-'))
+    writeFileSync(
+      resolve(outDir, 'guia-tai.html'),
+      '<html lang="es"><head><title>Guía</title></head><body><main><h1>Guía</h1></main></body></html>',
+    )
+    execFileSync('node', ['scripts/generate-seo.mjs'], {
+      env: {
+        ...process.env,
+        SITE_URL: 'https://www.example.test/',
+        SEO_OUT_DIR: outDir,
+      },
+      stdio: 'pipe',
+    })
+
+    const og = readFileSync(resolve('public/og-plaza-tai.png'))
+    expect(og.subarray(1, 4).toString('ascii')).toBe('PNG')
+    expect(og.readUInt32BE(16)).toBe(1200)
+    expect(og.readUInt32BE(20)).toBe(630)
+
+    const tema = readFileSync(
+      resolve(outDir, 'temas/corona-constitucion-tai.html'),
+      'utf8',
+    )
+    expect(tema).toContain(
+      'og:image" content="https://www.example.test/og-plaza-tai.png',
+    )
+    expect(tema).toContain('og:image:width" content="1200"')
+    expect(tema).toContain('twitter:card" content="summary_large_image"')
+    expect(tema).toContain('class="site-breadcrumb"')
+    expect(tema).toContain('Bloque I')
+    expect(tema).toContain('class="site-pager"')
+    expect(tema).toContain('rel="next"')
+
+    // Las migas visibles y las declaradas tienen que contar lo mismo: cuatro
+    // niveles, del inicio al tema.
+    const ld = JSON.parse(
+      tema.match(
+        /<script type="application\/ld\+json">([\s\S]*?)<\/script>/,
+      )![1],
+    )
+    const migas = ld['@graph'].find(
+      (nodo: { '@type': string }) => nodo['@type'] === 'BreadcrumbList',
+    )
+    expect(migas.itemListElement).toHaveLength(4)
+    expect(migas.itemListElement[3].name).toContain('B1-T01')
+
+    // La pagina escrita a mano recibe tambien la imagen, aunque no la traiga.
+    const guia = readFileSync(resolve(outDir, 'guia-tai.html'), 'utf8')
+    expect(guia).toContain('og:image')
+    expect(guia).toContain('summary_large_image')
   })
 
   it('cada tema tiene una nota propia y ninguna repite la plantilla', () => {
